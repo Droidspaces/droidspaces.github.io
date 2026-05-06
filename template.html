@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>${title} - Droidspaces</title>
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="logo">Droidspaces</a>
+    <button class="menu-toggle">☰</button>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/docs/">Docs</a></li>
+      <li><a href="https://github.com/ravindu644/Droidspaces-OSS">GitHub</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <aside class="sidebar">
+      <ul>
+        <li><a href="/docs/">Overview</a></li>
+        <li><a href="/docs/getting-started.html">Getting Started</a></li>
+        <li><a href="/docs/installation-android.html">Install Android</a></li>
+        <li><a href="/docs/installation-linux.html">Install Linux</a></li>
+        <li><a href="/docs/usage-android-app.html">Usage Android</a></li>
+        <li><a href="/docs/linux-cli.html">Linux CLI</a></li>
+        <li><a href="/docs/features.html">Features</a></li>
+        <li><a href="/docs/gpu-acceleration.html">GPU Acceleration</a></li>
+        <li><a href="/docs/troubleshooting.html">Troubleshooting</a></li>
+        <li><a href="/docs/cool-things-you-can-do.html">Cool Things</a></li>
+      </ul>
+    </aside>
+    <main class="content">
+      ${body}
+      <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
+      <p><a href="https://github.com/ravindu644/Droidspaces-OSS/edit/main/Documentation/${file}.md" style="color: var(--primary);">Edit on GitHub</a></p>
+    </main>
+  </div>
+  <footer class="footer">
+    <p>&copy; 2026 Droidspaces. <a href="https://github.com/ravindu644/Droidspaces-OSS/blob/main/LICENSE">GPLv3</a> | <a href="https://t.me/Droidspaces">Telegram</a></p>
+  </footer>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>
