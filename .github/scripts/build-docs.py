@@ -466,7 +466,7 @@ def make_page(title, body, slug, nav_template, footer_template, pages, is_index=
     .sidebar-content {{
       flex: 1; min-width: 0;
       padding: 2rem 2rem 4rem;
-      max-width: 960px;
+      max-width: none;
     }}
     .sidebar-content h1 {{
       font-family: var(--mono); font-size: clamp(1.5rem, 2.5vw, 2rem);
@@ -497,12 +497,14 @@ def make_page(title, body, slug, nav_template, footer_template, pages, is_index=
     .sidebar-content strong {{ color: var(--text); }}
     .sidebar-content a {{
       color: var(--accent2); text-decoration: none;
+      word-break: break-word; overflow-wrap: anywhere;
     }}
     .sidebar-content a:hover {{ text-decoration: underline; }}
     .sidebar-content code {{
       font-family: var(--mono); font-size: 0.82rem;
       background: var(--bg3); padding: 0.15rem 0.4rem;
       border-radius: 4px; color: var(--accent2);
+      word-break: break-word; overflow-wrap: anywhere;
     }}
     .sidebar-content pre {{
       background: var(--bg2); border: 1px solid var(--border);
@@ -566,7 +568,8 @@ def make_page(title, body, slug, nav_template, footer_template, pages, is_index=
       text-transform: uppercase; letter-spacing: 0.06em;
       padding: 0.75rem 1rem; text-align: left; color: var(--muted);
       border-bottom: 1px solid var(--border); background: var(--bg3);
-      white-space: nowrap;
+      white-space: normal;
+      word-break: break-word; overflow-wrap: anywhere;
     }}
     .sidebar-content td {{
       padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
