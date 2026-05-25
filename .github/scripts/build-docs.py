@@ -251,7 +251,7 @@ def convert_table(rows):
 SECTION_ORDER = {'Basics': 0, 'Guides': 1, 'Recipes': 2, 'Reference': 3}
 
 FALLBACK_TITLES = {
-    'getting-started': 'Getting Started', 'installation-android': 'Android Installation',
+    'installation-android': 'Android Installation',
     'installation-linux': 'Linux Installation', 'features': 'Features Deep Dive',
     'gpu-acceleration': 'GPU Acceleration', 'kernel-configuration': 'Kernel Configuration',
     'usage-android-app': 'Android App Usage', 'linux-cli': 'Linux CLI Usage',
@@ -261,7 +261,7 @@ FALLBACK_TITLES = {
 }
 
 FALLBACK_SECTIONS = {
-    'getting-started': 'Basics', 'installation-android': 'Basics', 'installation-linux': 'Basics',
+    'installation-android': 'Basics', 'installation-linux': 'Basics',
     'features': 'Guides', 'gpu-acceleration': 'Guides', 'kernel-configuration': 'Guides',
     'usage-android-app': 'Guides', 'linux-cli': 'Guides',
     'cool-things-you-can-do': 'Recipes',
@@ -270,7 +270,7 @@ FALLBACK_SECTIONS = {
 }
 
 FALLBACK_ORDER = {
-    'getting-started': 1, 'installation-android': 2, 'installation-linux': 3,
+    'installation-android': 1, 'installation-linux': 2,
     'features': 1, 'gpu-acceleration': 2, 'kernel-configuration': 3,
     'usage-android-app': 4, 'linux-cli': 5,
     'cool-things-you-can-do': 1,
@@ -279,7 +279,6 @@ FALLBACK_ORDER = {
 }
 
 FALLBACK_DESC = {
-    'getting-started': 'Get started with Droidspaces \u2014 a lightweight ~400KB Linux container runtime for Android and Linux. Install, configure, and run your first container in minutes.',
     'installation-android': 'Step-by-step Android installation guide for Droidspaces. Root your device, install the APK, set up the backend, and run Linux containers with zero terminal commands.',
     'installation-linux': 'Install Droidspaces on Linux desktop or server. Download the tarball, extract the binary, create a rootfs image, and boot your first container.',
     'features': 'Deep dive into every Droidspaces feature: namespace isolation, init system support, OverlayFS volatile mode, GPU acceleration, cgroup isolation, seccomp shields, and Android-specific tuning.',
@@ -296,7 +295,6 @@ FALLBACK_DESC = {
 }
 
 FALLBACK_KEYWORDS = {
-    'getting-started': 'Droidspaces getting started, Linux containers Android, container runtime, namespaces, rootfs, kernel requirements',
     'installation-android': 'install Droidspaces Android, rooted Android container, APK install, atomic backend, sparse image',
     'installation-linux': 'install Droidspaces Linux, Linux container runtime, rootfs tarball, ext4 image, Linux namespaces',
     'features': 'Droidspaces features, namespace isolation, cgroup v2, OverlayFS, volatile mode, init system, GPU hardware access',
@@ -1034,7 +1032,7 @@ def generate_sitemap(root):
         '404.html': ('/404.html', 0.1),
     }
     doc_priorities = {
-        'getting-started': 0.9, 'installation-android': 0.8, 'installation-linux': 0.8,
+        'installation-android': 0.9, 'installation-linux': 0.8,
         'features': 0.7, 'gpu-acceleration': 0.7, 'kernel-configuration': 0.7,
         'usage-android-app': 0.7, 'linux-cli': 0.7, 'cool-things-you-can-do': 0.6,
         'common-errors': 0.6, 'troubleshooting': 0.6, 'community-supported-devices': 0.5,
