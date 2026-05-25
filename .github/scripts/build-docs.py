@@ -1056,7 +1056,7 @@ def generate_sitemap(root):
     print("OK: sitemap.xml")
 
 if __name__ == '__main__':
-    root = '/home/tharukrj/Projects/droidspaces.github.io'
+    root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     docs_dir = os.path.join(root, 'docs/content')
     out_dir = os.path.join(root, 'docs')
 
