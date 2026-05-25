@@ -362,7 +362,6 @@
         <button class="sidebar-close" id="sidebar-close" aria-label="Close sidebar">&times;</button>
 <div class="sidebar-group">
 <div class="sidebar-heading">Basics</div>
-<a href="getting-started.html" class="sidebar-link">Getting Started</a>
 <a href="installation-android.html" class="sidebar-link">Android Installation</a>
 <a href="installation-linux.html" class="sidebar-link">Linux Installation</a>
 </div>
@@ -381,7 +380,6 @@
 <div class="sidebar-group">
 <div class="sidebar-heading">Reference</div>
 <a href="troubleshooting.html" class="sidebar-link">Troubleshooting</a>
-<a href="common-errors.html" class="sidebar-link">Common Errors</a>
 <a href="community-supported-devices.html" class="sidebar-link">Supported Devices</a>
 <a href="nix-nixos.html" class="sidebar-link">Nix / NixOS</a>
 <a href="uninstallation.html" class="sidebar-link">Uninstallation</a>
@@ -447,8 +445,9 @@ CONFIG_DEVTMPFS=y
 # Overlay filesystem support (required for volatile mode)
 CONFIG_OVERLAY_FS=y
 
-# Enable xattr support on tmpfs
-# (required for NixOS setcap wrappers in /run/wrappers)
+# Enable xattr, posix acl support on tmpfs
+# For NixOS support
+CONFIG_TMPFS_POSIX_ACL=y
 CONFIG_TMPFS_XATTR=y
 
 # Firmware loading support
@@ -568,10 +567,10 @@ CONFIG_PID_NS=y
 # HW Access Support
 CONFIG_DEVTMPFS=y
 
-# --- Below configs are optional but recommended ---
-
-# Networking (Docker/NAT support)
+# Networking (Enhanced NAT support)
 CONFIG_NETFILTER_XT_MATCH_ADDRTYPE=y
+
+# --- Below configs are optional but recommended ---
 
 # UFW support
 CONFIG_NETFILTER_XT_TARGET_REJECT=y
@@ -584,8 +583,9 @@ CONFIG_IP_SET_HASH_IP=y
 CONFIG_IP_SET_HASH_NET=y
 CONFIG_NETFILTER_XT_SET=y
 
-# Enable xattr support on tmpfs
-# (required for NixOS setcap wrappers in /run/wrappers)
+# Enable xattr, posix acl support on tmpfs
+# For NixOS support
+CONFIG_TMPFS_POSIX_ACL=y
 CONFIG_TMPFS_XATTR=y
 </code></pre></div>
 <p><strong>Workflow Rules:</strong> - <strong>Do not</strong> append this as a block at the end of the file. - Search for each option individually. - If an option appears as <code># CONFIG_NAME is not set</code>, change it to <code>CONFIG_NAME=y</code>. - If an option is already set to <code>CONFIG_NAME=y</code>, leave it alone. - If an option does not exist, add it at the end.</p>
