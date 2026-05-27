@@ -400,22 +400,22 @@
 <div class="callout callout-important"><strong class="callout-title">IMPORTANT</strong> This guide is specifically focused on <strong>Android devices</strong>. While Droidspaces also runs on Linux Desktop, these instructions address the unique networking, storage, and kernel requirements of the Android environment.</div>
 <h3 id="quick-navigation">Quick Navigation</h3>
 <ul>
-<li><a href="#1-setting-up-a-secure-mobile-server-tailscale--ufw--fail2ban" rel="noopener noreferrer">1. Setting Up a Secure "Mobile Server" (Tailscale + UFW + Fail2Ban)</a><ul>
-<li><a href="#prerequisites" rel="noopener noreferrer">Prerequisites</a></li>
-<li><a href="#step-1-install-networking-tools--compatibility-layer" rel="noopener noreferrer">Step 1: Install Networking Tools & Compatibility Layer</a></li>
-<li><a href="#step-2-personal-user-setup--ssh-hardening" rel="noopener noreferrer">Step 2: Personal User Setup & SSH Hardening</a></li>
-<li><a href="#step-3-set-up-tailscale" rel="noopener noreferrer">Step 3: Set Up Tailscale</a></li>
-<li><a href="#step-4-secure-the-container-with-ufw-firewall" rel="noopener noreferrer">Step 4: Secure the Container with UFW (Firewall)</a></li>
-<li><a href="#step-5-add-brute-force-protection-with-fail2ban" rel="noopener noreferrer">Step 5: Add Brute-Force Protection with Fail2Ban</a></li>
+<li><a href="#1-setting-up-a-secure-mobile-server-tailscale--ufw--fail2ban" rel="noopener noreferrer">1. Setting Up a Secure "Mobile Server" (Tailscale + UFW + Fail2Ban)</a>  <ul>
+<li><a href="#prerequisites" rel="noopener noreferrer">Prerequisites</a>  </li>
+<li><a href="#step-1-install-networking-tools--compatibility-layer" rel="noopener noreferrer">Step 1: Install Networking Tools & Compatibility Layer</a>  </li>
+<li><a href="#step-2-personal-user-setup--ssh-hardening" rel="noopener noreferrer">Step 2: Personal User Setup & SSH Hardening</a>  </li>
+<li><a href="#step-3-set-up-tailscale" rel="noopener noreferrer">Step 3: Set Up Tailscale</a>  </li>
+<li><a href="#step-4-secure-the-container-with-ufw-firewall" rel="noopener noreferrer">Step 4: Secure the Container with UFW (Firewall)</a>  </li>
+<li><a href="#step-5-add-brute-force-protection-with-fail2ban" rel="noopener noreferrer">Step 5: Add Brute-Force Protection with Fail2Ban</a>  </li>
 </ul></li>
-<li><a href="#2-running-docker-containers-nested-containerization" rel="noopener noreferrer">2. Running Docker Containers (Nested Containerization)</a><ul>
-<li><a href="#prerequisites-1" rel="noopener noreferrer">Prerequisites</a></li>
-<li><a href="#step-1-ensure-nat-networking" rel="noopener noreferrer">Step 1: Ensure NAT Networking</a></li>
-<li><a href="#step-2-compatibility-layer-iptables-legacy" rel="noopener noreferrer">Step 2: Compatibility Layer (iptables-legacy)</a></li>
-<li><a href="#step-3-install-docker" rel="noopener noreferrer">Step 3: Install Docker</a></li>
-<li><a href="#step-4-non-root-user-setup" rel="noopener noreferrer">Step 4: Non-Root User Setup</a></li>
-<li><a href="#step-5-verify-installation" rel="noopener noreferrer">Step 5: Verify Installation</a></li>
-<li><a href="#last-resort-for-host-mode-or-legacy-kernels-old-kernels-only" rel="noopener noreferrer">"Last Resort" for Host Mode or Legacy Kernels (Old Kernels Only)</a></li>
+<li><a href="#2-running-docker-containers-nested-containerization" rel="noopener noreferrer">2. Running Docker Containers (Nested Containerization)</a>  <ul>
+<li><a href="#prerequisites-1" rel="noopener noreferrer">Prerequisites</a>  </li>
+<li><a href="#step-1-ensure-nat-networking" rel="noopener noreferrer">Step 1: Ensure NAT Networking</a>  </li>
+<li><a href="#step-2-compatibility-layer-iptables-legacy" rel="noopener noreferrer">Step 2: Compatibility Layer (iptables-legacy)</a>  </li>
+<li><a href="#step-3-install-docker" rel="noopener noreferrer">Step 3: Install Docker</a>  </li>
+<li><a href="#step-4-non-root-user-setup" rel="noopener noreferrer">Step 4: Non-Root User Setup</a>  </li>
+<li><a href="#step-5-verify-installation" rel="noopener noreferrer">Step 5: Verify Installation</a>  </li>
+<li><a href="#last-resort-for-host-mode-or-legacy-kernels-old-kernels-only" rel="noopener noreferrer">"Last Resort" for Host Mode or Legacy Kernels (Old Kernels Only)</a>  </li>
 </ul></li>
 </ul>
 <hr>
