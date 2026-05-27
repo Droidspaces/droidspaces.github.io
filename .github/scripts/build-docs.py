@@ -881,9 +881,7 @@ def fetch_kernel_patches():
             parts.append('</div>')
     return '\n'.join(parts)
 
-def build_downloads_page(root, nav_template, footer_template):
-    dl_nav = nav_template.replace('{{FEATURES_HREF}}', '/#features').replace('{{DOCS_STYLE}}', '')
-    releases = []
+def fetch_latest_release():
     try:
         url = 'https://api.github.com/repos/ravindu644/Droidspaces-OSS/releases?per_page=5'
         req = urllib.request.Request(url)
@@ -892,8 +890,55 @@ def build_downloads_page(root, nav_template, footer_template):
             req.add_header('Authorization', f'Bearer {token}')
         with urllib.request.urlopen(req, timeout=10) as resp:
             releases = json.loads(resp.read())
-    except:
-        pass
+    except Exception:
+        return None
+
+    if not releases:
+        return None
+
+    latest = releases[0]
+    version = latest.get('tag_name', 'v6.2.0')
+    date = latest.get('published_at', '2026-05-22')[:10]
+    apk_url = ''
+    tar_url = ''
+    for a in latest.get('assets', []):
+        name = a.get('name', '')
+        if name.endswith('.apk'):
+            apk_url = a.get('browser_download_url', '')
+        elif name.endswith('.tar.gz'):
+            tar_url = a.get('browser_download_url', '')
+    body = latest.get('body', '')
+    changelog = md_to_html(body) if body else '<p>No changelog available.</p>'
+
+    older_rows = []
+    for r in releases[1:]:
+        tag = r.get('tag_name', '')
+        rd = r.get('published_at', '')[:10]
+        rn = r.get('name', tag)
+        older_rows.append(
+            f'<tr><td>{rn}</td><td>{rd}</td>'
+            f'<td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/{tag}" class="dl-secondary">Download</a></td></tr>'
+        )
+    older_html = (
+        '<div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody>'
+        + '\n'.join(older_rows)
+        + '</tbody></table></div>'
+        if older_rows else ''
+    )
+
+    return {
+        'version': version,
+        'date': date,
+        'apk_url': apk_url,
+        'tar_url': tar_url,
+        'changelog': changelog,
+        'older_html': older_html,
+    }
+
+
+def build_downloads_page(root, nav_template, footer_template):
+    dl_nav = nav_template.replace('{{FEATURES_HREF}}', '/#features').replace('{{DOCS_STYLE}}', '')
+    release_info = fetch_latest_release()
     patches_html = '''<div class="patch-group"><h3 class="patch-group-title">GKI</h3>
 <div class="patch-subgroup"><h4 class="patch-subgroup-title">below-kernel-6.12</h4><ul class="patch-list">
 <li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_1_2_3.patch" download>001.GKI-below-6.12-fix_sysvipc_kabi_1_2_3.patch</a></li>
@@ -909,26 +954,13 @@ def build_downloads_page(root, nav_template, footer_template):
 <ul class="patch-list"><li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/non-GKI/01.fix_kernel_panic_in_xt_qtaguid.patch" download>01.fix_kernel_panic_in_xt_qtaguid.patch</a></li></ul>
 <ul class="patch-list"><li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/non-GKI/02.fix_restore%20cgroup%20file%20prefix%20handling%20.patch" download>02.fix_restore cgroup file prefix handling .patch</a></li></ul>
 </div>'''
-    if releases:
-        latest = releases[0]
-        version = latest.get('tag_name', 'v6.2.0')
-        date = latest.get('published_at', '2026-05-22')[:10]
-        apk_url = tar_url = ''
-        for a in latest.get('assets', []):
-            n = a['name']
-            if n.endswith('.apk'):
-                apk_url = a['browser_download_url']
-            elif n.endswith('.tar.gz'):
-                tar_url = a['browser_download_url']
-        body = latest.get('body', '')
-        changelog = md_to_html(body) if body else '<p>No changelog available.</p>'
-        older_rows = []
-        for r in releases[1:]:
-            tag = r['tag_name']
-            rd = r.get('published_at', '')[:10]
-            rn = r['name']
-            older_rows.append(f'<tr><td>{rn}</td><td>{rd}</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/{tag}" class="dl-secondary">Download</a></td></tr>')
-        older_html = '<div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody>' + '\n'.join(older_rows) + '</tbody></table></div>' if older_rows else ''
+    if release_info:
+        version = release_info['version']
+        date = release_info['date']
+        apk_url = release_info['apk_url']
+        tar_url = release_info['tar_url']
+        changelog = release_info['changelog']
+        older_html = release_info['older_html']
     else:
         version = 'v6.2.0'
         date = '2026-05-22'
@@ -1126,6 +1158,19 @@ if __name__ == '__main__':
         index_html,
         flags=re.DOTALL
     )
+    release_info = fetch_latest_release()
+    if release_info:
+        version = release_info['version']
+        index_html = re.sub(
+            r'(<div class="hero-badge"><span></span>)v[^<]+( · Open Source</div>)',
+            lambda m: f'{m.group(1)}{version}{m.group(2)}',
+            index_html,
+        )
+        index_html = re.sub(
+            r'("softwareVersion"\s*:\s*")v?[^"\n]+(",)',
+            lambda m: f'{m.group(1)}{version.lstrip("v")}{m.group(2)}',
+            index_html,
+        )
     index_html = index_html.replace('{{FOOTER}}', footer_template)
     with open(index_path, 'w') as f:
         f.write(index_html)
