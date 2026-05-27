@@ -95,7 +95,6 @@
     .sidebar-content strong { color: var(--text); }
     .sidebar-content a {
       color: var(--accent2); text-decoration: none;
-      word-break: break-word; overflow-wrap: anywhere;
     }
     .sidebar-content a:hover { text-decoration: underline; }
     .sidebar-content code {
@@ -166,13 +165,11 @@
       text-transform: uppercase; letter-spacing: 0.06em;
       padding: 0.75rem 1rem; text-align: left; color: var(--muted);
       border-bottom: 1px solid var(--border); background: var(--bg3);
-      white-space: normal;
-      word-break: break-word; overflow-wrap: anywhere;
+      white-space: nowrap;
     }
     .sidebar-content td {
       padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
       color: var(--muted);
-      word-break: break-word;
     }
     .sidebar-content img {
       max-width: 100%; border-radius: 8px; border: 1px solid var(--border);
@@ -301,6 +298,11 @@
         padding: 0.5rem 0.5rem;
         font-size: 0.78rem;
       }
+      .sidebar-content a { word-break: break-word; }
+      .sidebar-content code { word-break: break-word; }
+      .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .sidebar-content th { white-space: normal; word-break: break-word; }
+      .sidebar-content td { word-break: break-word; }
     }
   </style>
   <script>

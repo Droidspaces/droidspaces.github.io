@@ -29,6 +29,69 @@ def inline_format(text):
         text = text.replace(f'\x00CODE{i}\x00', f'<code>{cs}</code>')
     return text
 
+def normalize_hyphenated_links(item_html):
+    if not re.fullmatch(r'(?:<a\b[^>]*>.*?</a>)(?:\s*-\s*<a\b[^>]*>.*?</a>)+', item_html):
+        return item_html
+    parts = re.findall(r'<a\b[^>]*>.*?</a>', item_html)
+    return '<br>'.join(parts)
+
+def parse_list_block(lines, i, parent_indent=0):
+    if i >= len(lines):
+        return '', i
+    line = lines[i]
+    stripped = line.lstrip()
+    indent = len(line) - len(stripped)
+    if re.match(r'^[-*+]\s+', stripped):
+        list_tag = 'ul'
+        marker_re = r'^[-*+]\s+'
+    else:
+        olm = re.match(r'^\d+\.\s+', stripped)
+        if olm:
+            list_tag = 'ol'
+            marker_re = r'^\d+\.\s+'
+        else:
+            return '', i
+
+    base_indent = indent
+    items = []
+    while i < len(lines):
+        line = lines[i]
+        stripped = line.lstrip()
+        if stripped == '':
+            i += 1
+            continue
+        indent = len(line) - len(stripped)
+        if indent < base_indent:
+            break
+        if not re.match(marker_re, stripped):
+            break
+        item_text = re.sub(marker_re, '', stripped)
+        item_html = inline_format(item_text)
+        i += 1
+
+        nested_html_parts = []
+        while i < len(lines):
+            next_line = lines[i]
+            stripped2 = next_line.lstrip()
+            if stripped2 == '':
+                i += 1
+                continue
+            indent2 = len(next_line) - len(stripped2)
+            if indent2 <= base_indent:
+                break
+            nested_block, new_i = parse_list_block(lines, i, parent_indent=indent2)
+            if nested_block:
+                nested_html_parts.append(nested_block)
+                i = new_i
+                continue
+            nested_html_parts.append(f'<p>{inline_format(stripped2)}</p>')
+            i += 1
+
+        nested_html = ''.join(nested_html_parts)
+        items.append(f'<li>{item_html}{nested_html}</li>')
+
+    return f'<{list_tag}>\n' + '\n'.join(items) + f'\n</{list_tag}>', i
+
 def consume_code(lines, i):
     lang = lines[i].lstrip()[3:].strip()
     indent = len(lines[i]) - len(lines[i].lstrip())
@@ -139,71 +202,15 @@ def md_to_html(md):
             continue
 
         # Ordered lists
-        olm = re.match(r'^\s*\d+\.\s+(.+)$', line)
-        if olm:
-            items = []
-            while i < len(lines) and re.match(r'^\s*\d+\.\s+', lines[i]):
-                item_text = re.sub(r'^\s*\d+\.\s+', '', lines[i])
-                item_html = inline_format(item_text)
-                i += 1
-                extra = []
-                while i < len(lines):
-                    s = lines[i].lstrip()
-                    indent = len(lines[i]) - len(s)
-                    if indent >= 3 and s.startswith('```'):
-                        ch, i = consume_code(lines, i)
-                        extra.append(ch)
-                    elif indent >= 3 and s.startswith('> '):
-                        extra.append(f'<blockquote>{inline_format(s[2:])}</blockquote>')
-                        i += 1
-                    elif lines[i].strip() == '':
-                        i += 1
-                        continue
-                    elif indent >= 3 and s.strip():
-                        extra.append(inline_format(s))
-                        i += 1
-                    else:
-                        break
-                items.append(f'<li>{" ".join(extra) if item_html == "" else item_html}{"".join(extra) if item_html != "" else ""}</li>')
-            # Fix: combine item_html with extra
-            fixed_items = []
-            for item in items:
-                fixed_items.append(item)
-            html.append('<ol>\n' + '\n'.join(items) + '\n</ol>')
+        if re.match(r'^\s*\d+\.\s+', line):
+            list_html, i = parse_list_block(lines, i)
+            html.append(list_html)
             continue
 
         # Unordered lists
-        ulm = re.match(r'^[\s]*[-*+]\s+', line)
-        if ulm:
-            items = []
-            while i < len(lines) and re.match(r'^[\s]*[-*+]\s+', lines[i]):
-                item_text = re.sub(r'^[\s]*[-*+]\s+', '', lines[i])
-                item_html = inline_format(item_text)
-                i += 1
-                extra = []
-                while i < len(lines):
-                    s = lines[i].lstrip()
-                    indent = len(lines[i]) - len(s)
-                    if indent >= 3 and s.startswith('```'):
-                        ch, i = consume_code(lines, i)
-                        extra.append(ch)
-                    elif indent >= 3 and s.startswith('> '):
-                        extra.append(f'<blockquote>{inline_format(s[2:])}</blockquote>')
-                        i += 1
-                    elif lines[i].strip() == '':
-                        i += 1
-                        continue
-                    elif indent >= 3 and s.strip():
-                        extra.append(inline_format(s))
-                        i += 1
-                    else:
-                        break
-                items.append(f'<li>{" ".join(extra) if item_html == "" else item_html}{"".join(extra) if item_html != "" else ""}</li>')
-            # Fix the combine
-            combined = []
-            for item in items:
-                combined.append(item)
-            html.append('<ul>\n' + '\n'.join(items) + '\n</ul>')
+        if re.match(r'^[\s]*[-*+]\s+', line):
+            list_html, i = parse_list_block(lines, i)
+            html.append(list_html)
             continue
 
         # Paragraph
@@ -497,14 +504,12 @@ def make_page(title, body, slug, nav_template, footer_template, pages, is_index=
     .sidebar-content strong {{ color: var(--text); }}
     .sidebar-content a {{
       color: var(--accent2); text-decoration: none;
-      word-break: break-word; overflow-wrap: anywhere;
     }}
     .sidebar-content a:hover {{ text-decoration: underline; }}
     .sidebar-content code {{
       font-family: var(--mono); font-size: 0.82rem;
       background: var(--bg3); padding: 0.15rem 0.4rem;
       border-radius: 4px; color: var(--accent2);
-      word-break: break-word; overflow-wrap: anywhere;
     }}
     .sidebar-content pre {{
       background: var(--bg2); border: 1px solid var(--border);
@@ -535,6 +540,11 @@ def make_page(title, body, slug, nav_template, footer_template, pages, is_index=
     }}
     @media (max-width: 768px) {{
       .copy-btn {{ opacity: 1; }}
+      .sidebar-content a {{ word-break: break-word; }}
+      .sidebar-content code {{ word-break: break-word; }}
+      .table-wrap {{ overflow-x: auto; -webkit-overflow-scrolling: touch; }}
+      .sidebar-content th {{ white-space: normal; word-break: break-word; }}
+      .sidebar-content td {{ word-break: break-word; }}
     }}
     .sidebar-content ul, .sidebar-content ol {{
       color: var(--muted); line-height: 1.7;
@@ -568,13 +578,11 @@ def make_page(title, body, slug, nav_template, footer_template, pages, is_index=
       text-transform: uppercase; letter-spacing: 0.06em;
       padding: 0.75rem 1rem; text-align: left; color: var(--muted);
       border-bottom: 1px solid var(--border); background: var(--bg3);
-      white-space: normal;
-      word-break: break-word; overflow-wrap: anywhere;
+      white-space: nowrap;
     }}
     .sidebar-content td {{
       padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
       color: var(--muted);
-      word-break: break-word;
     }}
     .sidebar-content img {{
       max-width: 100%; border-radius: 8px; border: 1px solid var(--border);
@@ -703,6 +711,11 @@ def make_page(title, body, slug, nav_template, footer_template, pages, is_index=
         padding: 0.5rem 0.5rem;
         font-size: 0.78rem;
       }}
+      .sidebar-content a {{ word-break: break-word; }}
+      .sidebar-content code {{ word-break: break-word; }}
+      .table-wrap {{ overflow-x: auto; -webkit-overflow-scrolling: touch; }}
+      .sidebar-content th {{ white-space: normal; word-break: break-word; }}
+      .sidebar-content td {{ word-break: break-word; }}
     }}
   </style>
   <script>
@@ -828,6 +841,61 @@ def make_page(title, body, slug, nav_template, footer_template, pages, is_index=
 def fix_img_paths(html):
     return re.sub(r'Documentation/resources/', r'assets/resources/', html)
 
+def fetch_latest_release():
+    try:
+        url = 'https://api.github.com/repos/ravindu644/Droidspaces-OSS/releases?per_page=5'
+        req = urllib.request.Request(url)
+        token = os.environ.get('GITHUB_TOKEN')
+        if token:
+            req.add_header('Authorization', f'Bearer {token}')
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            releases = json.loads(resp.read())
+    except Exception:
+        return None
+
+    if not releases:
+        return None
+
+    latest = releases[0]
+    version = latest.get('tag_name', 'v6.2.0')
+    date = latest.get('published_at', '2026-05-22')[:10]
+    apk_url = ''
+    tar_url = ''
+    for a in latest.get('assets', []):
+        name = a.get('name', '')
+        if name.endswith('.apk'):
+            apk_url = a.get('browser_download_url', '')
+        elif name.endswith('.tar.gz'):
+            tar_url = a.get('browser_download_url', '')
+    body = latest.get('body', '')
+    changelog = md_to_html(body) if body else '<p>No changelog available.</p>'
+
+    older_rows = []
+    for r in releases[1:]:
+        tag = r.get('tag_name', '')
+        rd = r.get('published_at', '')[:10]
+        rn = r.get('name', tag)
+        older_rows.append(
+            f'<tr><td>{rn}</td><td>{rd}</td>'
+            f'<td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/{tag}" class="dl-secondary">Download</a></td></tr>'
+        )
+    older_html = (
+        '<div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody>'
+        + '\n'.join(older_rows)
+        + '</tbody></table></div>'
+        if older_rows else ''
+    )
+
+    return {
+        'version': version,
+        'date': date,
+        'apk_url': apk_url,
+        'tar_url': tar_url,
+        'changelog': changelog,
+        'older_html': older_html,
+    }
+
+
 def fetch_kernel_patches():
     base = 'https://api.github.com/repos/ravindu644/Droidspaces-OSS/contents/Documentation/resources/kernel-patches'
     data = json.loads(urllib.request.urlopen(base).read())
@@ -853,17 +921,7 @@ def fetch_kernel_patches():
 
 def build_downloads_page(root, nav_template, footer_template):
     dl_nav = nav_template.replace('{{FEATURES_HREF}}', '/#features').replace('{{DOCS_STYLE}}', '')
-    releases = []
-    try:
-        url = 'https://api.github.com/repos/ravindu644/Droidspaces-OSS/releases?per_page=5'
-        req = urllib.request.Request(url)
-        token = os.environ.get('GITHUB_TOKEN')
-        if token:
-            req.add_header('Authorization', f'Bearer {token}')
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            releases = json.loads(resp.read())
-    except:
-        pass
+    release_info = fetch_latest_release()
     patches_html = '''<div class="patch-group"><h3 class="patch-group-title">GKI</h3>
 <div class="patch-subgroup"><h4 class="patch-subgroup-title">below-kernel-6.12</h4><ul class="patch-list">
 <li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_1_2_3.patch" download>001.GKI-below-6.12-fix_sysvipc_kabi_1_2_3.patch</a></li>
@@ -879,26 +937,13 @@ def build_downloads_page(root, nav_template, footer_template):
 <ul class="patch-list"><li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/non-GKI/01.fix_kernel_panic_in_xt_qtaguid.patch" download>01.fix_kernel_panic_in_xt_qtaguid.patch</a></li></ul>
 <ul class="patch-list"><li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/non-GKI/02.fix_restore%20cgroup%20file%20prefix%20handling%20.patch" download>02.fix_restore cgroup file prefix handling .patch</a></li></ul>
 </div>'''
-    if releases:
-        latest = releases[0]
-        version = latest.get('tag_name', 'v6.2.0')
-        date = latest.get('published_at', '2026-05-22')[:10]
-        apk_url = tar_url = ''
-        for a in latest.get('assets', []):
-            n = a['name']
-            if n.endswith('.apk'):
-                apk_url = a['browser_download_url']
-            elif n.endswith('.tar.gz'):
-                tar_url = a['browser_download_url']
-        body = latest.get('body', '')
-        changelog = md_to_html(body) if body else '<p>No changelog available.</p>'
-        older_rows = []
-        for r in releases[1:]:
-            tag = r['tag_name']
-            rd = r.get('published_at', '')[:10]
-            rn = r['name']
-            older_rows.append(f'<tr><td>{rn}</td><td>{rd}</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/{tag}" class="dl-secondary">Download</a></td></tr>')
-        older_html = '<div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody>' + '\n'.join(older_rows) + '</tbody></table></div>' if older_rows else ''
+    if release_info:
+        version = release_info['version']
+        date = release_info['date']
+        apk_url = release_info['apk_url']
+        tar_url = release_info['tar_url']
+        changelog = release_info['changelog']
+        older_html = release_info['older_html']
     else:
         version = 'v6.2.0'
         date = '2026-05-22'
@@ -909,7 +954,7 @@ def build_downloads_page(root, nav_template, footer_template):
 * fix(terminal/panel): unified OSInfo stream eliminates hostname/metrics null bug
 * droidspaces: bump v6.2.0
 * Translated using Weblate (#144)
-* fix: prevent UI remount and terminal state loss on screen rotation
+* fix: prevent UI remount and systemd state loss on screen rotation
 * fix(service): update terminal session notification count and localize strings
 * post_extract_fixes: configure systemd-networkd for eth0 and restrict systemd-resolved for NAT networking
 * pipewire: use env for pw-cli in audio setup
@@ -1038,7 +1083,7 @@ def generate_sitemap(root):
         'installation-android': 0.9, 'installation-linux': 0.8,
         'features': 0.7, 'gpu-acceleration': 0.7, 'kernel-configuration': 0.7,
         'usage-android-app': 0.7, 'linux-cli': 0.7, 'cool-things-you-can-do': 0.6,
-        'common-errors': 0.6, 'troubleshooting': 0.6, 'community-supported-devices': 0.5,
+        'troubleshooting': 0.6, 'community-supported-devices': 0.5,
         'nix-nixos': 0.5, 'uninstallation': 0.5,
     }
     urls = [(loc, pri) for fname, (loc, pri) in priorities.items()]
@@ -1096,6 +1141,21 @@ if __name__ == '__main__':
         index_html,
         flags=re.DOTALL
     )
+    release_info = fetch_latest_release()
+
+    if release_info:
+        version = release_info['version']
+        index_html = re.sub(
+            r'(<div class="hero-badge"><span></span>)v[^<]+( · Open Source</div>)',
+            lambda m: f'{m.group(1)}{version}{m.group(2)}',
+            index_html,
+        )
+        index_html = re.sub(
+            r'("softwareVersion"\s*:\s*")v?[^"\n]+("),',
+            lambda m: f'{m.group(1)}{version.lstrip("v")}{m.group(2)},',
+            index_html,
+        )
+
     index_html = index_html.replace('{{FOOTER}}', footer_template)
     with open(index_path, 'w') as f:
         f.write(index_html)
