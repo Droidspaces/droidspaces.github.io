@@ -415,15 +415,19 @@
 <h2 id="step-2-automatic-backend-setup">Step 2: Automatic Backend Setup</h2>
 <p>On the first launch, Droidspaces performs an <strong>Atomic Installation</strong> of the backend system: - It detects your device architecture (<code>aarch64</code>, <code>armhf</code>, etc.). - It extracts the <code>droidspaces</code> and <code>busybox</code> binaries to <code>/data/local/Droidspaces/bin</code>. - It performs an atomic move to ensure the binaries are installed correctly even if an older version is currently running. - It verifies checksums to ensure zero corruption.</p>
 <h2 id="step-3-setting-up-your-first-container">Step 3: Setting Up Your First Container</h2>
-<p>You don't need to manually extract rootfs files. The app handles it:</p>
+<p>You don't need to manually extract rootfs files. The app handles it all.</p>
+<h3 id="option-a-install-from-the-rootfs-repository-recommended">Option A: Install from the Rootfs Repository (Recommended)</h3>
+<p>The easiest way to get started. The app can browse, download, and install distros directly - no manual downloading required.</p>
 <ol>
-<li><strong>Download a rootfs tarball</strong>: We recommend using our <a href="https://github.com/ravindu644/Droidspaces-rootfs-builder/releases/latest" rel="noopener noreferrer">official rootfs tarballs</a> - which are <strong>specifically optimized for Android</strong> - or the official <a href="https://images.linuxcontainers.org/images/" rel="noopener noreferrer">Linux Containers images</a>.
-</li>
 <li><strong>Open the Containers Tab</strong>: Tap the middle icon in the bottom navigation bar.
 </li>
-<li><strong>Add a Container</strong>: Tap the <strong>"+"</strong> button at the bottom right.
+<li><strong>Open the Repository</strong>: Tap the <strong>cloud icon</strong> (above the "+" button). This opens the Rootfs Repository sheet, which automatically fetches all available distros optimized for Android from our <a href="https://github.com/Droidspaces/Droidspaces-rootfs-builder" rel="noopener noreferrer">official repository</a>.
 </li>
-<li><strong>Choose your Tarball</strong>: Select the downloaded <code>.tar.xz</code> or <code>.tar.gz</code> file.
+<li><strong>Pick a distro</strong>: Browse or search the list. Each card shows the distro name, size, architecture, and build date.
+</li>
+<li><strong>Download</strong>: Tap <strong>Download</strong> on the distro you want. A progress bar appears on the card. The file saves to your Downloads folder.
+</li>
+<li><strong>Install</strong>: Once complete, the button changes to <strong>Install</strong>. Tap it to launch the container setup wizard.
 </li>
 <li><strong>Configuration Wizard</strong>:
 <ul>
@@ -435,9 +439,21 @@
 </li>
 </ul>
 </li>
-<li><strong>Installation</strong>: The app will extract the tarball and apply <strong>Post-Extraction Fixes</strong> automatically (DNS, Masking useless/dangerous services, and Safe Udev).
+<li><strong>Done</strong>: The app extracts the tarball and automatically applies <strong>Post-Extraction Fixes</strong> (DNS, masking useless/dangerous services, and Safe Udev).
 </li>
 </ol>
+<div class="callout callout-tip"><strong class="callout-title">TIP</strong> The official repository includes distros pre-configured for Android. For a wider selection, you can add the LXC images mirror as a custom repository - see the <a href="usage-android-app.html#rootfs-repository" rel="noopener noreferrer">Rootfs Repository</a> section of the Usage Guide.</div>
+<h3 id="option-b-install-from-a-local-tarball">Option B: Install from a Local Tarball</h3>
+<p>If you already have a <code>.tar.xz</code> or <code>.tar.gz</code> rootfs file on your device:</p>
+<ol>
+<li><strong>Open the Containers Tab</strong> and tap the <strong>"+"</strong> button.
+</li>
+<li><strong>Select your tarball</strong> from storage.
+</li>
+<li>Follow the same <strong>Configuration Wizard</strong> steps above.
+</li>
+</ol>
+<div class="callout callout-note"><strong class="callout-title">NOTE</strong> Both methods lead to the same wizard - the only difference is where the tarball comes from.</div>
 <h2 id="verification-settings">Verification & Settings</h2>
 <p>You can verify your system status at any time: 1. Go to <strong>Settings</strong> (gear icon) -> <strong>Requirements</strong>. 2. Tap <strong>Check Requirements</strong>. This runs the full <code>droidspaces check</code> suite internally. 3. <strong>Kernel Config</strong>: If you're a kernel developer, you can find a copyable <code>droidspaces.config</code> defconfig fragment, similar to <a href="./kernel-configuration.html#required-kernel-configuration" rel="noopener noreferrer">this page</a>, to make sure your kernel is perfectly compatible with Droidspaces.</p>
 <h2 id="next-steps">Next Steps</h2>

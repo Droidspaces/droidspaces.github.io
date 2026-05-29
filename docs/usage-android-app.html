@@ -420,7 +420,37 @@
 <li><strong>Terminal Icon (Logs)</strong>: Provides access to persistent session logs for the container's previous start, stop, and restart sequences.
 </li>
 </ul>
-<div class="callout callout-tip"><strong class="callout-title">TIP</strong> You can <strong>edit container configuration</strong> or <strong>uninstall</strong> existing installed containers by <strong>pressing and holding</strong> the container's card. Also gives you the ability to migrate to a <code>rootfs.img</code>-based container or resize your existing <code>rootfs.img</code>..!</div>
+<div class="callout callout-tip"><strong class="callout-title">TIP</strong> You can <strong>edit container configuration</strong> or <strong>uninstall</strong> existing installed containers by <strong>pressing and holding</strong> the container’s card. Also gives you the ability to migrate to a <code>rootfs.img</code>-based container or resize your existing <code>rootfs.img</code>..!</div>
+<hr>
+<h2 id="rootfs-repository">Rootfs Repository</h2>
+<p>The <strong>cloud icon</strong> above the "+" button opens the Rootfs Repository - a built-in distro browser that lets you download and install Linux rootfs images without leaving the app.</p>
+<h3 id="how-it-works">How it works</h3>
+<ol>
+<li>Tap the <strong>cloud icon</strong> in the Containers tab.
+</li>
+<li>The sheet opens and loads available distros from the <a href="https://github.com/Droidspaces/Droidspaces-rootfs-builder" rel="noopener noreferrer">Droidspaces official repository</a>. Only images matching your device’s architecture are shown.
+</li>
+<li><strong>Search</strong> the list by name, description, or author using the search bar.
+</li>
+<li>Tap <strong>Download</strong> on a distro card. A progress bar tracks the download; the file is saved to your Downloads folder.
+</li>
+<li>Once done, the button switches to <strong>Install</strong>. Tap it to go straight into the container setup wizard.
+</li>
+</ol>
+<div class="callout callout-note"><strong class="callout-title">NOTE</strong> If a download fails, the card shows a <strong>Retry</strong> button. Previously downloaded files are detected automatically on relaunch - the Install button will already be available.</div>
+<h3 id="adding-custom-repositories">Adding Custom Repositories</h3>
+<p>The repository supports third-party rootfs sources in the same JSON format.</p>
+<ol>
+<li>Tap the <strong>settings icon</strong> (left of the refresh icon) in the sheet header.
+</li>
+<li>Enter a <strong>name</strong> and a <strong>URL</strong> pointing to a valid <code>rootfs.json</code>.
+</li>
+<li>Tap <strong>Add</strong>, then <strong>Save</strong>. The sheet refreshes and merges results from all sources.
+</li>
+</ol>
+<div class="callout callout-tip"><strong class="callout-title">TIP</strong> To get a much wider selection of distros, add the official LXC images mirror as a custom repository:
+- <strong>Name</strong>: anything you like (e.g. <code>LXC Mirror</code>)
+- <strong>URL</strong>: <code>https://raw.githubusercontent.com/Droidspaces/linuxcontainers-mirror/refs/heads/main/rootfs.json</code></div>
 <hr>
 <h2 id="networking-configuration">Networking Configuration</h2>
 <p>When editing or creating a container, you can choose from three networking modes:</p>
