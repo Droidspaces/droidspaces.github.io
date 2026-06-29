@@ -671,7 +671,7 @@ Your Browser:   "Thanks." [now connects to 142.250.80.46]
 +-- ds-lan (host bridge - NO IP address, just a switch)
 |    |
 |    +-- ds-g[hash] (veth host-side, connected to OpenWRT's netns as eth1)
-|    +-- ds-v[pid]  (veth host-side, connected to Kali's netns as eth0)
+|    +-- ds-c[pid]  (veth host-side, connected to Kali's netns as eth0)
 |
 +-- [Kali container - net=gateway mode]
      netns: owns eth0 (LAN side - plugged into ds-lan bridge)
@@ -732,21 +732,37 @@ Your Browser:   "Thanks." [now connects to 142.250.80.46]
 <p>This mimics how you might physically plug a cable into a router's LAN port after the router is already running.</p>
 <h3 id="why-resolvconf-is-left-alone-in-gateway-mode">Why resolv.conf is left alone in gateway mode</h3>
 <p>In NAT mode, Droidspaces writes <code>/etc/resolv.conf</code> inside the container, pointing to <code>1.1.1.1</code> or <code>8.8.8.8</code>.</p>
-<p>In gateway mode, Droidspaces does NOT write <code>resolv.conf</code> (unless you explicitly pass <code>--dns</code>). This is because OpenWRT's <code>dnsmasq</code> hands the DNS server address to the container via the DHCP lease. If Droidspaces also wrote a <code>resolv.conf</code>, it would conflict with what dnsmasq is providing - the container would use the wrong DNS and bypass OpenWRT's DNS filtering/caching entirely.</p>
+<p>In gateway mode, Droidspaces does NOT write a static <code>resolv.conf</code> (unless you explicitly pass <code>--dns</code>). This is because OpenWRT's <code>dnsmasq</code> hands the DNS server address to the container via the DHCP lease. If Droidspaces also wrote a <code>resolv.conf</code>, it would conflict with what dnsmasq is providing - the container would use the wrong DNS and bypass OpenWRT's DNS filtering/caching entirely.</p>
+<p>How this is wired depends on the client's init system:</p>
+<ul>
+<li><strong>systemd containers:</strong> <code>/etc/resolv.conf</code> is symlinked to <code>/run/systemd/resolve/resolv.conf</code>, which systemd-resolved populates from the DHCP lease.
+</li>
+<li><strong>non-systemd containers:</strong> Droidspaces leaves <code>/etc/resolv.conf</code> entirely alone, so the container's own DHCP client (udhcpc/dhclient) writes the gateway-supplied nameserver from the lease. (Earlier builds wrote a hardcoded <code>1.1.1.1</code>/<code>8.8.8.8</code> here, which silently bypassed the gateway's DNS - that is fixed.) If a minimal rootfs ships no DHCP resolv.conf hook, pass <code>--dns</code> to set one explicitly.
+</li>
+</ul>
 <h3 id="why-bridge-nf-call-iptables-is-set-to-0">Why bridge-nf-call-iptables is set to 0</h3>
 <p>The bridge <code>ds-lan</code> carries traffic between OpenWRT and Kali. By default, Linux can pass bridged traffic through the host's iptables. This would mean Android's iptables rules (which might drop or NAT things unexpectedly) would interfere with traffic that OpenWRT is supposed to be managing.</p>
 <p>Setting it to <code>0</code> tells Linux: "do not run iptables on bridged traffic." This keeps OpenWRT's firewall as the <em>only</em> firewall that sees this traffic, which is exactly what we want.</p>
-<h3 id="the-gateway-container-must-be-running-first">The gateway container must be running first</h3>
-<p>Start order matters. When a gateway-mode container starts, Droidspaces looks up the gateway container's live process ID to reach its network namespace. If the gateway container is not running at that moment, the network setup fails with a warning and the client container boots anyway - but with no network at all (only loopback). It does not retry on its own.</p>
-<p>The same logic applies after a gateway restart. A veth pair dies together: when the gateway container stops, the <code>eth1</code> end inside it is destroyed, and that destroys the host-side end too. Existing clients stay plugged into the bridge but have no router anymore. The LAN cable is re-plugged the next time <strong>any</strong> gateway-mode container starts on that segment - so after restarting the gateway, restart one client (or start a new one) to bring the segment back to life.</p>
+<h3 id="start-order-and-automatic-self-healing">Start order and automatic self-healing</h3>
+<p>All wiring for a gateway-mode client is done <strong>from the host side</strong> by a single function, <code>gateway_wire_client()</code>: it ensures the bridge and the gateway-side cable, creates the client's app veth, and moves+renames the peer into the client's namespace as <code>eth0</code> (pinned MAC, brought up) — the client's own boot code only brings up <code>lo</code>. Because the host owns every step, the same function wires a client whether it is just starting or already running.</p>
+<p>This gives a deliberately simple rule keyed on <strong>gateway liveness</strong>:</p>
+<ul>
+<li><strong>Gateway already running when a client starts</strong> → the client wires immediately (its own monitor calls <code>gateway_wire_client</code>).
+</li>
+<li><strong>Gateway not running when a client starts</strong> → the client wires <strong>nothing at all</strong> (no bridge, no veth, no <code>eth0</code>) and just boots. The work is deferred entirely to the gateway.
+</li>
+</ul>
+<p>Healing is therefore driven by <strong>the gateway itself</strong>, not by the clients. On every boot cycle the gateway container's monitor calls <code>ds_net_rewire_gateway_clients()</code>: it scans the running containers, finds the ones that delegate to this gateway, and runs <code>gateway_wire_client</code> for each — establishing the gateway-side <code>eth1</code> cable and every client's <code>eth0</code> into the gateway's <em>current</em> namespace. So when the gateway <strong>starts or reboots</strong>, every running client is (re)wired with <strong>no client restart required</strong>.</p>
+<p>Skipping all client wiring while the gateway is down (rather than half-wiring a bridge and a danging veth) also closes a race: a client started before its gateway can have its gateway/LAN settings (<code>--gateway-net</code>, <code>--host-bridge</code>, …) edited before the gateway comes up, and the gateway then wires every client from each client's <em>current</em> config — never a stale one.</p>
+<p>There is exactly <strong>one actor</strong> (the gateway) doing the wiring, so there is nothing to poll and no thundering herd. Wiring is serialised per segment (an advisory file lock) to keep concurrent client starts and the gateway's re-wire from racing. Both <code>eth1</code> (gateway side) and each <code>eth0</code> (client side) keep a <strong>stable MAC</strong> and are moved+renamed into their namespace in a single atomic step, so the container's own <code>netifd</code>/DHCP sees one persistent device rather than re-initialising a churning one.</p>
 <h3 id="what-happens-when-containers-stop">What happens when containers stop</h3>
 <p>Cleanup in gateway mode is deliberately minimal, matching the "plumbing only" philosophy:</p>
 <ul>
-<li><strong>A client stops:</strong> only that client's own veth (<code>ds-v<PID></code>) is removed. The bridge and the gateway's <code>eth1</code> stay up, so other clients on the segment are untouched.
+<li><strong>A client stops:</strong> only that client's own veth is removed (gateway clients use the <code>ds-c<PID></code> prefix, distinct from NAT's <code>ds-v<PID></code>). The bridge and the gateway's <code>eth1</code> stay up, so other clients on the segment are untouched.
 </li>
-<li><strong>The gateway stops:</strong> the gateway-side veth disappears with its namespace (see above), but the bridge itself stays.
+<li><strong>The last client stops while the gateway is still running:</strong> the bridge is <strong>kept</strong> (not reaped). Tearing it down would flap the gateway's live <code>eth1</code> carrier and occasionally make netifd report "device initialization failed"; an idle IP-less bridge is harmless and the next client reuses it.
 </li>
-<li>The delegated bridge (<code>ds-lan</code> etc.) is never torn down by Droidspaces. It is harmless when idle - it has no IP and carries no policy - and persists until you delete it manually or reboot the device.
+<li><strong>The gateway stops:</strong> the gateway-side veth disappears with its namespace. Once no clients remain <em>and</em> the gateway is gone, the now-idle bridge is reaped.
 </li>
 </ul>
 <hr>
