@@ -454,7 +454,7 @@
 - <strong>URL</strong>: <code>https://raw.githubusercontent.com/Droidspaces/linuxcontainers-mirror/refs/heads/main/rootfs.json</code></div>
 <hr>
 <h2 id="networking-configuration">Networking Configuration</h2>
-<p>When editing or creating a container, you can choose from three networking modes:</p>
+<p>When editing or creating a container, you can choose from four networking modes:</p>
 <ul>
 <li><strong>Host (Default)</strong>: Shares host network directly.
 </li>
@@ -462,9 +462,22 @@
 </li>
 <li><strong>None</strong>: No network access.
 </li>
+<li><strong>Gateway</strong>: The container's LAN is delegated to another running container (typically OpenWRT), which owns DHCP, DNS, firewall and routing. Select the gateway container and (optionally) the LAN segment, interface and bridge in the <strong>Gateway</strong> settings. See <a href="networking-from-zero.html" rel="noopener noreferrer">Networking From Zero</a> for the full guide.
+</li>
 </ul>
 <h3 id="internet-uplink-nat-mode">Internet Uplink (NAT Mode)</h3>
 <p>If you select <strong>NAT (Isolated)</strong> mode, the internet uplink is detected fully automatically - there is nothing to configure. Droidspaces reads the kernel's own routing state to find the interface Android is currently using for internet (Wi-Fi, mobile data, ethernet) and a background Route Monitor keeps the container connected in real time as you switch networks.</p>
+<h4 id="upstream-interface-optional">Upstream Interface (Optional)</h4>
+<p>If you want the container to <strong>ignore the active network</strong> and pin its internet to specific interface(s), add them under <strong>Upstream Interface</strong>. This disables auto-detection and forces the WAN through your list only:</p>
+<ul>
+<li>The list is <strong>priority-ordered</strong> and supports <strong>wildcards</strong> - e.g. <code>wlan0, rmnet*</code> prefers Wi-Fi and falls back to mobile data (use <code>rmnet*</code> because the mobile-data interface number is not stable).
+</li>
+<li><strong>Example - VPN killswitch</strong>: run a VPN app on the phone and pin <code>tun0</code> so the container can only reach the internet through the tunnel.
+</li>
+<li><strong>Example - cellular while on Wi-Fi</strong>: enable <em>Mobile data always active</em> in Developer Options, connect Wi-Fi, turn on mobile data, and pin <code>rmnet*</code> so the container uses cellular while the phone stays on Wi-Fi.
+</li>
+</ul>
+<p>Leave it empty to auto-detect the active uplink (the default, recommended for most users).</p>
 <div class="callout callout-note"><strong class="callout-title">NOTE</strong> NAT mode is IPv4 only. If your carrier only provides IPv6, see the <a href="troubleshooting.html#ipv4-quirks" rel="noopener noreferrer">IPv4 NAT Workaround</a>.</div>
 <h3 id="port-forwarding">Port Forwarding</h3>
 <p>In NAT mode, use the <strong>Port Forwarding</strong> section to map host ports to container ports (e.g., <code>22:22</code>). You can also specify <strong>port ranges</strong> (e.g., <code>1000-2000:1000-2000</code>) for services that require multiple contiguous ports.</p>

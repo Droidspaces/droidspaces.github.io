@@ -428,6 +428,12 @@
 <ul>
 <li><a href="#nat-in-droidspaces" rel="noopener noreferrer">NAT in Droidspaces</a>
 </li>
+<li><a href="#how-nat-mode-picks-the-wan-uplink-automatic" rel="noopener noreferrer">How NAT mode picks the WAN uplink (automatic)</a>
+</li>
+<li><a href="#pinning-the-uplink-manually-with---upstream" rel="noopener noreferrer">Pinning the uplink manually with --upstream</a>
+</li>
+<li><a href="#use-cases-for---upstream" rel="noopener noreferrer">Use cases for --upstream</a>
+</li>
 </ul>
 </li>
 <li><a href="#part-6-bridges-and-virtual-cables-linux-plumbing" rel="noopener noreferrer">Part 6: Bridges and Virtual Cables (Linux Plumbing)</a>
@@ -599,6 +605,41 @@ Your Browser:   "Thanks." [now connects to 142.250.80.46]
 <li>On Android, a background route monitor detects the active internet uplink automatically (by reading the kernel's routing rules) and re-points container traffic the moment the active network changes (for example, Wi-Fi to mobile data handoff)
 </li>
 </ul>
+<h3 id="how-nat-mode-picks-the-wan-uplink-automatic">How NAT mode picks the WAN uplink (automatic)</h3>
+<p>A NAT container has to know <em>which</em> of Android's real interfaces currently has internet, so it can MASQUERADE through it. Phones make this hard: the active network hops between Wi-Fi, mobile data, USB-ethernet and VPN tunnels, and the interface names themselves are unstable (the mobile-data interface might be <code>rmnet0</code> one minute and <code>rmnet8</code> after a reconnect).</p>
+<p>By default Droidspaces handles all of this for you - <strong>there is nothing to configure</strong>:</p>
+<ul>
+<li>It reads the kernel's <em>own</em> ground truth for "what is the internet interface right now." On Android that is the policy-routing rule <code>netd</code> installs for the active default network; on desktop Linux it is the main routing table's default route.
+</li>
+<li>A background <strong>route monitor</strong> subscribes to kernel routing events (rule, route, link and address changes). The instant the host switches networks - you walk out of Wi-Fi range and it falls back to mobile data, or you plug in a USB-ethernet dongle on a laptop - the monitor re-points the container's traffic. No restart, no config.
+</li>
+<li>CLAT/464xlat interfaces (the <code>v4-rmnet...</code> interfaces phones synthesise on IPv6-only mobile networks) are picked up automatically.
+</li>
+</ul>
+<p>This automatic mode is the right choice for the vast majority of users. The rest of this section is only relevant if you want to <em>override</em> it.</p>
+<h3 id="pinning-the-uplink-manually-with-upstream">Pinning the uplink manually with <code>--upstream</code></h3>
+<p>Sometimes you do <strong>not</strong> want the container to follow whatever network the host is using. You want to force its internet out through one specific interface and keep it there. That is what <code>--upstream</code> does.</p>
+<p>When you pass <code>--upstream</code>, automatic detection is switched off entirely. The interface(s) you list become the <em>only</em> candidates the container will ever use for WAN - it never hops to whatever the host marks as its active default network.</p>
+<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code># Force the container's internet out through Wi-Fi, always
+droidspaces --name=box --rootfs=/data/box --net=nat --upstream=wlan0 start
+</code></pre></div>
+<p>You can list <strong>multiple interfaces, comma-separated</strong>, and use <strong>wildcards</strong> (<code>*</code>, <code>?</code>):</p>
+<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>droidspaces --name=box --rootfs=/data/box --net=nat --upstream=wlan0,rmnet* start
+</code></pre></div>
+<p>The list is <strong>priority-ordered</strong>. The route monitor walks it top to bottom and uses the first interface that is currently up and actually has internet. So <code>wlan0,rmnet*</code> means "prefer Wi-Fi; if Wi-Fi is down, fall back to mobile data" - and when Wi-Fi returns, it switches back. The failover stays strictly <em>inside your list</em>; it never falls back to an interface you did not list. This is the key difference from auto mode - the WAN is yours to decide, not the host's.</p>
+<p>If a pinned interface is missing when the container starts, or disappears mid-session and later reappears, that is handled too: the container simply has no WAN until one of your pinned interfaces is up, then it wires up automatically.</p>
+<blockquote><p><strong>Why wildcards matter on mobile data:</strong> Android does not give the mobile-data interface a stable number - it might be <code>rmnet0</code>, <code>rmnet8</code>, <code>rmnet_data2</code>, and the number can change across reconnects. Pinning a literal <code>rmnet0</code> will break the next time it comes up as something else. Pin <code>rmnet*</code> instead and it keeps working.</p></blockquote>
+<h3 id="use-cases-for-upstream">Use cases for <code>--upstream</code></h3>
+<p><strong>1. Route the container's WAN through an Android VPN (<code>tun0</code>)</strong></p>
+<p>Connect a VPN on the phone itself - ProtonVPN, WireGuard, OpenVPN, any app that creates a <code>tun0</code> interface. Then pin the container to it:</p>
+<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>droidspaces --name=box --rootfs=/data/box --net=nat --upstream=tun0 start
+</code></pre></div>
+<p>Now all of the container's traffic goes out through the VPN tunnel, and <em>only</em> the tunnel. If the VPN drops, <code>tun0</code> disappears and the container loses internet instead of leaking out over your real connection - a simple killswitch, for free.</p>
+<p><strong>2. Container on mobile data while the phone stays on Wi-Fi</strong></p>
+<p>Android can keep the cellular radio up even while you are on Wi-Fi. Enable <strong>"Mobile data always active"</strong> in Developer Options, connect to Wi-Fi, then turn mobile data on. Both networks are now live at once. Pin the container to the mobile-data interface:</p>
+<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>droidspaces --name=box --rootfs=/data/box --net=nat --upstream=rmnet* start
+</code></pre></div>
+<p>The container's traffic goes out over mobile data while the rest of the phone keeps using Wi-Fi. Handy for testing from a different IP/network, putting a container's bandwidth onto cellular, or simply running something on a separate connection from everything else on the phone.</p>
 <hr>
 <h2 id="part-6-bridges-and-virtual-cables-linux-plumbing">Part 6: Bridges and Virtual Cables (Linux Plumbing)</h2>
 <p>Now we go one level deeper, into how Linux actually connects containers to each other.</p>

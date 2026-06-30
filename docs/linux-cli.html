@@ -479,10 +479,24 @@ sudo droidspaces --name=web,db,app stop
 <tr><th>Option</th><th>Short</th><th>Description</th></tr>
 </thead>
 <tbody>
-<tr><td><code>--net=MODE</code></td><td></td><td>Networking mode: <code>host</code> (default), <code>nat</code>, or <code>none</code>.</td></tr>
+<tr><td><code>--net=MODE</code></td><td></td><td>Networking mode: <code>host</code> (default), <code>nat</code>, <code>none</code>, or <code>gateway</code>.</td></tr>
+<tr><td><code>--upstream=IFACE</code></td><td></td><td>Pin the NAT WAN to specific interface(s); disables automatic uplink detection. Comma-separated, priority-ordered, supports wildcards. Example: <code>--upstream=wlan0,rmnet*</code>. NAT mode only.</td></tr>
 <tr><td><code>--port HOST:CONT[/proto]</code></td><td></td><td>Forward host port to container (NAT mode). Supports TCP/UDP.</td></tr>
 <tr><td><code>--dns=SERVERS</code></td><td><code>-d</code></td><td>Custom DNS servers, comma-separated. Example: <code>--dns=1.1.1.1,8.8.8.8</code></td></tr>
 <tr><td><code>--disable-ipv6</code></td><td></td><td>Disable IPv6 networking support (Host mode only).</td></tr>
+</tbody>
+</table></div>
+<h4 id="gateway-mode">Gateway Mode</h4>
+<p>Delegate a container's LAN to another running container (e.g. OpenWRT), which then owns DHCP, DNS, firewall and routing. Droidspaces only does the L2 plumbing. See <a href="networking-from-zero.html" rel="noopener noreferrer">Networking From Zero</a> for the full guide.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr><th>Option</th><th>Short</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--gateway=NAME</code></td><td></td><td><strong>Required</strong> for <code>--net=gateway</code>. The running container that acts as the router.</td></tr>
+<tr><td><code>--gateway-net=NAME</code></td><td></td><td>LAN segment name / host bridge suffix (default: <code>lan</code>). Clients sharing a value share a LAN; different values are isolated segments.</td></tr>
+<tr><td><code>--gateway-iface=IFACE</code></td><td></td><td>Interface name as seen <em>inside</em> the gateway container (default: <code>eth1</code>). Each segment needs a unique name.</td></tr>
+<tr><td><code>--gateway-bridge=BR</code></td><td></td><td>Override the host bridge name (default: <code>ds-{gateway-net}</code>).</td></tr>
 </tbody>
 </table></div>
 <h3 id="feature-flags">Feature Flags</h3>
@@ -595,6 +609,23 @@ foreground=0
   --net=nat \
   --port=8080:80 \
   start
+</code></pre></div>
+<h3 id="nat-with-a-pinned-uplink">NAT with a Pinned Uplink</h3>
+<p>Force the container's internet out through a specific interface instead of following the host's active network. Pin a VPN tunnel (<code>tun0</code>) as a killswitch, or <code>rmnet*</code> to stay on mobile data while the phone uses Wi-Fi:</p>
+<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>sudo droidspaces \
+  --name=vpnbox \
+  --rootfs-img=/path/to/rootfs.img \
+  --net=nat \
+  --upstream=tun0 \
+  start
+</code></pre></div>
+<h3 id="gateway-mode-lan-owned-by-openwrt">Gateway Mode (LAN owned by OpenWRT)</h3>
+<p>Start the router container first (in NAT mode), then attach clients to it:</p>
+<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code># 1. the router
+sudo droidspaces --name=openwrt --rootfs=/data/openwrt --net=nat start
+
+# 2. a client whose LAN/DHCP/firewall is owned by openwrt
+sudo droidspaces --name=kali --rootfs=/data/kali --net=gateway --gateway=openwrt start
 </code></pre></div>
 <h3 id="ephemeral-testing">Ephemeral Testing</h3>
 <div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>sudo droidspaces --name=test --rootfs=/path/to/rootfs --volatile start

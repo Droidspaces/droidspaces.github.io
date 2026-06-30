@@ -415,13 +415,15 @@
 </tbody>
 </table></div>
 <h3 id="network-namespace-isolation-net">Network Namespace Isolation (<code>--net</code>)</h3>
-<p>Droidspaces supports three networking modes that determine whether a network namespace (<code>CLONE_NEWNET</code>) is used:</p>
+<p>Droidspaces supports four networking modes that determine whether a network namespace (<code>CLONE_NEWNET</code>) is used:</p>
 <ol>
 <li><strong>Host Mode (<code>--net=host</code>) - Default</strong>: Droidspaces deliberately does <strong>not</strong> unshare the network namespace. The container shares the host's network stack. This greatly simplifies setup: containers get internet access immediately without virtual bridges, NAT, or firewall rules. On Android, where networking is already complex (cellular, Wi-Fi, VPN), this avoids a whole category of connectivity issues.
 </li>
-<li><strong>NAT Mode (<code>--net=nat</code>)</strong>: The container is placed in a private network namespace. It is connected to the host via a virtual bridge or veth pair, providing <strong>Pure Network Isolation</strong> while maintaining internet access through the host's active internet uplink, which is detected automatically. Compatible with the vast majority of Android devices.
+<li><strong>NAT Mode (<code>--net=nat</code>)</strong>: The container is placed in a private network namespace. It is connected to the host via a virtual bridge or veth pair, providing <strong>Pure Network Isolation</strong> while maintaining internet access through the host's active internet uplink, which is detected automatically (or pinned manually with <code>--upstream</code>, see below). Compatible with the vast majority of Android devices.
 </li>
 <li><strong>None Mode (<code>--net=none</code>)</strong>: The container is placed in a private, air-gapped network namespace with only the loopback interface enabled for maximum security.
+</li>
+<li><strong>Gateway Mode (<code>--net=gateway</code>)</strong>: The container's LAN is delegated to <em>another</em> running container (typically OpenWRT). Droidspaces does only the L2 plumbing (bridge + veth pairs) and lets the gateway container own all policy - DHCP, DNS, firewall, routing, VPN. Ideal for VPN killswitches, segmented LANs, and traffic analysis. See the dedicated <a href="networking-from-zero.html" rel="noopener noreferrer">Networking From Zero</a> guide for the full deep dive.
 </li>
 </ol>
 <h3 id="how-it-compares-to-chroot">How It Compares to Chroot</h3>
@@ -601,8 +603,8 @@ droidspaces --name=test --rootfs-img=/path/to/rootfs.img --volatile start
 <h3 id="security">Security</h3>
 <p>Droidspaces validates bind mount targets with two protections: 1. <strong>Pre-mount:</strong> Uses <code>lstat()</code> to ensure the target inside the rootfs is not a symlink 2. <strong>Post-mount:</strong> Uses <code>realpath()</code> via the <code>is_subpath()</code> helper to verify the mounted path cannot escape the container root</p>
 <hr>
-<h2 id="network-isolation-3-modes">Network Isolation (3 Modes)</h2>
-<p>Droidspaces provides three distinct networking modes to balance ease-of-use with advanced isolation.</p>
+<h2 id="network-isolation-4-modes">Network Isolation (4 Modes)</h2>
+<p>Droidspaces provides four distinct networking modes to balance ease-of-use with advanced isolation.</p>
 <h3 id="1-host-mode-nethost-default">1. Host Mode (<code>--net=host</code>) - Default</h3>
 <p>The container shares the host's network namespace. - <strong>Pros</strong>: Zero configuration, instant internet access, works with all Android VPNs/hotspots. - <strong>Cons</strong>: No port isolation; services inside the container bind to host ports directly.</p>
 <h3 id="2-nat-mode-netnat">2. NAT Mode (<code>--net=nat</code>)</h3>
@@ -610,6 +612,8 @@ droidspaces --name=test --rootfs-img=/path/to/rootfs.img --volatile start
 <div class="callout callout-important"><strong class="callout-title">IMPORTANT</strong> NAT mode is <strong>IPv4 only</strong>. If the host's uplink lacks an IPv4 address (IPv6-only network), internet access will not work. See <a href="troubleshooting.html#ipv4-quirks" rel="noopener noreferrer">IPv4 NAT Quirks</a> for a workaround.</div>
 <h3 id="3-none-mode-netnone">3. None Mode (<code>--net=none</code>)</h3>
 <p>The container gets a private network namespace with only the loopback (<code>lo</code>) interface enabled. - <strong>Use Case</strong>: Maximum security for offline tasks.</p>
+<h3 id="4-gateway-mode-netgateway">4. Gateway Mode (<code>--net=gateway</code>)</h3>
+<p>The container is placed on an isolated L2 bridge whose <strong>policy is owned by another running container</strong> (typically OpenWRT) instead of by Droidspaces. Droidspaces does only the plumbing - it creates the bridge and the veth pairs and moves them into place; the gateway container provides DHCP, DNS, firewall, routing and VPN. - <strong>Required flag</strong>: <code>--gateway=NAME</code> names the running container that acts as the router. - <strong>Segments</strong>: <code>--gateway-net=NAME</code> (default <code>lan</code>) selects which bridge/segment the client lands on. Multiple clients sharing a <code>--gateway-net</code> share a LAN; different <code>--gateway-net</code> values are isolated segments through the same gateway. - <strong>Interface naming</strong>: <code>--gateway-iface=IFACE</code> (default <code>eth1</code>) controls what the LAN interface is called <em>inside</em> the gateway container, so it matches the gateway's own config. - <strong>Self-healing</strong>: wiring is driven entirely from the host side, so clients are (re)wired automatically when the gateway container starts or reboots - no client restart needed. - <strong>Use Cases</strong>: VPN killswitch for selected containers, VLAN-style segmented LANs, single-chokepoint traffic analysis, gateway-wide DNS filtering. See <a href="networking-from-zero.html" rel="noopener noreferrer">Networking From Zero</a> for the complete walkthrough.</p>
 <h3 id="port-forwarding-nat-mode">Port Forwarding (NAT Mode)</h3>
 <p>In NAT mode, you can expose container services to the host or local network using the <code>--port</code> flag. Supported formats:</p>
 <div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code># Forward host port 8080 to container port 80
@@ -626,7 +630,28 @@ droidspaces --name=test --rootfs-img=/path/to/rootfs.img --volatile start
 </code></pre></div>
 <p>Forwarded ports are reachable from any network the host belongs to - including clients connected to the phone's own hotspot or USB tethering on Android.</p>
 <h3 id="real-time-uplink-monitoring">Real-Time Uplink Monitoring</h3>
-<p>On Android, the connection often hops between Wi-Fi and Mobile Data. Droidspaces includes a <strong>Route Monitor</strong> that subscribes to kernel routing events (FIB rules, routes, links, addresses). The moment Android switches its default network (e.g., you walk out of Wi-Fi range), the monitor updates the kernel's policy routing to keep the container connected - no configuration, no restart.</p>
+<p>On Android, the connection often hops between Wi-Fi and Mobile Data. Droidspaces includes a <strong>Route Monitor</strong> that subscribes to kernel routing events (FIB rules, routes, links, addresses). The moment Android switches its default network (e.g., you walk out of Wi-Fi range), the monitor updates the kernel's policy routing to keep the container connected - no configuration, no restart. The same monitor works on desktop Linux (e.g. a Wi-Fi to ethernet handoff), where it follows the main routing table's default route.</p>
+<h3 id="manual-uplink-pinning-upstream">Manual Uplink Pinning (<code>--upstream</code>)</h3>
+<p>By default the uplink is fully automatic. When you want the container's WAN to <strong>ignore the host's active network</strong> and go out through a specific interface instead, pin it with <code>--upstream</code>. This switches auto-detection off entirely - the listed interface(s) become the <em>only</em> WAN candidates.</p>
+<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code># Single interface
+--upstream=wlan0
+
+# Priority-ordered list with wildcards (comma-separated)
+--upstream=wlan0,rmnet*
+</code></pre></div>
+<ul>
+<li><strong>Authoritative, not a fallback</strong>: traffic never hops to whatever <code>netd</code> marks active - only to interfaces you listed.
+</li>
+<li>**Priority failover <em>within</em> the list**: the Route Monitor re-resolves on every link/route change and uses the first listed interface that is up and has internet. <code>wlan0,rmnet*</code> prefers Wi-Fi and falls back to mobile data, then back to Wi-Fi when it returns.
+</li>
+<li><strong>Literals and wildcards</strong> (<code>*</code>, <code>?</code>): use <code>rmnet*</code> for mobile data, whose interface number is not stable across reconnects.
+</li>
+<li><strong>Disappear/reappear</strong> mid-session is handled: no WAN until a pinned interface is up, then it wires automatically.
+</li>
+<li><strong>Use cases</strong>: pin <code>tun0</code> to route the container exclusively through a phone-side VPN (a free killswitch), or pin <code>rmnet*</code> (with "Mobile data always active") to keep the container on cellular while the phone stays on Wi-Fi.
+</li>
+</ul>
+<blockquote><p><code>--upstream</code> is only valid with <code>--net=nat</code>; it is ignored (with a warning) in other modes.</p></blockquote>
 <hr>
 <h2 id="rootfs-image-support">Rootfs Image Support</h2>
 <h3 id="why-use-images">Why Use Images?</h3>
