@@ -498,6 +498,9 @@ CONFIG_IP_NF_NAT=y
 
 # Disable this on older kernels to make internet work
 CONFIG_ANDROID_PARANOID_NETWORK=n
+
+# Fix for docker unsafe procfs error
+CONFIG_USER_NS=y
 </code></pre></div>
 <h3 id="step-2-firewall-support-ufwfail2ban-optional">Step 2: Firewall Support (UFW/Fail2ban) - Optional</h3>
 <div class="callout callout-tip"><strong class="callout-title">TIP</strong> These options are only required if you want to run UFW or Fail2ban inside the container.
@@ -592,6 +595,9 @@ CONFIG_DEVTMPFS=y
 CONFIG_NETFILTER_XT_MATCH_ADDRTYPE=y
 
 # --- Below configs are optional but recommended ---
+
+# Fix for docker unsafe procfs error
+CONFIG_USER_NS=y
 
 # UFW support
 CONFIG_NETFILTER_XT_TARGET_REJECT=y
