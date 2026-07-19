@@ -70,20 +70,20 @@
   <section class="download-hero">
     <div class="container">
       <div class="section-label">Downloads</div>
-      <h1>v6.4.0</h1>
-      <p class="hero-desc">Released Date: 2026-07-04</p>
+      <h1>v6.4.5</h1>
+      <p class="hero-desc">Released Date: 2026-07-17</p>
       <div class="dl-cards">
         <div class="dl-card">
           <div class="dl-card-icon"><i class="fab fa-android"></i></div>
           <h3 class="dl-card-title">Android</h3>
           <p class="dl-card-desc">APK for rooted Android devices. KernelSU, Magisk, or APatch.</p>
-          <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.4.0/Droidspaces-universal-v6.4.0-7612af0.apk" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download APK</a>
+          <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.4.5/Droidspaces-universal-v6.4.5-1890424.apk" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download APK</a>
         </div>
         <div class="dl-card">
           <div class="dl-card-icon"><i class="fab fa-linux"></i></div>
           <h3 class="dl-card-title">Linux</h3>
           <p class="dl-card-desc">Static tarball for any Linux distribution. Zero dependencies.</p>
-          <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.4.0/droidspaces-v6.4.0-7612af0.tar.gz" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download Tarball</a>
+          <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.4.5/droidspaces-v6.4.5-1890424.tar.gz" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download Tarball</a>
         </div>
       </div>
       <div style="text-align:center;margin-top:1.5rem">
@@ -118,130 +118,48 @@
   <section class="section">
     <div class="container">
       <div class="section-label">Changelog</div>
-      <h2>v6.4.0</h2>
+      <h2>v6.4.5</h2>
       <div class="changelog-wrap">
         <div class="changelog" id="changelog-body">
           <h2 id="whats-changed">What's Changed</h2>
 <ul>
-<li>droidspaces: bump v6.4.0 (7612af0)
+<li>droidspaces: bump v6.4.5 (1890424)
 </li>
-<li>change: chkopenrc.sh to use rc-status for checking of running services (#226) (da001f9)
+<li>ci: do not cache toolchains (937053f)
 </li>
-<li>build: name tarball with commit hash instead of date (35c6dd4)
+<li>Translated using Weblate (Chinese (Traditional Han script), Spanish) (#238) (410cbee)
 </li>
-<li>ci: name CI apk Droidspaces-universal-CI-<commit>.apk (fe67da3)
+<li>Translated using Weblate (Chinese (Traditional Han script)) (#237) (b3efef4)
 </li>
-<li>ci: remove redundant run-name configuration from CI workflow (ac346ff)
+<li>ci: cache toolchains, fix author/event, add sha link (fe509af)
 </li>
-<li>docs: Add Galaxy A15 4G (sma155f) to GKI support list (#225) (5f5c613)
+<li>app: bold container name + type-to-confirm gate on uninstall dialog (c3fd619)
 </li>
-<li>mount: force image rootfs read-write before pivot_root (7957014)
+<li>app: fix: sync About dialog width to match Resize dialog (e9b2842)
 </li>
-<li>net: wire gateway clients before unblocking gateway init (39dbbdf)
+<li>UI Refinement (#236) (2a782aa)
 </li>
-<li>net: explicitly reap gateway veth on gateway stop to free orphan netns (8510a02)
+<li>net: dedup upstream interfaces on parse (6e45123)
 </li>
-<li>net: heal stale gateway cable when its peer outlives the gateway netns (9e738a8)
+<li>app: add missing userns toggle to container installer + summary (a512b18)
 </li>
-<li>docs: link Networking From Zero guide in README (d9e6938)
+<li>Translated using Weblate (Chinese (Simplified Han script)) (#235) (03d2e09)
 </li>
-<li>docs: cover gateway mode and --upstream pinning in built-in help (c4129eb)
+<li>net: add localhost DNAT to port-forward path; watch route_localnet (997066f)
 </li>
-<li>docs: document gateway mode, automatic uplink monitor, and --upstream pinning (e50ebe8)
+<li>ported the "Allow User Namespaces" feature from the <code>anland</code> branch (455f4ec)
 </li>
-<li>app: drop unused host systemUsage polling and its collector (c7c6296)
+<li>RequirementsScreen, docs: added <code>CONFIG_USER_NS</code> for the Docker unsafe procfs fix (41e164e)
 </li>
-<li>app: fix Panel tab polling not resuming after returning from background (06b1378)
+<li>ci: include branch name in CI build status notification (7c99ccc)
 </li>
-<li>net: fix DHCP source MAC for bridgeless NAT; harden gateway on no-bridge kernels (e876f99)
+<li>Update community-supported-devices.md (#233) (58690ea)
 </li>
-<li>net: log decoded target name instead of '' for standard verdicts (2dfdf89)
+<li>feat(ui): support AMOLED mode with system theme and preserve selection (#234) (a350154)
 </li>
-<li>net: dedupe NAT/gateway helpers (iptables ACCEPT, MAC, link up/down) (f30f467)
+<li>app: disable save/proceed button on static IP collision (3134eea)
 </li>
-<li>app: block back gesture on backend install screen, force Continue button (371ffd8)
-</li>
-<li>net: re-assert ip_forward on every platform, not just Android (9ac6ed3)
-</li>
-<li>net: add --upstream to pin NAT WAN to specific interface(s) (f702611)
-</li>
-<li>mount: don't force a full e2fsck on every container start (d035ce8)
-</li>
-<li>net: self-heal delegated-LAN clients when the gateway (re)boots (901502d)
-</li>
-<li>Update translation files (#224) (ea1c703)
-</li>
-<li>Added translation using Weblate (Tamil) (#221) (4206f21)
-</li>
-<li>docs: remove garbled characters from the Android installation guide (#223) (bc6c536)
-</li>
-<li>Documentation: Updated community-supported-devices.md to bring 1 new device and organization (#222) (d4e518c)
-</li>
-<li>app: show rootfs.img disk usage on sparse container details (80f687f)
-</li>
-<li>update Simplify Chinese translation (#219) (7a268e9)
-</li>
-<li>Translated using Weblate (Indonesian) (#212) (cbfcd47)
-</li>
-<li>selinux: fix permission denied when read/write mounted storage (5c7066f)
-</li>
-<li>app: center tab empty/error states above the floating bar (76cbd21)
-</li>
-<li>docs: document non-root GPU access for Turnip (e31a047)
-</li>
-<li>app: trim and collapse whitespace in container names (9d6b861)
-</li>
-<li>Translated using Weblate (Chinese (Simplified Han script)) (#208) (204e7e9)
-</li>
-<li>docs: add TB520FU (Yoga Tab Plus ROW ZUI 17.5.10.096) to community-supported-devices (#207) (802c933)
-</li>
-<li>build: add Debian package artifact generation (#206) (310abb5)
-</li>
-<li>Translated using Weblate (Chinese (Traditional Han script)) (#204) (75ed0b5)
-</li>
-<li>android: add OpenWrt procd service management (#203) (7b7213b)
-</li>
-<li>Add Droidspaces support for Redmi note 7 pro (violet) (#202) (a72fec3)
-</li>
-<li>Translated using Weblate (#200) (977f0e8)
-</li>
-<li>net: pin container eth0 to a deterministic MAC from its name (c09e941)
-</li>
-<li>net: keep gateway veth alive on last client exit, reap only the bridge (4457dc4)
-</li>
-<li>post_extract_fixes: allow network services to start in gateway mode (20c6dbc)
-</li>
-<li>net: unify /etc/resolv.conf wiring, fix gateway-mode DNS (0ebd06f)
-</li>
-<li>config: load running container's booted snapshot, not the host copy (fc2dbda)
-</li>
-<li>net: tear down idle gateway bridge and veth on last client exit (bd65799)
-</li>
-<li>fix: smooth network-mode switching, single static divider above DNS (f0c2bf5)
-</li>
-<li>feat: add gateway networking mode to installer and edit screens (ef6bcb5)
-</li>
-<li>feat: add auto-boot priority ordering for gateway networking mode (db90b9a)
-</li>
-<li>net: fix port forwards being unreachable from hotspot/USB-tether clients (4184d97)
-</li>
-<li>updated .gitignore and submodules (899b1ae)
-</li>
-<li>netlink: fix netd default-network rule never matching in RTM_GETRULE dump (c29524b)
-</li>
-<li>net: remove --upstream entirely, detect the internet uplink automatically (81b02fa)
-</li>
-<li>updated gitignore (c2a1c09)
-</li>
-<li>submodules: updated socketd & webui (90a53f6)
-</li>
-<li>docs: add Networking-From-Zero conceptual guide for gateway mode (6cf898a)
-</li>
-<li>clang-format all the source files (61d400a)
-</li>
-<li>Makefile: add make format target to automate clang-format on source files (a5bc2cd)
-</li>
-<li>Net: Virtual router support (#196) (d41368e)
+<li>Update bugreport.sh (#227) (800d57c)
 </li>
 </ul>
 <hr>
@@ -256,10 +174,10 @@
     <div class="container">
       <div class="section-label">Older Versions</div>
       <h2>Previous releases</h2>
-      <div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody><tr><td>Droidspaces v6.3.0</td><td>2026-06-10</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.3.0" class="dl-secondary">Download</a></td></tr>
+      <div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody><tr><td>Droidspaces v6.4.0</td><td>2026-07-04</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.4.0" class="dl-secondary">Download</a></td></tr>
+<tr><td>Droidspaces v6.3.0</td><td>2026-06-10</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.3.0" class="dl-secondary">Download</a></td></tr>
 <tr><td>Droidspaces v6.2.5</td><td>2026-05-29</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.2.5" class="dl-secondary">Download</a></td></tr>
-<tr><td>Droidspaces v6.2.0</td><td>2026-05-22</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.2.0" class="dl-secondary">Download</a></td></tr>
-<tr><td>Droidspaces v6.1.5</td><td>2026-05-15</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.1.5" class="dl-secondary">Download</a></td></tr></tbody></table></div>
+<tr><td>Droidspaces v6.2.0</td><td>2026-05-22</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.2.0" class="dl-secondary">Download</a></td></tr></tbody></table></div>
     </div>
   </section>
 </main>
