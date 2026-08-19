@@ -70,20 +70,20 @@
   <section class="download-hero">
     <div class="container">
       <div class="section-label">Downloads</div>
-      <h1>v6.4.5</h1>
-      <p class="hero-desc">Released Date: 2026-07-17</p>
+      <h1>v6.5.0</h1>
+      <p class="hero-desc">Released Date: 2026-08-09</p>
       <div class="dl-cards">
         <div class="dl-card">
           <div class="dl-card-icon"><i class="fab fa-android"></i></div>
           <h3 class="dl-card-title">Android</h3>
           <p class="dl-card-desc">APK for rooted Android devices. KernelSU, Magisk, or APatch.</p>
-          <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.4.5/Droidspaces-universal-v6.4.5-1890424.apk" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download APK</a>
+          <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.5.0/Droidspaces-universal-v6.5.0-7e67165.apk" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download APK</a>
         </div>
         <div class="dl-card">
           <div class="dl-card-icon"><i class="fab fa-linux"></i></div>
           <h3 class="dl-card-title">Linux</h3>
           <p class="dl-card-desc">Static tarball for any Linux distribution. Zero dependencies.</p>
-          <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.4.5/droidspaces-v6.4.5-1890424.tar.gz" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download Tarball</a>
+          <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.5.0/droidspaces-v6.5.0-7e67165.tar.gz" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download Tarball</a>
         </div>
       </div>
       <div style="text-align:center;margin-top:1.5rem">
@@ -118,48 +118,236 @@
   <section class="section">
     <div class="container">
       <div class="section-label">Changelog</div>
-      <h2>v6.4.5</h2>
+      <h2>v6.5.0</h2>
       <div class="changelog-wrap">
         <div class="changelog" id="changelog-body">
           <h2 id="whats-changed">What's Changed</h2>
 <ul>
-<li>droidspaces: bump v6.4.5 (1890424)
+<li>droidspaces: bump v6.5.0 (7e67165)
 </li>
-<li>ci: do not cache toolchains (937053f)
+<li>Translated using Weblate (Chinese (Simplified Han script)) (#274) (2635482)
 </li>
-<li>Translated using Weblate (Chinese (Traditional Han script), Spanish) (#238) (410cbee)
+<li>src: app: re-ordered korean locale in the locales_config.xml (8644b60)
 </li>
-<li>Translated using Weblate (Chinese (Traditional Han script)) (#237) (b3efef4)
+<li>formatted src/seccomp.c -s (e6df0e3)
 </li>
-<li>ci: cache toolchains, fix author/event, add sha link (fe509af)
+<li>fix: detect MSS clamp and port-forward removal in the rule probe (3c9821f)
 </li>
-<li>app: bold container name + type-to-confirm gate on uninstall dialog (c3fd619)
+<li>fix: reinstall host network rules when netd flushes them (cf9f008)
 </li>
-<li>app: fix: sync About dialog width to match Resize dialog (e9b2842)
+<li>app: drag to reorder upstream interfaces in container config (fdca598)
 </li>
-<li>UI Refinement (#236) (2a782aa)
+<li>Korean Resource Activation  (#269) (6f31e04)
 </li>
-<li>net: dedup upstream interfaces on parse (6e45123)
+<li>Translated using Weblate (Chinese (Traditional Han script)) (#266) (761d4a1)
 </li>
-<li>app: add missing userns toggle to container installer + summary (a512b18)
+<li>docs: add Poco X6 Pro (duchamp) to the supported devices list (#268) (1362e4f)
 </li>
-<li>Translated using Weblate (Chinese (Simplified Han script)) (#235) (03d2e09)
+<li>UI imporvements (#264) (b528c28)
 </li>
-<li>net: add localhost DNAT to port-forward path; watch route_localnet (997066f)
+<li>Translated using Weblate (Korean) (#258) (7412f6f)
 </li>
-<li>ported the "Allow User Namespaces" feature from the <code>anland</code> branch (455f4ec)
+<li>app: refactor: localize strings introduced by unit inspection/override editor (5d19d89)
 </li>
-<li>RequirementsScreen, docs: added <code>CONFIG_USER_NS</code> for the Docker unsafe procfs fix (41e164e)
+<li>feat(systemd): add unit inspection and override.conf editing (#260) (b5d4f34)
 </li>
-<li>ci: include branch name in CI build status notification (7c99ccc)
+<li>seccomp: block KSU magic-reboot fd install and neutralize GRANT_ROOT escape (#262) (5228bf7)
 </li>
-<li>Update community-supported-devices.md (#233) (58690ea)
+<li>post: Implement Devuan-specific umount script patches (#263) (b8f21bc)
 </li>
-<li>feat(ui): support AMOLED mode with system theme and preserve selection (#234) (a350154)
+<li>Translated using Weblate (Czech) (#256) (2242f37)
 </li>
-<li>app: disable save/proceed button on static IP collision (3134eea)
+<li>app: fix: bump termux terminal to 0.118.3 so fish stops printing "5u" (ab96668)
 </li>
-<li>Update bugreport.sh (#227) (800d57c)
+<li>fix: report user namespaces as optional, not a hardening regression (0388a54)
+</li>
+<li>Fix blurry launcher icon on Xiaomi tablet desktop and dock (#253) (0e022a2)
+</li>
+<li>docs: add motorola edge 30 to supported devices list (#249) (0fc8344)
+</li>
+<li>fix(monitor): drain console PTY master in background mode (#247) (9096c5a)
+</li>
+<li>feat(ui): swipe between service filter categories on the service list (893eaec)
+</li>
+<li>refactor: clear compiler warnings left by the refactor (9b2eacc)
+</li>
+<li>refactor: collect Settings toggles via collectAsStateWithLifecycle (77689eb)
+</li>
+<li>refactor: dedupe wizard-scoped ViewModel resolution in navigation (9acf48a)
+</li>
+<li>refactor: render the container list with LazyColumn + stable keys (3d6a4bc)
+</li>
+<li>refactor: group ContainerCard callbacks into ContainerCardActions (a4b919a)
+</li>
+<li>refactor: move InstallationScreen orchestration into AppStateViewModel.performInstallation (711e554)
+</li>
+<li>refactor: move ContainersScreen operations into ContainerOperationsViewModel (9ea611b)
+</li>
+<li>fix(security): detach terminal session client on dispose to stop Activity leak (3b22762)
+</li>
+<li>fix(security): quote container-derived paths and drop unsafe names on config load (6eed430)
+</li>
+<li>fix(security): reject control characters in single-line container-config values (01a7bb8)
+</li>
+<li>fix(security): fail closed when the rootfs validator cannot run (f7b3ce4)
+</li>
+<li>fix(security): remove unused RECEIVE_BOOT_COMPLETED permission and no-op BootReceiver (c0af39d)
+</li>
+<li>fix(ui): disable Check Requirements button when backend is missing or corrupted (523436a)
+</li>
+<li>fix(ui): make Accent Color settings row background match sibling rows (2c85869)
+</li>
+<li>fix(security): enforce HTTPS for rootfs repos and block cleartext traffic (e448468)
+</li>
+<li>fix(security): disable allowBackup on the root-privileged app (5c4ba1c)
+</li>
+<li>fix(security): allow-list container name and user before building su -c payload (241bfaf)
+</li>
+<li>fix(security): quote bare rm -rf path in installer cleanup (299d654)
+</li>
+<li>fix(security): shell-quote imgPath in disk-usage stat command (3055be0)
+</li>
+<li>fix(security): shell-quote file-picker paths in root ls/test commands (2cc3b3c)
+</li>
+<li>refactor: dedupe ABI->arch mapping into DeviceArch (19e3302)
+</li>
+<li>refactor: remove dead @Deprecated buildUptimeCommand (e11371a)
+</li>
+<li>refactor: make SummaryItem icon type-safe via overloads (0c85f75)
+</li>
+<li>refactor: dedupe countEnvVars into ValidationUtils (276b272)
+</li>
+<li>refactor: fix net_mode default drift between model and parser (a6d1932)
+</li>
+<li>refactor: key/remember recomputed lists to cut needless recomposition work (2e5ab92)
+</li>
+<li>refactor: bound usage-monitor coroutines, prune download jobs, privatize app scope (430c1d8)
+</li>
+<li>refactor: extract daemon-mode root shell into DaemonModeRepository (05b01a6)
+</li>
+<li>refactor: route ContainerViewModel scan through a ContainerRuntime gateway (2bf0fa6)
+</li>
+<li>refactor: share warning card, confirm gate and footer across dangerous dialogs (3ce17df)
+</li>
+<li>refactor: extract shared StatusPill component (971bbc4)
+</li>
+<li>refactor: collapse GatewaySettingsSection params into GatewayConfig (f4c695a)
+</li>
+<li>refactor: extract DsTextFieldDefaults for duplicated OutlinedTextField colors (e72f846)
+</li>
+<li>refactor: merge ToggleCard/SettingsRowCard into shared SettingsCard (21714f3)
+</li>
+<li>refactor: extract shared DialogFooterRow for dialog Cancel/Confirm rows (ec777f8)
+</li>
+<li>refactor: extract shared PrimaryActionBottomBar across wizard screens (1ba1b12)
+</li>
+<li>refactor: delete dead StatusBarStyle.kt (139349e)
+</li>
+<li>refactor: unify Procd/OpenRC/Systemd screens into InitServiceScreen (7c5bf7d)
+</li>
+<li>fix(security): validate systemd/openrc service names to prevent host-root command injection (842c816)
+</li>
+<li>refactor: unify Edit/Config screens into ContainerConfigForm + ContainerConfigState (56c8f75)
+</li>
+<li>Translated using Weblate (Romanian) (#243) (0b270d3)
+</li>
+<li>app: add launcher long-press shortcuts (7ba97ee)
+</li>
+<li>app: validate tarball is a Linux rootfs before install (1f1639f)
+</li>
+<li>Revert "fix(security): refuse to load a group/other-writable config" (ecf412c)
+</li>
+<li>Use fixed latest release URL for kernel download (#244) (31c3b69)
+</li>
+<li>fix(ui): jump directly between tabs instead of scrolling through them (462ddce)
+</li>
+<li>fix(net): re-base jump verdicts on raw iptables delete (fixes ELOOP) (6b63827)
+</li>
+<li>fix(net): actually remove DS iptables rules on cleanup; stop phantom drop logs (9696c76)
+</li>
+<li>fix(net): keep uplink route monitor alive across internal reboots (f87862f)
+</li>
+<li>refactor: wrap repeated payload-drain idiom in socketd_drain_payload (334c006)
+</li>
+<li>refactor: share pidfile resolve/prune helpers between scan loops (cb6de8a)
+</li>
+<li>refactor: shell-quote multi-arg su -c command in run_in_rootfs (95fcdf6)
+</li>
+<li>refactor: call p_printf explicitly instead of #define printf in print_page (e4280cb)
+</li>
+<li>refactor: centralize tx11/virgl flag ownership in ds_config_free (aa6c6ca)
+</li>
+<li>refactor: compute doc nav-hint width by display columns, not byte fudge (08e6540)
+</li>
+<li>refactor: unify socket peer authorization into ds_peer_authorized (1660135)
+</li>
+<li>refactor: share Termux socket-bridge setup for PulseAudio and VirGL (95d2746)
+</li>
+<li>refactor: share forked-daemon-child preamble across A/V helpers (0508150)
+</li>
+<li>refactor: extract generic socketd_grow_array for record buffers (eef4db0)
+</li>
+<li>refactor: use in-tree remove_recursive to clear stale PulseAudio config (9a6856b)
+</li>
+<li>refactor: unify pidfile sidecar path builders (3102b97)
+</li>
+<li>refactor: free cur_base on OOM early-return in remove_matching_rules (296c380)
+</li>
+<li>refactor: drop premature ds_config_free in start_rootfs boot-failure path (6638be2)
+</li>
+<li>refactor: remove dead payload-drain block and stale TODO in socketd bridge (f85f250)
+</li>
+<li>fix(security): validate container mount marker before host bookkeeping (a8a0a29)
+</li>
+<li>fix(security): bounds-check 4-byte netlink attribute reads (e168073)
+</li>
+<li>fix(security): guard nl_nest_end against a NULL nest pointer (247e6ca)
+</li>
+<li>fix(security): validate container_ip before the iptables shell sweep (86c2f58)
+</li>
+<li>fix(security): use async-signal-safe write() in SIGINT handler (70ef5f4)
+</li>
+<li>fix(security): scrub LD_*/IFS env before the daemon re-execs as root (5fd8a2f)
+</li>
+<li>fix(security): validate port_forwards proto in the config parser (4371206)
+</li>
+<li>fix(security): replace weak rand() UUID fallback with getrandom(2) (267714d)
+</li>
+<li>fix(security): add SOCK_CLOEXEC to transient AF_INET sockets (feb7586)
+</li>
+<li>fix(security): use atomic close-on-exec for transient fds (6601337)
+</li>
+<li>fix(security): add O_NOFOLLOW to bind_vfile target creation (b0e3ffe)
+</li>
+<li>fix(security): clamp gen_uptime out_len to bytes actually written (2117b89)
+</li>
+<li>fix(security): fix format-string arg mismatch in domount_silent (af4a123)
+</li>
+<li>fix(security): guard size==0 underflow in sanitize_container_name (9fb229a)
+</li>
+<li>fix(security): set SOCK_CLOEXEC on route-monitor and DHCP sockets (6a73f76)
+</li>
+<li>fix(security): write sysvinit initctl only through a verified FIFO (59ddf21)
+</li>
+<li>fix(security): reject socket peers outside the daemon PID namespace (79449ca)
+</li>
+<li>fix(security): force NUL-termination of socketd wire target field (2c46cff)
+</li>
+<li>fix(security): refuse to load a group/other-writable config (174b75c)
+</li>
+<li>fix(security): create pidfile and container.config non-world-writable (e5d47e7)
+</li>
+<li>fix(security): safe temp-file creation, reject symlinked bind targets (7be27b9)
+</li>
+<li>fix(security): pin bind-mount target inode to defeat symlink swap race (995fe9b)
+</li>
+<li>fix(security): length-aware growth in gen_stat() /proc/stat buffer (eb3824b)
+</li>
+<li>fix(security): check getgrouplist() return in daemon peer auth (71e5368)
+</li>
+<li>Add POCO F6 / Redmi Turbo 3 (peridot) — DroidSpaces LXC mode, working (#242) (12859a9)
+</li>
+<li>feat(ui): Swipe to switch between home, containers, and control panel tabs (#241) (37d7154)
 </li>
 </ul>
 <hr>
@@ -174,10 +362,10 @@
     <div class="container">
       <div class="section-label">Older Versions</div>
       <h2>Previous releases</h2>
-      <div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody><tr><td>Droidspaces v6.4.0</td><td>2026-07-04</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.4.0" class="dl-secondary">Download</a></td></tr>
+      <div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody><tr><td>Droidspaces v6.4.5</td><td>2026-07-17</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.4.5" class="dl-secondary">Download</a></td></tr>
+<tr><td>Droidspaces v6.4.0</td><td>2026-07-04</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.4.0" class="dl-secondary">Download</a></td></tr>
 <tr><td>Droidspaces v6.3.0</td><td>2026-06-10</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.3.0" class="dl-secondary">Download</a></td></tr>
-<tr><td>Droidspaces v6.2.5</td><td>2026-05-29</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.2.5" class="dl-secondary">Download</a></td></tr>
-<tr><td>Droidspaces v6.2.0</td><td>2026-05-22</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.2.0" class="dl-secondary">Download</a></td></tr></tbody></table></div>
+<tr><td>Droidspaces v6.2.5</td><td>2026-05-29</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.2.5" class="dl-secondary">Download</a></td></tr></tbody></table></div>
     </div>
   </section>
 </main>
