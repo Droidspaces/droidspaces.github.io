@@ -516,6 +516,7 @@ droidspaces --name=test --rootfs-img=/path/to/rootfs.img --volatile start
 <p>This gives the container access to: - <strong>GPU</strong> (for hardware-accelerated graphics via Turnip + Zink, Panfrost/Native GPU Acceleration in desktop for Intel and AMD) - <strong>Cameras</strong> - <strong>Sensors</strong> - <strong>USB devices</strong> - <strong>Block Devices</strong> (Partitions and physical disks)</p>
 <h3 id="security-implications">Security Implications</h3>
 <p>Hardware access mode grants the container visibility to <strong>all</strong> host devices. The container can interact with the GPU, USB controllers, and other hardware directly. Only use this mode when you trust the container's contents and need hardware access.</p>
+<p>The container's <code>/dev</code> is the kernel's devtmpfs, the same instance the host uses on Linux. Droidspaces never writes into it: the nodes it needs (<code>null</code>, <code>console</code>, <code>ptmx</code>, GPU nodes and so on) are created in a private tmpfs and bind-mounted over the devtmpfs paths inside the container's mount namespace. The one exception is <code>/dev/tty1</code> to <code>tty6</code>, which are masked with <code>/dev/null</code> by default because a systemd container starts <code>getty</code> on them and would put its login prompt on the host console. Pass <code>--allow-vts</code> to leave the host's virtual terminals visible.</p>
 <h3 id="the-systemd-258-fix">The systemd 258+ Fix</h3>
 <p>Starting with systemd 258, the container detection logic was hardened. systemd now checks whether <code>/sys</code> is mounted read-only to determine if it's running in a container versus a physical machine. If <code>/sys</code> is read-write, systemd assumes it has full hardware authority and attempts to attach services (like <code>getty</code>) to physical TTYs (<code>tty1</code>-<code>tty6</code>). Since these do not exist in the isolated container environment, the services fail to start, leaving the console without a login prompt.</p>
 <div class="callout callout-note"><strong class="callout-title">NOTE</strong> This information is based on current developer understanding of systemd's behavior in Droidspaces and may require further verification.</div>
@@ -536,14 +537,14 @@ droidspaces --name=test --rootfs-img=/path/to/rootfs.img --volatile start
 <h3 id="automatic-gpu-group-setup">Automatic GPU Group Setup</h3>
 <p>When <code>--hw-access</code> is enabled, Droidspaces automatically:</p>
 <ol>
-<li><strong>Scans host GPU devices</strong> - Before <code>pivot_root</code>, it probes ~40 known GPU device paths (<code>/dev/dri/*</code>, <code>/dev/mali*</code>, <code>/dev/kgsl-3d0</code>, <code>/dev/nvidia*</code>, etc.) and collects their group IDs via <code>stat()</code>. <strong>Dangerous nodes like <code>/dev/dri/card*</code> are explicitly skipped</strong> to prevent host kernel panics, as these nodes are restricted to the host's display manager.
+<li><strong>Scans host GPU devices</strong> - Before <code>pivot_root</code>, it probes ~40 known GPU device paths (<code>/dev/dri/*</code>, <code>/dev/mali*</code>, <code>/dev/kgsl-3d0</code>, <code>/dev/nvidia*</code>, etc.) and collects their group IDs via <code>stat()</code>.
 </li>
 <li><strong>Creates matching groups</strong> - After <code>pivot_root</code>, it appends entries like <code>gpu_<GID>:x:<GID>:root</code> to the container's <code>/etc/group</code>. The container's root user is automatically added to each group.
 </li>
 <li><strong>Idempotent restarts</strong> - On container restart, existing groups are detected and skipped (no duplicate entries).
 </li>
 </ol>
-<p>This eliminates the need for manual <code>groupadd</code>/<code>usermod</code> commands inside the container, while ensuring the host's kernel stability by avoiding restricted hardware paths.</p>
+<p>This eliminates the need for manual <code>groupadd</code>/<code>usermod</code> commands inside the container.</p>
 <h3 id="x11-socket-mounting">X11 Socket Mounting</h3>
 <p>For GUI application support, Droidspaces automatically bind-mounts the X11 socket directory:</p>
 <ul>
