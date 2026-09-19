@@ -423,8 +423,6 @@
 </li>
 <li><a href="#selinux-induced-rootfs-corruption-directory-mode" rel="noopener noreferrer">SELinux-Induced Rootfs Corruption</a>
 </li>
-<li><a href="#systemd-service-sandboxing-conflicts-legacy-kernels" rel="noopener noreferrer">Systemd Service Sandboxing Conflicts</a>
-</li>
 <li><a href="#reclaim-storage" rel="noopener noreferrer">Reclaiming Storage (Sparse Image)</a>
 </li>
 <li><a href="#nuke-wifi-powersave" rel="noopener noreferrer">WIFI <code>Power save: on</code> make the networking experience sluggish in Android</a>
@@ -487,12 +485,12 @@ droidspaces --name=test --rootfs-img=/data/rootfs.img --volatile start
 <h2 id="systemd-hangs-on-older-kernels">Systemd Hangs on Older Kernels</h2>
 <p><strong>Symptoms:</strong> The entire systemd hangs or becomes unresponsive when starting a container on legacy kernels (3.18, 4.4, 4.9, 4.14, 4.19).</p>
 <p><strong>Cause:</strong> systemd's service sandboxing (<code>PrivateTmp=yes</code>, <code>ProtectSystem=yes</code>) triggers a race condition in the kernel's VFS <code>grab_super</code> path on legacy kernels.</p>
-<p><strong>Solution:</strong> Try enabling the "Deadlock Shield" on App/<code>--block-nested-namespaces</code> in CLI, hard reboot your device, and try again.</p>
+<p><strong>Solution:</strong> This is a kernel bug (<code>grab_super()</code> on 4.14.113 and neighbours) and Droidspaces cannot work around it. Use a kernel that carries the fix.</p>
 <hr>
 <h2 id="container-wont-stop">Container Won't Stop</h2>
 <p><strong>Symptoms:</strong> <code>droidspaces stop</code> takes more than 15 seconds to stop the container and eventually fail.</p>
 <p><strong>Cause:</strong> Exact same cuase of <a href="#systemd-hangs-on-older-kernels" rel="noopener noreferrer">Systemd Hangs on Older Kernels</a>.</p>
-<p><strong>Solution:</strong> Try enabling the "Deadlock Shield" on App/<code>--block-nested-namespaces</code> in CLI, hard reboot your device, and try again.</p>
+<p><strong>Solution:</strong> This is a kernel bug (<code>grab_super()</code> on 4.14.113 and neighbours) and Droidspaces cannot work around it. Use a kernel that carries the fix.</p>
 <hr>
 <h2 id="rootfs-image-io-errors-on-android">Rootfs Image I/O Errors on Android</h2>
 <p><strong>Symptoms:</strong> Loop-mounting a rootfs image silently fails.</p>
@@ -564,37 +562,6 @@ droidspaces --name=test --rootfs-img=/data/rootfs.img --volatile start
 <p>In this mode, the rootfs is stored as a standalone ext4 image and loop-mounted at runtime. SELinux xattr labels for files inside the image are encapsulated within the image's own filesystem metadata, so Android's policy engine cannot relabel or conflict with them. This avoids the core problem of the host assigning a generic context to every file in the directory tree.</p>
 <div class="callout callout-note"><strong class="callout-title">NOTE</strong> SELinux enforcement still applies at the process level - the container process's domain and access to the loop device or mount point remain subject to host policy. The <code>.img</code> mode does not create a fully SELinux-transparent environment, but it does eliminate host-side interference with the internal filesystem's structure and extended attributes.</div>
 <div class="callout callout-warning"><strong class="callout-title">WARNING</strong> While switching to <code>permissive</code> mode may seem to fix this, it is <strong>not recommended</strong> as a permanent solution. If the rootfs has already been corrupted by SELinux denials, the damage is often permanent and cannot be undone by simply changing modes.</div>
-<hr>
-<h2 id="systemd-service-sandboxing-conflicts-legacy-kernels">Systemd Service Sandboxing Conflicts (Legacy Kernels)</h2>
-<p><strong>Symptoms:</strong> Services like <code>redis</code>, <code>mysql</code>, or <code>apache</code> fail to start with <code>exit-code</code> or <code>status=226/NAMESPACE</code>, even though the exact same configuration worked elsewhere.</p>
-<p><strong>Cause:</strong> Modern service files often use advanced systemd sandboxing directives (<code>PrivateTmp</code>, <code>ProtectSystem</code>, <code>RestrictNamespaces</code>). On legacy kernels (3.18 - 4.19), Droidspaces' <strong>Adaptive Seccomp Shield</strong> intercepts these namespace-related syscalls and returns <code>EPERM</code> to prevent kernel deadlocks. However, some distributions' versions of systemd treat these errors as fatal and refuse to start the service.</p>
-<p><strong>Solution:</strong> Create a service override to disable the conflicting sandboxing features:</p>
-<ol>
-<li><strong>Identify the service</strong>: e.g., <code>redis-server</code>
-</li>
-<li><strong>Create the override</strong>:
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>sudo systemctl edit <service-name>
-</code></pre></div>
-</li>
-<li><strong>Add these lines</strong> (to the empty space provided by the editor):
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>[Service]
-# Disable problematic security sandboxing
-PrivateTmp=no
-PrivateDevices=no
-ProtectSystem=no
-ProtectHome=no
-RestrictNamespaces=no
-MemoryDenyWriteExecute=no
-NoNewPrivileges=no
-CapabilityBoundingSet=
-</code></pre></div>
-</li>
-<li><strong>Reload and restart</strong>:
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>sudo systemctl daemon-reload
-sudo systemctl restart <service-name>
-</code></pre></div>
-</li>
-</ol>
 <hr>
 <h2 id="reclaim-storage">Reclaiming Storage (Sparse Image)</h2>
 <p><strong>Symptoms:</strong> You have deleted large files or uninstalled heavy packages inside a container using <strong>Sparse Image mode</strong> (<code>rootfs.img</code>), but the <code>rootfs.img</code> file on your Android internal storage still takes up the same amount of space (it doesn't "shrink" back).</p>

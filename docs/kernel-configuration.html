@@ -694,7 +694,7 @@ CONFIG_TMPFS_XATTR=y
 </thead>
 <tbody>
 <tr><td>3.18</td><td>Legacy</td><td>Minimum supported version. Basic namespace support only. Modern distros are unstable or may not boot at all.</td></tr>
-<tr><td>4.4 - 4.19</td><td>Stable</td><td>Full support. Nested containers (Docker/Podman) work natively. If you hit systemd hangs on kernels like 4.14.113 due to the VFS deadlock bug, try enabling the "Deadlock Shield" in the app or passing <code>--block-nested-namespaces</code> in the CLI, then hard reboot and try again.</td></tr>
+<tr><td>4.4 - 4.19</td><td>Stable</td><td>Full support. Nested containers (Docker/Podman) work natively.</td></tr>
 <tr><td>5.4 - 5.10</td><td>Recommended</td><td>Full feature support including nested containers and modern cgroup v2.</td></tr>
 <tr><td>5.15+</td><td>Ideal</td><td>All features, best performance, and the widest compatibility.</td></tr>
 </tbody>
@@ -705,8 +705,6 @@ CONFIG_TMPFS_XATTR=y
 <h3 id="legacy-kernel-considerations-419-and-below">Legacy Kernel Considerations (4.19 and below)</h3>
 <p>Legacy kernels may present some challenges for modern nested container tools:</p>
 <ul>
-<li><strong>Deadlock Shield trade-off</strong>: If your device is affected by the 4.14.113 <code>grab_super()</code> VFS deadlock and requires the Deadlock Shield to boot systemd, enabling the shield will also block the namespace syscalls that Docker, LXC, and Podman need. You cannot use nested containers while the shield is active.
-</li>
 <li><strong>Networking incompatibilities</strong>: Modern Docker, LXC, and Podman rely on <code>nftables</code>. Legacy kernels often lack full <code>nftables</code> support. To work around this, use Droidspaces in NAT mode and switch your container's iptables alternative to <code>iptables-legacy</code> and <code>ip6tables-legacy</code>.
 </li>
 <li><strong>BPF conflicts</strong>: Modern Docker and runc use <code>BPF_CGROUP_DEVICE</code> for device management. Legacy kernels do not support the required BPF attach types, which causes <code>Invalid argument</code> errors. To work around this, configure Docker to use the <code>cgroupfs</code> driver and the <code>vfs</code> storage driver.
