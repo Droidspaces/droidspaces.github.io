@@ -127,8 +127,8 @@
     <div>
       <h2>Real init. Real services.</h2>
       <p class="title-lg">Each container gets its own PID, mount, UTS, IPC and cgroup namespace. systemd boots in 150 to 750 ms and starts services the way it does on a server.</p>
-      <ul class="chip-set" aria-label="Init systems and architectures">
-        <li class="chip">systemd</li><li class="chip">OpenRC</li><li class="chip">runit</li><li class="chip">s6</li><li class="chip">aarch64</li><li class="chip">armhf</li><li class="chip">x86_64</li><li class="chip">x86</li><li class="chip">riscv64</li>
+      <ul class="chip-set" aria-label="Init systems and what the kernel gives each container">
+        <li class="chip">systemd</li><li class="chip">OpenRC</li><li class="chip">runit</li><li class="chip">s6</li><li class="chip">PID namespace</li><li class="chip">Mount namespace</li><li class="chip">Cgroup v1 and v2</li><li class="chip">journald</li>
       </ul>
     </div>
   </section>
@@ -137,8 +137,8 @@
     <div>
       <h2>Put it on a shelf. It keeps serving.</h2>
       <p class="title-lg">Containers start at boot from post-fs-data, service.d or init.rc. Each one has its own monitor process, detached from the app, so closing or uninstalling the app stops nothing. Inside, they run their own containers and sandboxes.</p>
-      <ul class="chip-set" aria-label="What a container can run">
-        <li class="chip">Nested containers</li><li class="chip">Rootless Podman</li><li class="chip">Flatpak</li><li class="chip">bwrap</li><li class="chip">K3s</li><li class="chip">Tailscale</li><li class="chip">Port forwarding</li><li class="chip">Volatile mode</li><li class="chip">rootfs.img</li>
+      <ul class="chip-set" aria-label="Networking, and what runs inside a container">
+        <li class="chip">NAT networking</li><li class="chip">Port forwarding</li><li class="chip">OpenWRT as a gateway</li><li class="chip">Tailscale</li><li class="chip">Docker</li><li class="chip">Podman</li><li class="chip">Flatpak</li><li class="chip">bwrap</li>
       </ul>
     </div>
     <div class="stage">
