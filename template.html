@@ -28,14 +28,30 @@
   <button class="doc-breadcrumb" popovertarget="sidebar"><span class="icon" aria-hidden="true">menu</span>{{BREADCRUMB}}</button>
   <aside class="sidebar" id="sidebar" popover>
     <button class="icon-button sidebar-close" popovertarget="sidebar" popovertargetaction="hide" aria-label="Close navigation"><span class="icon" aria-hidden="true">close</span></button>
+    <button class="search-open" type="button" hidden><span class="icon" aria-hidden="true">search</span>Search the docs<kbd>Ctrl K</kbd></button>
 {{SIDEBAR}}
   </aside>
   <main class="docs-content">
+    <article>
 {{BODY}}
+    </article>
+    <p class="doc-edit"><a href="{{EDIT_URL}}" rel="noopener noreferrer"><span class="icon" aria-hidden="true">edit</span>Edit this page on GitHub</a></p>
 {{DOC_NAV}}
   </main>
+  <aside class="toc-column">
+{{TOC}}
+  </aside>
 </div>
+<dialog class="search-dialog" aria-label="Search the docs">
+  <form method="dialog" class="search-form">
+    <span class="icon" aria-hidden="true">search</span>
+    <input type="search" class="search-input" placeholder="Search the docs" autocomplete="off" aria-label="Search the docs">
+    <button class="icon-button" aria-label="Close search"><span class="icon" aria-hidden="true">close</span></button>
+  </form>
+  <ul class="search-results"></ul>
+</dialog>
 {{FOOTER}}
 <script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/docs.js" defer></script>
 </body>
 </html>
