@@ -469,11 +469,8 @@ main { overflow-x: clip; } /* a shape wider than its column must not scroll the 
 .card h3 { display: flex; align-items: center; gap: 8px; }
 .card h3 .icon { color: var(--md-sys-color-on-surface-variant); }
 .card .button { margin-top: 16px; }
-.patch-group { margin-top: 32px; }
-.patch-group h3, .patch-group h4 { margin: 0 0 12px; font: inherit; font-size: 14px; line-height: 20px; font-weight: 600; letter-spacing: 0.1px; }
-.patch-subgroup { margin: 16px 0 0 16px; }
-.patch-list { margin: 0; padding: 0; list-style: none; }
-.patch-list a { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; text-decoration: none; font: 400 14px/22px "JetBrains Mono", monospace; letter-spacing: 0; overflow-wrap: anywhere; }
+/* downloads: one short page, not a sequence of features, so sections share one 96px gap instead of stacking two */
+.compact .section + .section { padding-top: 0; }
 .changelog { padding: 0 24px; border: 1px solid var(--md-sys-color-outline-variant); border-radius: var(--md-sys-shape-corner-lg); background: var(--md-sys-color-surface-container); }
 .changelog summary { display: flex; align-items: center; min-height: 56px; font-size: 14px; line-height: 20px; font-weight: 600; letter-spacing: 0.1px; cursor: pointer; }
 .changelog h2 { font-size: 16px; line-height: 24px; font-weight: 600; letter-spacing: 0.15px; }

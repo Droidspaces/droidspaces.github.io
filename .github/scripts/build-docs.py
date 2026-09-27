@@ -440,29 +440,6 @@ def make_page(title, body, slug, nav_template, footer_template, pages, is_index=
 def fix_img_paths(html):
     return re.sub(r'Documentation/resources/', r'assets/resources/', html)
 
-def fetch_kernel_patches():
-    base = 'https://api.github.com/repos/ravindu644/Droidspaces-OSS/contents/Documentation/resources/kernel-patches'
-    data = json.loads(urllib.request.urlopen(base).read())
-    parts = []
-    for item in data:
-        if item['type'] == 'dir':
-            name = item['name']
-            sub = json.loads(urllib.request.urlopen(item['url']).read())
-            parts.append(f'<div class="patch-group"><h3 class="patch-group-title">{name}</h3>')
-            for s in sub:
-                if s['type'] == 'dir':
-                    sname = s['name']
-                    sub2 = json.loads(urllib.request.urlopen(s['url']).read())
-                    parts.append(f'<div class="patch-subgroup"><h4 class="patch-subgroup-title">{sname}</h4><ul class="patch-list">')
-                    for s2 in sub2:
-                        fname = s2['name']
-                        parts.append(f'<li><a href="{s2["download_url"]}" download><span class="icon" aria-hidden="true">download</span>{fname}</a></li>')
-                    parts.append('</ul></div>')
-                else:
-                    parts.append(f'<ul class="patch-list"><li><a href="{s["download_url"]}" download><span class="icon" aria-hidden="true">download</span>{s["name"]}</a></li></ul>')
-            parts.append('</div>')
-    return '\n'.join(parts)
-
 def fetch_stars():
     # None on any failure, so the last stamped value stays
     req = urllib.request.Request('https://api.github.com/repos/ravindu644/Droidspaces-OSS')
@@ -558,21 +535,6 @@ def fetch_latest_release():
 def build_downloads_page(root, nav_template, footer_template):
     dl_nav = nav_template.replace('{{DOCS_ATTR}}', '').replace('{{DOWNLOADS_ATTR}}', ' aria-current="page"')
     release_info = fetch_latest_release()
-    patches_html = '''<div class="patch-group"><h3 class="patch-group-title">GKI</h3>
-<div class="patch-subgroup"><h4 class="patch-subgroup-title">below-kernel-6.12</h4><ul class="patch-list">
-<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_1_2_3.patch" download><span class="icon" aria-hidden="true">download</span>001.GKI-below-6.12-fix_sysvipc_kabi_1_2_3.patch</a></li>
-<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_3_4_5.patch" download><span class="icon" aria-hidden="true">download</span>001.GKI-below-6.12-fix_sysvipc_kabi_3_4_5.patch</a></li>
-<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch" download><span class="icon" aria-hidden="true">download</span>001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch</a></li>
-<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/002.5.10_or_lower_use_android_abi_padding_for_posix_mqueue.patch" download><span class="icon" aria-hidden="true">download</span>002.5.10_or_lower_use_android_abi_padding_for_posix_mqueue.patch</a></li>
-</ul></div>
-<div class="patch-subgroup"><h4 class="patch-subgroup-title">kernel-6.12</h4><ul class="patch-list">
-<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/kernel-6.12/001.GKI-6.12-or-above-fix_sysvipc_kabi.patch" download><span class="icon" aria-hidden="true">download</span>001.GKI-6.12-or-above-fix_sysvipc_kabi.patch</a></li>
-</ul></div>
-</div>
-<div class="patch-group"><h3 class="patch-group-title">non-GKI</h3>
-<ul class="patch-list"><li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/non-GKI/01.fix_kernel_panic_in_xt_qtaguid.patch" download><span class="icon" aria-hidden="true">download</span>01.fix_kernel_panic_in_xt_qtaguid.patch</a></li></ul>
-<ul class="patch-list"><li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/non-GKI/02.fix_restore%20cgroup%20file%20prefix%20handling%20.patch" download><span class="icon" aria-hidden="true">download</span>02.fix_restore cgroup file prefix handling .patch</a></li></ul>
-</div>'''
     if release_info:
         version = release_info['version']
         date = release_info['date']
@@ -602,7 +564,7 @@ def build_downloads_page(root, nav_template, footer_template):
         older_html = '<div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody><tr><td>v6.1.5</td><td>2026-05-15</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.1.5" rel="noopener noreferrer">Release page</a></td></tr><tr><td>v6.1.0</td><td>2026-05-13</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.1.0" rel="noopener noreferrer">Release page</a></td></tr><tr><td>v6.0.0</td><td>2026-04-24</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.0.0" rel="noopener noreferrer">Release page</a></td></tr></tbody></table></div>'
     html = fill(os.path.join(root, 'template-downloads.html'), {
         'NAV': dl_nav, 'FOOTER': footer_template, 'VERSION': version, 'DATE': date,
-        'APK_URL': apk_url, 'TAR_URL': tar_url, 'PATCHES': patches_html, 'CHANGELOG': changelog, 'OLDER': older_html})
+        'APK_URL': apk_url, 'TAR_URL': tar_url, 'CHANGELOG': changelog, 'OLDER': older_html})
     with open(os.path.join(root, 'downloads.html'), 'w') as f:
         f.write(html)
     print("OK: downloads.html")
