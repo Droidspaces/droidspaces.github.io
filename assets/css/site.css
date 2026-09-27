@@ -36,6 +36,20 @@ main p a, main li a { color: inherit; text-decoration: underline; } /* a link in
 :focus-visible { outline: 2px solid var(--md-sys-color-primary); outline-offset: 2px; }
 p { max-width: 68ch; }
 
+/* scrollbars, every one on the site: 8px, no arrow buttons, a rounded outline-variant thumb on a
+   transparent track, so a scroller reads as part of the page and not as browser chrome.
+   Chromium and Safari get the ::-webkit-scrollbar parts, which draw no arrows. Only Firefox gets
+   scrollbar-width and scrollbar-color: Chromium honours those too, but then ignores the parts
+   below and draws its arrow buttons */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: transparent; }
+::-webkit-scrollbar-thumb { border: 2px solid transparent; border-radius: var(--md-sys-shape-corner-full); background: var(--md-sys-color-outline-variant) padding-box; }
+::-webkit-scrollbar-thumb:hover { background-color: var(--md-sys-color-outline); }
+::-webkit-scrollbar-button { display: none; }
+@supports (-moz-appearance: none) {
+  * { scrollbar-width: thin; scrollbar-color: var(--md-sys-color-outline-variant) transparent; }
+}
+
 /* type scale: M3 sizes; emphasis is one weight step up, body stays at 400 (DESIGN.md Typography) */
 h1, h2, h3, h4 { margin: 0; letter-spacing: 0; }
 h1, .display-lg { font-size: 57px; line-height: 64px; font-weight: 700; }
