@@ -411,7 +411,14 @@ def breadcrumb(pages, slug):
     parts.append(f'<span class="bc-label">{label}</span>')
     return ''.join(parts)
 
-TEMPLATE = open(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'template.html')).read()
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def fill(template_path, values):
+    """Fill {{KEY}} placeholders. Plain replace, not format(), so page content may contain braces."""
+    page = open(template_path).read()
+    for key, value in values.items():
+        page = page.replace('{{' + key + '}}', value)
+    return page
 
 def make_page(title, body, slug, nav_template, footer_template, pages, is_index=False):
     s = sidebar(pages, slug)
@@ -426,11 +433,9 @@ def make_page(title, body, slug, nav_template, footer_template, pages, is_index=
     keywords = seo.get('keywords', 'Droidspaces, Linux containers, Android containers')
 
     nav_html = nav_template.replace('{{DOCS_ATTR}}', ' aria-current="page"').replace('{{DOWNLOADS_ATTR}}', '')
-    page = TEMPLATE
-    for key, value in {'TITLE': title, 'DESC': desc, 'KEYWORDS': keywords, 'SLUG': slug, 'NAV': nav_html,
-                       'BREADCRUMB': bc_html, 'SIDEBAR': s, 'BODY': body, 'DOC_NAV': nav_btns, 'FOOTER': footer_template}.items():
-        page = page.replace('{{' + key + '}}', value)
-    return page
+    return fill(os.path.join(ROOT, 'template.html'), {
+        'TITLE': title, 'DESC': desc, 'KEYWORDS': keywords, 'SLUG': slug, 'NAV': nav_html,
+        'BREADCRUMB': bc_html, 'SIDEBAR': s, 'BODY': body, 'DOC_NAV': nav_btns, 'FOOTER': footer_template})
 
 def fix_img_paths(html):
     return re.sub(r'Documentation/resources/', r'assets/resources/', html)
@@ -451,10 +456,10 @@ def fetch_kernel_patches():
                     parts.append(f'<div class="patch-subgroup"><h4 class="patch-subgroup-title">{sname}</h4><ul class="patch-list">')
                     for s2 in sub2:
                         fname = s2['name']
-                        parts.append(f'<li><a href="{s2["download_url"]}" download>{fname}</a></li>')
+                        parts.append(f'<li><a href="{s2["download_url"]}" download><span class="icon" aria-hidden="true">download</span>{fname}</a></li>')
                     parts.append('</ul></div>')
                 else:
-                    parts.append(f'<ul class="patch-list"><li><a href="{s["download_url"]}" download>{s["name"]}</a></li></ul>')
+                    parts.append(f'<ul class="patch-list"><li><a href="{s["download_url"]}" download><span class="icon" aria-hidden="true">download</span>{s["name"]}</a></li></ul>')
             parts.append('</div>')
     return '\n'.join(parts)
 
@@ -494,7 +499,7 @@ def fetch_latest_release():
         rn = r.get('name', tag)
         older_rows.append(
             f'<tr><td>{rn}</td><td>{rd}</td>'
-            f'<td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/{tag}" class="dl-secondary">Download</a></td></tr>'
+            f'<td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/{tag}" rel="noopener noreferrer">Release page</a></td></tr>'
         )
     older_html = (
         '<div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody>'
@@ -518,18 +523,18 @@ def build_downloads_page(root, nav_template, footer_template):
     release_info = fetch_latest_release()
     patches_html = '''<div class="patch-group"><h3 class="patch-group-title">GKI</h3>
 <div class="patch-subgroup"><h4 class="patch-subgroup-title">below-kernel-6.12</h4><ul class="patch-list">
-<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_1_2_3.patch" download>001.GKI-below-6.12-fix_sysvipc_kabi_1_2_3.patch</a></li>
-<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_3_4_5.patch" download>001.GKI-below-6.12-fix_sysvipc_kabi_3_4_5.patch</a></li>
-<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch" download>001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch</a></li>
-<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/002.5.10_or_lower_use_android_abi_padding_for_posix_mqueue.patch" download>002.5.10_or_lower_use_android_abi_padding_for_posix_mqueue.patch</a></li>
+<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_1_2_3.patch" download><span class="icon" aria-hidden="true">download</span>001.GKI-below-6.12-fix_sysvipc_kabi_1_2_3.patch</a></li>
+<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_3_4_5.patch" download><span class="icon" aria-hidden="true">download</span>001.GKI-below-6.12-fix_sysvipc_kabi_3_4_5.patch</a></li>
+<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch" download><span class="icon" aria-hidden="true">download</span>001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch</a></li>
+<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/002.5.10_or_lower_use_android_abi_padding_for_posix_mqueue.patch" download><span class="icon" aria-hidden="true">download</span>002.5.10_or_lower_use_android_abi_padding_for_posix_mqueue.patch</a></li>
 </ul></div>
 <div class="patch-subgroup"><h4 class="patch-subgroup-title">kernel-6.12</h4><ul class="patch-list">
-<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/kernel-6.12/001.GKI-6.12-or-above-fix_sysvipc_kabi.patch" download>001.GKI-6.12-or-above-fix_sysvipc_kabi.patch</a></li>
+<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/kernel-6.12/001.GKI-6.12-or-above-fix_sysvipc_kabi.patch" download><span class="icon" aria-hidden="true">download</span>001.GKI-6.12-or-above-fix_sysvipc_kabi.patch</a></li>
 </ul></div>
 </div>
 <div class="patch-group"><h3 class="patch-group-title">non-GKI</h3>
-<ul class="patch-list"><li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/non-GKI/01.fix_kernel_panic_in_xt_qtaguid.patch" download>01.fix_kernel_panic_in_xt_qtaguid.patch</a></li></ul>
-<ul class="patch-list"><li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/non-GKI/02.fix_restore%20cgroup%20file%20prefix%20handling%20.patch" download>02.fix_restore cgroup file prefix handling .patch</a></li></ul>
+<ul class="patch-list"><li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/non-GKI/01.fix_kernel_panic_in_xt_qtaguid.patch" download><span class="icon" aria-hidden="true">download</span>01.fix_kernel_panic_in_xt_qtaguid.patch</a></li></ul>
+<ul class="patch-list"><li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/non-GKI/02.fix_restore%20cgroup%20file%20prefix%20handling%20.patch" download><span class="icon" aria-hidden="true">download</span>02.fix_restore cgroup file prefix handling .patch</a></li></ul>
 </div>'''
     if release_info:
         version = release_info['version']
@@ -557,93 +562,10 @@ def build_downloads_page(root, nav_template, footer_template):
 * Translated using Weblate (Chinese (Simplified))
 * Translated using Weblate (Turkish)
 * Translated using Weblate (Ukrainian)''')
-        older_html = '<div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody><tr><td>v6.1.5</td><td>2026-05-15</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.1.5" class="dl-secondary">Download</a></td></tr><tr><td>v6.1.0</td><td>2026-05-13</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.1.0" class="dl-secondary">Download</a></td></tr><tr><td>v6.0.0</td><td>2026-04-24</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.0.0" class="dl-secondary">Download</a></td></tr></tbody></table></div>'
-    html = f'''<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Download Droidspaces — APK for Android, tarball for Linux, kernel patches, and changelogs.">
-  <title>Downloads - Droidspaces</title>
-  <meta property="og:title" content="Downloads - Droidspaces">
-  <meta property="og:description" content="Download Droidspaces — APK for Android, tarball for Linux, kernel patches, and changelogs.">
-  <meta property="og:url" content="https://www.droidspaces.org/downloads.html">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Downloads - Droidspaces">
-  <meta name="twitter:description" content="Download Droidspaces — APK for Android, tarball for Linux, kernel patches, and changelogs.">
-  <meta name="twitter:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
-  <link rel="canonical" href="https://www.droidspaces.org/downloads.html">
-  <link rel="stylesheet" href="/assets/css/site.css">
-  <link rel="icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" href="/favicon.ico">
-  <script>(function(){{const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}})();</script>
-</head>
-<body>
-<!--NAV_START-->
-{dl_nav}
-<!--NAV_END-->
-<main>
-  <section class="download-hero">
-    <div class="container">
-      <div class="section-label">Downloads</div>
-      <h1>{version}</h1>
-      <p class="hero-desc">Released Date: {date}</p>
-      <div class="dl-cards">
-        <div class="dl-card">
-          <div class="dl-card-icon"><i class="fab fa-android"></i></div>
-          <h3 class="dl-card-title">Android</h3>
-          <p class="dl-card-desc">APK for rooted Android devices. KernelSU, Magisk, or APatch.</p>
-          <a href="{apk_url}" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download APK</a>
-        </div>
-        <div class="dl-card">
-          <div class="dl-card-icon"><i class="fab fa-linux"></i></div>
-          <h3 class="dl-card-title">Linux</h3>
-          <p class="dl-card-desc">Static tarball for any Linux distribution. Zero dependencies.</p>
-          <a href="{tar_url}" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download Tarball</a>
-        </div>
-      </div>
-      <div style="text-align:center;margin-top:1.5rem">
-        <a href="https://github.com/ravindu644/Droidspaces-OSS/releases" class="btn btn-ghost" rel="noopener noreferrer">All Releases &rarr;</a>
-      </div>
-    </div>
-  </section>
-  <div class="divider"></div>
-  <section class="section">
-    <div class="container">
-      <div class="section-label">Kernel Patches</div>
-      <h2>Download kernel patches</h2>
-      <p class="section-desc">Patches for custom kernel builds. Select your kernel type and version.</p>
-      {patches_html}
-    </div>
-  </section>
-  <div class="divider"></div>
-  <section class="section">
-    <div class="container">
-      <div class="section-label">Changelog</div>
-      <h2>{version}</h2>
-      <div class="changelog-wrap">
-        <div class="changelog" id="changelog-body">
-          {changelog}
-        </div>
-        <button class="changelog-toggle" id="changelog-toggle" onclick="document.getElementById('changelog-body').classList.toggle('expanded');this.textContent=this.textContent==='Show changelog'?'Hide changelog':'Show changelog'">Show changelog</button>
-      </div>
-    </div>
-  </section>
-  <div class="divider"></div>
-  <section class="section">
-    <div class="container">
-      <div class="section-label">Older Versions</div>
-      <h2>Previous releases</h2>
-      {older_html}
-    </div>
-  </section>
-</main>
-{footer_template}
-<script src="/assets/js/site.js" defer></script>
-</body>
-</html>'''
+        older_html = '<div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody><tr><td>v6.1.5</td><td>2026-05-15</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.1.5" rel="noopener noreferrer">Release page</a></td></tr><tr><td>v6.1.0</td><td>2026-05-13</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.1.0" rel="noopener noreferrer">Release page</a></td></tr><tr><td>v6.0.0</td><td>2026-04-24</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.0.0" rel="noopener noreferrer">Release page</a></td></tr></tbody></table></div>'
+    html = fill(os.path.join(root, 'template-downloads.html'), {
+        'NAV': dl_nav, 'FOOTER': footer_template, 'VERSION': version, 'DATE': date,
+        'APK_URL': apk_url, 'TAR_URL': tar_url, 'PATCHES': patches_html, 'CHANGELOG': changelog, 'OLDER': older_html})
     with open(os.path.join(root, 'downloads.html'), 'w') as f:
         f.write(html)
     print("OK: downloads.html")
@@ -741,42 +663,7 @@ if __name__ == '__main__':
 
     # Generate 404.html
     four04_nav = nav_template.replace('{{DOCS_ATTR}}', '').replace('{{DOWNLOADS_ATTR}}', '')
-    four04_html = f'''<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Page not found - Droidspaces">
-  <title>404 - Droidspaces</title>
-  <meta property="og:title" content="404 - Droidspaces">
-  <meta property="og:description" content="Page not found">
-  <meta property="og:url" content="https://www.droidspaces.org/404.html">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="404 - Droidspaces">
-  <meta name="twitter:description" content="Page not found">
-  <meta name="twitter:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
-  <link rel="canonical" href="https://www.droidspaces.org/404.html">
-  <link rel="icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/site.css">
-  <script>(function(){{const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}})();</script>
-</head>
-<body>
-{four04_nav}
-  <main style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 56px - 80px);padding:2rem;text-align:center">
-    <h1 style="font-size:4rem;font-family:var(--mono);color:var(--muted);margin-bottom:0.5rem">404</h1>
-    <p style="color:var(--muted);font-size:1rem;margin-bottom:2rem;max-width:400px">The page you're looking for doesn't exist.</p>
-    <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center">
-      <a href="/" class="btn btn-primary">Go Home</a>
-      <a href="/docs/" class="btn btn-ghost">Browse Docs</a>
-    </div>
-  </main>
-{footer_template}
-<script src="/assets/js/site.js" defer></script>
-</body>
-</html>'''
+    four04_html = fill(os.path.join(root, 'template-404.html'), {'NAV': four04_nav, 'FOOTER': footer_template})
     with open(os.path.join(root, '404.html'), 'w') as f:
         f.write(four04_html)
     print("OK: 404.html")
