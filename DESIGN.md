@@ -9,10 +9,10 @@ colors:
   on-primary-container: "#bfe9ff"
   secondary: "#b4cad6"
   secondary-container: "#2a3e48"
-  on-secondary-container: "#d0e6f2"
+  on-secondary-container: "#adc3ce"
   tertiary: "#d1dcff"
   tertiary-container: "#becefa"
-  on-tertiary-container: "#0f2a5c"
+  on-tertiary-container: "#354569"
   error: "#fa746f"
   surface: "#0b0f11"
   surface-container-lowest: "#000000"
@@ -132,7 +132,7 @@ components:
     height: 56px
     padding: 0 24px
   button-outlined:
-    backgroundColor: "{colors.surface}"
+    backgroundColor: transparent
     textColor: "{colors.on-surface-variant}"
     typography: "{typography.label-lg-emphasized}"
     rounded: "{rounded.full}"
@@ -237,9 +237,9 @@ The source colour is `#7DC4E4`, the app's dark primary. The scheme is `SchemeTon
 | `surface-container-highest` | `#1f272b` | Hover state of a `surface-container` card |
 | `on-surface` | `#dee7ec` | Body text, headings |
 | `on-surface-variant` | `#a4acb2` | Supporting text, metadata, captions |
-| `outline` | `#6e777c` | Outlined button border |
+| `outline` | `#6e777c` | Generated but unused. Outlined buttons take `outline-variant` so one border colour serves the site |
 | `outline-variant` | `#41494e` | Card borders, dividers, table rules |
-| `primary-fixed` | `#b5e0f6` | Same in both themes. The phone mockups' accent, so screenshots match in light mode |
+| `primary-fixed` | `#b5e0f6` | The phone mockups' accent. A fixed role barely moves between themes, so screenshots captured in dark mode still match in light mode |
 
 ### Light
 
@@ -370,7 +370,7 @@ Every card and every nested surface has a 1px border in `outline-variant`. On th
 of that border drifted across 40 sites; on the site it is one value, full opacity, because
 `outline-variant` in M3 is already the low-contrast outline.
 
-The exception is the phone mockup. It carries `0 40px 90px rgba(0,0,0,.55)`, because it is a
+The exception is the phone mockup. It carries `0 40px 90px rgba(0,0,0,.55)` (`--shadow-phone`), because it is a
 photograph of an object, not a surface of the page, and an object sitting on a page has a shadow.
 No other element may have one. If a card looks like it needs a shadow, it needs a higher surface
 tier.
@@ -411,7 +411,7 @@ Motion), and never carry text or icons. They are never `primary`. The SVG masks 
 
 The phone frame is its own shape and it is fixed: bezel at 1.75% of the frame width, outer radius
 7.8%, screen radius 6.2%, a centred punch-hole camera at 5.2% of the screen width, in the bezel
-colour, with nothing drawn inside it. Frame colour `#0a0f12`. This is a Galaxy S25 Ultra
+colour, with nothing drawn inside it. Frame colour `#0a0f12` (`--phone-frame`). This is a Galaxy S25 Ultra
 silhouette, thin and square, and it is the same on every page at every size. Screenshots inside
 it are `object-fit: cover; object-position: top`.
 
@@ -506,7 +506,8 @@ animation library.
 | `--motion-effects-fast` | 1.0 / 3800 | 180ms | Hover colour, focus ring |
 | `--motion-effects-default` | 1.0 / 1600 | 270ms | Surface tier step on hover, theme change |
 
-The `linear()` point lists are in `tokens.css`. They were produced from the spring equation, not
+The `linear()` point lists are in `tokens.css`, along with `--motion-press` for the button morph
+and `--motion-float` for the idle loop below. They were produced from the spring equation, not
 drawn, so `--motion-spatial-fast` really does overshoot by 9.5% and settle, the way the Android
 button does.
 
@@ -517,7 +518,7 @@ button does.
    animate in. Only the objects. The section's headline is already there when you get to it.
 2. **Float.** The front phone in each mockup group and each decorative shape drifts on an idle
    loop: 12px of vertical travel over 6 seconds for phones, 20px over 9 seconds for shapes, with
-   a `sin`-shaped `linear()` easing so there is no visible turnaround. Two elements in the same
+   a `sin`-shaped `linear()` easing (`--motion-float`) so there is no visible turnaround. Two elements in the same
    section are offset by a third of a period so they never move together. This is what
    "floating" means on this site. It is slow enough that a screenshot of the page looks still.
 3. **Press and hover.** Buttons morph on press. Surfaces step a tier on hover. Icons fill. All
