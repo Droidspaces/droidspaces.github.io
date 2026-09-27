@@ -303,7 +303,8 @@ The scale is the Material 3 type scale. The 2021 sizes are unchanged in Expressi
 is the addition of *emphasized* styles, which take the same size and line height and bump the
 weight. Here that step is 400 to 700 for display and headline styles and 400 to 600 for titles
 and labels. Body copy stays at 400. The contrast between heavy headings and light body text is
-the whole expressive signature, so nothing else is bold.
+the whole expressive signature, so nothing else is bold. The one exception is the product name
+in the hero's sentence, set in `<strong>` so the eye finds what the sentence is about.
 
 | Element | Style | Notes |
 | --- | --- | --- |
@@ -352,7 +353,7 @@ lines, not at 768 or 1024.
 
 The hero is a two-column split at expanded and above: copy on the left at 5/12, phone mockup on
 the right at 7/12, vertically centred. Under 840 it stacks, copy first, and the phone loses the
-decorative shape behind it because there is no room for it to float. A shape is never wider than
+decorative shape behind it because there is no room for it beside the phone. A shape is never wider than
 its own column and sits at `z-index: -1`, so it can never paint over copy; `main` clips horizontal
 overflow so it can never scroll the page either.
 
@@ -463,7 +464,8 @@ animated over the effects spring. The icon leads the label.
 
 Height 40px, full radius, `surface-container-high` fill, 1px `outline-variant` border,
 `label-lg-emphasized`. Used for lists of facts: init systems, supported architectures, services
-running in a screenshot. A selected chip takes `secondary-container`. Chips wrap; they do not
+running in a screenshot. A selected chip, and any chip under the pointer, takes `secondary-container` with
+`on-secondary-container` text. Chips wrap; they do not
 scroll horizontally.
 
 ### Cards
@@ -490,8 +492,9 @@ links collapse into a full-height drawer from the right, on `surface-container-l
 
 ### Phone mockup
 
-One component, one silhouette, described under Shapes. It takes a screenshot and an optional
-`data-float` attribute that enables the idle float (see Motion).
+One component, one silhouette, described under Shapes. It takes a screenshot. Phones do not
+float: an idle loop on a phone beside a turning shape drifts out of step with it and reads as a
+glitch, so the shape is the only thing that keeps moving.
 
 Three phones in a group form the app carousel, one `<figure>` each with a one-line `body-md`
 caption saying what the screen does. Exactly one phone is in front and only its caption shows.
@@ -503,7 +506,7 @@ caption saying what the screen does. Exactly one phone is in front and only its 
   on the middle screen. A scroll-driven `view(inline)` timeline makes the centred phone full size
   and its neighbours 85%, and shows only the centred caption.
 
-No JavaScript runs either mode. Carousel phones do not float.
+No JavaScript runs either mode.
 
 ### Tables
 
@@ -534,43 +537,38 @@ animation library.
 | `--motion-effects-default` | 1.0 / 1600 | 270ms | Surface tier step on hover, theme change |
 
 The `linear()` point lists are in `tokens.css`, along with `--motion-press` for the button morph
-and `--motion-float` for the idle loop below. They were produced from the spring equation, not
+and `--motion-float`, which is generated but unused since phones stopped floating. They were produced from the spring equation, not
 drawn, so `--motion-spatial-fast` really does overshoot by 9.5% and settle, the way the Android
 button does.
 
-**Six kinds of motion exist on the site, and nothing else moves:**
+**Five kinds of motion exist on the site, and nothing else moves:**
 
 1. **Arrival.** When a phone mockup or decorative shape enters the viewport, it translates up 24px
    and fades in over `--motion-spatial-default`, once. Text does not animate in. Cards do not
    animate in. Only the objects. The section's headline is already there when you get to it.
-2. **Float.** The front phone in each mockup group and each decorative shape drifts on an idle
-   loop: 12px of vertical travel over 6 seconds for phones, 20px over 9 seconds for shapes, with
-   a `sin`-shaped `linear()` easing (`--motion-float`) so there is no visible turnaround. Two elements in the same
-   section are offset by a third of a period so they never move together. This is what
-   "floating" means on this site. It is slow enough that a screenshot of the page looks still.
-3. **Press and hover.** Buttons morph on press. Surfaces step a tier on hover. Icons fill. All
-   three use the springs above.
-4. **Carousel.** A phone promoted by hover or focus scales to 100% over
+2. **Press and hover.** Buttons morph on press. Surfaces step a tier on hover. Chips take
+   `secondary-container` on hover. Icons fill. All use the springs above.
+3. **Carousel.** A phone promoted by hover or focus scales to 100% over
    `--motion-spatial-default`; its caption fades over `--motion-effects-default`. In the swipe
    carousel the scale and caption follow the scroll position, not a timer. When the overlapping
    group arrives, the side phones fan out from behind the front one over the same `view()` range
    as arrival.
-5. **Shape turn.** Decorative shapes rotate once every 120 seconds, linear, on top of their float,
+4. **Shape turn.** Decorative shapes rotate once every 120 seconds, linear, forever,
    the way the M3 Expressive loading indicator they come from turns. Slow enough to notice only
    when you look for it.
-6. **Shape morph.** The loading indicator on the downloads page cycles through `cookie-12`,
+5. **Shape morph.** The loading indicator on the downloads page cycles through `cookie-12`,
    `clover-4` and `sunny` by morphing the mask, which is the M3 Expressive loading indicator.
    Nothing else morphs.
 
 Scroll-driven animation (`animation-timeline: view()`) drives the arrival where supported, with
 `@starting-style` as the fallback. Nothing is hidden until an animation fires: the page renders
 complete with JavaScript disabled and with `prefers-reduced-motion: reduce`, in which case the
-float and the shape turn stop, arrival becomes an instant fade, the button morph is disabled, the
+shape turn stops, arrival becomes an instant fade, the button morph is disabled, the
 carousel loses its fan-out and scale (it still swipes and still hovers, instantly), and the swipe
 carousel shows every caption. The reduced-motion
 branch is not optional.
 
-There is no parallax, no marquee, no typing effect, no counter that counts up, no pulsing dot, no
+There is no float, no parallax, no marquee, no typing effect, no counter that counts up, no pulsing dot, no
 cursor that blinks, no hover transform that scales or rotates an image, and no page-load sequence
 that stagger-reveals every element in turn. Each of those is a template tell and each has been
 seen on a hundred landing pages this year.

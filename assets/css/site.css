@@ -130,7 +130,9 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
   font-weight: 600;
   letter-spacing: 0.1px;
   white-space: nowrap;
+  transition: background-color var(--motion-effects-default), color var(--motion-effects-default), border-color var(--motion-effects-default);
 }
+.chip:hover { background: var(--md-sys-color-secondary-container); border-color: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
 .chip[aria-pressed="true"], .chip-selected { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
 
 /* card: tonal depth only, one border, no shadow. Hover steps one surface tier */
@@ -364,11 +366,9 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
   background: var(--md-sys-color-tertiary-container);
   mask: var(--shape) center / contain no-repeat;
   z-index: -1; /* positioned and 640px wide, it would otherwise paint over the copy column beside it */
-  --float: 20px;
-  --float-period: 9s;
 }
 .shape-secondary { background: var(--md-sys-color-secondary-container); }
-@media (max-width: 839px) { .shape { display: none; } } /* stacked layout has no room for it to float */
+@media (max-width: 839px) { .shape { display: none; } } /* stacked layout has no room for it beside the phone */
 
 /* table: the comparison. Header a tier up, rules in outline-variant, the Droidspaces column tinted */
 .table-wrap { overflow-x: auto; border: 1px solid var(--md-sys-color-outline-variant); border-radius: var(--md-sys-shape-corner-xl); background: var(--md-sys-color-surface-container); }
@@ -388,20 +388,15 @@ td:first-child { color: var(--md-sys-color-on-surface); }
 .footer p { margin: 12px 0 0; }
 @media (min-width: 840px) { .footer-inner { grid-template-columns: 2fr 1fr 1fr 1fr; } }
 
-/* motion: arrival for phones and shapes, once, when they enter. Float is an idle loop. Text never animates */
-@keyframes float { to { transform: translateY(calc(-1 * var(--float, 12px))); } }
+/* motion: arrival for phones and shapes, once, when they enter. Shapes then turn. Text never animates.
+   Nothing floats: two idle loops beside each other drift out of step and read as a glitch */
 @keyframes arrive { from { opacity: 0; translate: 0 24px; } }
+@keyframes spin { to { rotate: 1turn; } } /* once every two minutes, like the M3 Expressive loading indicator the shapes come from */
 .arrive { animation: arrive var(--motion-spatial-default) both; }
-[data-float] { animation: float var(--float-period, 6s) var(--motion-float) infinite; }
-.arrive[data-float] { animation: arrive var(--motion-spatial-default) both, float var(--float-period, 6s) var(--motion-float) infinite; }
-/* shapes also turn, once every two minutes, like the M3 Expressive loading indicator they come from */
-@keyframes spin { to { rotate: 1turn; } }
-.shape.arrive[data-float] { animation: arrive var(--motion-spatial-default) both, float var(--float-period, 6s) var(--motion-float) infinite, spin 120s linear infinite; }
-.stage .shape[data-float] { animation-delay: 0s, -3s, 0s; } /* a third of a period behind the phone so they never move together */
+.shape.arrive { animation: arrive var(--motion-spatial-default) both, spin 120s linear infinite; }
 @supports (animation-timeline: view()) {
   .arrive { animation-timeline: view(); animation-range: entry 0% entry 60%; }
-  .arrive[data-float] { animation-timeline: view(), auto; animation-range: entry 0% entry 60%, normal; }
-  .shape.arrive[data-float] { animation-timeline: view(), auto, auto; animation-range: entry 0% entry 60%, normal, normal; }
+  .shape.arrive { animation-timeline: view(), auto; animation-range: entry 0% entry 60%, normal; }
 }
 
 main { overflow-x: clip; } /* a shape wider than its column must not scroll the page sideways */
@@ -450,12 +445,11 @@ main { overflow-x: clip; } /* a shape wider than its column must not scroll the 
   .button, .card, .card-nested, .chip, pre, .table-wrap, .phone-screen, .phone-display { corner-shape: squircle; }
 }
 
-/* reduced motion is not optional: float stops, arrival is an instant fade, the press morph is off */
+/* reduced motion is not optional: shapes stop turning, arrival is an instant fade, the press morph is off */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  [data-float], .arrive[data-float], .shape.arrive[data-float] { animation: none; }
   @keyframes arrive { from { opacity: 0; } }
-  .arrive { animation: arrive var(--motion-effects-fast) both; }
+  .arrive, .shape.arrive { animation: arrive var(--motion-effects-fast) both; }
   .button:active { border-radius: var(--md-sys-shape-corner-full); }
   .nav-drawer, .icon, .button, .card, .chip, .phone-group .phone, .phone-group figcaption { transition: none; }
   .phone-group .phone:nth-child(n) { animation: none; } /* no fan-out, no scroller scale; the swipe itself still works */
