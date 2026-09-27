@@ -6,7 +6,7 @@ written for the agent, so it is short and it repeats itself where repetition has
 ## What this is
 
 The public website for Droidspaces, a Linux container runtime for Android. A static site on
-GitHub Pages, plain HTML and CSS, one small script. No framework, no build step for the pages.
+GitHub Pages, plain HTML and CSS, two small scripts (`site.js` everywhere, `docs.js` on docs pages). No framework, no build step for the pages.
 
 - `index.html`, `downloads.html`, `404.html` are hand-written pages.
 - `docs/*.html` are generated. Never edit them. They are built by
@@ -22,6 +22,7 @@ GitHub Pages, plain HTML and CSS, one small script. No framework, no build step 
 
 ```
 node scripts/tokens.mjs > assets/css/tokens.css     # regenerate colour and motion tokens
+pip install markdown-it-py mdit-py-plugins pygments  # the build's renderer and highlighter
 python3 .github/scripts/build-docs.py               # rebuild docs/ from docs/content/
 npx @google/design.md lint DESIGN.md                # validate the design file
 python3 -m http.server 8000                         # preview at http://localhost:8000
@@ -101,8 +102,9 @@ Work down this list and stop at the first answer that holds.
    they are defined once.
 3. Does CSS already do it? Scroll-driven animations, `@starting-style`, `linear()` easings,
    `light-dark()`, `mask-image`, View Transitions. The site targets current Chrome, Safari and
-   Firefox. Reach for JavaScript only for the theme toggle, the copy button and the mobile
-   drawer.
+   Firefox. Reach for JavaScript only for the theme toggle, the copy button, the mobile
+   drawer, and on docs pages the search dialog and the device filter. Both docs controls ship
+   `hidden` and only the script reveals them, so a docs page without JavaScript is complete.
 4. Does an existing asset cover it? Screenshots come from the main repository's
    `Documentation/resources/`. Shapes come from `assets/shapes/`. Do not generate new imagery,
    do not draw a new shape, do not add an illustration.

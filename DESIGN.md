@@ -382,8 +382,18 @@ Cards appear in one place: the comparison against PRoot, chroot and QEMU, where 
 honest format and cards would hide the comparison. Everywhere else, content sits directly on the
 page background with a headline, a paragraph and a screenshot.
 
-The docs pages are a two-column layout: a 280px sidebar on `surface-container-low` with the page
-tree, and a prose column. The sidebar becomes a top drawer under 840px.
+The docs pages are a three-column wiki, full width, no centred box: a 280px sidebar flush to the
+left edge on `surface-container-low`, sticky under the nav at full viewport height with its own
+scroll; the page at a 760px measure; and an "On this page" list of the page's h2 and h3 at 240px,
+from 1200 up. Between 840 and 1199 the right column goes; under 840 the sidebar becomes a top
+drawer. Sidebar groups are `<details>`, so they collapse without a script. The current section in
+"On this page" is `primary` where the browser supports `scroll-target-group`; there is no
+scroll-spy script. Code is highlighted at build time by Pygments, and its token colours are M3
+roles only (keyword `primary`, string `tertiary`, name `secondary`, comment and punctuation
+`on-surface-variant`, number `on-primary-container`, deletion `error`), so both themes work. A code
+block has a 40px header row holding the language and the copy button, so neither covers the first
+line. Search is a native `<dialog>` on `surface-container` at radius 28, opened from the sidebar,
+Ctrl K or `/`.
 
 ## Elevation & Depth
 
