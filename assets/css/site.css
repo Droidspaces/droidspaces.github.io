@@ -303,10 +303,53 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
   border-radius: var(--md-sys-shape-corner-full);
   background: var(--phone-frame);
 }
-.phone-group { display: flex; align-items: center; justify-content: center; width: 100%; }
-.phone-group .phone { flex: 0 0 38%; }
-.phone-group .phone + .phone { margin-left: -12%; }
-.phone-group .phone:nth-child(2) { z-index: 1; flex-basis: 50%; }
+/* phone group: a swipe carousel by default, an overlapping trio you hover through on a wide pointer screen */
+.phone-group {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  margin: -96px 0; /* the padding keeps the phone shadow (40px down, 90px blur) from being cut by the scroller */
+  padding: 96px 12%; /* the side padding lets the first and last phone snap to the centre, and the neighbours peek into it */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  view-timeline: --group;
+}
+.phone-group .phone { flex: 0 0 100%; margin: 0; scroll-snap-align: center; } /* 100% of the padded box, so 76% of the scroller */
+/* stacked, the scroller runs edge to edge so its sides never cut a shadow into a visible box */
+@media (max-width: 839px) { .phone-group { width: 100vw; margin-inline: calc(50% - 50vw); padding-inline: 12vw; } }
+.phone-group .phone:nth-child(2) { scroll-initial-target: nearest; } /* open on the middle screen where supported */
+.phone-group .phone:focus-visible { outline: none; }
+.phone-group .phone:focus-visible .phone-screen { outline: 2px solid var(--md-sys-color-primary); outline-offset: 4px; }
+.phone-group figcaption { margin-top: 24px; text-align: center; transition: opacity var(--motion-effects-default); }
+@supports (animation-timeline: view()) {
+  /* the phone in the middle of the scroller is full size and captioned, its neighbours step back */
+  @keyframes centred { 0%, 100% { scale: 0.85; } 40%, 60% { scale: 1; } }
+  @keyframes centred-caption { 0%, 30%, 70%, 100% { opacity: 0; } 45%, 55% { opacity: 1; } }
+  .phone-group .phone { animation: centred linear both; animation-timeline: view(inline); }
+  .phone-group figcaption { animation: centred-caption linear both; animation-timeline: view(inline); animation-range: cover; }
+}
+@media (hover: hover) and (min-width: 840px) {
+  .phone-group { justify-content: center; gap: 0; margin: 0; padding: 0; overflow: visible; }
+  .phone-group .phone { flex-basis: 44%; scale: 0.8; transition: scale var(--motion-spatial-default); }
+  .phone-group .phone + .phone { margin-left: -14%; }
+  .phone-group figcaption { opacity: 0; }
+  /* the front phone: the hovered one, else the focused one, else the middle one. Exactly one at a time */
+  .phone-group .phone:hover,
+  .phone-group:not(:has(.phone:hover)) .phone:focus-visible,
+  .phone-group:not(:has(.phone:hover, .phone:focus-visible)) .phone:nth-child(2) { z-index: 1; scale: 1; }
+  .phone-group .phone:hover figcaption,
+  .phone-group:not(:has(.phone:hover)) .phone:focus-visible figcaption,
+  .phone-group:not(:has(.phone:hover, .phone:focus-visible)) .phone:nth-child(2) figcaption { opacity: 1; }
+  @supports (animation-timeline: view()) {
+    /* the side phones fan out from behind the front one as the group arrives */
+    @keyframes fan-left { from { translate: 60% 0; } }
+    @keyframes fan-right { from { translate: -60% 0; } }
+    .phone-group .phone, .phone-group figcaption { animation: none; }
+    .phone-group .phone:first-child { animation: fan-left var(--motion-spatial-default) both; animation-timeline: --group; animation-range: entry 0% entry 80%; }
+    .phone-group .phone:last-child { animation: fan-right var(--motion-spatial-default) both; animation-timeline: --group; animation-range: entry 0% entry 80%; }
+  }
+}
 
 /* stage: a phone or phone group with the section's one decorative shape behind it */
 .stage { position: relative; display: flex; justify-content: center; }
@@ -315,7 +358,7 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 640px;
+  width: min(640px, 100%); /* never wider than its own column, so it cannot reach under the copy */
   aspect-ratio: 1;
   translate: -50% -50%;
   background: var(--md-sys-color-tertiary-container);
@@ -351,10 +394,14 @@ td:first-child { color: var(--md-sys-color-on-surface); }
 .arrive { animation: arrive var(--motion-spatial-default) both; }
 [data-float] { animation: float var(--float-period, 6s) var(--motion-float) infinite; }
 .arrive[data-float] { animation: arrive var(--motion-spatial-default) both, float var(--float-period, 6s) var(--motion-float) infinite; }
-.stage .shape[data-float] { animation-delay: 0s, -3s; } /* a third of a period behind the phone so they never move together */
+/* shapes also turn, once every two minutes, like the M3 Expressive loading indicator they come from */
+@keyframes spin { to { rotate: 1turn; } }
+.shape.arrive[data-float] { animation: arrive var(--motion-spatial-default) both, float var(--float-period, 6s) var(--motion-float) infinite, spin 120s linear infinite; }
+.stage .shape[data-float] { animation-delay: 0s, -3s, 0s; } /* a third of a period behind the phone so they never move together */
 @supports (animation-timeline: view()) {
   .arrive { animation-timeline: view(); animation-range: entry 0% entry 60%; }
   .arrive[data-float] { animation-timeline: view(), auto; animation-range: entry 0% entry 60%, normal; }
+  .shape.arrive[data-float] { animation-timeline: view(), auto, auto; animation-range: entry 0% entry 60%, normal, normal; }
 }
 
 main { overflow-x: clip; } /* a shape wider than its column must not scroll the page sideways */
@@ -406,9 +453,11 @@ main { overflow-x: clip; } /* a shape wider than its column must not scroll the 
 /* reduced motion is not optional: float stops, arrival is an instant fade, the press morph is off */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  [data-float], .arrive[data-float] { animation: none; }
+  [data-float], .arrive[data-float], .shape.arrive[data-float] { animation: none; }
   @keyframes arrive { from { opacity: 0; } }
   .arrive { animation: arrive var(--motion-effects-fast) both; }
   .button:active { border-radius: var(--md-sys-shape-corner-full); }
-  .nav-drawer, .icon, .button, .card { transition: none; }
+  .nav-drawer, .icon, .button, .card, .chip, .phone-group .phone, .phone-group figcaption { transition: none; }
+  .phone-group .phone:nth-child(n) { animation: none; } /* no fan-out, no scroller scale; the swipe itself still works */
+  .phone-group figcaption { animation: none; }
 }
