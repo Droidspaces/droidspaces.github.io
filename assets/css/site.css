@@ -248,16 +248,24 @@ p { text-wrap: pretty; }
   background: var(--md-sys-color-surface-container-high);
 }
 
-/* nav: sticky shade, the site's only backdrop-filter (DESIGN.md Decided exceptions) */
+/* nav: the M3 top app bar. Opaque, no shade and no rule: a surface of the page that steps one tier
+   when content scrolls under it, the way the app's own bar does */
 .nav {
   position: sticky;
   top: 0;
   z-index: 10;
   height: 64px;
-  background: color-mix(in srgb, var(--md-sys-color-surface) 80%, transparent);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  background: var(--md-sys-color-surface);
+}
+/* the scrolled tier is a layer behind the content, faded in by opacity: a colour token inside the
+   keyframes does not follow the theme toggle in Chromium, a layer's opacity does */
+.nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--md-sys-color-surface-container);
+  opacity: 0;
 }
 .nav-inner {
   display: flex;
@@ -297,22 +305,23 @@ p { text-wrap: pretty; }
 @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .theme-toggle .icon::before { content: "dark_mode"; } }
 :root[data-theme="light"] .theme-toggle .icon::before { content: "dark_mode"; }
 @supports (animation-timeline: scroll()) {
-  /* the bottom rule shows only once the page has scrolled, without JavaScript */
-  @keyframes nav-rule { from { border-color: transparent; } }
-  .nav { animation: nav-rule linear both; animation-timeline: scroll(root); animation-range: 0 64px; }
+  /* the M3 on-scroll container colour, without JavaScript. Without scroll timelines the bar stays at surface */
+  @keyframes nav-scrolled { to { opacity: 1; } }
+  .nav::before { animation: nav-scrolled linear both; animation-timeline: scroll(root); animation-range: 0 64px; }
 }
 @media (max-width: 839px) {
   .nav-menu, .nav-close { display: inline-flex; }
+  /* the M3 modal navigation drawer: 360 wide, corner-lg on its open edge, no border, the scrim does the separating */
   .nav-drawer {
     display: none;
     position: fixed;
     inset: 0 0 0 auto;
-    width: min(320px, 100%);
+    width: min(360px, 100%);
     height: 100dvh;
     margin: 0;
-    padding: 64px 16px 16px;
+    padding: 64px 12px 12px;
     border: 0;
-    border-left: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: var(--md-sys-shape-corner-lg) 0 0 var(--md-sys-shape-corner-lg);
     background: var(--md-sys-color-surface-container-low);
     color: var(--md-sys-color-on-surface);
     translate: 100% 0;
@@ -322,7 +331,9 @@ p { text-wrap: pretty; }
   @starting-style { .nav-drawer:popover-open { translate: 100% 0; } }
   .nav-drawer::backdrop { background: color-mix(in srgb, transparent, var(--md-sys-color-surface-container-lowest) 38%); }
   .nav-drawer .nav-links { flex-direction: column; align-items: stretch; }
-  .nav-drawer .nav-links a { height: 56px; }
+  .nav-drawer .nav-links a { height: 56px; padding: 0 16px; }
+  /* the drawer's active indicator is a fill, as in M3; in the bar the current link is primary text */
+  .nav-drawer .nav-links a[aria-current="page"] { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
   .nav-close { position: absolute; top: 8px; right: 16px; }
 }
 

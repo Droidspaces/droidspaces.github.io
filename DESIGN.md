@@ -414,9 +414,10 @@ photograph of an object, not a surface of the page, and an object sitting on a p
 No other element may have one. If a card looks like it needs a shadow, it needs a higher surface
 tier.
 
-Nothing is glassmorphic. `backdrop-filter` is used once, on the sticky navigation bar, at
-`blur(16px)` over `surface` at 80% opacity, which is the Android 16 shade behaviour. It is not a
-card style.
+Nothing is glassmorphic and nothing is translucent. There is no `backdrop-filter` on the site.
+The navigation bar is an opaque surface of the page like every other surface, and it shows that
+content has scrolled under it the tonal way, by stepping a tier. A blurred shade was tried and
+removed: it is the one pattern every template ships, and the app has no such bar.
 
 ## Shapes
 
@@ -518,10 +519,16 @@ boot transcript beside it repeated the next section.
 
 ### Navigation
 
-Sticky, 64px tall, `surface` at 80% with `backdrop-filter: blur(16px)`, a 1px `outline-variant`
-bottom border that appears only once the page has scrolled. Logo mark left, links right, theme
-toggle last. The active link is `primary`; the rest are `on-surface-variant`. Under 840px the
-links collapse into a full-height drawer from the right, on `surface-container-low`.
+The M3 top app bar. Sticky, 64px tall, opaque `surface` at rest. Once the page has scrolled it
+steps to `surface-container`, the M3 on-scroll container colour, across the first 64px of scroll;
+that tier step is the only sign that content is passing under it. No bottom rule, no blur, no
+translucency. Logo mark left, links right, theme toggle last. The active link is `primary`; the
+rest are `on-surface-variant`, with the M3 state layer on hover.
+
+Under 840px the links collapse into the M3 modal navigation drawer, from the right: 360px wide
+on `surface-container-low`, radius 16 on its open edge, no border, the scrim behind it does the
+separating. Items are 56px tall at full radius, and the current page sits on `secondary-container`
+with `on-secondary-container` text, which is the drawer's active indicator.
 
 ### Phone mockup
 
@@ -647,6 +654,7 @@ Don't write "Unlock", "Supercharge", "Seamless", "Blazing fast", "Next-generatio
 Don't build a row of three or six identical icon-title-text cards.
 Don't animate text, and don't animate anything on scroll except the swipe carousel and the boot chain fill.
 Don't add a second shadow, a glow, a frosted card, or a dot grid background.
+Don't put `backdrop-filter` on anything. The navigation bar is opaque; the blurred shade was tried and removed.
 Don't load a font, icon or script from a third-party origin at runtime.
 
 ## Decided exceptions
@@ -661,8 +669,6 @@ Looked at, deliberately left alone. Do not re-open these without a reason the or
 - **`primary-fixed` is used for accents inside the phone screenshots' frames**, so the mockups look
   the same in light mode. A screenshot captured in dark mode cannot change with the theme, and a
   fixed role is what M3 provides for that case.
-- **The navigation bar is the one `backdrop-filter`.** It follows the Android 16 shade. A second
-  use anywhere turns the site into a glassmorphism template.
 - **The docs pages keep their generated structure** from `.github/scripts/build-docs.py` and only
   restyle it. The Markdown source is in the main repository, and the site must not fork it.
 - **Light mode was generated, not designed.** It is the same source colour through the same
