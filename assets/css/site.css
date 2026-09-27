@@ -402,7 +402,13 @@ td:first-child { color: var(--md-sys-color-on-surface); }
 main { overflow-x: clip; } /* a shape wider than its column must not scroll the page sideways */
 
 /* page layout: 1200px content, 24px gutters (16 under 600), sections 96 tall (64 under 840) */
-.section { max-width: 1248px; margin: 0 auto; padding: 96px 24px; }
+.section {
+  --gutter: 24px;
+  /* full width so a band can span the viewport; the 1200px measure lives in the padding */
+  padding: 96px max(var(--gutter), calc((100% - 1200px) / 2));
+  isolation: isolate; /* a shape's z-index: -1 then paints above the band and below the copy */
+}
+.section-band { background: var(--md-sys-color-surface-container-low); } /* tonal rhythm: the M3 surface step, no gradient */
 .section > h1, .section > h2 { margin-bottom: 16px; }
 .section > .title-lg { margin: 0 0 32px; }
 .split { display: grid; gap: 48px; align-items: center; }
@@ -438,7 +444,7 @@ main { overflow-x: clip; } /* a shape wider than its column must not scroll the 
 .notfound { min-height: calc(100dvh - 64px); }
 
 /* gutters and breakpoints: 16 under 600, 24 above; only 600, 840, 1200, 1600 exist */
-@media (max-width: 599px) { .nav-inner, .footer-inner, .section { padding-left: 16px; padding-right: 16px; } }
+@media (max-width: 599px) { .nav-inner, .footer-inner { padding-left: 16px; padding-right: 16px; } .section { --gutter: 16px; } }
 
 /* shape: Material squircle where the browser has it, plain rounding elsewhere */
 @supports (corner-shape: squircle) {
