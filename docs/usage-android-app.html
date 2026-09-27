@@ -44,163 +44,155 @@
   <button class="doc-breadcrumb" popovertarget="sidebar"><span class="icon" aria-hidden="true">menu</span><span>Docs</span><span class="bc-sep">/</span><span class="bc-section">Guides</span><span class="bc-sep">/</span><span class="bc-label">Android App Usage</span></button>
   <aside class="sidebar" id="sidebar" popover>
     <button class="icon-button sidebar-close" popovertarget="sidebar" popovertargetaction="hide" aria-label="Close navigation"><span class="icon" aria-hidden="true">close</span></button>
-<div class="sidebar-group">
-<div class="sidebar-heading">Basics</div>
+    <button class="search-open" type="button" hidden><span class="icon" aria-hidden="true">search</span>Search the docs<kbd>Ctrl K</kbd></button>
+<details class="sidebar-group" open><summary class="sidebar-heading">Basics</summary>
 <a href="installation-android.html" class="sidebar-link">Android Installation</a>
 <a href="installation-linux.html" class="sidebar-link">Linux Installation</a>
-</div>
-<div class="sidebar-group">
-<div class="sidebar-heading">Guides</div>
+</details>
+<details class="sidebar-group" open><summary class="sidebar-heading">Guides</summary>
 <a href="features.html" class="sidebar-link">Feature Deep Dives</a>
 <a href="graphics-and-audio.html" class="sidebar-link">Display, Audio & Desktop</a>
 <a href="kernel-configuration.html" class="sidebar-link">Kernel Configuration</a>
 <a href="usage-android-app.html" class="sidebar-link" aria-current="page">Android App Usage</a>
 <a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
 <a href="networking-from-zero.html" class="sidebar-link">Networking From Zero</a>
-</div>
-<div class="sidebar-group">
-<div class="sidebar-heading">Recipes</div>
+</details>
+<details class="sidebar-group" open><summary class="sidebar-heading">Recipes</summary>
 <a href="cool-things-you-can-do.html" class="sidebar-link">Cool Things You Can Do</a>
-</div>
-<div class="sidebar-group">
-<div class="sidebar-heading">Reference</div>
+</details>
+<details class="sidebar-group" open><summary class="sidebar-heading">Reference</summary>
 <a href="troubleshooting.html" class="sidebar-link">Troubleshooting</a>
 <a href="community-supported-devices.html" class="sidebar-link">Community-Supported Devices</a>
 <a href="nix-nixos.html" class="sidebar-link">Nix/NixOS</a>
 <a href="uninstallation.html" class="sidebar-link">Uninstallation</a>
-</div>
+</details>
   </aside>
   <main class="docs-content">
-<h1 id="android-app-usage-guide">Android App Usage Guide</h1>
+    <article>
+<h1 id="android-app-usage-guide">Android App Usage Guide <a class="header-anchor" href="#android-app-usage-guide">#</a></h1>
 <p>The Droidspaces Android app provides a premium GUI for managing Linux containers. It abstracts away the complexity of namespaces and mounts while giving you high-level control over your environments.</p>
-<h2 id="bottom-navigation">Bottom Navigation</h2>
+<h2 id="bottom-navigation">Bottom Navigation <a class="header-anchor" href="#bottom-navigation">#</a></h2>
 <ul>
-<li><strong>Home</strong>: A dashboard displaying the number of installed and running containers, root availability status, and the backend version.
-</li>
-<li><strong>Containers</strong>: A dedicated manager for all installed containers (Install, Start, Stop, Edit, and Uninstall).
-</li>
-<li><strong>Panel</strong>: A central dashboard for managing <strong>Running Containers</strong> and monitoring real-time <strong>System Statistics</strong> (CPU, RAM, Temperature, etc.).
-</li>
+<li><strong>Home</strong>: A dashboard displaying the number of installed and running containers, root availability status, and the backend version.</li>
+<li><strong>Containers</strong>: A dedicated manager for all installed containers (Install, Start, Stop, Edit, and Uninstall).</li>
+<li><strong>Panel</strong>: A central dashboard for managing <strong>Running Containers</strong> and monitoring real-time <strong>System Statistics</strong> (CPU, RAM, Temperature, etc.).</li>
 </ul>
-<hr>
-<h2 id="containers-tab">Containers Tab</h2>
-<p>This tab allows you to install containers using the "+" icon, and lists all your installed environments. Each container has a control card:</p>
+<hr />
+<h2 id="containers-tab">Containers Tab <a class="header-anchor" href="#containers-tab">#</a></h2>
+<p>This tab allows you to install containers using the &quot;+&quot; icon, and lists all your installed environments. Each container has a control card:</p>
 <ul>
-<li><strong>Install Button (+)</strong>: Install a new container.
-</li>
-<li><strong>Play Button</strong>: Start the container and boot the init system.
-</li>
-<li><strong>Stop Button</strong>: Sends a graceful shutdown signal to the container's init.
-</li>
-<li><strong>Cycle Button</strong>: Fast-restart the container.
-</li>
-<li><strong>Terminal Icon (Logs)</strong>: Provides access to persistent session logs for the container's previous start, stop, and restart sequences.
-</li>
+<li><strong>Install Button (+)</strong>: Install a new container.</li>
+<li><strong>Play Button</strong>: Start the container and boot the init system.</li>
+<li><strong>Stop Button</strong>: Sends a graceful shutdown signal to the container's init.</li>
+<li><strong>Cycle Button</strong>: Fast-restart the container.</li>
+<li><strong>Terminal Icon (Logs)</strong>: Provides access to persistent session logs for the container's previous start, stop, and restart sequences.</li>
 </ul>
-<div class="callout callout-tip"><strong class="callout-title">TIP</strong> You can <strong>edit container configuration</strong> or <strong>uninstall</strong> existing installed containers by <strong>pressing and holding</strong> the container’s card. Also gives you the ability to migrate to a <code>rootfs.img</code>-based container or resize your existing <code>rootfs.img</code>..!</div>
-<hr>
-<h2 id="rootfs-repository">Rootfs Repository</h2>
-<p>The <strong>cloud icon</strong> above the "+" button opens the Rootfs Repository - a built-in distro browser that lets you download and install Linux rootfs images without leaving the app.</p>
-<h3 id="how-it-works">How it works</h3>
+<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p>You can <strong>edit container configuration</strong> or <strong>uninstall</strong> existing installed containers by <strong>pressing and holding</strong> the container’s card. Also gives you the ability to migrate to a <code>rootfs.img</code>-based container or resize your existing <code>rootfs.img</code>..!</p></div>
+<hr />
+<h2 id="rootfs-repository">Rootfs Repository <a class="header-anchor" href="#rootfs-repository">#</a></h2>
+<p>The <strong>cloud icon</strong> above the &quot;+&quot; button opens the Rootfs Repository - a built-in distro browser that lets you download and install Linux rootfs images without leaving the app.</p>
+<h3 id="how-it-works">How it works <a class="header-anchor" href="#how-it-works">#</a></h3>
 <ol>
-<li>Tap the <strong>cloud icon</strong> in the Containers tab.
-</li>
-<li>The sheet opens and loads available distros from the <a href="https://github.com/Droidspaces/Droidspaces-rootfs-builder" rel="noopener noreferrer">Droidspaces official repository</a>. Only images matching your device’s architecture are shown.
-</li>
-<li><strong>Search</strong> the list by name, description, or author using the search bar.
-</li>
-<li>Tap <strong>Download</strong> on a distro card. A progress bar tracks the download; the file is saved to your Downloads folder.
-</li>
-<li>Once done, the button switches to <strong>Install</strong>. Tap it to go straight into the container setup wizard.
-</li>
+<li>Tap the <strong>cloud icon</strong> in the Containers tab.</li>
+<li>The sheet opens and loads available distros from the <a href="https://github.com/Droidspaces/Droidspaces-rootfs-builder" rel="noopener noreferrer">Droidspaces official repository</a>. Only images matching your device’s architecture are shown.</li>
+<li><strong>Search</strong> the list by name, description, or author using the search bar.</li>
+<li>Tap <strong>Download</strong> on a distro card. A progress bar tracks the download; the file is saved to your Downloads folder.</li>
+<li>Once done, the button switches to <strong>Install</strong>. Tap it to go straight into the container setup wizard.</li>
 </ol>
-<div class="callout callout-note"><strong class="callout-title">NOTE</strong> If a download fails, the card shows a <strong>Retry</strong> button. Previously downloaded files are detected automatically on relaunch - the Install button will already be available.</div>
-<h3 id="adding-custom-repositories">Adding Custom Repositories</h3>
+<div class="callout callout-note"><strong class="callout-title">Note</strong><p>If a download fails, the card shows a <strong>Retry</strong> button. Previously downloaded files are detected automatically on relaunch - the Install button will already be available.</p></div>
+<h3 id="adding-custom-repositories">Adding Custom Repositories <a class="header-anchor" href="#adding-custom-repositories">#</a></h3>
 <p>The repository supports third-party rootfs sources in the same JSON format.</p>
 <ol>
-<li>Tap the <strong>settings icon</strong> (left of the refresh icon) in the sheet header.
-</li>
-<li>Enter a <strong>name</strong> and a <strong>URL</strong> pointing to a valid <code>rootfs.json</code>.
-</li>
-<li>Tap <strong>Add</strong>, then <strong>Save</strong>. The sheet refreshes and merges results from all sources.
-</li>
+<li>Tap the <strong>settings icon</strong> (left of the refresh icon) in the sheet header.</li>
+<li>Enter a <strong>name</strong> and a <strong>URL</strong> pointing to a valid <code>rootfs.json</code>.</li>
+<li>Tap <strong>Add</strong>, then <strong>Save</strong>. The sheet refreshes and merges results from all sources.</li>
 </ol>
-<div class="callout callout-tip"><strong class="callout-title">TIP</strong> To get a much wider selection of distros, add the official LXC images mirror as a custom repository:
-- <strong>Name</strong>: anything you like (e.g. <code>LXC Mirror</code>)
-- <strong>URL</strong>: <code>https://raw.githubusercontent.com/Droidspaces/linuxcontainers-mirror/refs/heads/main/rootfs.json</code></div>
-<hr>
-<h2 id="networking-configuration">Networking Configuration</h2>
+<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p>To get a much wider selection of distros, add the official LXC images mirror as a custom repository:</p>
+<ul>
+<li><strong>Name</strong>: anything you like (e.g. <code>LXC Mirror</code>)</li>
+<li><strong>URL</strong>: <code>https://raw.githubusercontent.com/Droidspaces/linuxcontainers-mirror/refs/heads/main/rootfs.json</code></li>
+</ul></div>
+<hr />
+<h2 id="networking-configuration">Networking Configuration <a class="header-anchor" href="#networking-configuration">#</a></h2>
 <p>When editing or creating a container, you can choose from four networking modes:</p>
 <ul>
-<li><strong>Host (Default)</strong>: Shares host network directly.
-</li>
-<li><strong>NAT (Isolated)</strong>: Private network namespace with deterministic IP and port forwarding support.
-</li>
-<li><strong>None</strong>: No network access.
-</li>
-<li><strong>Gateway</strong>: The container's LAN is delegated to another running container (typically OpenWRT), which owns DHCP, DNS, firewall and routing. Select the gateway container and (optionally) the LAN segment, interface and bridge in the <strong>Gateway</strong> settings. See <a href="networking-from-zero.html" rel="noopener noreferrer">Networking From Zero</a> for the full guide.
-</li>
+<li><strong>Host (Default)</strong>: Shares host network directly.</li>
+<li><strong>NAT (Isolated)</strong>: Private network namespace with deterministic IP and port forwarding support.</li>
+<li><strong>None</strong>: No network access.</li>
+<li><strong>Gateway</strong>: The container's LAN is delegated to another running container (typically OpenWRT), which owns DHCP, DNS, firewall and routing. Select the gateway container and (optionally) the LAN segment, interface and bridge in the <strong>Gateway</strong> settings. See <a href="networking-from-zero.html">Networking From Zero</a> for the full guide.</li>
 </ul>
-<h3 id="internet-uplink-nat-mode">Internet Uplink (NAT Mode)</h3>
+<h3 id="internet-uplink-nat-mode">Internet Uplink (NAT Mode) <a class="header-anchor" href="#internet-uplink-nat-mode">#</a></h3>
 <p>If you select <strong>NAT (Isolated)</strong> mode, the internet uplink is detected fully automatically - there is nothing to configure. Droidspaces reads the kernel's own routing state to find the interface Android is currently using for internet (Wi-Fi, mobile data, ethernet) and a background Route Monitor keeps the container connected in real time as you switch networks.</p>
-<h4 id="upstream-interface-optional">Upstream Interface (Optional)</h4>
+<h4 id="upstream-interface-optional">Upstream Interface (Optional) <a class="header-anchor" href="#upstream-interface-optional">#</a></h4>
 <p>If you want the container to <strong>ignore the active network</strong> and pin its internet to specific interface(s), add them under <strong>Upstream Interface</strong>. This disables auto-detection and forces the WAN through your list only:</p>
 <ul>
-<li>The list is <strong>priority-ordered</strong> and supports <strong>wildcards</strong> - e.g. <code>wlan0, rmnet*</code> prefers Wi-Fi and falls back to mobile data (use <code>rmnet*</code> because the mobile-data interface number is not stable).
-</li>
-<li><strong>Example - VPN killswitch</strong>: run a VPN app on the phone and pin <code>tun0</code> so the container can only reach the internet through the tunnel.
-</li>
-<li><strong>Example - cellular while on Wi-Fi</strong>: enable <em>Mobile data always active</em> in Developer Options, connect Wi-Fi, turn on mobile data, and pin <code>rmnet*</code> so the container uses cellular while the phone stays on Wi-Fi.
-</li>
+<li>The list is <strong>priority-ordered</strong> and supports <strong>wildcards</strong> - e.g. <code>wlan0, rmnet*</code> prefers Wi-Fi and falls back to mobile data (use <code>rmnet*</code> because the mobile-data interface number is not stable).</li>
+<li><strong>Example - VPN killswitch</strong>: run a VPN app on the phone and pin <code>tun0</code> so the container can only reach the internet through the tunnel.</li>
+<li><strong>Example - cellular while on Wi-Fi</strong>: enable <em>Mobile data always active</em> in Developer Options, connect Wi-Fi, turn on mobile data, and pin <code>rmnet*</code> so the container uses cellular while the phone stays on Wi-Fi.</li>
 </ul>
 <p>Leave it empty to auto-detect the active uplink (the default, recommended for most users).</p>
-<div class="callout callout-note"><strong class="callout-title">NOTE</strong> NAT mode is IPv4 only. If your carrier only provides IPv6, see the <a href="troubleshooting.html#ipv4-quirks" rel="noopener noreferrer">IPv4 NAT Workaround</a>.</div>
-<h3 id="port-forwarding">Port Forwarding</h3>
+<div class="callout callout-note"><strong class="callout-title">Note</strong><p>NAT mode is IPv4 only. If your carrier only provides IPv6, see the <a href="troubleshooting.html#ipv4-quirks">IPv4 NAT Workaround</a>.</p></div>
+<h3 id="port-forwarding">Port Forwarding <a class="header-anchor" href="#port-forwarding">#</a></h3>
 <p>In NAT mode, use the <strong>Port Forwarding</strong> section to map host ports to container ports (e.g., <code>22:22</code>). You can also specify <strong>port ranges</strong> (e.g., <code>1000-2000:1000-2000</code>) for services that require multiple contiguous ports.</p>
-<hr>
-<h2 id="panel-tab-active-environments">Panel Tab (Active Environments)</h2>
+<hr />
+<h2 id="panel-tab-active-environments">Panel Tab (Active Environments) <a class="header-anchor" href="#panel-tab-active-environments">#</a></h2>
 <p>The <strong>Panel</strong> tab focuses strictly on your running containers. Tapping a running container card opens the <strong>Details Screen</strong>.</p>
-<h3 id="container-details-screen">Container Details Screen</h3>
-<p>This screen provides deep introspection into the running environment: - <strong>Distribution Info</strong>: Shows the Pretty Name, Version, Per-container-uptime, Hostname, and <strong>IP Address (IPv4)</strong>. - <strong>Available Users</strong>: Lists detected users in the rootfs. - <strong>Copy Login</strong>: Choose a user from the dropdown and tap this to copy a command like <code>su -c 'droidspaces enter [user]'</code>. - <strong>Terminal</strong>: Open an interactive Terminal Emulator inside from the container, natively on the Droidspaces app ! - <strong>Systemd Menu</strong>: If the container uses systemd, a "Manage" button appears. Tapping it opens a list of all systemd services, allowing you to Start, Stop, or Restart individual services (e.g., SSH, Nginx, or a VNC server) directly from the app.</p>
-<hr>
-<h2 id="accessing-the-container-shell">Accessing the Container Shell</h2>
+<h3 id="container-details-screen">Container Details Screen <a class="header-anchor" href="#container-details-screen">#</a></h3>
+<p>This screen provides deep introspection into the running environment:</p>
+<ul>
+<li><strong>Distribution Info</strong>: Shows the Pretty Name, Version, Per-container-uptime, Hostname, and <strong>IP Address (IPv4)</strong>.</li>
+<li><strong>Available Users</strong>: Lists detected users in the rootfs.</li>
+<li><strong>Copy Login</strong>: Choose a user from the dropdown and tap this to copy a command like <code>su -c 'droidspaces enter [user]'</code>.</li>
+<li><strong>Terminal</strong>: Open an interactive Terminal Emulator inside from the container, natively on the Droidspaces app !</li>
+<li><strong>Systemd Menu</strong>: If the container uses systemd, a &quot;Manage&quot; button appears. Tapping it opens a list of all systemd services, allowing you to Start, Stop, or Restart individual services (e.g., SSH, Nginx, or a VNC server) directly from the app.</li>
+</ul>
+<hr />
+<h2 id="accessing-the-container-shell">Accessing the Container Shell <a class="header-anchor" href="#accessing-the-container-shell">#</a></h2>
 <p>Droidspaces provides two primary ways to interact with your running Linux containers. Whether you want a quick check from within the app or a full-featured session in your favorite terminal, we've got you covered.</p>
-<h3 id="method-1-built-in-terminal-v570">Method 1: Built-in Terminal (v5.7.0+)</h3>
+<h3 id="method-1-built-in-terminal-v570">Method 1: Built-in Terminal (v5.7.0+) <a class="header-anchor" href="#method-1-built-in-terminal-v570">#</a></h3>
 <p>This is the most convenient way to quickly run commands without leaving the Droidspaces app.</p>
 <ol>
-<li>Ensure the container is <strong>RUNNING</strong>.
-</li>
-<li>Navigate to the <strong>Panel</strong> tab and tap the container to open its <strong>Details</strong>.
-</li>
-<li>Find the <strong>Terminal</strong> card and tap <strong>Open</strong>.
-</li>
-<li>Select the <strong>User</strong> you wish to log in as (e.g., <code>root</code> or your default user).
-</li>
-<li>An interactive terminal will launch directly within the app.
-</li>
+<li>Ensure the container is <strong>RUNNING</strong>.</li>
+<li>Navigate to the <strong>Panel</strong> tab and tap the container to open its <strong>Details</strong>.</li>
+<li>Find the <strong>Terminal</strong> card and tap <strong>Open</strong>.</li>
+<li>Select the <strong>User</strong> you wish to log in as (e.g., <code>root</code> or your default user).</li>
+<li>An interactive terminal will launch directly within the app.</li>
 </ol>
-<h3 id="method-2-external-terminal-copy-login">Method 2: External Terminal (Copy Login)</h3>
-<p>For power users who prefer <strong>Termux</strong>, <strong>ADB</strong>, or other terminal emulators, Droidspaces allows you to "attach" external sessions to the container.</p>
+<h3 id="method-2-external-terminal-copy-login">Method 2: External Terminal (Copy Login) <a class="header-anchor" href="#method-2-external-terminal-copy-login">#</a></h3>
+<p>For power users who prefer <strong>Termux</strong>, <strong>ADB</strong>, or other terminal emulators, Droidspaces allows you to &quot;attach&quot; external sessions to the container.</p>
 <ol>
-<li>Ensure the container is <strong>RUNNING</strong>.
-</li>
-<li>Open the container <strong>Details</strong> in the <strong>Panel</strong> tab.
-</li>
-<li>Select your desired user from the dropdown menu.
-</li>
-<li>Tap <strong>Copy Login</strong>. This copies a command like <code>su -c 'droidspaces --name=[name enter [user]'</code> to your clipboard.
-</li>
-<li>Open your preferred terminal (e.g., Termux) and <strong>Paste</strong> the command.
-</li>
-<li><strong>Run</strong> the command (ensure your terminal has root permissions granted from your root manager).
-</li>
+<li>Ensure the container is <strong>RUNNING</strong>.</li>
+<li>Open the container <strong>Details</strong> in the <strong>Panel</strong> tab.</li>
+<li>Select your desired user from the dropdown menu.</li>
+<li>Tap <strong>Copy Login</strong>. This copies a command like <code>su -c 'droidspaces --name=[name enter [user]'</code> to your clipboard.</li>
+<li>Open your preferred terminal (e.g., Termux) and <strong>Paste</strong> the command.</li>
+<li><strong>Run</strong> the command (ensure your terminal has root permissions granted from your root manager).</li>
 </ol>
-<hr>
-<h2 id="settings-requirements">Settings & Requirements</h2>
-<p>Accessed via the gear icon in the top right: - <strong>Requirements</strong>: Runs a 27-point diagnostic check on your kernel. - <strong>Kernel Config</strong>: Provides a copyable <code>droidspaces.config</code> snippet specifically for your device. - <strong>Theme Engine</strong>: Support for AMOLED Black, Material You, Changing accent colors, and Light/Dark modes.</p>
+<hr />
+<h2 id="settings--requirements">Settings &amp; Requirements <a class="header-anchor" href="#settings--requirements">#</a></h2>
+<p>Accessed via the gear icon in the top right:</p>
+<ul>
+<li><strong>Requirements</strong>: Runs a 27-point diagnostic check on your kernel.</li>
+<li><strong>Kernel Config</strong>: Provides a copyable <code>droidspaces.config</code> snippet specifically for your device.</li>
+<li><strong>Theme Engine</strong>: Support for AMOLED Black, Material You, Changing accent colors, and Light/Dark modes.</li>
+</ul>
+
+    </article>
+    <p class="doc-edit"><a href="https://github.com/ravindu644/Droidspaces-OSS/edit/main/Documentation/Usage-Android-App.md" rel="noopener noreferrer"><span class="icon" aria-hidden="true">edit</span>Edit this page on GitHub</a></p>
 <nav class="doc-nav" aria-label="Pages"><a href="kernel-configuration.html" class="doc-nav-prev"><small>Previous</small>Kernel Configuration</a><a href="linux-cli.html" class="doc-nav-next"><small>Next</small>Linux CLI</a></nav>
   </main>
+  <aside class="toc-column">
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#bottom-navigation">Bottom Navigation</a></li><li class="toc-h2"><a href="#containers-tab">Containers Tab</a></li><li class="toc-h2"><a href="#rootfs-repository">Rootfs Repository</a></li><li class="toc-h3"><a href="#how-it-works">How it works</a></li><li class="toc-h3"><a href="#adding-custom-repositories">Adding Custom Repositories</a></li><li class="toc-h2"><a href="#networking-configuration">Networking Configuration</a></li><li class="toc-h3"><a href="#internet-uplink-nat-mode">Internet Uplink (NAT Mode)</a></li><li class="toc-h3"><a href="#port-forwarding">Port Forwarding</a></li><li class="toc-h2"><a href="#panel-tab-active-environments">Panel Tab (Active Environments)</a></li><li class="toc-h3"><a href="#container-details-screen">Container Details Screen</a></li><li class="toc-h2"><a href="#accessing-the-container-shell">Accessing the Container Shell</a></li><li class="toc-h3"><a href="#method-1-built-in-terminal-v570">Method 1: Built-in Terminal (v5.7.0+)</a></li><li class="toc-h3"><a href="#method-2-external-terminal-copy-login">Method 2: External Terminal (Copy Login)</a></li><li class="toc-h2"><a href="#settings--requirements">Settings &amp; Requirements</a></li></ul></nav>
+  </aside>
 </div>
+<dialog class="search-dialog" aria-label="Search the docs">
+  <form method="dialog" class="search-form">
+    <span class="icon" aria-hidden="true">search</span>
+    <input type="search" class="search-input" placeholder="Search the docs" autocomplete="off" aria-label="Search the docs">
+    <button class="icon-button" aria-label="Close search"><span class="icon" aria-hidden="true">close</span></button>
+  </form>
+  <ul class="search-results"></ul>
+</dialog>
 <footer class="footer">
   <div class="footer-inner">
     <div>
@@ -235,5 +227,6 @@
 </footer>
 
 <script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/docs.js" defer></script>
 </body>
 </html>

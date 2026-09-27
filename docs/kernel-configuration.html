@@ -44,361 +44,435 @@
   <button class="doc-breadcrumb" popovertarget="sidebar"><span class="icon" aria-hidden="true">menu</span><span>Docs</span><span class="bc-sep">/</span><span class="bc-section">Guides</span><span class="bc-sep">/</span><span class="bc-label">Kernel Configuration</span></button>
   <aside class="sidebar" id="sidebar" popover>
     <button class="icon-button sidebar-close" popovertarget="sidebar" popovertargetaction="hide" aria-label="Close navigation"><span class="icon" aria-hidden="true">close</span></button>
-<div class="sidebar-group">
-<div class="sidebar-heading">Basics</div>
+    <button class="search-open" type="button" hidden><span class="icon" aria-hidden="true">search</span>Search the docs<kbd>Ctrl K</kbd></button>
+<details class="sidebar-group" open><summary class="sidebar-heading">Basics</summary>
 <a href="installation-android.html" class="sidebar-link">Android Installation</a>
 <a href="installation-linux.html" class="sidebar-link">Linux Installation</a>
-</div>
-<div class="sidebar-group">
-<div class="sidebar-heading">Guides</div>
+</details>
+<details class="sidebar-group" open><summary class="sidebar-heading">Guides</summary>
 <a href="features.html" class="sidebar-link">Feature Deep Dives</a>
 <a href="graphics-and-audio.html" class="sidebar-link">Display, Audio & Desktop</a>
 <a href="kernel-configuration.html" class="sidebar-link" aria-current="page">Kernel Configuration</a>
 <a href="usage-android-app.html" class="sidebar-link">Android App Usage</a>
 <a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
 <a href="networking-from-zero.html" class="sidebar-link">Networking From Zero</a>
-</div>
-<div class="sidebar-group">
-<div class="sidebar-heading">Recipes</div>
+</details>
+<details class="sidebar-group" open><summary class="sidebar-heading">Recipes</summary>
 <a href="cool-things-you-can-do.html" class="sidebar-link">Cool Things You Can Do</a>
-</div>
-<div class="sidebar-group">
-<div class="sidebar-heading">Reference</div>
+</details>
+<details class="sidebar-group" open><summary class="sidebar-heading">Reference</summary>
 <a href="troubleshooting.html" class="sidebar-link">Troubleshooting</a>
 <a href="community-supported-devices.html" class="sidebar-link">Community-Supported Devices</a>
 <a href="nix-nixos.html" class="sidebar-link">Nix/NixOS</a>
 <a href="uninstallation.html" class="sidebar-link">Uninstallation</a>
-</div>
+</details>
   </aside>
   <main class="docs-content">
-<h1 id="kernel-configuration-guide">Kernel Configuration Guide</h1>
+    <article>
+<h1 id="kernel-configuration-guide">Kernel Configuration Guide <a class="header-anchor" href="#kernel-configuration-guide">#</a></h1>
 <p>This guide explains how to compile a Linux kernel with Droidspaces support for Android devices.</p>
-<div class="callout callout-tip"><strong class="callout-title">TIP</strong> <strong>New to kernel compilation?</strong> Check out the comprehensive tutorial at:
-https://github.com/ravindu644/Android-Kernel-Tutorials</div>
-<hr>
-<h3 id="quick-navigation">Quick Navigation</h3>
+<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p><strong>New to kernel compilation?</strong> Check out the comprehensive tutorial at:
+https://github.com/ravindu644/Android-Kernel-Tutorials</p></div>
+<hr />
+<h3 id="quick-navigation">Quick Navigation <a class="header-anchor" href="#quick-navigation">#</a></h3>
 <ul>
-<li><a href="#overview" rel="noopener noreferrer">Overview</a>
-</li>
-<li><a href="#non-gki" rel="noopener noreferrer">Configuring Non-GKI Kernels</a>
-</li>
-<li><a href="#gki" rel="noopener noreferrer">Configuring GKI Kernels</a>
-</li>
-<li><a href="#testing" rel="noopener noreferrer">Testing Your Kernel</a>
-</li>
-<li><a href="#versions" rel="noopener noreferrer">Recommended Kernel Versions</a>
-</li>
-<li><a href="#nested" rel="noopener noreferrer">Nested Containers</a>
-</li>
-<li><a href="#resources" rel="noopener noreferrer">Additional Resources</a>
-</li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#non-gki">Configuring Non-GKI Kernels</a></li>
+<li><a href="#gki">Configuring GKI Kernels</a></li>
+<li><a href="#testing">Testing Your Kernel</a></li>
+<li><a href="#versions">Recommended Kernel Versions</a></li>
+<li><a href="#nested">Nested Containers</a></li>
+<li><a href="#resources">Additional Resources</a></li>
 </ul>
-<hr>
-<h2 id="overview">Overview</h2>
+<hr />
+<p><a id="overview"></a></p>
+<h2 id="overview">Overview <a class="header-anchor" href="#overview">#</a></h2>
 <p>Droidspaces needs specific kernel options to run isolated containers. These options enable Linux namespaces, cgroups, seccomp filtering, networking, and device filesystem support.</p>
-<hr>
-<h2 id="non-gki">Configuring Non-GKI Kernels (Legacy Kernels)</h2>
+<hr />
+<p><a id="non-gki"></a></p>
+<h2 id="configuring-non-gki-kernels-legacy-kernels">Configuring Non-GKI Kernels (Legacy Kernels) <a class="header-anchor" href="#configuring-non-gki-kernels-legacy-kernels">#</a></h2>
 <p><strong>Applies to:</strong> Kernel 3.18, 4.4, 4.9, 4.14, 4.19</p>
 <p>Non-GKI kernels are the easiest to configure. Follow these steps:</p>
-<h3 id="step-1-mandatory-configuration">Step 1: Mandatory Configuration</h3>
+<h3 id="step-1-mandatory-configuration">Step 1: Mandatory Configuration <a class="header-anchor" href="#step-1-mandatory-configuration">#</a></h3>
 <p>Place these options in your device defconfig or use them as a configuration fragment.</p>
-<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code># Kernel configurations for full DroidSpaces support
-# Copyright (C) 2026 ravindu644 <droidcasts@protonmail.com>
+<div class="code-block"><span class="code-lang">makefile</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c"># Kernel configurations for full DroidSpaces support</span>
+<span class="c"># Copyright (C) 2026 ravindu644 &lt;droidcasts@protonmail.com&gt;</span>
 
-# IPC mechanisms
-CONFIG_SYSCTL=y
-CONFIG_SYSVIPC=y
-CONFIG_POSIX_MQUEUE=y
+<span class="c"># IPC mechanisms</span>
+<span class="nv">CONFIG_SYSCTL</span><span class="o">=</span>y
+<span class="nv">CONFIG_SYSVIPC</span><span class="o">=</span>y
+<span class="nv">CONFIG_POSIX_MQUEUE</span><span class="o">=</span>y
 
-# Core namespace support
-CONFIG_NAMESPACES=y
-CONFIG_PID_NS=y
-CONFIG_UTS_NS=y
-CONFIG_IPC_NS=y
+<span class="c"># Core namespace support</span>
+<span class="nv">CONFIG_NAMESPACES</span><span class="o">=</span>y
+<span class="nv">CONFIG_PID_NS</span><span class="o">=</span>y
+<span class="nv">CONFIG_UTS_NS</span><span class="o">=</span>y
+<span class="nv">CONFIG_IPC_NS</span><span class="o">=</span>y
 
-# Seccomp support
-CONFIG_SECCOMP=y
-CONFIG_SECCOMP_FILTER=y
+<span class="c"># Seccomp support</span>
+<span class="nv">CONFIG_SECCOMP</span><span class="o">=</span>y
+<span class="nv">CONFIG_SECCOMP_FILTER</span><span class="o">=</span>y
 
-# Control groups support
-CONFIG_CGROUPS=y
-CONFIG_CGROUP_DEVICE=y
-CONFIG_CGROUP_PIDS=y
-CONFIG_MEMCG=y
-CONFIG_CGROUP_SCHED=y
-CONFIG_FAIR_GROUP_SCHED=y
-CONFIG_CGROUP_FREEZER=y
-CONFIG_CGROUP_NET_PRIO=y
+<span class="c"># Control groups support</span>
+<span class="nv">CONFIG_CGROUPS</span><span class="o">=</span>y
+<span class="nv">CONFIG_CGROUP_DEVICE</span><span class="o">=</span>y
+<span class="nv">CONFIG_CGROUP_PIDS</span><span class="o">=</span>y
+<span class="nv">CONFIG_MEMCG</span><span class="o">=</span>y
+<span class="nv">CONFIG_CGROUP_SCHED</span><span class="o">=</span>y
+<span class="nv">CONFIG_FAIR_GROUP_SCHED</span><span class="o">=</span>y
+<span class="nv">CONFIG_CGROUP_FREEZER</span><span class="o">=</span>y
+<span class="nv">CONFIG_CGROUP_NET_PRIO</span><span class="o">=</span>y
 
-# Device filesystem support
-CONFIG_DEVTMPFS=y
+<span class="c"># Device filesystem support</span>
+<span class="nv">CONFIG_DEVTMPFS</span><span class="o">=</span>y
 
-# Overlay filesystem support (required for volatile mode)
-CONFIG_OVERLAY_FS=y
+<span class="c"># Overlay filesystem support (required for volatile mode)</span>
+<span class="nv">CONFIG_OVERLAY_FS</span><span class="o">=</span>y
 
-# Enable xattr, posix acl support on tmpfs
-# For NixOS support
-CONFIG_TMPFS_POSIX_ACL=y
-CONFIG_TMPFS_XATTR=y
+<span class="c"># Enable xattr, posix acl support on tmpfs</span>
+<span class="c"># For NixOS support</span>
+<span class="nv">CONFIG_TMPFS_POSIX_ACL</span><span class="o">=</span>y
+<span class="nv">CONFIG_TMPFS_XATTR</span><span class="o">=</span>y
 
-# Firmware loading support
-CONFIG_FW_LOADER=y
-CONFIG_FW_LOADER_USER_HELPER=y
-CONFIG_FW_LOADER_COMPRESS=y
+<span class="c"># Firmware loading support</span>
+<span class="nv">CONFIG_FW_LOADER</span><span class="o">=</span>y
+<span class="nv">CONFIG_FW_LOADER_USER_HELPER</span><span class="o">=</span>y
+<span class="nv">CONFIG_FW_LOADER_COMPRESS</span><span class="o">=</span>y
 
-# Droidspaces Network Isolation Support - NAT/none modes
-CONFIG_NET_NS=y
-CONFIG_VETH=y
-CONFIG_BRIDGE=y
-CONFIG_NETFILTER=y
-CONFIG_BRIDGE_NETFILTER=y
-CONFIG_NETFILTER_ADVANCED=y
-CONFIG_NF_CONNTRACK=y
-CONFIG_IP_NF_IPTABLES=y
-CONFIG_IP_NF_FILTER=y
-CONFIG_NF_NAT=y
-CONFIG_NF_TABLES=y
-CONFIG_IP_NF_TARGET_MASQUERADE=y
-CONFIG_NETFILTER_XT_TARGET_MASQUERADE=y
-CONFIG_NETFILTER_XT_TARGET_TCPMSS=y
-CONFIG_NETFILTER_XT_MATCH_ADDRTYPE=y
-CONFIG_NF_CONNTRACK_NETLINK=y
-CONFIG_NF_NAT_REDIRECT=y
-CONFIG_IP_ADVANCED_ROUTER=y
-CONFIG_IP_MULTIPLE_TABLES=y
+<span class="c"># Droidspaces Network Isolation Support - NAT/none modes</span>
+<span class="nv">CONFIG_NET_NS</span><span class="o">=</span>y
+<span class="nv">CONFIG_VETH</span><span class="o">=</span>y
+<span class="nv">CONFIG_BRIDGE</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER</span><span class="o">=</span>y
+<span class="nv">CONFIG_BRIDGE_NETFILTER</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_ADVANCED</span><span class="o">=</span>y
+<span class="nv">CONFIG_NF_CONNTRACK</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP_NF_IPTABLES</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP_NF_FILTER</span><span class="o">=</span>y
+<span class="nv">CONFIG_NF_NAT</span><span class="o">=</span>y
+<span class="nv">CONFIG_NF_TABLES</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP_NF_TARGET_MASQUERADE</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_TARGET_MASQUERADE</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_TARGET_TCPMSS</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_MATCH_ADDRTYPE</span><span class="o">=</span>y
+<span class="nv">CONFIG_NF_CONNTRACK_NETLINK</span><span class="o">=</span>y
+<span class="nv">CONFIG_NF_NAT_REDIRECT</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP_ADVANCED_ROUTER</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP_MULTIPLE_TABLES</span><span class="o">=</span>y
 
-# legacy compat
-CONFIG_NF_CONNTRACK_IPV4=y
-CONFIG_NF_NAT_IPV4=y
-CONFIG_IP_NF_NAT=y
+<span class="c"># legacy compat</span>
+<span class="nv">CONFIG_NF_CONNTRACK_IPV4</span><span class="o">=</span>y
+<span class="nv">CONFIG_NF_NAT_IPV4</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP_NF_NAT</span><span class="o">=</span>y
 
-# Disable this on older kernels to make internet work
-CONFIG_ANDROID_PARANOID_NETWORK=n
+<span class="c"># Disable this on older kernels to make internet work</span>
+<span class="nv">CONFIG_ANDROID_PARANOID_NETWORK</span><span class="o">=</span>n
 
-# Fix for docker unsafe procfs error
-CONFIG_USER_NS=y
+<span class="c"># Fix for docker unsafe procfs error</span>
+<span class="nv">CONFIG_USER_NS</span><span class="o">=</span>y
 </code></pre></div>
-<h3 id="step-2-firewall-support-ufwfail2ban-optional">Step 2: Firewall Support (UFW/Fail2ban) - Optional</h3>
-<div class="callout callout-tip"><strong class="callout-title">TIP</strong> These options are only required if you want to run UFW or Fail2ban inside the container.
-
-<strong>Use NAT mode</strong> when running these to avoid host networking conflicts.</div>
-<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code># UFW & FAIL2BAN CORE
-CONFIG_NETFILTER_XT_MATCH_COMMENT=y
-CONFIG_NETFILTER_XT_MATCH_STATE=y
-CONFIG_NETFILTER_XT_MATCH_CONNTRACK=y
-CONFIG_NETFILTER_XT_MATCH_MULTIPORT=y
-CONFIG_NETFILTER_XT_MATCH_HL=y
-CONFIG_NETFILTER_XT_TARGET_REJECT=y
-CONFIG_IP_NF_TARGET_REJECT=y
-CONFIG_NETFILTER_XT_TARGET_LOG=y
-CONFIG_IP_NF_TARGET_ULOG=y
-CONFIG_NETFILTER_XT_MATCH_RECENT=y
-CONFIG_NETFILTER_XT_MATCH_LIMIT=y
-CONFIG_NETFILTER_XT_MATCH_HASHLIMIT=y
-CONFIG_NETFILTER_XT_MATCH_OWNER=y
-CONFIG_NETFILTER_XT_MATCH_PKTTYPE=y
-CONFIG_NETFILTER_XT_MATCH_MARK=y
-CONFIG_NETFILTER_XT_TARGET_MARK=y
-CONFIG_IP_SET=y
-CONFIG_IP_SET_HASH_IP=y
-CONFIG_IP_SET_HASH_NET=y
-CONFIG_NETFILTER_XT_SET=y
-CONFIG_NETFILTER_NETLINK_QUEUE=y
-CONFIG_NETFILTER_NETLINK_LOG=y
-CONFIG_NETFILTER_XT_TARGET_NFLOG=y
+<h3 id="step-2-firewall-support-ufwfail2ban---optional">Step 2: Firewall Support (UFW/Fail2ban) - Optional <a class="header-anchor" href="#step-2-firewall-support-ufwfail2ban---optional">#</a></h3>
+<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p>These options are only required if you want to run UFW or Fail2ban inside the container.</p>
+<p><strong>Use NAT mode</strong> when running these to avoid host networking conflicts.</p></div>
+<div class="code-block"><span class="code-lang">makefile</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c"># UFW &amp; FAIL2BAN CORE</span>
+<span class="nv">CONFIG_NETFILTER_XT_MATCH_COMMENT</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_MATCH_STATE</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_MATCH_CONNTRACK</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_MATCH_MULTIPORT</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_MATCH_HL</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_TARGET_REJECT</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP_NF_TARGET_REJECT</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_TARGET_LOG</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP_NF_TARGET_ULOG</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_MATCH_RECENT</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_MATCH_LIMIT</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_MATCH_HASHLIMIT</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_MATCH_OWNER</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_MATCH_PKTTYPE</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_MATCH_MARK</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_TARGET_MARK</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP_SET</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP_SET_HASH_IP</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP_SET_HASH_NET</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_SET</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_NETLINK_QUEUE</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_NETLINK_LOG</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_TARGET_NFLOG</span><span class="o">=</span>y
 </code></pre></div>
-<h3 id="step-3-apply-patches">Step 3: Apply Patches</h3>
-<p>Apply all patches from the <a href="./resources/kernel-patches/non-GKI/" rel="noopener noreferrer">assets/resources/kernel-patches/non-GKI</a> directory using this command:</p>
-<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>patch -p1 < /path/to/extracted/patchfile.patch
+<h3 id="step-3-apply-patches">Step 3: Apply Patches <a class="header-anchor" href="#step-3-apply-patches">#</a></h3>
+<p>Apply all patches from the <a href="https://github.com/ravindu644/Droidspaces-OSS/tree/main/assets/resources/kernel-patches/non-GKI/">assets/resources/kernel-patches/non-GKI</a> directory using this command:</p>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </span>/path/to/extracted/patchfile.patch
 </code></pre></div>
-<h3 id="step-4-build-flash-and-test">Step 4: Build, Flash and Test</h3>
+<h3 id="step-4-build-flash-and-test">Step 4: Build, Flash and Test <a class="header-anchor" href="#step-4-build-flash-and-test">#</a></h3>
 <ol>
-<li>Save the configuration blocks above as <code>.config</code> fragments or merge them into your defconfig.
-</li>
-<li>Compile and flash the kernel to your device.
-</li>
-<li>Verify using the Droidspaces app <strong>Settings -> Requirements -> Check Requirements</strong>.
-</li>
+<li>Save the configuration blocks above as <code>.config</code> fragments or merge them into your defconfig.</li>
+<li>Compile and flash the kernel to your device.</li>
+<li>Verify using the Droidspaces app <strong>Settings -&gt; Requirements -&gt; Check Requirements</strong>.</li>
 </ol>
-<hr>
-<h2 id="gki">Configuring GKI Kernels</h2>
+<hr />
+<p><a id="gki"></a></p>
+<h2 id="configuring-gki-kernels">Configuring GKI Kernels <a class="header-anchor" href="#configuring-gki-kernels">#</a></h2>
 <p><strong>Applies to:</strong> Kernel 5.4, 5.10, 5.15, 6.1, 6.6, 6.12+</p>
 <p>Google's Generic Kernel Image (GKI) enforces strict <strong>kABI (Kernel Application Binary Interface)</strong> compliance. Enabling standard Droidspaces features like <code>CONFIG_SYSVIPC</code> or <code>CONFIG_IPC_NS</code> would normally shift memory offsets in the core <code>task_struct</code>, causing pre-compiled vendor modules (GPU, Camera, etc.) to crash or bootloop the device.</p>
 <p>To solve this, Droidspaces provides specialized <strong>kABI-friendly patches</strong> that allow these features to be enabled without shifting offsets.</p>
-<h3 id="step-1-apply-the-mandatory-kabi-patches">Step 1: Apply the Mandatory kABI Patches</h3>
-<div class="callout callout-important"><strong class="callout-title">IMPORTANT</strong> <strong>These patches are NOT OPTIONAL.</strong> You <strong>MUST</strong> apply the correct kABI fix patches for your kernel version. Skipping these patches will cause an immediate bootloop upon enabling <code>CONFIG_SYSVIPC</code>, <code>CONFIG_IPC_NS</code> or <code>CONFIG_POSIX_MQUEUE</code>.</div>
+<h3 id="step-1-apply-the-mandatory-kabi-patches">Step 1: Apply the Mandatory kABI Patches <a class="header-anchor" href="#step-1-apply-the-mandatory-kabi-patches">#</a></h3>
+<div class="callout callout-important"><strong class="callout-title">Important</strong><p><strong>These patches are NOT OPTIONAL.</strong> You <strong>MUST</strong> apply the correct kABI fix patches for your kernel version. Skipping these patches will cause an immediate bootloop upon enabling <code>CONFIG_SYSVIPC</code>, <code>CONFIG_IPC_NS</code> or <code>CONFIG_POSIX_MQUEUE</code>.</p></div>
 <p><strong>For ALL Kernels BELOW 6.12 (5.4, 5.10, 5.15, 6.1, 6.6):</strong></p>
 <ul>
-<li>Apply the <code>SYSVIPC</code> kABI fix from <a href="./resources/kernel-patches/GKI/below-kernel-6.12/" rel="noopener noreferrer">assets/resources/kernel-patches/GKI/below-kernel-6.12/</a>:
-</li>
+<li>Apply the <code>SYSVIPC</code> kABI fix from <a href="https://github.com/ravindu644/Droidspaces-OSS/tree/main/assets/resources/kernel-patches/GKI/below-kernel-6.12/">assets/resources/kernel-patches/GKI/below-kernel-6.12/</a>:</li>
 </ul>
-<div class="callout callout-tip"><strong class="callout-title">TIP</strong> The <a href="./resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch" rel="noopener noreferrer"><code>001.GKI-below-6.12-fix_sysvipc_kABI_6_7_8.patch</code></a> is recommended.
-If this patch causes a bootloop, try the alternative patches from the same folder (e.g., <code>1_2_3</code> or <code>3_4_5</code>).</div>
+<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p>The <a href="https://github.com/ravindu644/Droidspaces-OSS/tree/main/assets/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch"><code>001.GKI-below-6.12-fix_sysvipc_kABI_6_7_8.patch</code></a> is recommended.</p>
+<p>If this patch causes a bootloop, try the alternative patches from the same folder (e.g., <code>1_2_3</code> or <code>3_4_5</code>).</p></div>
 <p><strong>For Kernels 5.10 and BELOW ONLY:</strong></p>
 <ul>
 <li>You <strong>MUST ALSO</strong> apply the <code>POSIX_MQUEUE</code> kABI fix:
-<p><a href="./resources/kernel-patches/GKI/below-kernel-6.12/002.5.10_or_lower_use_android_abi_padding_for_posix_mqueue.patch" rel="noopener noreferrer">assets/resources/kernel-patches/GKI/below-kernel-6.12/002.5.10_or_lower_use_android_abi_padding_for_posix_mqueue.patch</a></p>
-</li>
+<a href="https://github.com/ravindu644/Droidspaces-OSS/tree/main/assets/resources/kernel-patches/GKI/below-kernel-6.12/002.5.10_or_lower_use_android_abi_padding_for_posix_mqueue.patch">assets/resources/kernel-patches/GKI/below-kernel-6.12/002.5.10_or_lower_use_android_abi_padding_for_posix_mqueue.patch</a></li>
 </ul>
 <p><strong>For Kernels 6.12 and ABOVE:</strong></p>
 <ul>
-<li>Apply the patch from <a href="./resources/kernel-patches/GKI/kernel-6.12/001.GKI-6.12-or-above-fix_sysvipc_kabi.patch" rel="noopener noreferrer">assets/resources/kernel-patches/GKI/kernel-6.12/001.GKI-6.12-or-above-fix_sysvipc_kabi.patch</a>.
-</li>
+<li>Apply the patch from <a href="https://github.com/ravindu644/Droidspaces-OSS/tree/main/assets/resources/kernel-patches/GKI/kernel-6.12/001.GKI-6.12-or-above-fix_sysvipc_kabi.patch">assets/resources/kernel-patches/GKI/kernel-6.12/001.GKI-6.12-or-above-fix_sysvipc_kabi.patch</a>.</li>
 </ul>
 <p><strong>How to apply the patches:</strong></p>
-<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code># Apply each required patch for your kernel version
-patch -p1 < /path/to/extracted/patchfile.patch
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Apply each required patch for your kernel version</span>
+patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </span>/path/to/extracted/patchfile.patch
 </code></pre></div>
-<h3 id="step-2-edit-gkidefconfig">Step 2: Edit <code>gki_defconfig</code></h3>
+<h3 id="step-2-edit-gki_defconfig">Step 2: Edit <code>gki_defconfig</code> <a class="header-anchor" href="#step-2-edit-gki_defconfig">#</a></h3>
 <p>Rather than using separate fragment files, directly edit <code>arch/arm64/configs/gki_defconfig</code>, use this <strong>GKI-Exclusive Configuration</strong>.</p>
 <p>These options have been tested and proven to work across all GKI kernels without breaking ABI.</p>
-<div class="callout callout-warning"><strong class="callout-title">WARNING</strong> <strong>DO NOT</strong> enable anything other than the recommended GKI configuration below. These specific items are kABI-safe when combined with the Step 1 patch.</div>
-<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code># Kernel configurations for full DroidSpaces support for GKI
-# Copyright (C) 2026 ravindu644 <droidcasts@protonmail.com>
+<div class="callout callout-warning"><strong class="callout-title">Warning</strong><p><strong>DO NOT</strong> enable anything other than the recommended GKI configuration below. These specific items are kABI-safe when combined with the Step 1 patch.</p></div>
+<div class="code-block"><span class="code-lang">makefile</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c"># Kernel configurations for full DroidSpaces support for GKI</span>
+<span class="c"># Copyright (C) 2026 ravindu644 &lt;droidcasts@protonmail.com&gt;</span>
 
-# IPC
-CONFIG_SYSVIPC=y
-CONFIG_POSIX_MQUEUE=y
+<span class="c"># IPC</span>
+<span class="nv">CONFIG_SYSVIPC</span><span class="o">=</span>y
+<span class="nv">CONFIG_POSIX_MQUEUE</span><span class="o">=</span>y
 
-# Namespaces
-CONFIG_IPC_NS=y
-CONFIG_PID_NS=y
+<span class="c"># Namespaces</span>
+<span class="nv">CONFIG_IPC_NS</span><span class="o">=</span>y
+<span class="nv">CONFIG_PID_NS</span><span class="o">=</span>y
 
-# HW Access Support
-CONFIG_DEVTMPFS=y
+<span class="c"># HW Access Support</span>
+<span class="nv">CONFIG_DEVTMPFS</span><span class="o">=</span>y
 
-# Networking (Enhanced NAT support)
-CONFIG_NETFILTER_XT_MATCH_ADDRTYPE=y
+<span class="c"># Networking (Enhanced NAT support)</span>
+<span class="nv">CONFIG_NETFILTER_XT_MATCH_ADDRTYPE</span><span class="o">=</span>y
 
-# --- Below configs are optional but recommended ---
+<span class="c"># --- Below configs are optional but recommended ---</span>
 
-# Fix for docker unsafe procfs error
-CONFIG_USER_NS=y
+<span class="c"># Fix for docker unsafe procfs error</span>
+<span class="nv">CONFIG_USER_NS</span><span class="o">=</span>y
 
-# UFW support
-CONFIG_NETFILTER_XT_TARGET_REJECT=y
-CONFIG_NETFILTER_XT_TARGET_LOG=y
-CONFIG_NETFILTER_XT_MATCH_RECENT=y
+<span class="c"># UFW support</span>
+<span class="nv">CONFIG_NETFILTER_XT_TARGET_REJECT</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_TARGET_LOG</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_MATCH_RECENT</span><span class="o">=</span>y
 
-# Fail2ban support
-CONFIG_IP_SET=y
-CONFIG_IP_SET_HASH_IP=y
-CONFIG_IP_SET_HASH_NET=y
-CONFIG_NETFILTER_XT_SET=y
+<span class="c"># Fail2ban support</span>
+<span class="nv">CONFIG_IP_SET</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP_SET_HASH_IP</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP_SET_HASH_NET</span><span class="o">=</span>y
+<span class="nv">CONFIG_NETFILTER_XT_SET</span><span class="o">=</span>y
 
-# Enable xattr, posix acl support on tmpfs
-# For NixOS support
-CONFIG_TMPFS_POSIX_ACL=y
-CONFIG_TMPFS_XATTR=y
+<span class="c"># Enable xattr, posix acl support on tmpfs</span>
+<span class="c"># For NixOS support</span>
+<span class="nv">CONFIG_TMPFS_POSIX_ACL</span><span class="o">=</span>y
+<span class="nv">CONFIG_TMPFS_XATTR</span><span class="o">=</span>y
 </code></pre></div>
-<p><strong>Workflow Rules:</strong> - <strong>Do not</strong> append this as a block at the end of the file. - Search for each option individually. - If an option appears as <code># CONFIG_NAME is not set</code>, change it to <code>CONFIG_NAME=y</code>. - If an option is already set to <code>CONFIG_NAME=y</code>, leave it alone. - If an option does not exist, add it at the end.</p>
-<h3 id="step-3-compile">Step 3: Compile</h3>
-<p>Use your preferred build method: Bazel, the official AOSP <code>build.sh</code>/<code>prepare_vendor.sh</code> scripts, or traditional <code>Kbuild</code> with <code>make</code>.</p>
-<h3 id="step-4-flash-and-test">Step 4: Flash and Test</h3>
-<p>Flash the compiled <code>boot.img</code> or <code>Image</code> using Odin, fastboot, Heimdall, Anykernel3 or your device's preferred method. Since we used kABI-safe patches, your stock vendor modules will continue to work perfectly.</p>
-<p>After booting, open the Droidspaces app and go to <strong>Settings</strong> (gear icon) -> <strong>Requirements</strong> -> <strong>Check Requirements</strong> to verify your setup.</p>
-<hr>
-<h2 id="testing">Testing Your Kernel</h2>
-<h3 id="1-run-the-requirements-check">1. Run the Requirements Check</h3>
+<p><strong>Workflow Rules:</strong></p>
 <ul>
-<li><strong>In the app</strong>: Go to <strong>Settings</strong> (gear icon) -> <strong>Requirements</strong> -> <strong>Check Requirements</strong>.
-</li>
-<li><strong>In a terminal</strong>: Run:
-</li>
+<li><strong>Do not</strong> append this as a block at the end of the file.</li>
+<li>Search for each option individually.</li>
+<li>If an option appears as <code># CONFIG_NAME is not set</code>, change it to <code>CONFIG_NAME=y</code>.</li>
+<li>If an option is already set to <code>CONFIG_NAME=y</code>, leave it alone.</li>
+<li>If an option does not exist, add it at the end.</li>
 </ul>
-<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>su -c droidspaces check
+<h3 id="step-3-compile">Step 3: Compile <a class="header-anchor" href="#step-3-compile">#</a></h3>
+<p>Use your preferred build method: Bazel, the official AOSP <code>build.sh</code>/<code>prepare_vendor.sh</code> scripts, or traditional <code>Kbuild</code> with <code>make</code>.</p>
+<h3 id="step-4-flash-and-test">Step 4: Flash and Test <a class="header-anchor" href="#step-4-flash-and-test">#</a></h3>
+<p>Flash the compiled <code>boot.img</code> or <code>Image</code> using Odin, fastboot, Heimdall, Anykernel3 or your device's preferred method. Since we used kABI-safe patches, your stock vendor modules will continue to work perfectly.</p>
+<p>After booting, open the Droidspaces app and go to <strong>Settings</strong> (gear icon) -&gt; <strong>Requirements</strong> -&gt; <strong>Check Requirements</strong> to verify your setup.</p>
+<hr />
+<p><a id="testing"></a></p>
+<h2 id="testing-your-kernel">Testing Your Kernel <a class="header-anchor" href="#testing-your-kernel">#</a></h2>
+<h3 id="1-run-the-requirements-check">1. Run the Requirements Check <a class="header-anchor" href="#1-run-the-requirements-check">#</a></h3>
+<ul>
+<li><strong>In the app</strong>: Go to <strong>Settings</strong> (gear icon) -&gt; <strong>Requirements</strong> -&gt; <strong>Check Requirements</strong>.</li>
+<li><strong>In a terminal</strong>: Run:</li>
+</ul>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>su<span class="w"> </span>-c<span class="w"> </span>droidspaces<span class="w"> </span>check
 </code></pre></div>
 <p>This checks for:</p>
 <ul>
-<li>Root access
-</li>
-<li>Kernel version (minimum 3.18)
-</li>
-<li>PID, MNT, UTS, IPC namespaces
-</li>
-<li>Network namespace (optional, required for NAT/None modes)
-</li>
-<li>Cgroup namespace (optional, for modern cgroup isolation)
-</li>
-<li>devtmpfs support
-</li>
-<li>OverlayFS support (optional, for volatile mode)
-</li>
-<li>VETH and Bridge support (optional, for NAT mode)
-</li>
-<li>PTY/devpts support
-</li>
-<li>Loop device support
-</li>
-<li>ext4 support
-</li>
+<li>Root access</li>
+<li>Kernel version (minimum 3.18)</li>
+<li>PID, MNT, UTS, IPC namespaces</li>
+<li>Network namespace (optional, required for NAT/None modes)</li>
+<li>Cgroup namespace (optional, for modern cgroup isolation)</li>
+<li>devtmpfs support</li>
+<li>OverlayFS support (optional, for volatile mode)</li>
+<li>VETH and Bridge support (optional, for NAT mode)</li>
+<li>PTY/devpts support</li>
+<li>Loop device support</li>
+<li>ext4 support</li>
 </ul>
-<h3 id="2-understanding-the-results">2. Understanding the Results</h3>
+<h3 id="2-understanding-the-results">2. Understanding the Results <a class="header-anchor" href="#2-understanding-the-results">#</a></h3>
 <div class="table-wrap"><table>
 <thead>
-<tr><th>Result</th><th>Meaning</th></tr>
+<tr>
+<th>Result</th>
+<th>Meaning</th>
+</tr>
 </thead>
 <tbody>
-<tr><td>Green checkmark</td><td>Feature is available</td></tr>
-<tr><td>Yellow warning</td><td>Feature is optional and not available (e.g., OverlayFS)</td></tr>
-<tr><td>Red cross</td><td>Required feature is missing; containers may not work</td></tr>
+<tr>
+<td>Green checkmark</td>
+<td>Feature is available</td>
+</tr>
+<tr>
+<td>Yellow warning</td>
+<td>Feature is optional and not available (e.g., OverlayFS)</td>
+</tr>
+<tr>
+<td>Red cross</td>
+<td>Required feature is missing; containers may not work</td>
+</tr>
 </tbody>
 </table></div>
-<h3 id="3-what-to-do-if-something-is-missing">3. What to Do If Something Is Missing</h3>
+<h3 id="3-what-to-do-if-something-is-missing">3. What to Do If Something Is Missing <a class="header-anchor" href="#3-what-to-do-if-something-is-missing">#</a></h3>
 <div class="table-wrap"><table>
 <thead>
-<tr><th>Missing Feature</th><th>Required Config</th><th>Impact if Missing</th></tr>
+<tr>
+<th>Missing Feature</th>
+<th>Required Config</th>
+<th>Impact if Missing</th>
+</tr>
 </thead>
 <tbody>
-<tr><td>PID namespace</td><td><code>CONFIG_PID_NS=y</code></td><td><strong>Fatal.</strong> Containers cannot start.</td></tr>
-<tr><td>MNT namespace</td><td><code>CONFIG_NAMESPACES=y</code></td><td><strong>Fatal.</strong> Containers cannot start.</td></tr>
-<tr><td>UTS namespace</td><td><code>CONFIG_UTS_NS=y</code></td><td><strong>Fatal.</strong> Containers cannot start.</td></tr>
-<tr><td>IPC namespace</td><td><code>CONFIG_IPC_NS=y</code></td><td><strong>Fatal.</strong> Containers cannot start.</td></tr>
-<tr><td>Cgroup device</td><td><code>CONFIG_CGROUP_DEVICE=y</code></td><td><strong>Fatal.</strong>  Containers cannot start.</td></tr>
-<tr><td>devtmpfs</td><td><code>CONFIG_DEVTMPFS=y</code></td><td><strong>Fatal.</strong> Droidspaces cannot set up <code>/dev</code>.</td></tr>
-<tr><td>OverlayFS</td><td><code>CONFIG_OVERLAY_FS</code></td><td>Volatile mode unavailable.</td></tr>
-<tr><td>Network namespace</td><td><code>CONFIG_NET_NS=y</code></td><td>NAT and None modes unavailable.</td></tr>
-<tr><td>VETH / Bridge</td><td><code>CONFIG_VETH</code> / <code>CONFIG_BRIDGE</code></td><td>NAT mode unavailable.</td></tr>
-<tr><td>Seccomp</td><td><code>CONFIG_SECCOMP=y</code></td><td>Seccomp shield disabled. Security risk.</td></tr>
+<tr>
+<td>PID namespace</td>
+<td><code>CONFIG_PID_NS=y</code></td>
+<td><strong>Fatal.</strong> Containers cannot start.</td>
+</tr>
+<tr>
+<td>MNT namespace</td>
+<td><code>CONFIG_NAMESPACES=y</code></td>
+<td><strong>Fatal.</strong> Containers cannot start.</td>
+</tr>
+<tr>
+<td>UTS namespace</td>
+<td><code>CONFIG_UTS_NS=y</code></td>
+<td><strong>Fatal.</strong> Containers cannot start.</td>
+</tr>
+<tr>
+<td>IPC namespace</td>
+<td><code>CONFIG_IPC_NS=y</code></td>
+<td><strong>Fatal.</strong> Containers cannot start.</td>
+</tr>
+<tr>
+<td>Cgroup device</td>
+<td><code>CONFIG_CGROUP_DEVICE=y</code></td>
+<td><strong>Fatal.</strong>  Containers cannot start.</td>
+</tr>
+<tr>
+<td>devtmpfs</td>
+<td><code>CONFIG_DEVTMPFS=y</code></td>
+<td><strong>Fatal.</strong> Droidspaces cannot set up <code>/dev</code>.</td>
+</tr>
+<tr>
+<td>OverlayFS</td>
+<td><code>CONFIG_OVERLAY_FS</code></td>
+<td>Volatile mode unavailable.</td>
+</tr>
+<tr>
+<td>Network namespace</td>
+<td><code>CONFIG_NET_NS=y</code></td>
+<td>NAT and None modes unavailable.</td>
+</tr>
+<tr>
+<td>VETH / Bridge</td>
+<td><code>CONFIG_VETH</code> / <code>CONFIG_BRIDGE</code></td>
+<td>NAT mode unavailable.</td>
+</tr>
+<tr>
+<td>Seccomp</td>
+<td><code>CONFIG_SECCOMP=y</code></td>
+<td>Seccomp shield disabled. Security risk.</td>
+</tr>
 </tbody>
 </table></div>
-<hr>
-<h2 id="versions">Recommended Kernel Versions</h2>
+<hr />
+<p><a id="versions"></a></p>
+<h2 id="recommended-kernel-versions">Recommended Kernel Versions <a class="header-anchor" href="#recommended-kernel-versions">#</a></h2>
 <div class="table-wrap"><table>
 <thead>
-<tr><th>Version</th><th>Support</th><th>Notes</th></tr>
+<tr>
+<th>Version</th>
+<th>Support</th>
+<th>Notes</th>
+</tr>
 </thead>
 <tbody>
-<tr><td>3.18</td><td>Legacy</td><td>Minimum supported version. Basic namespace support only. Modern distros are unstable or may not boot at all.</td></tr>
-<tr><td>4.4 - 4.19</td><td>Stable</td><td>Full support. Nested containers (Docker/Podman) work natively.</td></tr>
-<tr><td>5.4 - 5.10</td><td>Recommended</td><td>Full feature support including nested containers and modern cgroup v2.</td></tr>
-<tr><td>5.15+</td><td>Ideal</td><td>All features, best performance, and the widest compatibility.</td></tr>
+<tr>
+<td>3.18</td>
+<td>Legacy</td>
+<td>Minimum supported version. Basic namespace support only. Modern distros are unstable or may not boot at all.</td>
+</tr>
+<tr>
+<td>4.4 - 4.19</td>
+<td>Stable</td>
+<td>Full support. Nested containers (Docker/Podman) work natively.</td>
+</tr>
+<tr>
+<td>5.4 - 5.10</td>
+<td>Recommended</td>
+<td>Full feature support including nested containers and modern cgroup v2.</td>
+</tr>
+<tr>
+<td>5.15+</td>
+<td>Ideal</td>
+<td>All features, best performance, and the widest compatibility.</td>
+</tr>
 </tbody>
 </table></div>
-<hr>
-<h2 id="nested">Nested Containers (Docker, Podman, LXC)</h2>
+<hr />
+<p><a id="nested"></a></p>
+<h2 id="nested-containers-docker-podman-lxc">Nested Containers (Docker, Podman, LXC) <a class="header-anchor" href="#nested-containers-docker-podman-lxc">#</a></h2>
 <p>Droidspaces supports running Docker, Podman, or LXC inside a container out of the box on all supported kernel versions.</p>
-<h3 id="legacy-kernel-considerations-419-and-below">Legacy Kernel Considerations (4.19 and below)</h3>
+<h3 id="legacy-kernel-considerations-419-and-below">Legacy Kernel Considerations (4.19 and below) <a class="header-anchor" href="#legacy-kernel-considerations-419-and-below">#</a></h3>
 <p>Legacy kernels may present some challenges for modern nested container tools:</p>
 <ul>
-<li><strong>Networking incompatibilities</strong>: Modern Docker, LXC, and Podman rely on <code>nftables</code>. Legacy kernels often lack full <code>nftables</code> support. To work around this, use Droidspaces in NAT mode and switch your container's iptables alternative to <code>iptables-legacy</code> and <code>ip6tables-legacy</code>.
+<li>
+<p><strong>Networking incompatibilities</strong>: Modern Docker, LXC, and Podman rely on <code>nftables</code>. Legacy kernels often lack full <code>nftables</code> support. To work around this, use Droidspaces in NAT mode and switch your container's iptables alternative to <code>iptables-legacy</code> and <code>ip6tables-legacy</code>.</p>
 </li>
-<li><strong>BPF conflicts</strong>: Modern Docker and runc use <code>BPF_CGROUP_DEVICE</code> for device management. Legacy kernels do not support the required BPF attach types, which causes <code>Invalid argument</code> errors. To work around this, configure Docker to use the <code>cgroupfs</code> driver and the <code>vfs</code> storage driver.
+<li>
+<p><strong>BPF conflicts</strong>: Modern Docker and runc use <code>BPF_CGROUP_DEVICE</code> for device management. Legacy kernels do not support the required BPF attach types, which causes <code>Invalid argument</code> errors. To work around this, configure Docker to use the <code>cgroupfs</code> driver and the <code>vfs</code> storage driver.</p>
 </li>
 </ul>
-<hr>
-<h2 id="resources">Additional Resources</h2>
+<hr />
+<p><a id="resources"></a></p>
+<h2 id="additional-resources">Additional Resources <a class="header-anchor" href="#additional-resources">#</a></h2>
 <ul>
-<li><a href="https://github.com/ravindu644/Android-Kernel-Tutorials" rel="noopener noreferrer">Android Kernel Tutorials</a> by ravindu644
-</li>
-<li><a href="https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters.html" rel="noopener noreferrer">Kernel Configuration Reference</a>
-</li>
-<li><a href="https://t.me/Droidspaces" rel="noopener noreferrer">Droidspaces Telegram Channel</a> for kernel-specific support
-</li>
+<li><a href="https://github.com/ravindu644/Android-Kernel-Tutorials" rel="noopener noreferrer">Android Kernel Tutorials</a> by ravindu644</li>
+<li><a href="https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters.html" rel="noopener noreferrer">Kernel Configuration Reference</a></li>
+<li><a href="https://t.me/Droidspaces" rel="noopener noreferrer">Droidspaces Telegram Channel</a> for kernel-specific support</li>
 </ul>
+
+    </article>
+    <p class="doc-edit"><a href="https://github.com/ravindu644/Droidspaces-OSS/edit/main/Documentation/Kernel-Configuration.md" rel="noopener noreferrer"><span class="icon" aria-hidden="true">edit</span>Edit this page on GitHub</a></p>
 <nav class="doc-nav" aria-label="Pages"><a href="graphics-and-audio.html" class="doc-nav-prev"><small>Previous</small>Display, Audio & Desktop</a><a href="usage-android-app.html" class="doc-nav-next"><small>Next</small>Android App Usage</a></nav>
   </main>
+  <aside class="toc-column">
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h3"><a href="#quick-navigation">Quick Navigation</a></li><li class="toc-h2"><a href="#overview">Overview</a></li><li class="toc-h2"><a href="#configuring-non-gki-kernels-legacy-kernels">Configuring Non-GKI Kernels (Legacy Kernels)</a></li><li class="toc-h3"><a href="#step-1-mandatory-configuration">Step 1: Mandatory Configuration</a></li><li class="toc-h3"><a href="#step-2-firewall-support-ufwfail2ban---optional">Step 2: Firewall Support (UFW/Fail2ban) - Optional</a></li><li class="toc-h3"><a href="#step-3-apply-patches">Step 3: Apply Patches</a></li><li class="toc-h3"><a href="#step-4-build-flash-and-test">Step 4: Build, Flash and Test</a></li><li class="toc-h2"><a href="#configuring-gki-kernels">Configuring GKI Kernels</a></li><li class="toc-h3"><a href="#step-1-apply-the-mandatory-kabi-patches">Step 1: Apply the Mandatory kABI Patches</a></li><li class="toc-h3"><a href="#step-2-edit-gki_defconfig">Step 2: Edit gki_defconfig</a></li><li class="toc-h3"><a href="#step-3-compile">Step 3: Compile</a></li><li class="toc-h3"><a href="#step-4-flash-and-test">Step 4: Flash and Test</a></li><li class="toc-h2"><a href="#testing-your-kernel">Testing Your Kernel</a></li><li class="toc-h3"><a href="#1-run-the-requirements-check">1. Run the Requirements Check</a></li><li class="toc-h3"><a href="#2-understanding-the-results">2. Understanding the Results</a></li><li class="toc-h3"><a href="#3-what-to-do-if-something-is-missing">3. What to Do If Something Is Missing</a></li><li class="toc-h2"><a href="#recommended-kernel-versions">Recommended Kernel Versions</a></li><li class="toc-h2"><a href="#nested-containers-docker-podman-lxc">Nested Containers (Docker, Podman, LXC)</a></li><li class="toc-h3"><a href="#legacy-kernel-considerations-419-and-below">Legacy Kernel Considerations (4.19 and below)</a></li><li class="toc-h2"><a href="#additional-resources">Additional Resources</a></li></ul></nav>
+  </aside>
 </div>
+<dialog class="search-dialog" aria-label="Search the docs">
+  <form method="dialog" class="search-form">
+    <span class="icon" aria-hidden="true">search</span>
+    <input type="search" class="search-input" placeholder="Search the docs" autocomplete="off" aria-label="Search the docs">
+    <button class="icon-button" aria-label="Close search"><span class="icon" aria-hidden="true">close</span></button>
+  </form>
+  <ul class="search-results"></ul>
+</dialog>
 <footer class="footer">
   <div class="footer-inner">
     <div>
@@ -433,5 +507,6 @@ CONFIG_TMPFS_XATTR=y
 </footer>
 
 <script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/docs.js" defer></script>
 </body>
 </html>
