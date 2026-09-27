@@ -187,6 +187,12 @@ phone's kernel. No emulation, no virtual machine, no Termux. The site exists to 
 in ten seconds to two audiences at once: a self-hoster with an old phone in a drawer, and a
 kernel developer who will read the namespace list before believing anything.
 
+The home page opens on the reason the project exists, not on the technology: an old phone
+already has a battery, mobile data and a Linux kernel, so it can be a homelab that keeps running
+when the power cuts. The kernel developer's claim (systemd as PID 1, no emulation) is the line
+under it. Numbers on the page (release, stars, contributors) are stamped by the build from the
+GitHub API, never typed.
+
 The site has to feel like the Android app. Someone who installs the app after reading the site
 should recognise it. That decides most of what follows: the same slate-blue palette, surfaces
 that step up in tone rather than float on shadows, borders that carry state, and a companion app
@@ -302,7 +308,8 @@ the whole expressive signature, so nothing else is bold.
 | Element | Style | Notes |
 | --- | --- | --- |
 | Hero headline | `display-lg-emphasized` | 57/64, weight 700. Drops to `display-md-emphasized` under 600px |
-| Section headline | `headline-lg-emphasized` | 32/40, weight 700 |
+| Hero headline, 840 to 1199 | `display-md-emphasized` | The 5/12 column is too narrow for 57px there |
+| Section headline | `headline-lg-emphasized` | 32/40, weight 700. A claim of three to six words |
 | Card title | `title-md-emphasized` | 16/24, weight 600 |
 | Section intro paragraph | `title-lg` | 22/28, weight 400, `on-surface-variant` |
 | Body copy | `body-lg` | 16/24 |
@@ -315,6 +322,10 @@ Line length is capped at 68 characters for body
 copy (`max-width: 68ch`), which is where a 16px sans stays comfortable. Headlines do not track
 tighter than 0; letter-spacing of −2px on a display headline is a web-template habit, not a
 Material one.
+
+Every section opens the same way: a short claim as the headline, one `title-lg` sentence under it,
+and chips for any list of facts. A second paragraph is the exception, not the pattern; if the
+section needs one, the claim is probably too vague.
 
 Never accent a single word of a headline in colour or italic. The headline is one sentence in one
 colour. Emphasis, when needed, is the sentence break.
@@ -341,7 +352,12 @@ lines, not at 768 or 1024.
 
 The hero is a two-column split at expanded and above: copy on the left at 5/12, phone mockup on
 the right at 7/12, vertically centred. Under 840 it stacks, copy first, and the phone loses the
-decorative shape behind it because there is no room for it to float.
+decorative shape behind it because there is no room for it to float. A shape is never wider than
+its own column and sits at `z-index: -1`, so it can never paint over copy; `main` clips horizontal
+overflow so it can never scroll the page either.
+
+The home page has six sections: the hero, init and services, the home server, the app carousel,
+the comparison, and requirements with the download.
 
 Feature sections alternate the side the phone sits on. Text, then phone; phone, then text. This
 is the only rhythm the page has and it replaces the row of six identical cards.
@@ -475,9 +491,19 @@ links collapse into a full-height drawer from the right, on `surface-container-l
 ### Phone mockup
 
 One component, one silhouette, described under Shapes. It takes a screenshot and an optional
-`data-float` attribute that enables the idle float (see Motion). Two or three phones in a group
-overlap by 20% with the centre one in front and 30% larger. The front phone floats; the others
-do not.
+`data-float` attribute that enables the idle float (see Motion).
+
+Three phones in a group form the app carousel, one `<figure>` each with a one-line `body-md`
+caption saying what the screen does. Exactly one phone is in front and only its caption shows.
+
+- On a wide pointer screen (`hover: hover`, 840 and up) the phones overlap, the side ones at 80%
+  scale. Hovering or keyboard-focusing a phone brings it to the front; at rest the middle one is.
+  Hover wins over focus, so two phones are never in front at once.
+- Everywhere else the group is a horizontal scroll-snap carousel, edge to edge under 840, opening
+  on the middle screen. A scroll-driven `view(inline)` timeline makes the centred phone full size
+  and its neighbours 85%, and shows only the centred caption.
+
+No JavaScript runs either mode. Carousel phones do not float.
 
 ### Tables
 
@@ -512,7 +538,7 @@ and `--motion-float` for the idle loop below. They were produced from the spring
 drawn, so `--motion-spatial-fast` really does overshoot by 9.5% and settle, the way the Android
 button does.
 
-**Four kinds of motion exist on the site, and nothing else moves:**
+**Six kinds of motion exist on the site, and nothing else moves:**
 
 1. **Arrival.** When a phone mockup or decorative shape enters the viewport, it translates up 24px
    and fades in over `--motion-spatial-default`, once. Text does not animate in. Cards do not
@@ -524,14 +550,24 @@ button does.
    "floating" means on this site. It is slow enough that a screenshot of the page looks still.
 3. **Press and hover.** Buttons morph on press. Surfaces step a tier on hover. Icons fill. All
    three use the springs above.
-4. **Shape morph.** The loading indicator on the downloads page cycles through `cookie-12`,
+4. **Carousel.** A phone promoted by hover or focus scales to 100% over
+   `--motion-spatial-default`; its caption fades over `--motion-effects-default`. In the swipe
+   carousel the scale and caption follow the scroll position, not a timer. When the overlapping
+   group arrives, the side phones fan out from behind the front one over the same `view()` range
+   as arrival.
+5. **Shape turn.** Decorative shapes rotate once every 120 seconds, linear, on top of their float,
+   the way the M3 Expressive loading indicator they come from turns. Slow enough to notice only
+   when you look for it.
+6. **Shape morph.** The loading indicator on the downloads page cycles through `cookie-12`,
    `clover-4` and `sunny` by morphing the mask, which is the M3 Expressive loading indicator.
    Nothing else morphs.
 
 Scroll-driven animation (`animation-timeline: view()`) drives the arrival where supported, with
 `@starting-style` as the fallback. Nothing is hidden until an animation fires: the page renders
 complete with JavaScript disabled and with `prefers-reduced-motion: reduce`, in which case the
-float stops, arrival becomes an instant fade, and the button morph is disabled. The reduced-motion
+float and the shape turn stop, arrival becomes an instant fade, the button morph is disabled, the
+carousel loses its fan-out and scale (it still swipes and still hovers, instantly), and the swipe
+carousel shows every caption. The reduced-motion
 branch is not optional.
 
 There is no parallax, no marquee, no typing effect, no counter that counts up, no pulsing dot, no
@@ -559,7 +595,7 @@ Don't append an arrow to a link or button label.
 Don't use an em dash. Use a comma, a full stop, or rewrite the sentence.
 Don't write "Unlock", "Supercharge", "Seamless", "Blazing fast", "Next-generation" or "Reimagine".
 Don't build a row of three or six identical icon-title-text cards.
-Don't animate text, and don't animate anything on scroll except arrival.
+Don't animate text, and don't animate anything on scroll except arrival and the swipe carousel.
 Don't add a second shadow, a glow, a frosted card, or a dot grid background.
 Don't load a font, icon or script from a third-party origin at runtime.
 
