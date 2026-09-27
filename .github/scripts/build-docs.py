@@ -463,6 +463,27 @@ def fetch_kernel_patches():
             parts.append('</div>')
     return '\n'.join(parts)
 
+def fetch_repo_stats():
+    # Stars and contributors for the home page. None on any failure, so the last stamped value stays.
+    api = 'https://api.github.com/repos/ravindu644/Droidspaces-OSS'
+    token = os.environ.get('GITHUB_TOKEN')
+    def get(url):
+        req = urllib.request.Request(url)
+        if token:
+            req.add_header('Authorization', f'Bearer {token}')
+        return urllib.request.urlopen(req, timeout=10)
+    try:
+        with get(api) as resp:
+            stars = json.loads(resp.read())['stargazers_count']
+        # one contributor per page, so the last page number is the count
+        with get(api + '/contributors?per_page=1&anon=1') as resp:
+            m = re.search(r'[?&]page=(\d+)>; rel="last"', resp.headers.get('Link', ''))
+            contributors = int(m.group(1)) if m else len(json.loads(resp.read()))
+    except Exception:
+        return None
+    return {'stars': f'{stars:,}', 'contributors': f'{contributors:,}'}
+
+
 def fetch_latest_release():
     try:
         url = 'https://api.github.com/repos/ravindu644/Droidspaces-OSS/releases?per_page=5'
@@ -653,6 +674,14 @@ if __name__ == '__main__':
             lambda m: f'{m.group(1)}{version.lstrip("v")}{m.group(2)}',
             index_html,
         )
+    stats = fetch_repo_stats()
+    if stats:
+        for key, value in stats.items():
+            index_html = re.sub(
+                rf'(<span data-{key}>)[^<]*(</span>)',
+                lambda m: f'{m.group(1)}{value}{m.group(2)}',
+                index_html,
+            )
     index_html = index_html.replace('{{FOOTER}}', footer_template)
     with open(index_path, 'w') as f:
         f.write(index_html)
