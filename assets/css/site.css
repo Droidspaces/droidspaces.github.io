@@ -22,6 +22,8 @@
 
 /* base */
 *, *::before, *::after { box-sizing: border-box; }
+/* no blue tap box on touch screens: every control has its own press state (the button morph, state layers) */
+html { -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
