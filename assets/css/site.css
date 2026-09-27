@@ -70,7 +70,9 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
   height: 56px;
   padding: 0 24px;
   border: 0;
-  border-radius: var(--md-sys-shape-corner-full);
+  /* a pill at 56px. Not corner-full: 9999px morphing to 12 on an overshooting curve passes below
+     zero and clamps, so the corners go square and jagged for a frame */
+  border-radius: var(--md-sys-shape-corner-xl);
   font: inherit;
   font-size: 14px;
   line-height: 20px;
@@ -456,9 +458,10 @@ main { overflow-x: clip; } /* a shape wider than its column must not scroll the 
 /* gutters and breakpoints: 16 under 600, 24 above; only 600, 840, 1200, 1600 exist */
 @media (max-width: 599px) { .nav-inner, .footer-inner { padding-left: 16px; padding-right: 16px; } .section { --gutter: 16px; } }
 
-/* shape: Material squircle where the browser has it, plain rounding elsewhere */
+/* shape: Material squircle where the browser has it, plain rounding elsewhere. Not on buttons: an
+   animating squircle radius renders with rough edges in Chromium */
 @supports (corner-shape: squircle) {
-  .button, .card, .card-nested, .chip, pre, .table-wrap, .phone-screen, .phone-display { corner-shape: squircle; }
+  .card, .card-nested, .chip, pre, .table-wrap, .phone-screen, .phone-display { corner-shape: squircle; }
 }
 
 /* reduced motion is not optional: shapes stop turning, arrival is an instant fade, the press morph is off */
@@ -466,7 +469,7 @@ main { overflow-x: clip; } /* a shape wider than its column must not scroll the 
   html { scroll-behavior: auto; }
   @keyframes arrive { from { opacity: 0; } }
   .arrive, .shape.arrive, .shape-secondary.arrive { animation: arrive var(--motion-effects-fast) both; }
-  .button:active { border-radius: var(--md-sys-shape-corner-full); }
+  .button:active { border-radius: var(--md-sys-shape-corner-xl); }
   .nav-drawer, .icon, .button, .card, .chip, .phone-group .phone, .phone-group figcaption { transition: none; }
   .phone-group .phone:nth-child(n) { animation: none; } /* no fan-out, no scroller scale; the swipe itself still works */
   .phone-group figcaption { animation: none; }

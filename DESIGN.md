@@ -118,21 +118,21 @@ components:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.on-primary}"
     typography: "{typography.label-lg-emphasized}"
-    rounded: "{rounded.full}"
+    rounded: "{rounded.xl}"
     height: 56px
     padding: 0 24px
   button-tonal:
     backgroundColor: "{colors.secondary-container}"
     textColor: "{colors.on-secondary-container}"
     typography: "{typography.label-lg-emphasized}"
-    rounded: "{rounded.full}"
+    rounded: "{rounded.xl}"
     height: 56px
     padding: 0 24px
   button-outlined:
     backgroundColor: transparent
     textColor: "{colors.on-surface-variant}"
     typography: "{typography.label-lg-emphasized}"
-    rounded: "{rounded.full}"
+    rounded: "{rounded.xl}"
     height: 56px
     padding: 0 24px
   card:
@@ -409,7 +409,7 @@ ones Expressive added: **4, 8, 12, 16, 20, 28, 32, 48, full.**
 | Card on the page | 28 (`xl`) |
 | Card nested in a card, code block | 16 (`lg`) |
 | Chip, badge | full |
-| Button at rest | full |
+| Button at rest | 28 (`xl`), which is a pill at 56px tall |
 | Button pressed | 12 (`md`) |
 | Button, selected or toggled | 16 (`lg`) |
 | Text input | 16 |
@@ -417,7 +417,9 @@ ones Expressive added: **4, 8, 12, 16, 20, 28, 32, 48, full.**
 | Phone screen | 6.2% of the frame width |
 | Decorative shapes | see below |
 
-**Buttons morph when pressed.** A resting button is a pill. On `:active` it snaps to 12px corners
+**Buttons morph when pressed.** A resting button is a pill, drawn with 28px corners rather than
+`full`: a 9999px radius animating to 12 on an overshooting curve dips below zero and clamps, which
+shows as square, jagged corners for a frame. On `:active` it snaps to 12px corners
 and springs back on release, over `350ms cubic-bezier(0.42, 1.67, 0.21, 0.9)`. That curve and
 those numbers are Google's own, from the expressive button in `@material/web` 2.5.0, and the
 overshoot in the bezier is the point. Do not replace it with `ease-out`.
@@ -440,9 +442,10 @@ bar around them in the app's own surface colours (`--phone-app-surface`, `--phon
 silhouette, thin and square, and it is the same on every page at every size. Screenshots inside
 it are `object-fit: cover; object-position: top`.
 
-Where Chromium supports it, cards and buttons take `corner-shape: squircle` inside an `@supports`
+Where Chromium supports it, cards, chips and code blocks take `corner-shape: squircle` inside an `@supports`
 block, which is the true Material shape. Browsers without it get the round corner. Nothing
-depends on the difference.
+depends on the difference. Buttons stay round: their radius animates on press, and an animating
+squircle renders with rough edges.
 
 ## Components
 
