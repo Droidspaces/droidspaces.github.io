@@ -16,357 +16,34 @@
   <meta name="twitter:description" content="A beginner-friendly guide to every networking concept behind Droidspaces gateway mode - IP addresses, LAN, WAN, DHCP, DNS, NAT, bridges, veth pairs, network namespaces, and OpenWRT.">
   <meta name="twitter:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
   <link rel="canonical" href="https://www.droidspaces.org/docs/networking-from-zero.html">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.ico">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  <link rel="stylesheet" href="../style.css">
-  <style>
-    .docs-layout {
-      display: flex; min-height: calc(100vh - 56px);
-    }
-    .sidebar {
-      width: 300px; flex-shrink: 0;
-      border-right: 1px solid var(--border);
-      background: var(--bg2);
-      overflow-y: auto;
-      position: sticky; top: 56px; height: calc(100vh - 56px);
-    }
-    .sidebar-inner {
-      padding: 0;
-      position: relative;
-      width: 100%;
-      min-width: 0;
-    }
-    .sidebar-group {
-      margin-bottom: 0;
-    }
-    .sidebar-heading {
-      font-family: var(--mono); font-size: 0.7rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      color: var(--muted); padding: 1rem 1rem 0.25rem;
-    }
-    .sidebar-link {
-      display: block; padding: 0.5rem 1rem;
-      font-size: 0.9rem; color: var(--muted);
-      text-decoration: none; border-radius: 0;
-      transition: all 0.1s;
-    }
-    .sidebar-link:hover {
-      color: var(--text); background: var(--bg3);
-    }
-    .sidebar-link.active {
-      color: var(--accent2); background: rgba(79,142,247,0.08);
-      font-weight: 600;
-    }
-    .sidebar-content {
-      flex: 1; min-width: 0;
-      padding: 2rem 2rem 4rem;
-      max-width: none;
-    }
-    .sidebar-content h1 {
-      font-family: var(--mono); font-size: clamp(1.5rem, 2.5vw, 2rem);
-      font-weight: 700; letter-spacing: -0.03em; color: var(--text);
-      margin-bottom: 1.5rem; padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .sidebar-content h2 {
-      font-family: var(--mono); font-size: 1.25rem; font-weight: 700;
-      color: var(--text); margin: 2rem 0 0.75rem;
-      letter-spacing: -0.02em;
-    }
-    .sidebar-content h2:target {
-      border-left: 3px solid var(--accent);
-      padding-left: 0.75rem;
-    }
-    .sidebar-content h3 {
-      font-family: var(--mono); font-size: 1rem; font-weight: 600;
-      color: var(--accent2); margin: 1.5rem 0 0.5rem;
-    }
-    .sidebar-content h3:target {
-      border-left: 2px solid var(--accent);
-      padding-left: 0.5rem;
-    }
-    .sidebar-content p {
-      color: var(--muted); line-height: 1.7; margin-bottom: 1rem;
-    }
-    .sidebar-content strong { color: var(--text); }
-    .sidebar-content a {
-      color: var(--accent2); text-decoration: none;
-      word-break: break-word; overflow-wrap: anywhere;
-    }
-    .sidebar-content a:hover { text-decoration: underline; }
-    .sidebar-content code {
-      font-family: var(--mono); font-size: 0.82rem;
-      background: var(--bg3); padding: 0.15rem 0.4rem;
-      border-radius: 4px; color: var(--accent2);
-      word-break: break-word; overflow-wrap: anywhere;
-    }
-    .sidebar-content pre {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 8px; padding: 1rem; overflow-x: auto;
-      margin-bottom: 1rem;
-    }
-    .sidebar-content pre code {
-      background: none; padding: 0; font-size: 0.78rem;
-      color: var(--text); line-height: 1.6;
-    }
-    .code-block {
-      position: relative;
-    }
-    .code-block:hover .copy-btn {
-      opacity: 1;
-    }
-    .copy-btn {
-      position: absolute; top: 0.5rem; right: 0.5rem;
-      background: var(--bg3); border: 1px solid var(--border);
-      color: var(--muted); font-size: 0.7rem;
-      font-family: var(--sans); padding: 0.2rem 0.5rem;
-      border-radius: 4px; cursor: pointer;
-      opacity: 0; transition: opacity 0.15s; z-index: 1;
-      display: inline-flex; align-items: center; gap: 0.25rem;
-    }
-    .copy-btn:hover {
-      color: var(--accent2); border-color: var(--accent2);
-    }
-    @media (max-width: 768px) {
-      .copy-btn { opacity: 1; }
-    }
-    .sidebar-content ul, .sidebar-content ol {
-      color: var(--muted); line-height: 1.7;
-      margin-bottom: 1rem; padding-left: 1.25rem;
-    }
-    .sidebar-content li { margin-bottom: 0.25rem; }
-    .sidebar-content li > .code-block { margin-top: 0.5rem; }
-    .sidebar-content blockquote {
-      border-left: 3px solid var(--accent); background: var(--bg3);
-      padding: 0.75rem 1rem; margin-bottom: 1rem;
-      border-radius: 0 6px 6px 0;
-      color: var(--text); font-size: 0.9rem;
-    }
-    .sidebar-content blockquote p { color: var(--text); margin-bottom: 0; }
-    .sidebar-content hr {
-      border: none; border-top: 1px solid var(--border); margin: 2rem 0;
-    }
-    .table-wrap {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      margin-bottom: 1.5rem;
-    }
-    .table-wrap table {
-      width: max-content;
-      min-width: 100%;
-      margin-bottom: 0;
-    }
-    .sidebar-content table {
-      width: max-content; min-width: 100%;
-      border-collapse: collapse; font-size: 0.85rem;
-      margin-bottom: 1.5rem;
-    }
-    .sidebar-content th {
-      font-family: var(--mono); font-size: 0.72rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.06em;
-      padding: 0.75rem 1rem; text-align: left; color: var(--muted);
-      border-bottom: 1px solid var(--border); background: var(--bg3);
-      white-space: nowrap;
-    }
-    .sidebar-content td {
-      padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
-      color: var(--muted);
-      white-space: normal; word-break: normal;
-      overflow-wrap: break-word; max-width: 300px;
-    }
-    .sidebar-content img {
-      max-width: 100%; border-radius: 8px; border: 1px solid var(--border);
-      margin: 1rem 0;
-    }
-    .sidebar-content details {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 8px; padding: 1rem; margin-bottom: 1rem;
-    }
-    .sidebar-content summary {
-      font-family: var(--mono); font-size: 0.85rem;
-      cursor: pointer; color: var(--accent2);
-    }
-    .callout {
-      border-left: 4px solid var(--accent);
-      background: var(--bg3); padding: 0.75rem 1rem;
-      margin-bottom: 1rem; border-radius: 0 6px 6px 0;
-      font-size: 0.9rem; color: var(--text);
-    }
-    .callout-title {
-      font-family: var(--mono); font-size: 0.72rem;
-      text-transform: uppercase; letter-spacing: 0.06em;
-      display: block; margin-bottom: 0.25rem;
-    }
-    .callout-note { border-left-color: var(--accent); }
-    .callout-note .callout-title { color: var(--accent); }
-    .callout-tip { border-left-color: var(--green); }
-    .callout-tip .callout-title { color: var(--green); }
-    .callout-warning { border-left-color: #f59e0b; }
-    .callout-warning .callout-title { color: #f59e0b; }
-    .callout-caution { border-left-color: #f59e0b; }
-    .callout-caution .callout-title { color: #f59e0b; }
-    .callout-important { border-left-color: #ef4444; }
-    .callout-important .callout-title { color: #ef4444; }
-    .doc-nav-buttons {
-      display: flex; justify-content: space-between; gap: 1rem;
-      margin: 2rem 0 1rem;
-    }
-    .doc-nav-btn {
-      padding: 0.5rem 1rem; border-radius: 8px;
-      font-family: var(--sans); font-size: 0.82rem; font-weight: 500;
-      text-decoration: none; color: var(--muted);
-      border: 1px solid var(--border);
-      transition: all 0.15s; max-width: 50%;
-    }
-    .doc-nav-btn:hover {
-      color: var(--text); border-color: var(--muted);
-    }
-    .doc-nav-next {
-      margin-left: auto; text-align: right;
-    }
-    .doc-nav-prev {
-      text-align: left;
-    }
-    .doc-copyright {
-      font-size: 0.78rem; color: var(--border2);
-      padding-top: 1rem; border-top: 1px solid var(--border);
-      margin-top: 1.5rem; text-align: center;
-    }
-    .doc-copyright a {
-      color: var(--border2); text-decoration: none;
-    }
-    .doc-copyright a:hover {
-      color: var(--muted);
-    }
-    .nav-overlay {
-      display: none; position: fixed;
-      top: 56px; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5); z-index: 199;
-    }
-    .nav-overlay.active { display: block; }
-
-    .sidebar-close {
-      display: none;
-      position: absolute; top: 0.5rem; right: 1rem;
-      background: none; border: none;
-      color: var(--muted); font-size: 1.5rem;
-      cursor: pointer; padding: 0.25rem 0.5rem;
-      line-height: 1; border-radius: 4px;
-    }
-    .sidebar-close:hover {
-      color: var(--text); background: var(--bg3);
-    }
-
-    .doc-breadcrumb {
-      display: none;
-      position: sticky;
-      top: 56px;
-      z-index: 50;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: var(--bg2);
-      border-bottom: 1px solid var(--border);
-      font-size: 0.78rem;
-      color: var(--muted);
-      user-select: none;
-      cursor: pointer;
-    }
-    .doc-breadcrumb .bc-sep {
-      color: var(--border2);
-    }
-    .doc-breadcrumb .bc-section {
-      color: var(--text);
-    }
-    .doc-breadcrumb .bc-label {
-      color: var(--accent2);
-    }
-    @media (max-width: 768px) {
-      .sidebar {
-        display: flex;
-        position: fixed; top: 56px; left: 0;
-        width: 300px; height: calc(100dvh - 56px); z-index: 200;
-        border-right: 1px solid var(--border);
-        transform: translateX(-100%);
-        transition: transform 0.25s ease;
-        box-shadow: 4px 0 12px rgba(0,0,0,0.2);
-      }
-      .sidebar.open { transform: translateX(0); }
-      .sidebar-close { display: block; }
-      .sidebar-content { padding: 1.5rem 1rem 3rem; }
-      .doc-breadcrumb { display: flex; }
-      .docs-layout { flex-direction: column; }
-      .sidebar-content th,
-      .sidebar-content td {
-        padding: 0.5rem 0.5rem;
-        font-size: 0.78rem;
-      }
-    }
-  </style>
-  <script>
-    (function () {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
-    })();
-  </script>
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
-    <nav aria-label="Main navigation">
-    <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:100%;">
-      <a href="/" class="nav-logo">
-        <svg class="logo-icon" viewBox="8.25 10.35 31.5 27.3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M36.85 30.16H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 34.97c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/>
-          <path d="M36.85 21.00H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 25.82c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/>
-          <path d="M36.84 11.74H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 16.57c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/>
-        </svg>
-        <span class="logo-text">Droidspaces</span>
-      </a>
-      <div style="display:flex;align-items:center;gap:0.5rem;">
-        <ul class="nav-links">
-          <li class="nav-features"><a href="/#features">Features</a></li>
-          <li><a href="/docs/" style="color:var(--accent2)"><i class="fas fa-book nav-icon nav-icon-docs"></i><span class="nav-label">Documentation</span></a></li>
-          <li class="nav-downloads"><a href="/downloads.html"><i class="fas fa-download nav-icon nav-icon-docs"></i><span class="nav-label">Downloads</span></a></li>
-          <li><a href="https://github.com/ravindu644/Droidspaces-OSS" rel="noopener noreferrer"><i class="fab fa-github nav-icon"></i><span class="nav-label nav-label-gt">GitHub</span></a></li>
-          <li><a href="https://t.me/Droidspaces" rel="noopener noreferrer"><i class="fab fa-telegram nav-icon"></i><span class="nav-label nav-label-gt">Telegram</span></a></li>
-        </ul>
-        <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
-          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </button>
-      </div>
+<nav class="nav" aria-label="Main">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><svg viewBox="8.25 10.35 31.5 27.3" fill="currentColor" aria-hidden="true"><path d="M36.85 30.16H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 34.97c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.85 21.00H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 25.82c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.84 11.74H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 16.57c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/></svg> Droidspaces</a>
+    <div id="nav-drawer" class="nav-drawer" popover>
+      <button class="icon-button nav-close" popovertarget="nav-drawer" popovertargetaction="hide" aria-label="Close menu"><span class="icon" aria-hidden="true">close</span></button>
+      <ul class="nav-links">
+        <li><a href="/docs/" aria-current="page">Documentation</a></li>
+        <li><a href="/downloads.html">Downloads</a></li>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://t.me/Droidspaces" rel="noopener noreferrer">Telegram</a></li>
+      </ul>
     </div>
-  </nav>
-
-  <div class="nav-overlay" id="sidebar-overlay"></div>
-
-  <div class="doc-breadcrumb" id="sidebar-toggle" role="button" tabindex="0" aria-label="Toggle docs navigation">
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0">
-      <rect x="3" y="3" width="18" height="18" rx="2"/>
-      <line x1="9" y1="3" x2="9" y2="21"/>
-    </svg>
-    <span>Docs</span><span class="bc-sep">/</span><span class="bc-section">Guides</span><span class="bc-sep">/</span><span class="bc-label">Networking From Zero</span>
+    <button class="icon-button theme-toggle" id="theme-toggle" aria-label="Toggle theme"><span class="icon" aria-hidden="true"></span></button>
+    <button class="icon-button nav-menu" popovertarget="nav-drawer" aria-label="Open menu"><span class="icon" aria-hidden="true">menu</span></button>
   </div>
+</nav>
 
-  <div class="docs-layout">
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-inner">
-        <button class="sidebar-close" id="sidebar-close" aria-label="Close sidebar">&times;</button>
+<div class="docs-layout">
+  <button class="doc-breadcrumb" popovertarget="sidebar"><span class="icon" aria-hidden="true">menu</span><span>Docs</span><span class="bc-sep">/</span><span class="bc-section">Guides</span><span class="bc-sep">/</span><span class="bc-label">Networking From Zero</span></button>
+  <aside class="sidebar" id="sidebar" popover>
+    <button class="icon-button sidebar-close" popovertarget="sidebar" popovertargetaction="hide" aria-label="Close navigation"><span class="icon" aria-hidden="true">close</span></button>
 <div class="sidebar-group">
 <div class="sidebar-heading">Basics</div>
 <a href="installation-android.html" class="sidebar-link">Android Installation</a>
@@ -379,7 +56,7 @@
 <a href="kernel-configuration.html" class="sidebar-link">Kernel Configuration</a>
 <a href="usage-android-app.html" class="sidebar-link">Android App Usage</a>
 <a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
-<a href="networking-from-zero.html" class="sidebar-link active">Networking From Zero</a>
+<a href="networking-from-zero.html" class="sidebar-link" aria-current="page">Networking From Zero</a>
 </div>
 <div class="sidebar-group">
 <div class="sidebar-heading">Recipes</div>
@@ -392,9 +69,8 @@
 <a href="nix-nixos.html" class="sidebar-link">Nix/NixOS</a>
 <a href="uninstallation.html" class="sidebar-link">Uninstallation</a>
 </div>
-      </div>
-    </aside>
-    <div class="sidebar-content">
+  </aside>
+  <main class="docs-content">
 <h1 id="networking-from-zero-understanding-droidspaces-gateway-mode">Networking From Zero: Understanding Droidspaces Gateway Mode</h1>
 <h3 id="quick-navigation">Quick Navigation</h3>
 <ul>
@@ -510,7 +186,7 @@
 <p><strong>WAN</strong> = the network <em>outside your home</em>: the internet itself.</p>
 <p>Your router has two sides: - The <strong>LAN side</strong> faces your devices at home - The <strong>WAN side</strong> faces your internet provider (ISP)</p>
 <p>Your ISP gives your router one public IP address for the WAN side. Everything inside your home shares that one public IP to reach the internet.</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>[Your Phone]--+
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>[Your Phone]--+
 [Your Laptop]-+--[Router]--[ISP]--[The Internet]
 [Your TV]-----+
   (LAN side)     (WAN side)
@@ -546,7 +222,7 @@
 <p><strong>DHCP</strong> = Dynamic Host Configuration Protocol</p>
 <p>It is a system where one device (the <strong>DHCP server</strong>) automatically hands out IP addresses to every new device that joins the network.</p>
 <p>The conversation goes like this:</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>New Device:   "Hello? Anyone there? I just joined this network and I need an IP address."
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>New Device:   "Hello? Anyone there? I just joined this network and I need an IP address."
 DHCP Server:  "I heard you. Here, take 192.168.1.42. Also, your gateway is 192.168.1.1,
                and for DNS use 1.1.1.1. Your lease lasts 24 hours."
 New Device:   "Got it, thanks!"
@@ -563,7 +239,7 @@ New Device:   "Got it, thanks!"
 <p><strong>DNS</strong> = Domain Name System</p>
 <p>It is basically the internet's phone book. You give it a name (<code>google.com</code>), it gives you back an IP address (<code>142.250.80.46</code>).</p>
 <p>The conversation:</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>Your Browser:   "What is the IP address of google.com?"
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>Your Browser:   "What is the IP address of google.com?"
 DNS Server:     "It is 142.250.80.46"
 Your Browser:   "Thanks." [now connects to 142.250.80.46]
 </code></pre></div>
@@ -577,7 +253,7 @@ Your Browser:   "Thanks." [now connects to 142.250.80.46]
 <p><strong>NAT</strong> = Network Address Translation</p>
 <p>Your router keeps a secret table. When a device inside your LAN sends a packet to the internet, the router: 1. Rewrites the source IP from the device's private IP (<code>192.168.1.5</code>) to the router's public IP 2. Remembers which device sent it 3. When the reply comes back from the internet, rewrites the destination back to the device's private IP and forwards it</p>
 <p>From the internet's perspective, all your home devices appear to be <em>one device</em>: the router.</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>[Laptop: 192.168.1.5] --sends packet--> [Router]
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>[Laptop: 192.168.1.5] --sends packet--> [Router]
                                           |
                                           | rewrites source to public IP
                                           v
@@ -620,11 +296,11 @@ Your Browser:   "Thanks." [now connects to 142.250.80.46]
 <h3 id="pinning-the-uplink-manually-with-upstream">Pinning the uplink manually with <code>--upstream</code></h3>
 <p>Sometimes you do <strong>not</strong> want the container to follow whatever network the host is using. You want to force its internet out through one specific interface and keep it there. That is what <code>--upstream</code> does.</p>
 <p>When you pass <code>--upstream</code>, automatic detection is switched off entirely. The interface(s) you list become the <em>only</em> candidates the container will ever use for WAN - it never hops to whatever the host marks as its active default network.</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code># Force the container's internet out through Wi-Fi, always
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code># Force the container's internet out through Wi-Fi, always
 droidspaces --name=box --rootfs=/data/box --net=nat --upstream=wlan0 start
 </code></pre></div>
 <p>You can list <strong>multiple interfaces, comma-separated</strong>, and use <strong>wildcards</strong> (<code>*</code>, <code>?</code>):</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>droidspaces --name=box --rootfs=/data/box --net=nat --upstream=wlan0,rmnet* start
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>droidspaces --name=box --rootfs=/data/box --net=nat --upstream=wlan0,rmnet* start
 </code></pre></div>
 <p>The list is <strong>priority-ordered</strong>. The route monitor walks it top to bottom and uses the first interface that is currently up and actually has internet. So <code>wlan0,rmnet*</code> means "prefer Wi-Fi; if Wi-Fi is down, fall back to mobile data" - and when Wi-Fi returns, it switches back. The failover stays strictly <em>inside your list</em>; it never falls back to an interface you did not list. This is the key difference from auto mode - the WAN is yours to decide, not the host's.</p>
 <p>If a pinned interface is missing when the container starts, or disappears mid-session and later reappears, that is handled too: the container simply has no WAN until one of your pinned interfaces is up, then it wires up automatically.</p>
@@ -632,12 +308,12 @@ droidspaces --name=box --rootfs=/data/box --net=nat --upstream=wlan0 start
 <h3 id="use-cases-for-upstream">Use cases for <code>--upstream</code></h3>
 <p><strong>1. Route the container's WAN through an Android VPN (<code>tun0</code>)</strong></p>
 <p>Connect a VPN on the phone itself - ProtonVPN, WireGuard, OpenVPN, any app that creates a <code>tun0</code> interface. Then pin the container to it:</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>droidspaces --name=box --rootfs=/data/box --net=nat --upstream=tun0 start
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>droidspaces --name=box --rootfs=/data/box --net=nat --upstream=tun0 start
 </code></pre></div>
 <p>Now all of the container's traffic goes out through the VPN tunnel, and <em>only</em> the tunnel. If the VPN drops, <code>tun0</code> disappears and the container loses internet instead of leaking out over your real connection - a simple killswitch, for free.</p>
 <p><strong>2. Container on mobile data while the phone stays on Wi-Fi</strong></p>
 <p>Android can keep the cellular radio up even while you are on Wi-Fi. Enable <strong>"Mobile data always active"</strong> in Developer Options, connect to Wi-Fi, then turn mobile data on. Both networks are now live at once. Pin the container to the mobile-data interface:</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>droidspaces --name=box --rootfs=/data/box --net=nat --upstream=rmnet* start
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>droidspaces --name=box --rootfs=/data/box --net=nat --upstream=rmnet* start
 </code></pre></div>
 <p>The container's traffic goes out over mobile data while the rest of the phone keeps using Wi-Fi. Handy for testing from a different IP/network, putting a container's bandwidth onto cellular, or simply running something on a separate connection from everything else on the phone.</p>
 <hr>
@@ -646,7 +322,7 @@ droidspaces --name=box --rootfs=/data/box --net=nat --upstream=wlan0 start
 <h3 id="what-is-a-network-bridge">What is a network bridge?</h3>
 <p>A <strong>network bridge</strong> works like a network switch. A physical network switch is a box you plug multiple ethernet cables into; all devices connected to it can talk to each other.</p>
 <p>A Linux <strong>bridge</strong> is a virtual switch, entirely in software. You can create it with a command, and then "plug" virtual network interfaces into it.</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>Physical world:           Linux world:
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>Physical world:           Linux world:
 +--------------+          +--------------+
 |   Switch     |          |   Bridge     |  (software, no physical box)
 | port1  port2 |          | port1  port2 |
@@ -658,13 +334,13 @@ droidspaces --name=box --rootfs=/data/box --net=nat --upstream=wlan0 start
 <p><strong>veth</strong> = virtual ethernet</p>
 <p>A veth pair is a pair of virtual network interfaces that are connected to each other like a pipe. Anything you send into one end comes out the other end.</p>
 <p>Think of it as a virtual ethernet cable with two plugs. You put one plug inside a container, and the other plug stays on the host (or goes into a bridge).</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>[Container netns]          [Host netns]
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>[Container netns]          [Host netns]
      eth0 --------------------- ds-veth0
   (plug inside container)   (plug on host side)
 </code></pre></div>
 <h3 id="how-nat-mode-uses-bridges-and-veths">How NAT mode uses bridges and veths</h3>
 <p>In Droidspaces NAT mode:</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>[Container netns]
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>[Container netns]
      eth0 (e.g. 172.28.137.42)
       |
       | veth pair (virtual cable)
@@ -700,7 +376,7 @@ droidspaces --name=box --rootfs=/data/box --net=nat --upstream=wlan0 start
 <p>The problem: if Droidspaces also tries to install NAT, DHCP, and DNS for those containers, it will <em>conflict</em> with what OpenWRT is trying to do. Two DHCP servers fighting over who gives the IP address. Two firewalls applying contradictory rules.</p>
 <p><strong>Gateway mode solves this.</strong> Droidspaces steps back. It only does the L2 plumbing (the virtual cables and switch), and lets OpenWRT own all the policy: DHCP, DNS, firewall, routing.</p>
 <h3 id="the-architecture">The architecture</h3>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>Android host kernel
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>Android host kernel
 |
 +-- wlan0 (Android's real Wi-Fi - WAN)
 |
@@ -722,11 +398,11 @@ droidspaces --name=box --rootfs=/data/box --net=nat --upstream=wlan0 start
 </code></pre></div>
 <h3 id="step-by-step-what-happens-when-you-start-a-gateway-mode-container">Step by step - what happens when you start a gateway-mode container</h3>
 <p><strong>Step 1 - You start OpenWRT first (in NAT mode)</strong></p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>droidspaces --name=openwrt --rootfs=/data/openwrt --net=nat start
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>droidspaces --name=openwrt --rootfs=/data/openwrt --net=nat start
 </code></pre></div>
 <p>OpenWRT boots. It has: - <code>eth0</code> on the WAN side (Droidspaces manages NAT for this) - No LAN side yet - OpenWRT is waiting for one</p>
 <p><strong>Step 2 - You start Kali (in gateway mode)</strong></p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>droidspaces --name=kali --rootfs=/data/kali --net=gateway --gateway=openwrt start
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>droidspaces --name=kali --rootfs=/data/kali --net=gateway --gateway=openwrt start
 </code></pre></div>
 <p>Droidspaces does the following (only plumbing, no policy):</p>
 <ol>
@@ -749,7 +425,7 @@ droidspaces --name=box --rootfs=/data/box --net=nat --upstream=wlan0 start
 <p>Kali is now fully configured, with OpenWRT as its router.</p>
 <p><strong>Step 4 - Traffic flows through OpenWRT</strong></p>
 <p>When Kali tries to reach the internet:</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>Kali eth0 --> ds-lan bridge --> OpenWRT eth1
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>Kali eth0 --> ds-lan bridge --> OpenWRT eth1
                                       |
                               OpenWRT firewall rules applied here
                                       |
@@ -810,7 +486,7 @@ droidspaces --name=box --rootfs=/data/box --net=nat --upstream=wlan0 start
 <h2 id="part-10-gateway-mode-flags-and-configuration">Part 10: Gateway Mode Flags and Configuration</h2>
 <h3 id="required-vs-optional-flags">Required vs optional flags</h3>
 <p>Only <strong>one flag is mandatory</strong> when using <code>--net=gateway</code>:</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>--gateway=<container_name>
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>--gateway=<container_name>
 </code></pre></div>
 <p>If you omit it, Droidspaces will print an error and refuse to start. Everything else has a working default:</p>
 <div class="table-wrap"><table>
@@ -825,10 +501,10 @@ droidspaces --name=box --rootfs=/data/box --net=nat --upstream=wlan0 start
 </tbody>
 </table></div>
 <p>So the minimal valid command is:</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>droidspaces --name=client --net=gateway --gateway=openwrt start
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>droidspaces --name=client --net=gateway --gateway=openwrt start
 </code></pre></div>
 <p>That is identical to spelling out all defaults explicitly:</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>droidspaces --name=client --net=gateway --gateway=openwrt \
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>droidspaces --name=client --net=gateway --gateway=openwrt \
   --gateway-net=lan \
   --gateway-iface=eth1 \
   start
@@ -837,14 +513,14 @@ droidspaces --name=box --rootfs=/data/box --net=nat --upstream=wlan0 start
 <p>This flag controls two things at once, both derived from the same name.</p>
 <p><strong>1. It names the host bridge.</strong></p>
 <p>The bridge Droidspaces creates on the host is named <code>ds-{NAME}</code>:</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>--gateway-net=lan   ->  host bridge: ds-lan
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>--gateway-net=lan   ->  host bridge: ds-lan
 --gateway-net=vpn   ->  host bridge: ds-vpn
 --gateway-net=iot   ->  host bridge: ds-iot
 </code></pre></div>
 <p><strong>2. It is the segment identifier - which bridge clients land on.</strong></p>
 <p>The veth names for the gateway's LAN side are generated by hashing the string <code>{gateway_container}:{gateway_net}</code> together. The same hash = the same veth = the same bridge segment. This means multiple client containers that share the same <code>--gateway</code> and <code>--gateway-net</code> all end up on the same bridge, and all get DHCP from the same OpenWRT interface.</p>
 <p>This is the real power of <code>--gateway-net</code>: running multiple isolated LAN segments through the same gateway container.</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code># These two land on ds-lan - they see each other, OpenWRT routes them as one LAN
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code># These two land on ds-lan - they see each other, OpenWRT routes them as one LAN
 droidspaces --name=kali   --net=gateway --gateway=openwrt --gateway-net=lan start
 droidspaces --name=ubuntu --net=gateway --gateway=openwrt --gateway-net=lan start
 
@@ -857,7 +533,7 @@ droidspaces --name=torbox --net=gateway --gateway=openwrt --gateway-net=vpn star
 <p>This controls <strong>what the LAN interface is called inside the gateway container's network namespace</strong>.</p>
 <p>When Droidspaces creates the gateway veth for a segment, it moves one end into OpenWRT's netns and renames it from its raw hash name (<code>ds-hXXXXXXXX</code>) to whatever you pass here (default <code>eth1</code>).</p>
 <p><strong>Why does this matter?</strong> OpenWRT's configuration is built around interface names. If your OpenWRT <code>/etc/config/network</code> says:</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>config interface 'lan'
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>config interface 'lan'
     option device 'eth1'
 </code></pre></div>
 <p>...then the interface that appears inside OpenWRT <strong>must</strong> be named <code>eth1</code>, or OpenWRT will not recognize it as its LAN and will not serve DHCP on it. <code>--gateway-iface=eth1</code> makes that happen.</p>
@@ -866,7 +542,7 @@ droidspaces --name=torbox --net=gateway --gateway=openwrt --gateway-net=vpn star
 <p>This means if you start two containers on <code>--gateway-net=lan</code> and both pass <code>--gateway-iface=eth1</code>, it works perfectly fine: the first container creates the veth and renames it <code>eth1</code>, the second container sees the veth already exists and does nothing with <code>--gateway-iface</code> at all.</p>
 <h3 id="the-flag-conflict-you-must-avoid">The flag conflict you must avoid</h3>
 <p>The problem only happens when you use <strong>two different <code>--gateway-net</code> segments but the same <code>--gateway-iface</code></strong>:</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code># segment 1 - creates eth1 inside OpenWRT
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code># segment 1 - creates eth1 inside OpenWRT
 droidspaces --name=kali   --net=gateway --gateway=openwrt --gateway-net=lan --gateway-iface=eth1 start
 
 # segment 2 - WRONG: also tries to create eth1 inside OpenWRT
@@ -874,7 +550,7 @@ droidspaces --name=torbox --net=gateway --gateway=openwrt --gateway-net=vpn --ga
 </code></pre></div>
 <p>When the second command runs, Droidspaces tries to move a new veth peer into OpenWRT and rename it <code>eth1</code>. But <code>eth1</code> already exists inside OpenWRT from the first segment. Instead of failing loudly, the code detects the conflict and just brings the existing <code>eth1</code> up again, leaving the new veth peer with its raw hash name (<code>ds-hYYYYYYYY</code>) inside OpenWRT. OpenWRT has no config for <code>ds-hYYYYYYYY</code> and silently ignores it. The <code>vpn</code> segment gets no gateway-side interface: no DHCP, no routing, containers on it are effectively isolated.</p>
 <p><strong>The rule:</strong> every <code>--gateway-net</code> segment must have a unique <code>--gateway-iface</code> name.</p>
-<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code># Correct: two segments, two interface names
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code># Correct: two segments, two interface names
 --gateway-net=lan  --gateway-iface=eth1   ->  eth1 inside OpenWRT (LAN segment)
 --gateway-net=vpn  --gateway-iface=eth2   ->  eth2 inside OpenWRT (VPN segment)
 </code></pre></div>
@@ -951,95 +627,42 @@ droidspaces --name=torbox --net=gateway --gateway=openwrt --gateway-net=vpn --ga
 <tr><td><strong>Lazy attachment</strong></td><td>The gateway's LAN-side veth is only created when the first client container starts, not when the gateway container starts</td></tr>
 </tbody>
 </table></div>
-<div class="doc-nav-buttons"><a href="linux-cli.html" class="doc-nav-btn doc-nav-prev">← Linux CLI</a><a href="cool-things-you-can-do.html" class="doc-nav-btn doc-nav-next">Cool Things You Can Do →</a></div>
-      <p class="doc-copyright">&copy; 2026 Droidspaces &nbsp;·&nbsp; <a href="https://github.com/ravindu644/Droidspaces-OSS/blob/main/LICENSE" rel="noopener noreferrer">GPLv3</a> &nbsp;·&nbsp; by <a href="https://github.com/ravindu644" rel="noopener noreferrer">ravindu644</a> and <a href="https://github.com/ravindu644/Droidspaces-OSS/graphs/contributors" rel="noopener noreferrer">contributors</a>
-</p>
+<nav class="doc-nav" aria-label="Pages"><a href="linux-cli.html" class="doc-nav-prev"><small>Previous</small>Linux CLI</a><a href="cool-things-you-can-do.html" class="doc-nav-next"><small>Next</small>Cool Things You Can Do</a></nav>
+  </main>
+</div>
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <a href="/" class="nav-logo"><svg viewBox="8.25 10.35 31.5 27.3" fill="currentColor" aria-hidden="true"><path d="M36.85 30.16H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 34.97c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.85 21.00H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 25.82c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.84 11.74H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 16.57c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/></svg> Droidspaces</a>
+      <p>A Linux container runtime for Android. It boots systemd or OpenRC as PID 1 on the phone's own kernel.</p>
+    </div>
+    <div>
+      <h3>Project</h3>
+      <ul>
+        <li><a href="/docs/">Documentation</a></li>
+        <li><a href="/downloads.html">Downloads</a></li>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS" rel="noopener noreferrer">Source code</a></li>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS/releases" rel="noopener noreferrer">Releases</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Community</h3>
+      <ul>
+        <li><a href="https://t.me/Droidspaces" rel="noopener noreferrer">Telegram</a></li>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS/issues" rel="noopener noreferrer">Issues</a></li>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS/graphs/contributors" rel="noopener noreferrer">Contributors</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Legal</h3>
+      <ul>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS/blob/main/LICENSE" rel="noopener noreferrer">GPLv3 licence</a></li>
+        <li>Maintained by <a href="https://github.com/ravindu644" rel="noopener noreferrer">ravindu644</a></li>
+      </ul>
     </div>
   </div>
+</footer>
 
-  <script>
-    (() => {
-      const themeToggle = document.getElementById('theme-toggle');
-      const sunIcon = themeToggle.querySelector('.sun-icon');
-      const moonIcon = themeToggle.querySelector('.moon-icon');
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
-      function updateIcons(theme) {
-        sunIcon.style.display = theme === 'light' ? 'none' : 'block';
-        moonIcon.style.display = theme === 'light' ? 'block' : 'none';
-      }
-      function getEffectiveTheme() {
-        const saved = localStorage.getItem('theme');
-        if (saved) return saved;
-        return mediaQuery.matches ? 'light' : 'dark';
-      }
-      function applyTheme(theme) {
-        if (theme === 'system') {
-          document.documentElement.removeAttribute('data-theme');
-          updateIcons(mediaQuery.matches ? 'light' : 'dark');
-        } else {
-          document.documentElement.setAttribute('data-theme', theme);
-          updateIcons(theme);
-        }
-      }
-      applyTheme(getEffectiveTheme());
-      mediaQuery.addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'light' : 'dark');
-      });
-      themeToggle.addEventListener('click', () => {
-        const currentTheme = getEffectiveTheme();
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('theme', newTheme);
-        applyTheme(newTheme);
-      });
-      // Docs sidebar toggle
-      const sidebarToggle = document.getElementById('sidebar-toggle');
-      const sidebar = document.getElementById('sidebar');
-      const sidebarOverlay = document.getElementById('sidebar-overlay');
-
-      function openSidebar() {
-        sidebar.classList.add('open');
-        sidebarOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeSidebar() {
-        sidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', (e) => {
-          e.stopPropagation();
-          if (sidebar.classList.contains('open')) closeSidebar();
-          else openSidebar();
-        });
-      }
-
-      if (sidebarOverlay) {
-        sidebarOverlay.addEventListener('click', closeSidebar);
-      }
-
-      const sidebarClose = document.getElementById('sidebar-close');
-      if (sidebarClose) {
-        sidebarClose.addEventListener('click', closeSidebar);
-      }
-
-      if (sidebar) {
-        sidebar.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', closeSidebar);
-        });
-      }
-    })();
-    function copyCode(btn) {
-      const code = btn.parentElement.querySelector('pre code');
-      const text = code.textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        const orig = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-        setTimeout(() => { btn.innerHTML = orig; }, 1500);
-      }).catch(() => {});
-    }
-  </script>
+<script src="/assets/js/site.js" defer></script>
 </body>
 </html>
