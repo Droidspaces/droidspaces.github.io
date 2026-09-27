@@ -70,20 +70,20 @@
   <section class="download-hero">
     <div class="container">
       <div class="section-label">Downloads</div>
-      <h1>v6.5.5</h1>
-      <p class="hero-desc">Released Date: 2026-09-08</p>
+      <h1>v6.6.0</h1>
+      <p class="hero-desc">Released Date: 2026-09-21</p>
       <div class="dl-cards">
         <div class="dl-card">
           <div class="dl-card-icon"><i class="fab fa-android"></i></div>
           <h3 class="dl-card-title">Android</h3>
           <p class="dl-card-desc">APK for rooted Android devices. KernelSU, Magisk, or APatch.</p>
-          <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.5.5/Droidspaces-universal-v6.5.5-2280b59.apk" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download APK</a>
+          <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.6.0/Droidspaces-universal-v6.6.0-cff50fa.apk" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download APK</a>
         </div>
         <div class="dl-card">
           <div class="dl-card-icon"><i class="fab fa-linux"></i></div>
           <h3 class="dl-card-title">Linux</h3>
           <p class="dl-card-desc">Static tarball for any Linux distribution. Zero dependencies.</p>
-          <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.5.5/droidspaces-v6.5.5-2280b59.tar.gz" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download Tarball</a>
+          <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.6.0/droidspaces-v6.6.0-cff50fa.tar.gz" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download Tarball</a>
         </div>
       </div>
       <div style="text-align:center;margin-top:1.5rem">
@@ -118,236 +118,80 @@
   <section class="section">
     <div class="container">
       <div class="section-label">Changelog</div>
-      <h2>v6.5.5</h2>
+      <h2>v6.6.0</h2>
       <div class="changelog-wrap">
         <div class="changelog" id="changelog-body">
           <h2 id="whats-changed">What's Changed</h2>
 <ul>
-<li>droidspaces: bump v6.5.5 (2280b59)
+<li>droidspaces: bump v6.6.0 (cff50fa)
 </li>
-<li>app: fix: the status card ignored repeated taps on a healthy backend (8e39768)
+<li>Translated using Weblate (Arabic) (#315) (5eced06)
 </li>
-<li>app: add an update-available notice fed by the latest GitHub release (68c7530)
+<li>app: fix: bring the journal logs screen onto the shared components (b79fcc2)
 </li>
-<li>docs: add Google Pixel 6 (oriole) and Lenovo Legion Y700 4th Gen (TB322FC) to community device lists (#303) (15a2343)
+<li>app: fix: open journal logs at the tail without a visible jump (175f62f)
 </li>
-<li>app: fix: share one AppStateViewModel across Home, Settings and Requirements (7795456)
+<li>app: fix: keep init service list state across child screens (ea9bf93)
 </li>
-<li>Translated using Weblate (Chinese (Traditional Han script)) (#304) (a1cd329)
+<li>docs: add-device: Redmi note 10s (#321) (b0b5876)
 </li>
-<li>app: fix: stop the SELinux row flashing "Checking" on a fresh launch (49d5bd2)
+<li>feat(journald): add journald inspection of units (#320) (bc527cc)
 </li>
-<li>app: add an experimental 64-bit backend toggle for 32-bit userspaces (d1655d0)
+<li>net: accept split-tunnel VPN tables as a pinned upstream (c30e72f)
 </li>
-<li>app: add a manual keyboard toggle to the terminal (f60294a)
+<li>app: fix(security): grey out folder picker confirm at host root for bind mounts (d322422)
 </li>
-<li>app: preview the selected font in the Font family card (d78c89b)
+<li>fix(security): refuse bind mounting host root into a container (7bca759)
 </li>
-<li>Translated using Weblate (Czech) (#300) (f362e1d)
+<li>app: refactor: edit environment variables as a plain text file (db5abd3)
 </li>
-<li>Translated using Weblate (Chinese (Simplified Han script)) (#296) (9c6a1c0)
+<li>docs: add Galaxy S21 5G (o1q) to community-supported devices (#319) (f8017b8)
 </li>
-<li>docs: add Realme GT Master Edition support (#294) (1322ae0)
+<li>docs(devices): add Redmi K40 device entry (#311) (10430ad)
 </li>
-<li>Translated using Weblate (Chinese (Traditional Han script)) (#293) (4c31165)
+<li>Droidspaces: Docs: Community-Supported-Devices: add bangkk (XT2347-2) (#312) (49251af)
 </li>
-<li>build: disable the socketd backend bridge by default (0b8dbd4)
+<li>docs: add Galaxy S8+ (dream2lte) to community-supported devices (#317) (7bc8b83)
 </li>
-<li>Update translation files (#292) (9fc1220)
+<li>docs: document --allow-sandboxing in one place (27bafc4)
 </li>
-<li>app: let snackbars swipe to dismiss (332a04d)
+<li>feat: --allow-sandboxing for unprivileged Docker, Podman and bwrap (59e05d7)
 </li>
-<li>app: split the Terminal page into Font, Theme and Misc sections (e8a747c)
+<li>docs: remove the Deadlock Shield (83783b6)
 </li>
-<li>app: optionally confirm before closing a terminal tab (ba20cbe)
+<li>app: refactor: remove the Deadlock Shield toggle (9c580f9)
 </li>
-<li>app: add a custom terminal font picker (f921e2c)
+<li>fix: remove the Deadlock Shield (af01153)
 </li>
-<li>app: add a Terminal page under Appearance with a configurable font size (b84abca)
+<li>fix: drop the privileged mode security warning banner (99575a1)
 </li>
-<li>docs: move Chinese translations into Documentation/zh-CN (d0f0bd3)
+<li>app: fix: animate card reflow when a container leaves the list (1794a6a)
 </li>
-<li>Update translation files (4168945)
+<li>app: fix: evict the container user cache on uninstall (cd56781)
 </li>
-<li>app: refactor: close About from the header, like the terminal log viewer (426ee3f)
+<li>fix: do not die with SIGPIPE when the daemon rejects before the request is sent (d8fb004)
 </li>
-<li>app: fix: keep the RAM chip on the panel card when usage reads 0MB (11cbd4f)
+<li>fix: peer guard denied every client on kernels without PID namespaces (4f3f018)
 </li>
-<li>docs: retire DESIGN-TODO.md (bc57edc)
+<li>Translated using Weblate (Chinese (Traditional Han script)) (#308) (18087e8)
 </li>
-<li>app: fix: put the quiet OK back on the About dialog (4b08eb8)
+<li>nix: working-droidspaces-rootfs-minimal, Update journald configuration (#309) (bf2aa0b)
 </li>
-<li>docs: record that the dialog shell owns the footer and its own bound (f2b5602)
+<li>app: refactor: fetch all container status with one show --format call per tick (00b7745)
 </li>
-<li>app: fix: stop dialogs starving their buttons, bounded by the live screen (075b702)
+<li>refactor: make --format JSON, fold usage into show and info (88fdc64)
 </li>
-<li>docs: record the shared dialog shell (553f4fa)
+<li>app: add the Artix distro icon (f460156)
 </li>
-<li>app: refactor: share one dialog shell (8e1ab8e)
+<li>app: bring post_extract_fixes.sh in line with the rootfs builder (1624c6f)
 </li>
-<li>docs: record the dialog action rule (4eb747a)
+<li>fix: default the CLI to --net=nat (78beeca)
 </li>
-<li>app: fix: shorten the notification permission labels (27020b4)
+<li>docs: describe the staged /dev binds and --allow-vts, drop unfiltered-dev and the blocklist (21d1d98)
 </li>
-<li>app: refactor: restore the dialog action buttons (f429c19)
+<li>app: remove the unfiltered-dev privileged toggle (ad59830)
 </li>
-<li>app: refactor: delete the unreachable RESTARTING status (bf6071c)
-</li>
-<li>app: feat: spin the status dot while an operation runs (a71d5d7)
-</li>
-<li>docs: write down the card header alignment (c454748)
-</li>
-<li>app: fix: realign the card headers across tabs (2ea6173)
-</li>
-<li>docs: bring the design docs in line with the cleanup (3916dee)
-</li>
-<li>app: docs: say why the root check button stays primary when disabled (80216be)
-</li>
-<li>app: refactor: build the notification rationale like the other dialogs (af1ad6a)
-</li>
-<li>app: refactor: stop hand-rolling the bottom action bar (0fa99a2)
-</li>
-<li>app: refactor: build the error logs dialog like every other dialog (2accafa)
-</li>
-<li>app: refactor: use DialogFooterRow in the last two dialogs (631d6e8)
-</li>
-<li>app: refactor: reuse StatusPill and share the menu theming (f52693f)
-</li>
-<li>app: fix: snap the spacing outliers back onto the scale (f167515)
-</li>
-<li>app: refactor: share one SectionHeader (348d665)
-</li>
-<li>app: fix: stop bypassing the type scale (c60f86f)
-</li>
-<li>app: refactor: import the theme mono font instead of redeclaring it (6b3d983)
-</li>
-<li>app: fix: one style for every screen title (7c50f2b)
-</li>
-<li>app: refactor: drop the cancelBorderAlpha parameter (ffb4598)
-</li>
-<li>app: fix: put the drifted border and state alphas back on the table (8ad90a7)
-</li>
-<li>app: fix: shape the four buttons that rendered as full pills (1afaa35)
-</li>
-<li>app: fix: bring buttons and text fields onto one radius (17c9f10)
-</li>
-<li>app: fix: settle every dialog shell at 24dp (d611438)
-</li>
-<li>app: docs: say why the virtual keys background is a literal (18dc11f)
-</li>
-<li>app: fix: use tertiary for the update available accent (f458c12)
-</li>
-<li>app: refactor: one source for the init system status colours (2c5adae)
-</li>
-<li>app: refactor: flatten AmoledColorCache into two functions (2cb2eb6)
-</li>
-<li>app: refactor: delete the legacy colour constants (3b5670e)
-</li>
-<li>app: refactor: drop the empty DialogUtils object (7013569)
-</li>
-<li>app: refactor: delete the unused PercentCircle component (91f0124)
-</li>
-<li>app: fix: give the container card logs button a real touch target (0fcded6)
-</li>
-<li>docs: write down the app's design language (ef8e851)
-</li>
-<li>app: revert: restore the tighter wrapper radius on action pills (fc76eb8)
-</li>
-<li>docs: add a YAGNI gate to AGENTS.md (0b2d78e)
-</li>
-<li>Translated using Weblate (Chinese (Traditional Han script)) (#290) (dfb6eca)
-</li>
-<li>docs: add Volla Phone Quintus (algiz) to community-supported devices (#289) (46de1e2)
-</li>
-<li>Docs: community-supported-devices: Move SM-A155F to proper section (see #225) (#288) (4fced45)
-</li>
-<li>docs: Community-Supported-Devices: update milanf, add fogo and dre to roster (#287) (54a25a7)
-</li>
-<li>fix: make restart honor every CLI flag exactly like start (90ae9a0)
-</li>
-<li>fix: treat command locks from a previous boot as stale (5d20069)
-</li>
-<li>app: fix: let Reinstall Backend run more than once (1941cb0)
-</li>
-<li>fix: drop sparsemgr's busybox mkfs fallback (d5ec198)
-</li>
-<li>fix: prefer busybox consistently for loop image tooling (a4cee0d)
-</li>
-<li>app: refactor: read the rootfs path from container.config (90166ad)
-</li>
-<li>fix: prefer busybox for loop mounts in the shell helpers (26b2703)
-</li>
-<li>fix: let busybox loop-mount on Android (5e4c294)
-</li>
-<li>fix: drop sparsemgr's loop path length check (81fdf02)
-</li>
-<li>app: refactor: drop the container name length limit (43fa100)
-</li>
-<li>app: refactor: drop unreferenced string resources (ebe88d2)
-</li>
-<li>app: fix: align the wizard step headings with each other (0ba8a69)
-</li>
-<li>app: fix: point the storage step's Next button at the summary (d5d8f30)
-</li>
-<li>app: feat: install a container rootfs to a chosen directory (6e1c02a)
-</li>
-<li>app: feat: probe filesystem capability for a storage path (ee39b01)
-</li>
-<li>app: fix: list directories without parsing ls output (245ad8e)
-</li>
-<li>app: refactor: drop the last findings reference from the manifest resources (3736fd4)
-</li>
-<li>app: refactor: drop references to the deleted findings files (2331521)
-</li>
-<li>docs: drop em-dashes from the English documentation (8cc0cd8)
-</li>
-<li>app: refactor: drop em-dashes and banner comments (5347a6f)
-</li>
-<li>refactor: drop banner comments from the Android backend (df5fe73)
-</li>
-<li>net: drop banner comments and em-dashes (474600d)
-</li>
-<li>refactor: drop banner comments from the container runtime (6b637fa)
-</li>
-<li>refactor: drop banner comments and em-dashes from the core runtime (74650e5)
-</li>
-<li>refactor: drop banner comments from the shared header (32b8aab)
-</li>
-<li>docs: add AGENTS.md contributor contract and rewrite CONTRIBUTING (4ce9303)
-</li>
-<li>app: revert: restore terminal top bar and tab switch animation (9c20b06)
-</li>
-<li>fix: fail closed in ds_peer_in_pidns peer namespace guard (ea4c4b4)
-</li>
-<li>app: revert: restore terminal session tab design (7076e90)
-</li>
-<li>Translated using Weblate (Bengali) (#284) (54f9353)
-</li>
-<li>docs: sync Chinese documentation terminology (#285) (b9def52)
-</li>
-<li>feat(ui): UI improvements - session tabs, dialog buttons, animations, and terminal dark mode fix (#283) (c3a7785)
-</li>
-<li>app: Add UIJ permissions and battery exemption helper (#282) (5e2e137)
-</li>
-<li>Translated using Weblate (Czech) (#278) (eb63243)
-</li>
-<li>app: fix: wrap the Panel usage chip instead of squeezing it off screen (27a4cda)
-</li>
-<li>app: fix: centre the rootfs repo sheet's loading and empty states (2d8f89f)
-</li>
-<li>app: fix: block the resize dialog's Continue on the current image size (d693c66)
-</li>
-<li>app: refactor: round progress bar ends with strokeCap, not a clip (d1a386c)
-</li>
-<li>app: refactor: route the last three dialogs through DialogFooterRow (727ee98)
-</li>
-<li>app: fix: accept NixOS rootfs tarballs in validator (16bf0a4)
-</li>
-<li>garaho: activate IME for 12-key terminal input (#280) (2a8537b)
-</li>
-<li>fix: only apply background overrides in terminal dark mode (#276) (3470336)
-</li>
-<li>feat: add terminal dark mode toggle in Settings (#275) (83a77e6)
+<li>mount: expose the raw devtmpfs in hw-access mode, drop the device blocklist (9ebbedc)
 </li>
 </ul>
 <hr>
@@ -362,10 +206,10 @@
     <div class="container">
       <div class="section-label">Older Versions</div>
       <h2>Previous releases</h2>
-      <div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody><tr><td>Droidspaces v6.5.0</td><td>2026-08-09</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.5.0" class="dl-secondary">Download</a></td></tr>
+      <div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody><tr><td>Droidspaces v6.5.5</td><td>2026-09-08</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.5.5" class="dl-secondary">Download</a></td></tr>
+<tr><td>Droidspaces v6.5.0</td><td>2026-08-09</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.5.0" class="dl-secondary">Download</a></td></tr>
 <tr><td>Droidspaces v6.4.5</td><td>2026-07-17</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.4.5" class="dl-secondary">Download</a></td></tr>
-<tr><td>Droidspaces v6.4.0</td><td>2026-07-04</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.4.0" class="dl-secondary">Download</a></td></tr>
-<tr><td>Droidspaces v6.3.0</td><td>2026-06-10</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.3.0" class="dl-secondary">Download</a></td></tr></tbody></table></div>
+<tr><td>Droidspaces v6.4.0</td><td>2026-07-04</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.4.0" class="dl-secondary">Download</a></td></tr></tbody></table></div>
     </div>
   </section>
 </main>
