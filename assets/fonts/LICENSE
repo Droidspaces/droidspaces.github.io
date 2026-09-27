@@ -15,7 +15,8 @@ MaterialSymbolsRounded.woff2
   Source: google/material-design-icons, variablefont/MaterialSymbolsRounded[FILL,GRAD,opsz,wght].woff2
   Kept axes: FILL 0 to 1, opsz 20 to 24. Pinned: wght 400, GRAD 0.
   Subset to: menu, close, dark_mode, light_mode, download, menu_book, content_copy, check,
-  android, terminal. Ligatures kept so markup can use the icon name as text.
+  android, terminal, wifi, signal_cellular_4_bar, battery_full, and the space. Ligatures kept
+  so markup can use the icon name as text.
   Licence: Apache License 2.0 (below).
 
 ==== Google Sans Flex

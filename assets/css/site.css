@@ -246,24 +246,55 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
   .nav-close { position: absolute; top: 8px; right: 16px; }
 }
 
-/* phone mockup: Galaxy S25 Ultra silhouette (DESIGN.md Shapes). The wrapper only sizes it, so the
-   bezel, radii and camera below are cqw fractions of the frame width, whatever the layout gives it */
+/* phone mockup: Galaxy S25 Ultra silhouette (DESIGN.md Shapes). The wrapper only sizes it, so every
+   length below is a cqw share of the frame width. The frame is one painted shape with the display
+   on top of it, never a border, so no page background can show through at the corners */
 .phone { container-type: inline-size; width: 100%; }
 .phone-screen {
   position: relative;
-  aspect-ratio: 1080 / 2142; /* the screenshots' own ratio, so object-fit: cover never crops a card edge */
-  border: 1.75cqw solid var(--phone-frame);
-  border-radius: 7.8cqw; /* the screen corner is the frame corner minus the bezel, 6.05cqw, within a pixel of the 6.2% in DESIGN.md */
-  background: var(--md-sys-color-surface-container-high) padding-box; /* flat placeholder until a screenshot is set */
+  padding: 1.75cqw;
+  border-radius: 7.8cqw;
+  background: var(--phone-frame);
   box-shadow: var(--shadow-phone); /* the only shadow on the site: a photographed object, not a surface */
+}
+/* the screenshots stop at the app's title bar, so the status bar and the gesture bar are drawn in the app's own colours */
+.phone-display {
+  position: relative;
+  padding: 7cqw 0 5cqw;
+  border-radius: 6.2cqw;
+  background: var(--phone-app-surface);
+  color: var(--phone-app-on-surface);
   overflow: hidden;
 }
-.phone-screen img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.phone-screen::after {
-  /* punch-hole camera, 5.2% of the screen width, in the bezel colour, nothing drawn inside */
+.phone-display[data-bar] { padding-bottom: 0; border-bottom: 5cqw solid var(--phone-app-bar); } /* the screenshot ends in the app's bottom bar */
+.phone-display img { display: block; width: 100%; height: auto; aspect-ratio: 1080 / 2142; }
+.phone-display::before, .phone-display::after { position: absolute; top: 0; height: 7cqw; display: flex; align-items: center; }
+.phone-display::before { content: "12:00"; left: 5cqw; font-size: 3.2cqw; font-weight: 600; }
+.phone-display::after {
+  content: "wifi signal_cellular_4_bar battery_full";
+  right: 3.5cqw;
+  font-family: "Material Symbols Rounded";
+  font-size: 3.6cqw;
+  letter-spacing: 0.4cqw;
+  font-variation-settings: "FILL" 1, "opsz" 20;
+}
+.phone-screen::before {
+  /* gesture pill, centred in the bottom bar */
   content: "";
   position: absolute;
-  top: 2cqw;
+  bottom: 3.75cqw;
+  left: 50%;
+  width: 28cqw;
+  height: 1cqw;
+  translate: -50% 0;
+  border-radius: var(--md-sys-shape-corner-full);
+  background: color-mix(in srgb, transparent, var(--phone-app-on-surface) 38%);
+}
+.phone-screen::after {
+  /* punch-hole camera, 5.2% of the screen width, centred in the status bar, in the bezel colour, nothing drawn inside */
+  content: "";
+  position: absolute;
+  top: 2.74cqw;
   left: 50%;
   width: 5.02cqw;
   aspect-ratio: 1;
@@ -365,7 +396,7 @@ td:first-child { color: var(--md-sys-color-on-surface); }
 
 /* shape: Material squircle where the browser has it, plain rounding elsewhere */
 @supports (corner-shape: squircle) {
-  .button, .card, .card-nested, .chip, pre, .table-wrap, .phone-screen { corner-shape: squircle; }
+  .button, .card, .card-nested, .chip, pre, .table-wrap, .phone-screen, .phone-display { corner-shape: squircle; }
 }
 
 /* reduced motion is not optional: float stops, arrival is an instant fade, the press morph is off */
