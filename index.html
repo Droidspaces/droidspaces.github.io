@@ -48,7 +48,7 @@
       "systemd and OpenRC init support as PID 1",
       "Single static binary of about 400 KB, no dependencies",
       "GPU acceleration with Turnip on Android",
-      "Two daemons keep containers running",
+      "A monitor process per container, detached from the app",
       "Network isolation with NAT, Veth pairs, or air-gapped",
       "USB, block device, sensor, serial device access",
       "Portable rootfs.img support",
@@ -136,7 +136,7 @@
   <section class="section split">
     <div>
       <h2>Put it on a shelf. It keeps serving.</h2>
-      <p class="title-lg">Containers start at boot from init.rc, and two daemons keep them alive while Android runs. Inside, they run their own containers and sandboxes.</p>
+      <p class="title-lg">Containers start at boot from post-fs-data, service.d or init.rc. Each one has its own monitor process, detached from the app, so closing or uninstalling the app stops nothing. Inside, they run their own containers and sandboxes.</p>
       <ul class="chip-set" aria-label="What a container can run">
         <li class="chip">Nested containers</li><li class="chip">Rootless Podman</li><li class="chip">Flatpak</li><li class="chip">bwrap</li><li class="chip">K3s</li><li class="chip">Tailscale</li><li class="chip">Port forwarding</li><li class="chip">Volatile mode</li><li class="chip">rootfs.img</li>
       </ul>
@@ -177,7 +177,7 @@
           <tr><td>Performance</td><td class="hl">Native</td><td>Native</td><td>Native</td><td>Native</td><td>Moderate</td></tr>
           <tr><td>Boot time</td><td class="hl">150 to 750 ms on systemd</td><td>750 to 2000 ms on systemd</td><td>No init</td><td>No init</td><td>No init</td></tr>
           <tr><td>Init support</td><td class="hl">Full</td><td>Full</td><td>None</td><td>None</td><td>None</td></tr>
-          <tr><td>Persistence</td><td class="hl">Two daemons keep it alive</td><td>Low</td><td>Low</td><td>Low</td><td>Low</td></tr>
+          <tr><td>Persistence</td><td class="hl">A monitor process per container</td><td>Low</td><td>Low</td><td>Low</td><td>Low</td></tr>
           <tr><td>Hardware access</td><td class="hl">One switch</td><td>Manual setup</td><td>Manual setup</td><td>Manual setup</td><td>None</td></tr>
           <tr><td>GPU access</td><td class="hl">One switch</td><td>Manual setup</td><td>Manual setup</td><td>Manual setup</td><td>Moderate</td></tr>
           <tr><td>Termux:X11</td><td class="hl">One switch</td><td>Manual setup</td><td>Manual setup</td><td>Manual setup</td><td>Moderate</td></tr>
