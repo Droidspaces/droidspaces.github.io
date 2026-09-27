@@ -267,19 +267,20 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
 .phone-display[data-bar] { padding-bottom: 0; border-bottom: 5cqw solid var(--phone-app-bar); } /* the screenshot ends in the app's bottom bar */
 .phone-display img { display: block; width: 100%; height: auto; aspect-ratio: 1080 / 2142; }
 .phone-display::before, .phone-display::after { position: absolute; top: 0; height: 7cqw; display: flex; align-items: center; }
-.phone-display::before { content: "12:00"; left: 5cqw; font-size: 3.2cqw; font-weight: 600; }
+.phone-display::before { content: "12:00"; left: 4.5cqw; font-size: 3.4cqw; font-weight: 500; letter-spacing: 0; }
 .phone-display::after {
-  content: "wifi signal_cellular_4_bar battery_full";
-  right: 3.5cqw;
-  font-family: "Material Symbols Rounded";
-  font-size: 3.6cqw;
-  letter-spacing: 0.4cqw;
-  font-variation-settings: "FILL" 1, "opsz" 20;
+  /* wifi, signal and battery are the AOSP status bar drawables (assets/phone/), masked so the colour is a token */
+  content: "";
+  right: 3cqw;
+  width: 15cqw;
+  background: var(--phone-app-on-surface);
+  mask: url(/assets/phone/wifi.svg) left center / 4.2cqw no-repeat, url(/assets/phone/signal.svg) center / 4.2cqw no-repeat, url(/assets/phone/battery.svg) right center / 4.2cqw no-repeat;
 }
 .phone-screen::before {
-  /* gesture pill, centred in the bottom bar */
+  /* gesture pill, centred in the bottom bar, above the display */
   content: "";
   position: absolute;
+  z-index: 1;
   bottom: 3.75cqw;
   left: 50%;
   width: 28cqw;
@@ -292,6 +293,7 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
   /* punch-hole camera, 5.2% of the screen width, centred in the status bar, in the bezel colour, nothing drawn inside */
   content: "";
   position: absolute;
+  z-index: 1;
   top: 2.74cqw;
   left: 50%;
   width: 5.02cqw;
