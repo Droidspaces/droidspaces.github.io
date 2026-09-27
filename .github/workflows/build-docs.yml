@@ -15,7 +15,8 @@ jobs:
 
       - name: Fetch latest docs from source repo
         run: |
-          git clone --depth 1 --branch main \
+          # full history, no file contents until checkout: the contributor count reads git log
+          git clone --filter=blob:none --branch main \
             https://github.com/ravindu644/Droidspaces-OSS.git /tmp/source
           rm -rf docs/content/
           mkdir -p docs/content
