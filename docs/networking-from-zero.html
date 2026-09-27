@@ -18,11 +18,12 @@
   <link rel="canonical" href="https://www.droidspaces.org/docs/networking-from-zero.html">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/site.css?v=b459ce3321">
+  <link rel="stylesheet" href="/assets/css/site.css?v=1afac79ecf">
   <link rel="stylesheet" href="/assets/css/main.css?v=42b54cd116">
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
+<a class="button button-filled skip-link" href="#main">Skip to content</a>
 <nav class="nav" aria-label="Main">
   <div class="nav-inner">
     <a href="/" class="nav-logo"><svg viewBox="8.25 10.35 31.5 27.3" fill="currentColor" aria-hidden="true"><path d="M36.85 30.16H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 34.97c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.85 21.00H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 25.82c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.84 11.74H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 16.57c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/></svg> Droidspaces</a>
@@ -67,7 +68,7 @@
 <a href="uninstallation.html" class="sidebar-link">Uninstallation</a>
 </details>
   </aside>
-  <main class="docs-content">
+  <main id="main" class="docs-content">
     <article>
 <h1 id="networking-from-zero-understanding-droidspaces-gateway-mode">Networking from zero: understanding Droidspaces gateway mode <a class="header-anchor" href="#networking-from-zero-understanding-droidspaces-gateway-mode">#</a></h1>
 <h3 id="quick-navigation">Quick navigation <a class="header-anchor" href="#quick-navigation">#</a></h3>
@@ -292,7 +293,7 @@ Your Browser:   &quot;Thanks.&quot; [now connects to 142.250.80.46]
 <h3 id="pinning-the-uplink-manually-with---upstream">Pinning the uplink manually with <code>--upstream</code> <a class="header-anchor" href="#pinning-the-uplink-manually-with---upstream">#</a></h3>
 <p>Sometimes you do <strong>not</strong> want the container to follow whatever network the host is on. You want its internet traffic to leave through one specific interface and stay there. That is what <code>--upstream</code> does.</p>
 <p>Passing <code>--upstream</code> turns automatic detection off completely. The interfaces you list become the <em>only</em> candidates the container ever uses for WAN. It never moves to whatever the host marks as its active default network.</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Force the container&#39;s internet out through Wi-Fi, always</span>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Force the container's internet out through Wi-Fi, always</span>
 droidspaces<span class="w"> </span>--name<span class="o">=</span>box<span class="w"> </span>--rootfs<span class="o">=</span>/data/box<span class="w"> </span>--net<span class="o">=</span>nat<span class="w"> </span>--upstream<span class="o">=</span>wlan0<span class="w"> </span>start
 </code></pre></div>
 <p>You can list <strong>several interfaces, comma-separated</strong>, and use <strong>wildcards</strong> (<code>*</code>, <code>?</code>):</p>

@@ -18,11 +18,12 @@
   <link rel="canonical" href="https://www.droidspaces.org/docs/uninstallation.html">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/site.css?v=b459ce3321">
+  <link rel="stylesheet" href="/assets/css/site.css?v=1afac79ecf">
   <link rel="stylesheet" href="/assets/css/main.css?v=42b54cd116">
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
+<a class="button button-filled skip-link" href="#main">Skip to content</a>
 <nav class="nav" aria-label="Main">
   <div class="nav-inner">
     <a href="/" class="nav-logo"><svg viewBox="8.25 10.35 31.5 27.3" fill="currentColor" aria-hidden="true"><path d="M36.85 30.16H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 34.97c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.85 21.00H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 25.82c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.84 11.74H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 16.57c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/></svg> Droidspaces</a>
@@ -67,7 +68,7 @@
 <a href="uninstallation.html" class="sidebar-link" aria-current="page">Uninstallation</a>
 </details>
   </aside>
-  <main class="docs-content">
+  <main id="main" class="docs-content">
     <article>
 <h1 id="uninstallation-guide">Uninstallation guide <a class="header-anchor" href="#uninstallation-guide">#</a></h1>
 <p>How to remove Droidspaces completely.</p>
@@ -86,7 +87,7 @@
 <ul>
 <li>With a root file manager or a terminal (Termux with root access, for example), delete this directory:</li>
 </ul>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>su<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;rm -rf /data/local/Droidspaces&quot;</span>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>su<span class="w"> </span>-c<span class="w"> </span><span class="s2">"rm -rf /data/local/Droidspaces"</span>
 </code></pre></div>
 </li>
 <li><strong>Uninstall the APK</strong>: uninstall the Droidspaces app from Android settings or your launcher.</li>

@@ -18,11 +18,12 @@
   <link rel="canonical" href="https://www.droidspaces.org/docs/cool-things-you-can-do.html">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/site.css?v=b459ce3321">
+  <link rel="stylesheet" href="/assets/css/site.css?v=1afac79ecf">
   <link rel="stylesheet" href="/assets/css/main.css?v=42b54cd116">
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
+<a class="button button-filled skip-link" href="#main">Skip to content</a>
 <nav class="nav" aria-label="Main">
   <div class="nav-inner">
     <a href="/" class="nav-logo"><svg viewBox="8.25 10.35 31.5 27.3" fill="currentColor" aria-hidden="true"><path d="M36.85 30.16H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 34.97c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.85 21.00H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 25.82c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.84 11.74H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 16.57c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/></svg> Droidspaces</a>
@@ -67,7 +68,7 @@
 <a href="uninstallation.html" class="sidebar-link">Uninstallation</a>
 </details>
   </aside>
-  <main class="docs-content">
+  <main id="main" class="docs-content">
     <article>
 <h1 id="cool-things-you-can-do-with-droidspaces">Cool things you can do with Droidspaces <a class="header-anchor" href="#cool-things-you-can-do-with-droidspaces">#</a></h1>
 <div class="callout callout-important"><strong class="callout-title">Important</strong><p>This guide is for <strong>Android devices</strong>. Droidspaces also runs on desktop Linux, but these instructions deal with the networking, storage and kernel requirements specific to Android.</p></div>
@@ -131,8 +132,8 @@ update-alternatives<span class="w"> </span>--set<span class="w"> </span>ip6table
 <p><strong>Reclaim UID 1000</strong>: distributions usually give UID <code>1000</code> to the first non-root user (such as <code>ubuntu</code>). To use this ID for your own user, first find and remove whichever user already has UID 1000:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Identify and delete the default user associated with UID 1000</span>
 <span class="nv">DEFAULT_USER</span><span class="o">=</span><span class="k">$(</span>getent<span class="w"> </span>passwd<span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d:<span class="w"> </span>-f<span class="w"> </span><span class="m">1</span><span class="k">)</span>
-userdel<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DEFAULT_USER</span><span class="s2">&quot;</span>
-groupdel<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DEFAULT_USER</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
+userdel<span class="w"> </span>-r<span class="w"> </span><span class="s2">"</span><span class="nv">$DEFAULT_USER</span><span class="s2">"</span>
+groupdel<span class="w"> </span><span class="s2">"</span><span class="nv">$DEFAULT_USER</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
 </code></pre></div>
 </li>
 <li>
@@ -150,8 +151,8 @@ passwd<span class="w"> </span>YOUR_USER
 <li>
 <p><strong>Disable root login</strong>:
 Edit <code>/etc/ssh/sshd_config</code> to refuse direct root logins:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/#PermitRootLogin prohibit-password/PermitRootLogin no/&#39;</span><span class="w"> </span>/etc/ssh/sshd_config
-sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/PermitRootLogin yes/PermitRootLogin no/&#39;</span><span class="w"> </span>/etc/ssh/sshd_config
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'s/#PermitRootLogin prohibit-password/PermitRootLogin no/'</span><span class="w"> </span>/etc/ssh/sshd_config
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'s/PermitRootLogin yes/PermitRootLogin no/'</span><span class="w"> </span>/etc/ssh/sshd_config
 systemctl<span class="w"> </span>restart<span class="w"> </span>ssh
 </code></pre></div>
 </li>
@@ -177,7 +178,7 @@ systemctl<span class="w"> </span>restart<span class="w"> </span>ssh
 <ol>
 <li>
 <p><strong>Disable IPv6 in UFW</strong>:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/IPV6=yes/IPV6=no/&#39;</span><span class="w"> </span>/etc/default/ufw
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'s/IPV6=yes/IPV6=no/'</span><span class="w"> </span>/etc/default/ufw
 </code></pre></div>
 </li>
 <li>
@@ -288,9 +289,9 @@ newgrp<span class="w"> </span>docker
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/docker
 cat<span class="w"> </span><span class="s">&lt;&lt;EOF &gt; /etc/docker/daemon.json</span>
 <span class="s">{</span>
-<span class="s">  &quot;iptables&quot;: false,</span>
-<span class="s">  &quot;ip6tables&quot;: false,</span>
-<span class="s">  &quot;bridge&quot;: &quot;none&quot;</span>
+<span class="s">  "iptables": false,</span>
+<span class="s">  "ip6tables": false,</span>
+<span class="s">  "bridge": "none"</span>
 <span class="s">}</span>
 <span class="s">EOF</span>
 systemctl<span class="w"> </span>restart<span class="w"> </span>docker

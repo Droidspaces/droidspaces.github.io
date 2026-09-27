@@ -18,11 +18,12 @@
   <link rel="canonical" href="https://www.droidspaces.org/docs/troubleshooting.html">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/site.css?v=b459ce3321">
+  <link rel="stylesheet" href="/assets/css/site.css?v=1afac79ecf">
   <link rel="stylesheet" href="/assets/css/main.css?v=42b54cd116">
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
+<a class="button button-filled skip-link" href="#main">Skip to content</a>
 <nav class="nav" aria-label="Main">
   <div class="nav-inner">
     <a href="/" class="nav-logo"><svg viewBox="8.25 10.35 31.5 27.3" fill="currentColor" aria-hidden="true"><path d="M36.85 30.16H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 34.97c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.85 21.00H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 25.82c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.84 11.74H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 16.57c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/></svg> Droidspaces</a>
@@ -67,7 +68,7 @@
 <a href="uninstallation.html" class="sidebar-link">Uninstallation</a>
 </details>
   </aside>
-  <main class="docs-content">
+  <main id="main" class="docs-content">
     <article>
 <h1 id="troubleshooting">Troubleshooting <a class="header-anchor" href="#troubleshooting">#</a></h1>
 <p>Common problems, what causes them, and how to fix them.</p>
@@ -208,7 +209,7 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span><span class="nb
 <ol>
 <li>
 <p>Run this command in an Android root shell to get the DNS addresses your ISP assigned:</p>
-<div class="code-block"><span class="code-lang">shell</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>dumpsys<span class="w"> </span>connectivity<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/}}/\n/g&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;InterfaceName: wlan0&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-o<span class="w"> </span><span class="s1">&#39;DnsAddresses: \[[^]]*\]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-o<span class="w"> </span><span class="s1">&#39;/[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;/&#39;</span>
+<div class="code-block"><span class="code-lang">shell</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>dumpsys<span class="w"> </span>connectivity<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s/}}/\n/g'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">'InterfaceName: wlan0'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-o<span class="w"> </span><span class="s1">'DnsAddresses: \[[^]]*\]'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-o<span class="w"> </span><span class="s1">'/[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s1">'/'</span>
 </code></pre></div>
 </li>
 <li>
@@ -271,10 +272,10 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span><span class="nb
 <p>Create <code>/usr/local/bin/wifi-watchdog.sh</code> with this content:</p>
 <div class="code-block"><span class="code-lang">shell</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="ch">#!/bin/sh</span>
 <span class="k">while</span><span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">    </span><span class="c1"># Check if power save is &quot;on&quot;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span>/usr/sbin/iw<span class="w"> </span>dev<span class="w"> </span>wlan0<span class="w"> </span>get<span class="w"> </span>power_save<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;on&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="c1"># Check if power save is "on"</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>/usr/sbin/iw<span class="w"> </span>dev<span class="w"> </span>wlan0<span class="w"> </span>get<span class="w"> </span>power_save<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">"on"</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">        </span>/usr/sbin/iw<span class="w"> </span>dev<span class="w"> </span>wlan0<span class="w"> </span><span class="nb">set</span><span class="w"> </span>power_save<span class="w"> </span>off
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>date<span class="k">)</span><span class="s2">: WiFi Power Save was ON. Forced OFF.&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/tmp/wifi-fix.log
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>date<span class="k">)</span><span class="s2">: WiFi Power Save was ON. Forced OFF."</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/tmp/wifi-fix.log
 <span class="w">    </span><span class="k">fi</span>
 <span class="w">    </span>sleep<span class="w"> </span><span class="m">60</span>
 <span class="k">done</span>
@@ -288,15 +289,15 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span><span class="nb
 <p>Create a service file at <code>/etc/init.d/wifi-watchdog</code>:</p>
 <div class="code-block"><span class="code-lang">shell</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="ch">#!/sbin/openrc-run</span>
 
-<span class="nv">name</span><span class="o">=</span><span class="s2">&quot;WiFi PowerSave Watchdog&quot;</span>
-<span class="nv">description</span><span class="o">=</span><span class="s2">&quot;Ensures wlan0 power_save stays off&quot;</span>
+<span class="nv">name</span><span class="o">=</span><span class="s2">"WiFi PowerSave Watchdog"</span>
+<span class="nv">description</span><span class="o">=</span><span class="s2">"Ensures wlan0 power_save stays off"</span>
 
 <span class="c1"># Use the path to your loop script</span>
-<span class="nv">command</span><span class="o">=</span><span class="s2">&quot;/usr/local/bin/wifi-watchdog.sh&quot;</span>
+<span class="nv">command</span><span class="o">=</span><span class="s2">"/usr/local/bin/wifi-watchdog.sh"</span>
 
 <span class="c1"># This tells OpenRC to handle the backgrounding and PID creation</span>
 <span class="nv">command_background</span><span class="o">=</span><span class="nb">true</span>
-<span class="nv">pidfile</span><span class="o">=</span><span class="s2">&quot;/run/</span><span class="si">${</span><span class="nv">RC_SVCNAME</span><span class="si">}</span><span class="s2">.pid&quot;</span>
+<span class="nv">pidfile</span><span class="o">=</span><span class="s2">"/run/</span><span class="si">${</span><span class="nv">RC_SVCNAME</span><span class="si">}</span><span class="s2">.pid"</span>
 
 <span class="c1"># Ensure it only starts after the network is available</span>
 depend<span class="o">()</span><span class="w"> </span><span class="o">{</span>
