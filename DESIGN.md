@@ -525,7 +525,8 @@ caption saying what the screen does. Exactly one phone is in front and only its 
   scale. Hovering or keyboard-focusing a phone brings it to the front; at rest the middle one is.
   Hover wins over focus, so two phones are never in front at once.
 - Everywhere else the group is a horizontal scroll-snap carousel, edge to edge under 840, opening
-  on the middle screen. A scroll-driven `view(inline)` timeline makes the centred phone full size
+  on the first screen. Not the middle one: `scroll-initial-target` also scrolls the page itself to
+  the carousel on every load, so the visitor never sees the hero. A scroll-driven `view(inline)` timeline makes the centred phone full size
   and its neighbours 85%, and shows only the centred caption.
 
 No JavaScript runs either mode.

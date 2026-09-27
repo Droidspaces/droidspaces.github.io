@@ -349,7 +349,6 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
 .phone-group .phone { flex: 0 0 100%; margin: 0; scroll-snap-align: center; } /* 100% of the padded box, so 76% of the scroller */
 /* stacked, the scroller runs edge to edge so its sides never cut a shadow into a visible box */
 @media (max-width: 839px) { .phone-group { width: 100vw; margin-inline: calc(50% - 50vw); padding-inline: 12vw; } }
-.phone-group .phone:nth-child(2) { scroll-initial-target: nearest; } /* open on the middle screen where supported */
 .phone-group .phone:focus-visible { outline: none; }
 .phone-group .phone:focus-visible .phone-screen { outline: 2px solid var(--md-sys-color-primary); outline-offset: 4px; }
 .phone-group figcaption { margin-top: 24px; text-align: center; transition: opacity var(--motion-effects-default); }
