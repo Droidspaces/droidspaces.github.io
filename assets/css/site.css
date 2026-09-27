@@ -368,7 +368,8 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
   z-index: -1; /* positioned and 640px wide, it would otherwise paint over the copy column beside it */
 }
 .shape-secondary { background: var(--md-sys-color-secondary-container); }
-@media (max-width: 839px) { .shape { width: 130%; } } /* stacked, the phone fills the column, so the shape grows to peek out on both sides */
+/* stacked, the phone gives up a fifth of the column so the shape behind it frames it on both sides */
+@media (max-width: 839px) { .stage > .phone { width: min(80%, 380px); } .shape { width: 120%; } }
 
 /* table: the comparison. Header a tier up, rules in outline-variant, the Droidspaces column tinted */
 .table-wrap { overflow-x: auto; border: 1px solid var(--md-sys-color-outline-variant); border-radius: var(--md-sys-shape-corner-xl); background: var(--md-sys-color-surface-container); }
@@ -393,17 +394,15 @@ td:first-child { color: var(--md-sys-color-on-surface); }
 @keyframes arrive { from { opacity: 0; translate: 0 24px; } }
 /* a shape's translate centres it, so it arrives by scale instead */
 @keyframes shape-arrive { from { opacity: 0; scale: 0.9; } }
-/* shapes turn like the M3 Expressive loading indicator they come from: with the scroll where the
-   browser has view timelines, half a turn while the shape crosses the screen; on a two-minute timer elsewhere */
+/* shapes turn once every two minutes, like the M3 Expressive loading indicator they come from */
 @keyframes spin { to { rotate: 1turn; } }
-@keyframes turn { from { rotate: 0turn; } to { rotate: 0.5turn; } }
 .arrive { animation: arrive var(--motion-spatial-default) both; }
 .shape.arrive { animation: shape-arrive var(--motion-spatial-default) both, spin 120s linear infinite; }
 @supports (animation-timeline: view()) {
   .arrive { animation-timeline: view(); animation-range: entry 0% entry 60%; }
-  .shape.arrive { animation: shape-arrive var(--motion-spatial-default) both, turn linear both; animation-timeline: view(), view(); animation-range: entry 0% entry 60%, cover; }
-  .shape-secondary.arrive { animation-direction: normal, reverse; } /* neighbouring shapes turn opposite ways */
+  .shape.arrive { animation-timeline: view(), auto; animation-range: entry 0% entry 60%, normal; }
 }
+.shape-secondary.arrive { animation-direction: normal, reverse; } /* neighbouring shapes turn opposite ways */
 
 main { overflow-x: clip; } /* a shape wider than its column must not scroll the page sideways */
 

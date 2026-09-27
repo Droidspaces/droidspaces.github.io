@@ -352,16 +352,23 @@ Compact is under 600, medium to 839, expanded to 1199, large to 1599. Layouts co
 lines, not at 768 or 1024.
 
 The hero is a two-column split at expanded and above: copy on the left at 5/12, phone mockup on
-the right at 7/12, vertically centred. Under 840 it stacks, copy first, and the phone loses the
-decorative shape behind it because there is no room for it beside the phone. A shape is never wider than
-its own column and sits at `z-index: -1`, so it can never paint over copy; `main` clips horizontal
-overflow so it can never scroll the page either.
+the right at 7/12, vertically centred. Under 840 it stacks, copy first, and the phone takes 80% of the column
+and the shape behind it 120%, so the shape still frames the phone on both sides. At 840 and up a
+shape is never wider than its own column. It sits at `z-index: -1` inside a section that sets
+`isolation: isolate`, so it paints above the section's band and never over copy; `main` clips
+horizontal overflow so it can never scroll the page either.
 
 The home page has six sections: the hero, init and services, the home server, the app carousel,
 the comparison, and requirements with the download.
 
 Feature sections alternate the side the phone sits on. Text, then phone; phone, then text. This
-is the only rhythm the page has and it replaces the row of six identical cards.
+replaces the row of six identical cards.
+
+The second rhythm is tonal. Sections are full width, with the 1200px measure carried by their side
+padding, and every second one (init, the app, get it running) sits on a `surface-container-low`
+band. It is the same one-step surface change the cards use, applied to the page, so the long
+stretches of background read as structure rather than as empty space. No gradient, no border
+between bands.
 
 Cards appear in one place: the comparison against PRoot, chroot and QEMU, where a table is the
 honest format and cards would hide the comparison. Everywhere else, content sits directly on the
@@ -418,7 +425,9 @@ overshoot in the bezier is the point. Do not replace it with `ease-out`.
 **Decorative shapes are the one expressive flourish per page.** Material 3 Expressive ships 35
 named shapes. The site uses five: `cookie-12`, `cookie-9`, `clover-4`, `sunny` and `pill`. Each appears at
 most twice on a page, as a `mask-image` over a flat `tertiary-container` or `secondary-container`
-fill, sitting behind or beside a phone mockup. They are large (400 to 1000px), slow to move (see
+fill, sitting behind a phone mockup. Every single-phone stage on the home page has one, each shape
+used once; the carousel has none, because three overlapping phones leave only slivers of it,
+which read as a rendering fault, `tertiary-container` and `secondary-container` alternating. They are large (400 to 1000px), slow to move (see
 Motion), and never carry text or icons. They are never `primary`. The SVG masks live in
 `assets/shapes/` and come from Beer CSS 5 (MIT), which traced them from Google's Figma kit.
 
@@ -463,8 +472,10 @@ animated over the effects spring. The icon leads the label.
 ### Chips
 
 Height 40px, full radius, `surface-container-high` fill, 1px `outline-variant` border,
-`label-lg-emphasized`. Used for lists of facts: init systems, supported architectures, services
-running in a screenshot. A selected chip, and any chip under the pointer, takes `secondary-container` with
+`label-lg-emphasized`. Used for lists of facts: init systems, supported architectures, what a
+container can run, the hardware the app hands over. Every chip names something documented in the
+main repository's README or `Documentation/Features.md`; a chip that could describe any product
+("Docker inside", "Fast") is not a fact. A selected chip, and any chip under the pointer, takes `secondary-container` with
 `on-secondary-container` text. Chips wrap; they do not
 scroll horizontally.
 
@@ -553,9 +564,11 @@ button does.
    carousel the scale and caption follow the scroll position, not a timer. When the overlapping
    group arrives, the side phones fan out from behind the front one over the same `view()` range
    as arrival.
-4. **Shape turn.** Decorative shapes rotate once every 120 seconds, linear, forever,
-   the way the M3 Expressive loading indicator they come from turns. Slow enough to notice only
-   when you look for it.
+4. **Shape turn.** Decorative shapes turn once every 120 seconds, linear, forever, the way the
+   M3 Expressive loading indicator they come from turns. `secondary-container` shapes turn the
+   other way, so neighbours never look like one pattern. The turn runs on a timer, not on scroll,
+   so the page keeps moving while the visitor reads. A shape arrives by fading in from 90% scale
+   rather than by translating, because its translate is what centres it.
 5. **Shape morph.** The loading indicator on the downloads page cycles through `cookie-12`,
    `clover-4` and `sunny` by morphing the mask, which is the M3 Expressive loading indicator.
    Nothing else morphs.
