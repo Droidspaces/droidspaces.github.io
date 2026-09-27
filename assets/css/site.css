@@ -326,10 +326,10 @@ td:first-child { color: var(--md-sys-color-on-surface); }
 
 /* page layout: 1200px content, 24px gutters (16 under 600), sections 96 tall (64 under 840) */
 .section { max-width: 1248px; margin: 0 auto; padding: 96px 24px; }
-.section > h2 { margin-bottom: 16px; }
+.section > h1, .section > h2 { margin-bottom: 16px; }
 .section > .title-lg { margin: 0 0 32px; }
 .split { display: grid; gap: 48px; align-items: center; }
-.split > * { min-width: 0; } /* the hero pre must not set the column minimum */
+.split > * { min-width: 0; } /* long unbroken content must not set the column minimum */
 .split .stage { order: 1; } /* stacked: copy first, then the phone */
 @media (min-width: 840px) {
   .split { grid-template-columns: 5fr 7fr; }
@@ -341,10 +341,24 @@ td:first-child { color: var(--md-sys-color-on-surface); }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 32px 0; }
 .hero { padding-top: 64px; }
 .hero h1 { margin-bottom: 24px; }
-.hero pre { margin-top: 32px; }
-pre .prompt { color: var(--md-sys-color-primary); }
-pre .cursor { display: inline-block; width: 0.6em; height: 1.1em; vertical-align: text-bottom; background: var(--md-sys-color-on-surface-variant); }
 @media (max-width: 839px) { .section { padding-top: 64px; padding-bottom: 64px; } }
+
+/* downloads page: the two download cards are the only cards allowed a button (DESIGN.md Cards) */
+.download-cards { margin-bottom: 24px; }
+.card h3 { display: flex; align-items: center; gap: 8px; }
+.card h3 .icon { color: var(--md-sys-color-on-surface-variant); }
+.card .button { margin-top: 16px; }
+.patch-group { margin-top: 32px; }
+.patch-group h3, .patch-group h4 { margin: 0 0 12px; font: inherit; font-size: 14px; line-height: 20px; font-weight: 700; letter-spacing: 0.1px; }
+.patch-subgroup { margin: 16px 0 0 16px; }
+.patch-list { margin: 0; padding: 0; list-style: none; }
+.patch-list a { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; text-decoration: none; font: 400 14px/22px "JetBrains Mono", monospace; letter-spacing: 0; overflow-wrap: anywhere; }
+.changelog { padding: 0 24px; border: 1px solid var(--md-sys-color-outline-variant); border-radius: var(--md-sys-shape-corner-lg); background: var(--md-sys-color-surface-container); }
+.changelog summary { display: flex; align-items: center; min-height: 56px; font-size: 14px; line-height: 20px; font-weight: 700; letter-spacing: 0.1px; cursor: pointer; }
+.changelog h2 { font-size: 16px; line-height: 24px; font-weight: 700; letter-spacing: 0.15px; }
+.changelog li { font-size: 14px; line-height: 20px; letter-spacing: 0.25px; color: var(--md-sys-color-on-surface-variant); }
+.changelog hr { border: 0; border-top: 1px solid var(--md-sys-color-outline-variant); }
+.notfound { min-height: calc(100dvh - 64px); }
 
 /* gutters and breakpoints: 16 under 600, 24 above; only 600, 840, 1200, 1600 exist */
 @media (max-width: 599px) { .nav-inner, .footer-inner, .section { padding-left: 16px; padding-right: 16px; } }

@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Download Droidspaces — APK for Android, tarball for Linux, kernel patches, and changelogs.">
+  <meta name="description" content="Download Droidspaces: the APK for Android, the tarball for Linux, kernel patches and changelogs.">
   <title>Downloads - Droidspaces</title>
   <meta property="og:title" content="Downloads - Droidspaces">
-  <meta property="og:description" content="Download Droidspaces — APK for Android, tarball for Linux, kernel patches, and changelogs.">
+  <meta property="og:description" content="Download Droidspaces: the APK for Android, the tarball for Linux, kernel patches and changelogs.">
   <meta property="og:url" content="https://www.droidspaces.org/downloads.html">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Downloads - Droidspaces">
-  <meta name="twitter:description" content="Download Droidspaces — APK for Android, tarball for Linux, kernel patches, and changelogs.">
+  <meta name="twitter:description" content="Download Droidspaces: the APK for Android, the tarball for Linux, kernel patches and changelogs.">
   <meta name="twitter:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
   <link rel="canonical" href="https://www.droidspaces.org/downloads.html">
   <link rel="stylesheet" href="/assets/css/site.css">
@@ -38,63 +38,52 @@
     <button class="icon-button nav-menu" popovertarget="nav-drawer" aria-label="Open menu"><span class="icon" aria-hidden="true">menu</span></button>
   </div>
 </nav>
+
 <!--NAV_END-->
 <main>
-  <section class="download-hero">
-    <div class="container">
-      <div class="section-label">Downloads</div>
-      <h1>v6.6.0</h1>
-      <p class="hero-desc">Released Date: 2026-09-21</p>
-      <div class="dl-cards">
-        <div class="dl-card">
-          <div class="dl-card-icon"><i class="fab fa-android"></i></div>
-          <h3 class="dl-card-title">Android</h3>
-          <p class="dl-card-desc">APK for rooted Android devices. KernelSU, Magisk, or APatch.</p>
-          <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.6.0/Droidspaces-universal-v6.6.0-cff50fa.apk" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download APK</a>
-        </div>
-        <div class="dl-card">
-          <div class="dl-card-icon"><i class="fab fa-linux"></i></div>
-          <h3 class="dl-card-title">Linux</h3>
-          <p class="dl-card-desc">Static tarball for any Linux distribution. Zero dependencies.</p>
-          <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.6.0/droidspaces-v6.6.0-cff50fa.tar.gz" class="btn btn-primary dl-card-btn"><i class="fas fa-download"></i> Download Tarball</a>
-        </div>
+  <section class="section">
+    <h1>Downloads.</h1>
+    <p class="title-lg">Version v6.6.0, released 2026-09-21. The APK carries the runtime and the app. Linux gets a static tarball with no dependencies.</p>
+    <div class="columns download-cards">
+      <div class="card">
+        <h3><span class="icon" aria-hidden="true">android</span>Android</h3>
+        <p class="body-md">For rooted devices through KernelSU, Magisk or APatch, on a kernel built with the documented configuration.</p>
+        <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.6.0/Droidspaces-universal-v6.6.0-cff50fa.apk" class="button button-filled"><span class="icon" aria-hidden="true">download</span>Download the APK</a>
       </div>
-      <div style="text-align:center;margin-top:1.5rem">
-        <a href="https://github.com/ravindu644/Droidspaces-OSS/releases" class="btn btn-ghost" rel="noopener noreferrer">All Releases &rarr;</a>
+      <div class="card">
+        <h3><span class="icon" aria-hidden="true">terminal</span>Linux</h3>
+        <p class="body-md">A static binary for any distribution on kernel 3.10 or newer. Root, or a running droidspaces daemon.</p>
+        <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v6.6.0/droidspaces-v6.6.0-cff50fa.tar.gz" class="button button-tonal"><span class="icon" aria-hidden="true">download</span>Download the tarball</a>
       </div>
     </div>
+    <p class="body-md">Every release, with checksums, is on <a href="https://github.com/ravindu644/Droidspaces-OSS/releases" rel="noopener noreferrer">GitHub</a>.</p>
   </section>
-  <div class="divider"></div>
+
   <section class="section">
-    <div class="container">
-      <div class="section-label">Kernel Patches</div>
-      <h2>Download kernel patches</h2>
-      <p class="section-desc">Patches for custom kernel builds. Select your kernel type and version.</p>
-      <div class="patch-group"><h3 class="patch-group-title">GKI</h3>
+    <h2>Kernel patches.</h2>
+    <p class="title-lg">For custom kernel builds. Pick the set for your kernel type and version; the <a href="/docs/kernel-configuration.html">kernel configuration guide</a> says which one applies.</p>
+<div class="patch-group"><h3 class="patch-group-title">GKI</h3>
 <div class="patch-subgroup"><h4 class="patch-subgroup-title">below-kernel-6.12</h4><ul class="patch-list">
-<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_1_2_3.patch" download>001.GKI-below-6.12-fix_sysvipc_kabi_1_2_3.patch</a></li>
-<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_3_4_5.patch" download>001.GKI-below-6.12-fix_sysvipc_kabi_3_4_5.patch</a></li>
-<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch" download>001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch</a></li>
-<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/002.5.10_or_lower_use_android_abi_padding_for_posix_mqueue.patch" download>002.5.10_or_lower_use_android_abi_padding_for_posix_mqueue.patch</a></li>
+<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_1_2_3.patch" download><span class="icon" aria-hidden="true">download</span>001.GKI-below-6.12-fix_sysvipc_kabi_1_2_3.patch</a></li>
+<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_3_4_5.patch" download><span class="icon" aria-hidden="true">download</span>001.GKI-below-6.12-fix_sysvipc_kabi_3_4_5.patch</a></li>
+<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch" download><span class="icon" aria-hidden="true">download</span>001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch</a></li>
+<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/002.5.10_or_lower_use_android_abi_padding_for_posix_mqueue.patch" download><span class="icon" aria-hidden="true">download</span>002.5.10_or_lower_use_android_abi_padding_for_posix_mqueue.patch</a></li>
 </ul></div>
 <div class="patch-subgroup"><h4 class="patch-subgroup-title">kernel-6.12</h4><ul class="patch-list">
-<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/kernel-6.12/001.GKI-6.12-or-above-fix_sysvipc_kabi.patch" download>001.GKI-6.12-or-above-fix_sysvipc_kabi.patch</a></li>
+<li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/kernel-6.12/001.GKI-6.12-or-above-fix_sysvipc_kabi.patch" download><span class="icon" aria-hidden="true">download</span>001.GKI-6.12-or-above-fix_sysvipc_kabi.patch</a></li>
 </ul></div>
 </div>
 <div class="patch-group"><h3 class="patch-group-title">non-GKI</h3>
-<ul class="patch-list"><li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/non-GKI/01.fix_kernel_panic_in_xt_qtaguid.patch" download>01.fix_kernel_panic_in_xt_qtaguid.patch</a></li></ul>
-<ul class="patch-list"><li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/non-GKI/02.fix_restore%20cgroup%20file%20prefix%20handling%20.patch" download>02.fix_restore cgroup file prefix handling .patch</a></li></ul>
+<ul class="patch-list"><li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/non-GKI/01.fix_kernel_panic_in_xt_qtaguid.patch" download><span class="icon" aria-hidden="true">download</span>01.fix_kernel_panic_in_xt_qtaguid.patch</a></li></ul>
+<ul class="patch-list"><li><a href="https://raw.githubusercontent.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/non-GKI/02.fix_restore%20cgroup%20file%20prefix%20handling%20.patch" download><span class="icon" aria-hidden="true">download</span>02.fix_restore cgroup file prefix handling .patch</a></li></ul>
 </div>
-    </div>
   </section>
-  <div class="divider"></div>
+
   <section class="section">
-    <div class="container">
-      <div class="section-label">Changelog</div>
-      <h2>v6.6.0</h2>
-      <div class="changelog-wrap">
-        <div class="changelog" id="changelog-body">
-          <h2 id="whats-changed">What's Changed</h2>
+    <h2>What changed in v6.6.0.</h2>
+    <details class="changelog">
+      <summary>Show the changelog</summary>
+<h2 id="whats-changed">What's Changed</h2>
 <ul>
 <li>droidspaces: bump v6.6.0 (cff50fa)
 </li>
@@ -169,21 +158,15 @@
 </ul>
 <hr>
 <p><strong>Automated Release by Droidspaces CI</strong></p>
-        </div>
-        <button class="changelog-toggle" id="changelog-toggle" onclick="document.getElementById('changelog-body').classList.toggle('expanded');this.textContent=this.textContent==='Show changelog'?'Hide changelog':'Show changelog'">Show changelog</button>
-      </div>
-    </div>
+    </details>
   </section>
-  <div class="divider"></div>
+
   <section class="section">
-    <div class="container">
-      <div class="section-label">Older Versions</div>
-      <h2>Previous releases</h2>
-      <div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody><tr><td>Droidspaces v6.5.5</td><td>2026-09-08</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.5.5" class="dl-secondary">Download</a></td></tr>
-<tr><td>Droidspaces v6.5.0</td><td>2026-08-09</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.5.0" class="dl-secondary">Download</a></td></tr>
-<tr><td>Droidspaces v6.4.5</td><td>2026-07-17</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.4.5" class="dl-secondary">Download</a></td></tr>
-<tr><td>Droidspaces v6.4.0</td><td>2026-07-04</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.4.0" class="dl-secondary">Download</a></td></tr></tbody></table></div>
-    </div>
+    <h2>Previous releases.</h2>
+<div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody><tr><td>Droidspaces v6.5.5</td><td>2026-09-08</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.5.5" rel="noopener noreferrer">Release page</a></td></tr>
+<tr><td>Droidspaces v6.5.0</td><td>2026-08-09</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.5.0" rel="noopener noreferrer">Release page</a></td></tr>
+<tr><td>Droidspaces v6.4.5</td><td>2026-07-17</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.4.5" rel="noopener noreferrer">Release page</a></td></tr>
+<tr><td>Droidspaces v6.4.0</td><td>2026-07-04</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.4.0" rel="noopener noreferrer">Release page</a></td></tr></tbody></table></div>
   </section>
 </main>
 <footer class="footer">
@@ -218,6 +201,7 @@
     </div>
   </div>
 </footer>
+
 <script src="/assets/js/site.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Download Droidspaces: the APK for Android, the tarball for Linux, kernel patches and changelogs.">
+  <title>Downloads - Droidspaces</title>
+  <meta property="og:title" content="Downloads - Droidspaces">
+  <meta property="og:description" content="Download Droidspaces: the APK for Android, the tarball for Linux, kernel patches and changelogs.">
+  <meta property="og:url" content="https://www.droidspaces.org/downloads.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Downloads - Droidspaces">
+  <meta name="twitter:description" content="Download Droidspaces: the APK for Android, the tarball for Linux, kernel patches and changelogs.">
+  <meta name="twitter:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
+  <link rel="canonical" href="https://www.droidspaces.org/downloads.html">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.ico">
+  <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body>
+<!--NAV_START-->
+{{NAV}}
+<!--NAV_END-->
+<main>
+  <section class="section">
+    <h1>Downloads.</h1>
+    <p class="title-lg">Version {{VERSION}}, released {{DATE}}. The APK carries the runtime and the app. Linux gets a static tarball with no dependencies.</p>
+    <div class="columns download-cards">
+      <div class="card">
+        <h3><span class="icon" aria-hidden="true">android</span>Android</h3>
+        <p class="body-md">For rooted devices through KernelSU, Magisk or APatch, on a kernel built with the documented configuration.</p>
+        <a href="{{APK_URL}}" class="button button-filled"><span class="icon" aria-hidden="true">download</span>Download the APK</a>
+      </div>
+      <div class="card">
+        <h3><span class="icon" aria-hidden="true">terminal</span>Linux</h3>
+        <p class="body-md">A static binary for any distribution on kernel 3.10 or newer. Root, or a running droidspaces daemon.</p>
+        <a href="{{TAR_URL}}" class="button button-tonal"><span class="icon" aria-hidden="true">download</span>Download the tarball</a>
+      </div>
+    </div>
+    <p class="body-md">Every release, with checksums, is on <a href="https://github.com/ravindu644/Droidspaces-OSS/releases" rel="noopener noreferrer">GitHub</a>.</p>
+  </section>
+
+  <section class="section">
+    <h2>Kernel patches.</h2>
+    <p class="title-lg">For custom kernel builds. Pick the set for your kernel type and version; the <a href="/docs/kernel-configuration.html">kernel configuration guide</a> says which one applies.</p>
+{{PATCHES}}
+  </section>
+
+  <section class="section">
+    <h2>What changed in {{VERSION}}.</h2>
+    <details class="changelog">
+      <summary>Show the changelog</summary>
+{{CHANGELOG}}
+    </details>
+  </section>
+
+  <section class="section">
+    <h2>Previous releases.</h2>
+{{OLDER}}
+  </section>
+</main>
+{{FOOTER}}
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>
