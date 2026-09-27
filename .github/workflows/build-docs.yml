@@ -22,6 +22,9 @@ jobs:
           mkdir -p docs/content
           cp -r /tmp/source/Documentation/. docs/content/
 
+      - name: Install the build's Markdown renderer and highlighter
+        run: pip install markdown-it-py mdit-py-plugins pygments
+
       - name: Build HTML
         run: python3 .github/scripts/build-docs.py
 
