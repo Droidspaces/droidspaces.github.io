@@ -62,6 +62,9 @@ h3, .title-md { font-size: 16px; line-height: 24px; font-weight: 600; letter-spa
 .label-lg { font-size: 14px; line-height: 20px; font-weight: 600; letter-spacing: 0.1px; }
 .label-md { font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: 0.5px; }
 code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-spacing: 0; }
+/* no one-word last line under a headline, no orphan at the end of a paragraph */
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
 /* display-md under 600, and from 840 to 1199 where the hero's 5fr column is too narrow for 57px */
 @media (max-width: 599px), (min-width: 840px) and (max-width: 1199px) { h1, .display-lg { font-size: 45px; line-height: 52px; } }
 
@@ -285,6 +288,9 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
 .nav-links a:hover { background: color-mix(in srgb, transparent, var(--md-sys-color-on-surface) 8%); color: var(--md-sys-color-on-surface); }
 .nav-links a[aria-current="page"] { color: var(--md-sys-color-primary); }
 .nav-menu, .nav-close { display: none; }
+/* skip link: the first tab stop, off screen until focused, so a keyboard user can pass the nav */
+.skip-link { position: absolute; z-index: 11; top: 4px; left: 16px; translate: 0 -200%; }
+.skip-link:focus { translate: 0 0; }
 .nav-drawer { display: contents; } /* the drawer is a popover; above 840 its links sit in the bar */
 /* the toggle shows the scheme you would switch to; picked in CSS so it is right before any script runs */
 .theme-toggle .icon::before { content: "light_mode"; }
@@ -450,7 +456,7 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
 
 /* table: the comparison. Header a tier up, rules in outline-variant, the Droidspaces column tinted */
 .table-wrap { overflow-x: auto; border: 1px solid var(--md-sys-color-outline-variant); border-radius: var(--md-sys-shape-corner-xl); background: var(--md-sys-color-surface-container); }
-table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 20px; letter-spacing: 0.25px; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 14px; line-height: 20px; letter-spacing: 0.25px; }
 th { padding: 12px 16px; text-align: left; background: var(--md-sys-color-surface-container-high); color: var(--md-sys-color-on-surface-variant); font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: 0.5px; white-space: nowrap; }
 td { padding: 12px 16px; border-top: 1px solid var(--md-sys-color-outline-variant); color: var(--md-sys-color-on-surface-variant); vertical-align: top; }
 td:first-child { color: var(--md-sys-color-on-surface); }
