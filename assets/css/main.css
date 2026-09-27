@@ -1,1 +1,2 @@
 /* Docs layout only: sidebar, prose column, callouts. Components come from site.css. Restyled in step 5. */
+@media (min-width: 840px) { .sidebar { display: block; } } /* the sidebar is a popover under 840; above it is always shown */

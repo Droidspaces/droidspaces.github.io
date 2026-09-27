@@ -44,7 +44,7 @@ def consume_code(lines, i):
         else:
             buf.append(lines[i] + '\n')
         i += 1
-    return f'<div class="code-block"><button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button><pre><code>{"".join(buf)}</code></pre></div>', i
+    return f'<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>{"".join(buf)}</code></pre></div>', i
 
 def md_to_html(md):
     lines = md.split('\n')
@@ -377,8 +377,8 @@ def sidebar(pages, slug):
         lines.append('<div class="sidebar-group">')
         lines.append(f'<div class="sidebar-heading">{section}</div>')
         for href, label in groups[section]:
-            active = ' active' if href == slug else ''
-            lines.append(f'<a href="{href}.html" class="sidebar-link{active}">{label}</a>')
+            active = ' aria-current="page"' if href == slug else ''
+            lines.append(f'<a href="{href}.html" class="sidebar-link"{active}>{label}</a>')
         lines.append('</div>')
     return '\n'.join(lines)
 
@@ -392,11 +392,11 @@ def nav_buttons(pages, slug):
     prev_link = next_link = ''
     if idx > 0:
         p = slugs[idx - 1]
-        prev_link = f'<a href="{p}.html" class="doc-nav-btn doc-nav-prev">\u2190 {labels[p]}</a>'
+        prev_link = f'<a href="{p}.html" class="doc-nav-prev"><small>Previous</small>{labels[p]}</a>'
     if idx < len(slugs) - 1:
         n = slugs[idx + 1]
-        next_link = f'<a href="{n}.html" class="doc-nav-btn doc-nav-next">{labels[n]} \u2192</a>'
-    return f'<div class="doc-nav-buttons">{prev_link}{next_link}</div>'
+        next_link = f'<a href="{n}.html" class="doc-nav-next"><small>Next</small>{labels[n]}</a>'
+    return f'<nav class="doc-nav" aria-label="Pages">{prev_link}{next_link}</nav>'
 
 def breadcrumb(pages, slug):
     m = {p[0]: (p[2], p[1]) for p in pages}
@@ -411,6 +411,8 @@ def breadcrumb(pages, slug):
     parts.append(f'<span class="bc-label">{label}</span>')
     return ''.join(parts)
 
+TEMPLATE = open(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'template.html')).read()
+
 def make_page(title, body, slug, nav_template, footer_template, pages, is_index=False):
     s = sidebar(pages, slug)
     nav_btns = nav_buttons(pages, slug)
@@ -423,150 +425,12 @@ def make_page(title, body, slug, nav_template, footer_template, pages, is_index=
     desc = seo.get('desc', f'Droidspaces documentation - {title}')
     keywords = seo.get('keywords', 'Droidspaces, Linux containers, Android containers')
 
-    nav_html = nav_template.replace('{{FEATURES_HREF}}', '/#features').replace('{{DOCS_STYLE}}', 'style="color:var(--accent2)"')
-    footer_html = footer_template
-
-    return f'''<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="{desc}">
-  <meta name="keywords" content="{keywords}">
-  <title>{title} - Droidspaces Docs</title>
-  <meta property="og:title" content="{title} - Droidspaces Docs">
-  <meta property="og:description" content="{desc}">
-  <meta property="og:url" content="https://www.droidspaces.org/docs/{slug}.html">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{title} - Droidspaces Docs">
-  <meta name="twitter:description" content="{desc}">
-  <meta name="twitter:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
-  <link rel="canonical" href="https://www.droidspaces.org/docs/{slug}.html">
-  <link rel="icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/site.css">
-  <link rel="stylesheet" href="/assets/css/main.css">
-  <script>
-    (function () {{
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
-    }})();
-  </script>
-</head>
-<body>
-  {nav_html}
-  <div class="nav-overlay" id="sidebar-overlay"></div>
-
-  <div class="doc-breadcrumb" id="sidebar-toggle" role="button" tabindex="0" aria-label="Toggle docs navigation">
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0">
-      <rect x="3" y="3" width="18" height="18" rx="2"/>
-      <line x1="9" y1="3" x2="9" y2="21"/>
-    </svg>
-    {bc_html}
-  </div>
-
-  <div class="docs-layout">
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-inner">
-        <button class="sidebar-close" id="sidebar-close" aria-label="Close sidebar">&times;</button>
-{s}
-      </div>
-    </aside>
-    <div class="sidebar-content">
-{body}
-{nav_btns}
-      <p class="doc-copyright">{footer_html}</p>
-    </div>
-  </div>
-
-  <script>
-    (() => {{
-      const themeToggle = document.getElementById('theme-toggle');
-      const sunIcon = themeToggle.querySelector('.sun-icon');
-      const moonIcon = themeToggle.querySelector('.moon-icon');
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
-      function updateIcons(theme) {{
-        sunIcon.style.display = theme === 'light' ? 'none' : 'block';
-        moonIcon.style.display = theme === 'light' ? 'block' : 'none';
-      }}
-      function getEffectiveTheme() {{
-        const saved = localStorage.getItem('theme');
-        if (saved) return saved;
-        return mediaQuery.matches ? 'light' : 'dark';
-      }}
-      function applyTheme(theme) {{
-        if (theme === 'system') {{
-          document.documentElement.removeAttribute('data-theme');
-          updateIcons(mediaQuery.matches ? 'light' : 'dark');
-        }} else {{
-          document.documentElement.setAttribute('data-theme', theme);
-          updateIcons(theme);
-        }}
-      }}
-      applyTheme(getEffectiveTheme());
-      mediaQuery.addEventListener('change', (e) => {{
-        if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'light' : 'dark');
-      }});
-      themeToggle.addEventListener('click', () => {{
-        const currentTheme = getEffectiveTheme();
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('theme', newTheme);
-        applyTheme(newTheme);
-      }});
-      // Docs sidebar toggle
-      const sidebarToggle = document.getElementById('sidebar-toggle');
-      const sidebar = document.getElementById('sidebar');
-      const sidebarOverlay = document.getElementById('sidebar-overlay');
-
-      function openSidebar() {{
-        sidebar.classList.add('open');
-        sidebarOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }}
-
-      function closeSidebar() {{
-        sidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-      }}
-
-      if (sidebarToggle) {{
-        sidebarToggle.addEventListener('click', (e) => {{
-          e.stopPropagation();
-          if (sidebar.classList.contains('open')) closeSidebar();
-          else openSidebar();
-        }});
-      }}
-
-      if (sidebarOverlay) {{
-        sidebarOverlay.addEventListener('click', closeSidebar);
-      }}
-
-      const sidebarClose = document.getElementById('sidebar-close');
-      if (sidebarClose) {{
-        sidebarClose.addEventListener('click', closeSidebar);
-      }}
-
-      if (sidebar) {{
-        sidebar.querySelectorAll('a').forEach(link => {{
-          link.addEventListener('click', closeSidebar);
-        }});
-      }}
-    }})();
-    function copyCode(btn) {{
-      const code = btn.parentElement.querySelector('pre code');
-      const text = code.textContent;
-      navigator.clipboard.writeText(text).then(() => {{
-        const orig = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-        setTimeout(() => {{ btn.innerHTML = orig; }}, 1500);
-      }}).catch(() => {{}});
-    }}
-  </script>
-</body>
-</html>'''
+    nav_html = nav_template.replace('{{DOCS_ATTR}}', ' aria-current="page"').replace('{{DOWNLOADS_ATTR}}', '')
+    page = TEMPLATE
+    for key, value in {'TITLE': title, 'DESC': desc, 'KEYWORDS': keywords, 'SLUG': slug, 'NAV': nav_html,
+                       'BREADCRUMB': bc_html, 'SIDEBAR': s, 'BODY': body, 'DOC_NAV': nav_btns, 'FOOTER': footer_template}.items():
+        page = page.replace('{{' + key + '}}', value)
+    return page
 
 def fix_img_paths(html):
     return re.sub(r'Documentation/resources/', r'assets/resources/', html)
@@ -650,7 +514,7 @@ def fetch_latest_release():
 
 
 def build_downloads_page(root, nav_template, footer_template):
-    dl_nav = nav_template.replace('{{FEATURES_HREF}}', '/#features').replace('{{DOCS_STYLE}}', '')
+    dl_nav = nav_template.replace('{{DOCS_ATTR}}', '').replace('{{DOWNLOADS_ATTR}}', ' aria-current="page"')
     release_info = fetch_latest_release()
     patches_html = '''<div class="patch-group"><h3 class="patch-group-title">GKI</h3>
 <div class="patch-subgroup"><h4 class="patch-subgroup-title">below-kernel-6.12</h4><ul class="patch-list">
@@ -776,20 +640,8 @@ def build_downloads_page(root, nav_template, footer_template):
     </div>
   </section>
 </main>
-<footer>
 {footer_template}
-</footer>
-<script>
-(()=>{{
-  const t=document.getElementById('theme-toggle');if(!t)return;
-  const s=t.querySelector('.sun-icon'),m=t.querySelector('.moon-icon'),q=window.matchMedia('(prefers-color-scheme: light)');
-  function u(t){{t==='light'?(s.style.display='none',m.style.display='block'):(s.style.display='block',m.style.display='none')}}
-  function g(){{const s=localStorage.getItem('theme');return s||(q.matches?'light':'dark')}}
-  function a(t){{t==='system'?(document.documentElement.removeAttribute('data-theme'),u(q.matches?'light':'dark')):(document.documentElement.setAttribute('data-theme',t),u(t))}}
-  a(g());q.addEventListener('change',e=>{{if(!localStorage.getItem('theme'))a(e.matches?'light':'dark')}});
-  t.addEventListener('click',()=>{{const c=g(),n=c==='dark'?'light':'dark';localStorage.setItem('theme',n);a(n)}});
-}})();
-</script>
+<script src="/assets/js/site.js" defer></script>
 </body>
 </html>'''
     with open(os.path.join(root, 'downloads.html'), 'w') as f:
@@ -859,7 +711,7 @@ if __name__ == '__main__':
     index_path = os.path.join(root, 'index.html')
     with open(index_path) as f:
         index_html = f.read()
-    index_nav = nav_template.replace('{{FEATURES_HREF}}', '#features').replace('{{DOCS_STYLE}}', '')
+    index_nav = nav_template.replace('{{DOCS_ATTR}}', '').replace('{{DOWNLOADS_ATTR}}', '')
     index_html = re.sub(
         r'<!--NAV_START-->.*?<!--NAV_END-->',
         f'<!--NAV_START-->\n{index_nav}\n<!--NAV_END-->',
@@ -888,7 +740,7 @@ if __name__ == '__main__':
     build_downloads_page(root, nav_template, footer_template)
 
     # Generate 404.html
-    four04_nav = nav_template.replace('{{FEATURES_HREF}}', '/#features').replace('{{DOCS_STYLE}}', '')
+    four04_nav = nav_template.replace('{{DOCS_ATTR}}', '').replace('{{DOWNLOADS_ATTR}}', '')
     four04_html = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -921,9 +773,8 @@ if __name__ == '__main__':
       <a href="/docs/" class="btn btn-ghost">Browse Docs</a>
     </div>
   </main>
-  <footer>
-    <p>{footer_template}</p>
-  </footer>
+{footer_template}
+<script src="/assets/js/site.js" defer></script>
 </body>
 </html>'''
     with open(os.path.join(root, '404.html'), 'w') as f:
