@@ -240,7 +240,8 @@ def make_page(title, body, slug, nav_template, footer_template, pages, fname='')
 
     nav_html = nav_template.replace('{{DOCS_ATTR}}', ' aria-current="page"').replace('{{DOWNLOADS_ATTR}}', '')
     if slug == 'community-supported-devices':
-        body = re.sub(r'(</h1>)', r'\1' + DEVICE_FILTER, body, count=1)
+        # right above the first device table, where the reader is when they want it
+        body = body.replace('<div class="table-wrap">', DEVICE_FILTER + '<div class="table-wrap">', 1)
     edit = f'https://github.com/ravindu644/Droidspaces-OSS/edit/main/Documentation/{fname}'
     return fill(os.path.join(ROOT, 'template.html'), {
         'TITLE': title, 'DESC': desc, 'KEYWORDS': keywords, 'SLUG': slug, 'NAV': nav_html,

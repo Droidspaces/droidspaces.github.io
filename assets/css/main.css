@@ -282,7 +282,18 @@ pre .gi { color: var(--md-sys-color-primary); }
 .search-empty { padding: 12px 16px; }
 
 /* device filter on the community devices page */
-.device-filter { display: grid; gap: 8px; margin: 0 auto 24px; }
+.device-filter {
+  /* sticks under the nav while the two long tables scroll past, so it is always in reach */
+  position: sticky;
+  top: 64px;
+  z-index: 4;
+  display: grid;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 12px 0;
+  background: var(--md-sys-color-surface);
+}
+@media (max-width: 839px) { .device-filter { top: 112px; } } /* below the breadcrumb bar as well */
 .device-filter[hidden] { display: none; }
 .device-filter label { font-size: 14px; line-height: 20px; font-weight: 600; letter-spacing: 0.1px; }
 .device-filter input {
