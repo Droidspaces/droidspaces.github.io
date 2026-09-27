@@ -190,7 +190,14 @@ kernel developer who will read the namespace list before believing anything.
 The home page opens on the reason the project exists, not on the technology: an old phone
 already has a battery, mobile data and a Linux kernel, so it can be a homelab that keeps running
 when the power cuts. The kernel developer's claim (systemd as PID 1, no emulation) is the line
-under it. Numbers on the page (release, stars, contributors) are stamped by the build from the
+under it.
+
+The second beat is the philosophy, and it is the project's reason to exist: the phone boots,
+Droidspaces starts the containers while the phone is still locked and encrypted, and the init
+system inside starts every service. Gitea, Jellyfin, a website: set up once, then forgotten, the
+way a Linux server is. Every later section supports that claim.
+
+Numbers on the page (release, stars, contributors) are stamped by the build from the
 GitHub API, never typed.
 
 The site has to feel like the Android app. Someone who installs the app after reading the site
@@ -360,8 +367,9 @@ not isolated: a phone shadow has to cross into the next section, and a section t
 cuts it off in a hard line; `main` clips
 horizontal overflow so it can never scroll the page either.
 
-The home page has six sections: the hero, init and services, the home server, the app carousel,
-the comparison, and requirements with the download.
+The home page has seven sections: the hero, why it matters (set it up once, forget it), a real
+Linux rather than an emulation, the network, the app carousel, the comparison, and requirements
+with the download.
 
 Feature sections alternate the side the phone sits on. Text, then phone; phone, then text. This
 replaces the row of six identical cards.
@@ -522,6 +530,14 @@ caption saying what the screen does. Exactly one phone is in front and only its 
 
 No JavaScript runs either mode.
 
+### Boot chain
+
+The one sequence on the home page: phone boots, Droidspaces starts the containers, the init
+system starts the services. An `<ol>` of three steps, each an `h3` in `title-md-emphasized` and
+one `body-md` line. Steps are joined by a 1px `outline-variant` rule through 12px ring markers in
+`outline-variant` on `surface`. No numerals and no `primary`: it is a chain of events, not a
+numbered feature list. It does not animate.
+
 ### Tables
 
 The comparison table is `surface-container` with a `surface-container-high` header row, 1px
@@ -603,7 +619,7 @@ Do keep a 48px minimum on anything tappable. This is the one rule design does no
 Don't use a gradient anywhere: not on a background, not on text, not as a glow behind a phone.
 Don't use a colour that is not in `tokens.css`.
 Don't put an uppercase, letter-spaced label above a heading.
-Don't number sections 01, 02, 03. Nothing on the site is a sequence except the install steps.
+Don't number sections 01, 02, 03. Nothing on the site is a sequence except the install steps and the boot chain.
 Don't join metadata with middle dots. Use a comma or a separate line.
 Don't append an arrow to a link or button label.
 Don't use an em dash. Use a comma, a full stop, or rewrite the sentence.
