@@ -1,4 +1,4 @@
-import re, os, json, urllib.request
+import re, os, json, subprocess, urllib.request
 
 def slugify(text):
     text = text.lower()
@@ -463,25 +463,41 @@ def fetch_kernel_patches():
             parts.append('</div>')
     return '\n'.join(parts)
 
-def fetch_repo_stats():
-    # Stars and contributors for the home page. None on any failure, so the last stamped value stays.
-    api = 'https://api.github.com/repos/ravindu644/Droidspaces-OSS'
+def fetch_stars():
+    # None on any failure, so the last stamped value stays
+    req = urllib.request.Request('https://api.github.com/repos/ravindu644/Droidspaces-OSS')
     token = os.environ.get('GITHUB_TOKEN')
-    def get(url):
-        req = urllib.request.Request(url)
-        if token:
-            req.add_header('Authorization', f'Bearer {token}')
-        return urllib.request.urlopen(req, timeout=10)
+    if token:
+        req.add_header('Authorization', f'Bearer {token}')
     try:
-        with get(api) as resp:
-            stars = json.loads(resp.read())['stargazers_count']
-        # one contributor per page, so the last page number is the count
-        with get(api + '/contributors?per_page=1&anon=1') as resp:
-            m = re.search(r'[?&]page=(\d+)>; rel="last"', resp.headers.get('Link', ''))
-            contributors = int(m.group(1)) if m else len(json.loads(resp.read()))
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            return f"{json.loads(resp.read())['stargazers_count']:,}"
     except Exception:
         return None
-    return {'stars': f'{stars:,}', 'contributors': f'{contributors:,}'}
+
+
+def count_contributors(repo):
+    # Commit authors plus Co-authored-by trailers, which is where Weblate credits its translators.
+    # The REST contributors endpoint misses both, and GitHub's own count drops anyone whose email
+    # is not on a GitHub account, so history is the only complete source. None if there is no history.
+    try:
+        log = subprocess.run(
+            ['git', '-C', repo, 'log', '--format=%aN <%aE>%n%(trailers:key=Co-authored-by,valueonly)'],
+            capture_output=True, text=True, check=True).stdout
+    except Exception:
+        return None
+    parent = {}
+    def find(x):
+        while parent.setdefault(x, x) != x:
+            x = parent[x]
+        return x
+    for line in set(log.splitlines()):
+        m = re.match(r'\s*(.+?)\s*<([^>]+)>', line)
+        if not m or re.search(r'weblate\.org|\[bot\]|copilot@github|noreply@anthropic', line, re.I):
+            continue  # Weblate's own accounts, bots and AI agents are not people
+        # the same name or the same email is the same person
+        parent[find('n:' + m.group(1).lower())] = find('e:' + m.group(2).lower())
+    return f"{len({find(k) for k in parent}):,}" if parent else None
 
 
 def fetch_latest_release():
@@ -674,9 +690,10 @@ if __name__ == '__main__':
             lambda m: f'{m.group(1)}{version.lstrip("v")}{m.group(2)}',
             index_html,
         )
-    stats = fetch_repo_stats()
-    if stats:
-        for key, value in stats.items():
+    stats = {'stars': fetch_stars(),
+             'contributors': count_contributors(os.environ.get('SOURCE_REPO', '/tmp/source'))}
+    for key, value in stats.items():
+        if value:
             index_html = re.sub(
                 rf'(<span data-{key}>)[^<]*(</span>)',
                 lambda m: f'{m.group(1)}{value}{m.group(2)}',
