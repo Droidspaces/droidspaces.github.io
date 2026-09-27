@@ -46,7 +46,8 @@ h3, .title-md { font-size: 16px; line-height: 24px; font-weight: 600; letter-spa
 .label-lg { font-size: 14px; line-height: 20px; font-weight: 600; letter-spacing: 0.1px; }
 .label-md { font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: 0.5px; }
 code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-spacing: 0; }
-@media (max-width: 599px) { h1, .display-lg { font-size: 45px; line-height: 52px; } }
+/* display-md under 600, and from 840 to 1199 where the hero's 5fr column is too narrow for 57px */
+@media (max-width: 599px), (min-width: 840px) and (max-width: 1199px) { h1, .display-lg { font-size: 45px; line-height: 52px; } }
 
 /* icon: Material Symbols Rounded, FILL 0 at rest (DESIGN.md Buttons) */
 .icon {
@@ -319,6 +320,7 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
   translate: -50% -50%;
   background: var(--md-sys-color-tertiary-container);
   mask: var(--shape) center / contain no-repeat;
+  z-index: -1; /* positioned and 640px wide, it would otherwise paint over the copy column beside it */
   --float: 20px;
   --float-period: 9s;
 }
@@ -354,6 +356,8 @@ td:first-child { color: var(--md-sys-color-on-surface); }
   .arrive { animation-timeline: view(); animation-range: entry 0% entry 60%; }
   .arrive[data-float] { animation-timeline: view(), auto; animation-range: entry 0% entry 60%, normal; }
 }
+
+main { overflow-x: clip; } /* a shape wider than its column must not scroll the page sideways */
 
 /* page layout: 1200px content, 24px gutters (16 under 600), sections 96 tall (64 under 840) */
 .section { max-width: 1248px; margin: 0 auto; padding: 96px 24px; }
