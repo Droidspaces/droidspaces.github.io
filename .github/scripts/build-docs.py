@@ -491,7 +491,13 @@ if __name__ == '__main__':
                 lambda m: f'{m.group(1)}{value}{m.group(2)}',
                 index_html,
             )
-    index_html = index_html.replace('{{FOOTER}}', footer_template)
+    # the home page keeps a rendered footer between markers, so the partial is swapped in like the nav
+    index_html = re.sub(
+        r'<!--FOOTER-->.*?<!--/FOOTER-->',
+        f'<!--FOOTER-->\n{footer_template}\n<!--/FOOTER-->',
+        index_html,
+        flags=re.DOTALL
+    )
     with open(index_path, 'w') as f:
         f.write(index_html)
     print("OK: index.html")
