@@ -398,6 +398,30 @@ def generate_sitemap(root, pages):
         f.write('\n'.join(lines) + '\n')
     print("OK: sitemap.xml")
 
+def stamp_assets(root):
+    """GitHub Pages lets browsers cache CSS, JS and fonts for four hours, so a deploy would pair new
+    HTML with old styles. Each asset URL carries a hash of the file, which changes only when it does.
+    Fonts and tokens are stamped inside site.css first, so a new font also gives site.css a new hash."""
+    import hashlib, glob
+    def ver(path):
+        return hashlib.sha256(open(path, 'rb').read()).hexdigest()[:10]
+    css_path = os.path.join(root, 'assets/css/site.css')
+    css = open(css_path).read()
+    css = re.sub(r'url\("\.\./fonts/([\w.-]+)(?:\?v=\w+)?"\)',
+                 lambda m: f'url("../fonts/{m.group(1)}?v={ver(os.path.join(root, "assets/fonts", m.group(1)))}")', css)
+    css = re.sub(r'@import url\("tokens\.css(?:\?v=\w+)?"\)',
+                 lambda m: f'@import url("tokens.css?v={ver(os.path.join(root, "assets/css/tokens.css"))}")', css)
+    open(css_path, 'w').write(css)
+    for page in glob.glob(os.path.join(root, '*.html')) + glob.glob(os.path.join(root, 'docs/*.html')):
+        if os.path.basename(page).startswith('template'):
+            continue
+        html = open(page).read()
+        stamped = re.sub(r'(/assets/(?:css|js)/[\w.-]+)(?:\?v=\w+)?"',
+                         lambda m: f'{m.group(1)}?v={ver(os.path.join(root, m.group(1).lstrip("/")))}"', html)
+        if stamped != html:
+            open(page, 'w').write(stamped)
+    print("OK: asset versions")
+
 if __name__ == '__main__':
     root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     docs_dir = os.path.join(root, 'docs/content')
@@ -482,3 +506,4 @@ if __name__ == '__main__':
     print("OK: 404.html")
 
     generate_sitemap(root, pages)
+    stamp_assets(root)
