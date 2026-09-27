@@ -461,8 +461,10 @@ lift, no shadow.
 ### Code blocks and terminal panes
 
 `surface-container-lowest`, radius 16, padding 20, JetBrains Mono. A copy button sits top-right
-as an icon button. The terminal pane on the hero is a real `<pre>`, not an image, with prompt in
-`primary`, output in `on-surface`, and the cursor block static. It does not type itself out.
+as an icon button. Where a terminal transcript appears it is a real `<pre>`, not an image, with
+prompt in `primary`, output in `on-surface`, and the cursor block static. It does not type itself
+out. The hero has no terminal pane: the phone screenshot already shows the runtime working, and a
+boot transcript beside it repeated the next section.
 
 ### Navigation
 
