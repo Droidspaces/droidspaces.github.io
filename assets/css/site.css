@@ -210,15 +210,21 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
 }
 .nav-links a:hover { background: color-mix(in srgb, transparent, var(--md-sys-color-on-surface) 8%); color: var(--md-sys-color-on-surface); }
 .nav-links a[aria-current="page"] { color: var(--md-sys-color-primary); }
-.nav-menu { display: none; }
+.nav-menu, .nav-close { display: none; }
+.nav-drawer { display: contents; } /* the drawer is a popover; above 840 its links sit in the bar */
+/* the toggle shows the scheme you would switch to; picked in CSS so it is right before any script runs */
+.theme-toggle .icon::before { content: "light_mode"; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .theme-toggle .icon::before { content: "dark_mode"; } }
+:root[data-theme="light"] .theme-toggle .icon::before { content: "dark_mode"; }
 @supports (animation-timeline: scroll()) {
   /* the bottom rule shows only once the page has scrolled, without JavaScript */
   @keyframes nav-rule { from { border-color: transparent; } }
   .nav { animation: nav-rule linear both; animation-timeline: scroll(root); animation-range: 0 64px; }
 }
 @media (max-width: 839px) {
-  .nav-menu { display: inline-flex; }
+  .nav-menu, .nav-close { display: inline-flex; }
   .nav-drawer {
+    display: none;
     position: fixed;
     inset: 0 0 0 auto;
     width: min(320px, 100%);
@@ -232,13 +238,12 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
     translate: 100% 0;
     transition: translate var(--motion-spatial-default), display var(--motion-spatial-default) allow-discrete, overlay var(--motion-spatial-default) allow-discrete;
   }
-  .nav-drawer:popover-open { translate: 0 0; }
+  .nav-drawer:popover-open { display: block; translate: 0 0; }
   @starting-style { .nav-drawer:popover-open { translate: 100% 0; } }
   .nav-drawer::backdrop { background: color-mix(in srgb, transparent, var(--md-sys-color-surface-container-lowest) 38%); }
   .nav-drawer .nav-links { flex-direction: column; align-items: stretch; }
   .nav-drawer .nav-links a { height: 56px; }
-  .nav-drawer .icon-button { position: absolute; top: 8px; right: 16px; }
-  .nav > .nav-inner > .nav-links { display: none; }
+  .nav-close { position: absolute; top: 8px; right: 16px; }
 }
 
 /* phone mockup: Galaxy S25 Ultra silhouette, fixed ratios (DESIGN.md Shapes). The only shadow on the site */
@@ -291,7 +296,9 @@ td:first-child { color: var(--md-sys-color-on-surface); }
 .footer a { color: inherit; }
 .footer ul { margin: 0; padding: 0; list-style: none; }
 .footer li { margin: 12px 0; }
-@media (min-width: 840px) { .footer-inner { grid-template-columns: 2fr 1fr 1fr; } }
+.footer h3 { margin: 0 0 12px; color: var(--md-sys-color-on-surface); }
+.footer p { margin: 12px 0 0; }
+@media (min-width: 840px) { .footer-inner { grid-template-columns: 2fr 1fr 1fr 1fr; } }
 
 /* motion: arrival for phones and shapes, once, when they enter. Text never animates */
 @keyframes float { to { transform: translateY(-12px); } }
