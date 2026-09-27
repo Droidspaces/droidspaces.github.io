@@ -722,7 +722,7 @@ if __name__ == '__main__':
     if release_info:
         version = release_info['version']
         index_html = re.sub(
-            r'(<div class="hero-badge"><span></span>)v[^<]+( · Open Source</div>)',
+            r'(<span data-version>)v[^<]+(</span>)',
             lambda m: f'{m.group(1)}{version}{m.group(2)}',
             index_html,
         )
