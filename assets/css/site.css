@@ -178,6 +178,33 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
   background: var(--md-sys-color-outline-variant);
 }
 .boot-chain p { margin: 4px 0 0; }
+/* the chain fills as it moves up the screen: each ring turns primary in order and the rule between
+   them fills. Scroll-linked, so it pauses when the reader stops and runs back if they scroll back.
+   The section's one primary; where view timelines are missing it stays drawn and unfilled */
+.chain-fill {
+  position: absolute;
+  left: 5.5px;
+  top: 18px;
+  bottom: -30px;
+  z-index: 1;
+  width: 1px;
+  background: var(--md-sys-color-primary);
+  transform-origin: top;
+  scale: 1 0;
+}
+@supports (animation-timeline: view()) {
+  .boot-chain { view-timeline: --chain; }
+  @keyframes chain-fill { to { scale: 1 1; } }
+  @keyframes chain-ring { to { border-color: var(--md-sys-color-primary); background: var(--md-sys-color-primary); } }
+  .boot-chain .chain-fill, .boot-chain li::before { animation: linear both; animation-timeline: --chain; }
+  .boot-chain li::before { z-index: 2; animation-name: chain-ring; }
+  .boot-chain .chain-fill { animation-name: chain-fill; }
+  .boot-chain li:nth-child(1)::before { animation-range: contain 0% contain 5%; }
+  .boot-chain li:nth-child(1) .chain-fill { animation-range: contain 5% contain 30%; }
+  .boot-chain li:nth-child(2)::before { animation-range: contain 30% contain 35%; }
+  .boot-chain li:nth-child(2) .chain-fill { animation-range: contain 35% contain 60%; }
+  .boot-chain li:nth-child(3)::before { animation-range: contain 60% contain 65%; }
+}
 
 /* card: tonal depth only, one border, no shadow. Hover steps one surface tier */
 .card {
@@ -359,7 +386,6 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  view-timeline: --group;
 }
 .phone-group .phone { flex: 0 0 100%; margin: 0; scroll-snap-align: center; } /* 100% of the padded box, so 76% of the scroller */
 /* stacked, the scroller runs edge to edge so its sides never cut a shadow into a visible box */
@@ -386,14 +412,12 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
   .phone-group .phone:hover figcaption,
   .phone-group:not(:has(.phone:hover)) .phone:focus-visible figcaption,
   .phone-group:not(:has(.phone:hover, .phone:focus-visible)) .phone:nth-child(2) figcaption { opacity: 1; }
-  @supports (animation-timeline: view()) {
-    /* the side phones fan out from behind the front one as the group arrives */
-    @keyframes fan-left { from { translate: 60% 0; } }
-    @keyframes fan-right { from { translate: -60% 0; } }
-    .phone-group .phone, .phone-group figcaption { animation: none; }
-    .phone-group .phone:first-child { animation: fan-left var(--motion-spatial-default) both; animation-timeline: --group; animation-range: entry 0% entry 80%; }
-    .phone-group .phone:last-child { animation: fan-right var(--motion-spatial-default) both; animation-timeline: --group; animation-range: entry 0% entry 80%; }
-  }
+  /* the side phones fan out from behind the front one when site.js marks the group arrived */
+  @keyframes fan-left { from { translate: 60% 0; } }
+  @keyframes fan-right { from { translate: -60% 0; } }
+  .phone-group .phone, .phone-group figcaption { animation: none; }
+  .phone-group.arrived .phone:first-child { animation: fan-left var(--motion-spatial-slow) both; }
+  .phone-group.arrived .phone:last-child { animation: fan-right var(--motion-spatial-slow) both; }
 }
 
 /* stage: a phone or phone group with the section's one decorative shape behind it */
@@ -440,20 +464,22 @@ td:first-child { color: var(--md-sys-color-on-surface); }
 .footer p { margin: 12px 0 0; }
 @media (min-width: 840px) { .footer-inner { grid-template-columns: 2fr 1fr 1fr 1fr; } }
 
-/* motion: arrival for phones and shapes, once, when they enter. Shapes then turn. Text never animates.
-   Nothing floats: two idle loops beside each other drift out of step and read as a glitch */
+/* motion: arrival for phones and shapes, once, when they reach the screen. Shapes then turn. Text never
+   animates. Nothing floats: two idle loops beside each other drift out of step and read as a glitch.
+   Arrival is timed, not scroll-driven: site.js adds .pending to an object below the screen and swaps it
+   for .arrived when it comes into view, so a fast flick and a slow scroll see the same entrance. Without
+   JavaScript neither class is ever set, so nothing is hidden */
 @keyframes arrive { from { opacity: 0; translate: 0 24px; } }
 /* a shape's translate centres it, so it arrives by scale instead */
 @keyframes shape-arrive { from { opacity: 0; scale: 0.9; } }
 /* shapes turn once every two minutes, like the M3 Expressive loading indicator they come from */
 @keyframes spin { to { rotate: 1turn; } }
-.arrive { animation: arrive var(--motion-spatial-default) both; }
-.shape.arrive { animation: shape-arrive var(--motion-spatial-default) both, spin 120s linear infinite; }
-@supports (animation-timeline: view()) {
-  .arrive { animation-timeline: view(); animation-range: entry 0% entry 60%; }
-  .shape.arrive { animation-timeline: view(), auto; animation-range: entry 0% entry 60%, normal; }
-}
-.shape-secondary.arrive { animation-direction: normal, reverse; } /* neighbouring shapes turn opposite ways */
+.arrive.pending { opacity: 0; }
+.arrive.arrived { animation: arrive var(--motion-spatial-slow) both; }
+.shape.arrive { animation: spin 120s linear infinite; }
+.shape.arrive.arrived { animation: shape-arrive var(--motion-spatial-slow) both, spin 120s linear infinite; }
+.shape-secondary.arrive { animation-direction: reverse; } /* neighbouring shapes turn opposite ways */
+.shape-secondary.arrive.arrived { animation-direction: normal, reverse; }
 
 main { overflow-x: clip; } /* a shape wider than its column must not scroll the page sideways */
 
@@ -503,11 +529,13 @@ main { overflow-x: clip; } /* a shape wider than its column must not scroll the 
   .card, .card-nested, .chip, pre, .table-wrap, .phone-screen, .phone-display { corner-shape: squircle; }
 }
 
-/* reduced motion is not optional: shapes stop turning, arrival is an instant fade, the press morph is off */
+/* reduced motion is not optional: shapes stop turning, arrival is an instant fade, the press morph is off,
+   the boot chain does not fill */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   @keyframes arrive { from { opacity: 0; } }
-  .arrive, .shape.arrive, .shape-secondary.arrive { animation: arrive var(--motion-effects-fast) both; }
+  .arrive.arrived, .shape.arrive, .shape.arrive.arrived, .shape-secondary.arrive.arrived { animation: arrive var(--motion-effects-fast) both; }
+  .boot-chain .chain-fill, .boot-chain li::before { animation: none; } /* the chain stays drawn, unfilled */
   .button:active { border-radius: var(--md-sys-shape-corner-xl); }
   .nav-drawer, .icon, .button, .card, .chip, .phone-group .phone, .phone-group figcaption { transition: none; }
   .phone-group .phone:nth-child(n) { animation: none; } /* no fan-out, no scroller scale; the swipe itself still works */
