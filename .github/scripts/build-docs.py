@@ -1,278 +1,84 @@
 import re, os, json, subprocess, urllib.request
 
 def slugify(text):
-    text = text.lower()
-    text = re.sub(r'[^a-z0-9\s\u4e00-\u9fff-]', '', text)
-    text = re.sub(r'[\s]+', '-', text)
-    text = re.sub(r'-+', '-', text)
-    return text.strip('-')
+    # GitHub's heading ids, exactly, so every link written against GitHub's renderer works here:
+    # drop punctuation, one hyphen per space, never collapse ("A + B" is "a--b")
+    return re.sub(r'[^\w\- ]', '', text.strip().lower()).replace(' ', '-')
+
+REPO = 'https://github.com/ravindu644/Droidspaces-OSS'
 
 def fix_link(url):
-    if url.endswith('.md') or '.md#' in url:
-        url = url.lower().replace('.md', '.html')
-    elif (url.endswith('.html') or '.html#' in url) and not url.startswith('http'):
-        url = url.lower()
-    return url
+    """A docs page links to another page (.md becomes .html), or to a file the site does not host,
+    which goes to the repository on GitHub instead of a 404."""
+    if url.startswith(('http', '#', 'mailto:', '/')):
+        return url
+    path, _, frag = url.partition('#')
+    frag = f'#{frag}' if frag else ''
+    if path.startswith('../'):
+        return f'{REPO}/blob/main/{path[3:]}{frag}'
+    path = path.removeprefix('./')
+    if path.endswith('.md') or path.endswith('.html'):
+        return path.lower().replace('.md', '.html') + frag
+    return f'{REPO}/tree/main/Documentation/{path}{frag}'
 
-def inline_format(text):
-    code_spans = []
-    def save_code(m):
-        code_spans.append(m.group(1))
-        return f'\x00CODE{len(code_spans)-1}\x00'
-    text = re.sub(r'`([^`]+)`', save_code, text)
-    text = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', r'<img src="\2" alt="\1">', text)
-    text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', lambda m: f'<a href="{fix_link(m.group(2))}" rel="noopener noreferrer">{m.group(1)}</a>', text)
-    text = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', text)
-    text = re.sub(r'(?<!\*)\*([^*]+)\*(?!\*)', r'<em>\1</em>', text)
-    text = re.sub(r'~~([^~]+)~~', r'<del>\1</del>', text)
-    for i, cs in enumerate(code_spans):
-        text = text.replace(f'\x00CODE{i}\x00', f'<code>{cs}</code>')
-    return text
+from html import escape, unescape
+from markdown_it import MarkdownIt
+from mdit_py_plugins.anchors import anchors_plugin
+from pygments import highlight
+from pygments.formatters import HtmlFormatter
+from pygments.lexers import get_lexer_by_name
+from pygments.util import ClassNotFound
 
-def consume_code(lines, i):
-    lang = lines[i].lstrip()[3:].strip()
-    indent = len(lines[i]) - len(lines[i].lstrip())
-    buf = []
-    i += 1
-    while i < len(lines):
-        stripped = lines[i].lstrip()
-        if stripped.startswith('```'):
-            i += 1
-            break
-        if indent > 0 and len(lines[i]) >= indent:
-            buf.append(lines[i][indent:] + '\n')
-        else:
-            buf.append(lines[i] + '\n')
-        i += 1
-    return f'<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>{"".join(buf)}</code></pre></div>', i
+COPY_BUTTON = '<button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button>'
+
+def render_code(self, tokens, idx, options, env):
+    # Highlighted at build time, so the page needs no script and no third-party request to colour code
+    tok = tokens[idx]
+    lang = tok.info.strip().split()[0].lower() if tok.info.strip() else ''
+    try:
+        code = highlight(tok.content, get_lexer_by_name(lang), HtmlFormatter(nowrap=True))
+    except ClassNotFound:
+        code = escape(tok.content)
+    label = f'<span class="code-lang">{escape(lang)}</span>' if lang else ''
+    return f'<div class="code-block">{label}{COPY_BUTTON}<pre><code>{code}</code></pre></div>\n'
+
+MD = (MarkdownIt('commonmark', {'html': True})  # html: the docs use <details> and <a id> anchors
+      .enable(['table', 'strikethrough'])
+      .use(anchors_plugin, min_level=1, max_level=4, slug_func=slugify, permalink=True, permalinkSymbol='#'))
+MD.add_render_rule('fence', render_code)
+MD.add_render_rule('code_block', render_code)
 
 def md_to_html(md):
-    lines = md.split('\n')
-    html = []
-    i = 0
-    while i < len(lines):
-        line = lines[i]
-        if not line.strip():
-            i += 1
-            continue
-        if line.lstrip().startswith('```'):
-            code_html, i = consume_code(lines, i)
-            html.append(code_html)
-            continue
-        if re.match(r'^[-*_]{3,}\s*$', line):
-            html.append('<hr>')
-            i += 1
-            continue
+    html = MD.render(md)
+    # GitHub alerts: > [!NOTE] becomes the site's callout
+    html = re.sub(r'<blockquote>\s*<p>\[!(\w+)\]\s*(?:</p>\s*<p>|<br\s*/?>\s*)?(.*?)</blockquote>',
+                  lambda m: f'<div class="callout callout-{m.group(1).lower()}"><strong class="callout-title">{m.group(1).capitalize()}</strong><p>{m.group(2).strip()}</div>',
+                  html, flags=re.S)
+    html = re.sub(r'<p>\s*</p>', '', html)
+    html = html.replace('<table>', '<div class="table-wrap"><table>').replace('</table>', '</table></div>')
+    def link(m):
+        url = m.group(1)
+        ext = ' rel="noopener noreferrer"' if url.startswith('http') else ''
+        return f'href="{fix_link(url)}"{ext}'
+    return re.sub(r'href="([^"]+)"', link, html)
 
-        # Inline anchor tag before heading
-        am = re.match(r'^<a\s+id="([^"]+)"\s*/?>\s*</a>\s*$', line.strip())
-        if am:
-            aid = am.group(1)
-            i += 1
-            if i < len(lines) and re.match(r'^(#{1,6})\s+', lines[i]):
-                hm = re.match(r'^(#{1,6})\s+(.+)$', lines[i])
-                level = len(hm.group(1))
-                text = inline_format(hm.group(2))
-                html.append(f'<h{level} id="{aid}">{text}</h{level}>')
-                i += 1
-                continue
-            else:
-                html.append(f'<a id="{aid}"></a>')
-                continue
+def plain(html):
+    return unescape(re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', html)).strip())  # text, not HTML: escaped again where it is written
 
-        # Headings
-        hm = re.match(r'^(#{1,6})\s+(.+)$', line)
-        if hm:
-            level = len(hm.group(1))
-            text = hm.group(2)
-            ain = re.search(r'<a\s+id="([^"]+)"\s*/?>\s*</a>\s*', text)
-            if ain:
-                aid = ain.group(1)
-                text = re.sub(r'<a\s+id="[^"]+"\s*/?>\s*</a>\s*', '', text).strip()
-            else:
-                aid = slugify(text)
-            html.append(f'<h{level} id="{aid}">{inline_format(text)}</h{level}>')
-            i += 1
-            continue
+def headings(html):
+    """(level, id, text) for every h2 and h3, for the on-this-page list and the search index."""
+    out = []
+    for m in re.finditer(r'<h([23]) id="([^"]+)"[^>]*>(.*?)</h\1>', html, re.S):
+        text = plain(re.sub(r'<a class="header-anchor".*?</a>', '', m.group(3), flags=re.S))
+        out.append((int(m.group(1)), m.group(2), text))
+    return out
 
-        # GFM Alerts
-        al = re.match(r'>\s*\[!(\w+)\]\s*$', line)
-        if al:
-            atype = al.group(1).upper()
-            i += 1
-            qlines = []
-            while i < len(lines):
-                ql = lines[i]
-                if ql.startswith('> '):
-                    qlines.append(ql[2:].strip())
-                    i += 1
-                elif ql.strip() == '>':
-                    i += 1
-                else:
-                    break
-            content = '\n'.join(qlines)
-            content = inline_format(content)
-            html.append(f'<div class="callout callout-{atype.lower()}"><strong class="callout-title">{atype}</strong> {content}</div>')
-            continue
+def toc(html):
+    items = ''.join(f'<li class="toc-h{lvl}"><a href="#{hid}">{escape(text)}</a></li>' for lvl, hid, text in headings(html))
+    return f'<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>{items}</ul></nav>' if items else ''
 
-        # Multi-line blockquote
-        if line.startswith('> ') and not re.match(r'>\s*\[!\w+\]', line):
-            qlines = []
-            while i < len(lines) and (lines[i].startswith('> ') or lines[i].strip() == '>'):
-                if lines[i].strip() == '>':
-                    i += 1
-                    continue
-                qlines.append(lines[i][2:].strip())
-                i += 1
-            content = ' '.join(qlines)
-            content = inline_format(content)
-            html.append(f'<blockquote><p>{content}</p></blockquote>')
-            continue
-
-        # Tables
-        if '|' in line and line.strip().startswith('|'):
-            rows = []
-            while i < len(lines) and '|' in lines[i] and lines[i].strip().startswith('|'):
-                rows.append(lines[i])
-                i += 1
-            html.append(convert_table(rows))
-            continue
-
-        # Lists (ordered and unordered) — stack-based recursive nesting
-        def is_list_item(ln):
-            return bool(re.match(r'^(\s*)(?:\d+\.|[-*+])\s+', ln))
-
-        def item_indent(ln):
-            m = re.match(r'^(\s*)', ln)
-            return len(m.group(1)) if m else 0
-
-        def item_tag(ln):
-            """Return 'ol' for ordered, 'ul' for unordered."""
-            stripped = ln.lstrip()
-            return 'ol' if re.match(r'^\d+\.\s+', stripped) else 'ul'
-
-        def item_text_content(ln):
-            return re.sub(r'^\s*(?:\d+\.|[-*+])\s+', '', ln)
-
-        def consume_list(lines, start, base_indent):
-            """Recursively parse a list starting at `start` with `base_indent`.
-            Returns (html_string, next_line_index)."""
-            i = start
-            tag = item_tag(lines[i])
-            parts = [f'<{tag}>']
-            while i < len(lines):
-                ln = lines[i]
-                if not ln.strip():
-                    # blank line — peek ahead to see if list continues
-                    j = i + 1
-                    while j < len(lines) and not lines[j].strip():
-                        j += 1
-                    if j < len(lines) and is_list_item(lines[j]) and item_indent(lines[j]) >= base_indent:
-                        i = j
-                        continue
-                    break
-                if not is_list_item(ln):
-                    break
-                ind = item_indent(ln)
-                if ind < base_indent:
-                    break
-                if ind > base_indent:
-                    # deeper — recurse as nested list inside current <li>
-                    nested_html, i = consume_list(lines, i, ind)
-                    parts.append(nested_html)
-                    continue
-                # Same indent — new sibling list item
-                # Close previous <li> if open
-                if parts[-1] != f'<{tag}>':
-                    parts.append('</li>')
-                text = inline_format(item_text_content(ln))
-                parts.append(f'<li>{text}')
-                i += 1
-                # Consume continuation content (code blocks, blockquotes, plain text)
-                while i < len(lines):
-                    cont = lines[i]
-                    if not cont.strip():
-                        # blank — check if continuation follows
-                        j = i + 1
-                        while j < len(lines) and not lines[j].strip():
-                            j += 1
-                        if j < len(lines):
-                            cind = item_indent(lines[j]) if is_list_item(lines[j]) else (len(lines[j]) - len(lines[j].lstrip()))
-                            if cind > base_indent:
-                                i = j
-                                continue
-                        break
-                    s = cont.lstrip()
-                    cind = len(cont) - len(s)
-                    if is_list_item(cont) and item_indent(cont) > base_indent:
-                        nested_html, i = consume_list(lines, i, item_indent(cont))
-                        parts.append(nested_html)
-                    elif is_list_item(cont) and item_indent(cont) == base_indent:
-                        break
-                    elif cind > base_indent and s.startswith('```'):
-                        ch, i = consume_code(lines, i)
-                        parts.append(ch)
-                    elif cind > base_indent and s.startswith('> '):
-                        parts.append(f'<blockquote>{inline_format(s[2:])}</blockquote>')
-                        i += 1
-                    elif cind > base_indent and s.strip():
-                        parts.append(f'<p>{inline_format(s)}</p>')
-                        i += 1
-                    else:
-                        break
-            # Close any open <li>
-            if parts and parts[-1] != f'<{tag}>':
-                parts.append('</li>')
-            parts.append(f'</{tag}>')
-            return '\n'.join(parts), i
-
-        if is_list_item(line):
-            base = item_indent(line)
-            list_html, i = consume_list(lines, i, base)
-            html.append(list_html)
-            continue
-
-        # Paragraph
-        para = []
-        while i < len(lines) and lines[i].strip():
-            if lines[i].lstrip().startswith('```'):
-                break
-            text = inline_format(lines[i].rstrip())
-            if lines[i].endswith('  '):
-                text += '<br>'
-            para.append(text)
-            i += 1
-        if para:
-            html.append(f'<p>{" ".join(para)}</p>')
-        if i < len(lines) and lines[i].lstrip().startswith('```'):
-            code_html, i = consume_code(lines, i)
-            html.append(code_html)
-    return '\n'.join(html)
-
-def convert_table(rows):
-    if len(rows) < 2:
-        return ''
-    header = rows[0]
-    data = rows[2:]
-    cols = [c.strip() for c in header.split('|')]
-    if cols and not cols[0]: cols = cols[1:]
-    if cols and not cols[-1]: cols = cols[:-1]
-    html_s = '<div class="table-wrap"><table>\n<thead>\n<tr>'
-    for c in cols:
-        html_s += f'<th>{inline_format(c)}</th>'
-    html_s += '</tr>\n</thead>\n<tbody>\n'
-    for row in data:
-        cells = [c.strip() for c in row.split('|')]
-        if cells and not cells[0]: cells = cells[1:]
-        if cells and not cells[-1]: cells = cells[:-1]
-        if not any(c for c in cells):
-            continue
-        html_s += '<tr>'
-        for c in cells:
-            html_s += f'<td>{inline_format(c)}</td>'
-        html_s += '</tr>\n'
-    html_s += '</tbody>\n</table></div>'
-    return html_s
+DEVICE_FILTER = ('<div class="device-filter" hidden><label for="device-filter">Filter devices</label>'
+                 '<input id="device-filter" type="search" placeholder="Device, model, kernel or maintainer" autocomplete="off"></div>')
 
 SECTION_ORDER = {'Basics': 0, 'Guides': 1, 'Recipes': 2, 'Reference': 3}
 
@@ -374,12 +180,12 @@ def sidebar(pages, slug):
     for section in ['Basics', 'Guides', 'Recipes', 'Reference']:
         if section not in groups:
             continue
-        lines.append('<div class="sidebar-group">')
-        lines.append(f'<div class="sidebar-heading">{section}</div>')
+        # native <details>, so a group collapses without a script
+        lines.append(f'<details class="sidebar-group" open><summary class="sidebar-heading">{section}</summary>')
         for href, label in groups[section]:
             active = ' aria-current="page"' if href == slug else ''
             lines.append(f'<a href="{href}.html" class="sidebar-link"{active}>{label}</a>')
-        lines.append('</div>')
+        lines.append('</details>')
     return '\n'.join(lines)
 
 def nav_buttons(pages, slug):
@@ -420,7 +226,7 @@ def fill(template_path, values):
         page = page.replace('{{' + key + '}}', value)
     return page
 
-def make_page(title, body, slug, nav_template, footer_template, pages, is_index=False):
+def make_page(title, body, slug, nav_template, footer_template, pages, fname=''):
     s = sidebar(pages, slug)
     nav_btns = nav_buttons(pages, slug)
     bc_html = breadcrumb(pages, slug)
@@ -433,9 +239,13 @@ def make_page(title, body, slug, nav_template, footer_template, pages, is_index=
     keywords = seo.get('keywords', 'Droidspaces, Linux containers, Android containers')
 
     nav_html = nav_template.replace('{{DOCS_ATTR}}', ' aria-current="page"').replace('{{DOWNLOADS_ATTR}}', '')
+    if slug == 'community-supported-devices':
+        body = re.sub(r'(</h1>)', r'\1' + DEVICE_FILTER, body, count=1)
+    edit = f'https://github.com/ravindu644/Droidspaces-OSS/edit/main/Documentation/{fname}'
     return fill(os.path.join(ROOT, 'template.html'), {
         'TITLE': title, 'DESC': desc, 'KEYWORDS': keywords, 'SLUG': slug, 'NAV': nav_html,
-        'BREADCRUMB': bc_html, 'SIDEBAR': s, 'BODY': body, 'DOC_NAV': nav_btns, 'FOOTER': footer_template})
+        'BREADCRUMB': bc_html, 'SIDEBAR': s, 'BODY': body, 'DOC_NAV': nav_btns, 'FOOTER': footer_template,
+        'TOC': toc(body), 'EDIT_URL': edit})
 
 def fix_img_paths(html):
     return re.sub(r'Documentation/resources/', r'assets/resources/', html)
@@ -569,23 +379,12 @@ def build_downloads_page(root, nav_template, footer_template):
         f.write(html)
     print("OK: downloads.html")
 
-def generate_sitemap(root):
+def generate_sitemap(root, pages):
+    # every page the build rendered, so a page added or removed upstream is never stale here
     base = 'https://www.droidspaces.org'
-    today = '2026-05-23'
-    priorities = {
-        'index.html': ('/', 1.0),
-        'downloads.html': ('/downloads.html', 0.9),
-        '404.html': ('/404.html', 0.1),
-    }
-    doc_priorities = {
-        'installation-android': 0.9, 'installation-linux': 0.8,
-        'features': 0.7, 'gpu-acceleration': 0.7, 'kernel-configuration': 0.7,
-        'usage-android-app': 0.7, 'linux-cli': 0.7, 'cool-things-you-can-do': 0.6,
-        'troubleshooting': 0.6, 'community-supported-devices': 0.5,
-        'nix-nixos': 0.5, 'uninstallation': 0.5,
-    }
-    urls = [(loc, pri) for fname, (loc, pri) in priorities.items()]
-    urls += [(f'/docs/{slug}.html', pri) for slug, pri in doc_priorities.items()]
+    today = __import__('datetime').date.today().isoformat()
+    urls = [('/', 1.0), ('/downloads.html', 0.9)]
+    urls += [(f'/docs/{p[0]}.html', 0.9 if p[2] == 'Basics' else 0.7) for p in pages]
     lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for loc, pri in urls:
         lines.append('  <url>')
@@ -610,6 +409,7 @@ if __name__ == '__main__':
         footer_template = f.read()
 
     pages = load_pages(docs_dir)
+    search_index = []
 
     for slug, title, section, order, desc, keywords, fname in pages:
         path = os.path.join(docs_dir, fname)
@@ -622,11 +422,16 @@ if __name__ == '__main__':
         body = md_to_html(md)
         body = fix_img_paths(body)
         slug = fname.replace('.md', '').lower()
-        page = make_page(title, body, slug, nav_template, footer_template, pages)
+        page = make_page(title, body, slug, nav_template, footer_template, pages, fname)
+        search_index.append({'title': title, 'url': f'{slug}.html', 'section': section,
+                             'headings': [[hid, text] for _, hid, text in headings(body)], 'text': plain(body)})
         out_path = os.path.join(out_dir, slug + '.html')
         with open(out_path, 'w') as f:
             f.write(page)
         print(f"OK: {slug}.html")
+    with open(os.path.join(out_dir, 'search.json'), 'w') as f:
+        json.dump(search_index, f, ensure_ascii=False, separators=(',', ':'))
+    print("OK: search.json")
 
     # Stamp index.html
     index_path = os.path.join(root, 'index.html')
@@ -676,4 +481,4 @@ if __name__ == '__main__':
         f.write(four04_html)
     print("OK: 404.html")
 
-    generate_sitemap(root)
+    generate_sitemap(root, pages)
