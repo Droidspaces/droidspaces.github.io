@@ -28,64 +28,61 @@ colors:
   primary-fixed-dim: "#a7d2e8"
 typography:
   display-lg-emphasized:
-    fontFamily: Google Sans Flex
+    fontFamily: IBM Plex Sans
     fontSize: 57px
-    fontWeight: 500
+    fontWeight: 700
     lineHeight: 64px
     letterSpacing: 0px
-    fontVariation: '"ROND" 100'
   display-md-emphasized:
-    fontFamily: Google Sans Flex
+    fontFamily: IBM Plex Sans
     fontSize: 45px
-    fontWeight: 500
+    fontWeight: 700
     lineHeight: 52px
     letterSpacing: 0px
-    fontVariation: '"ROND" 100'
   headline-lg-emphasized:
-    fontFamily: Google Sans Flex
+    fontFamily: IBM Plex Sans
     fontSize: 32px
-    fontWeight: 500
+    fontWeight: 700
     lineHeight: 40px
     letterSpacing: 0px
-    fontVariation: '"ROND" 100'
   headline-md:
-    fontFamily: Google Sans Flex
+    fontFamily: IBM Plex Sans
     fontSize: 28px
     fontWeight: 400
     lineHeight: 36px
     letterSpacing: 0px
   title-lg:
-    fontFamily: Google Sans Flex
+    fontFamily: IBM Plex Sans
     fontSize: 22px
     fontWeight: 400
     lineHeight: 28px
     letterSpacing: 0px
   title-md-emphasized:
-    fontFamily: Google Sans Flex
+    fontFamily: IBM Plex Sans
     fontSize: 16px
-    fontWeight: 700
+    fontWeight: 600
     lineHeight: 24px
     letterSpacing: 0.15px
   body-lg:
-    fontFamily: Google Sans Flex
+    fontFamily: IBM Plex Sans
     fontSize: 16px
     fontWeight: 400
     lineHeight: 24px
     letterSpacing: 0.5px
   body-md:
-    fontFamily: Google Sans Flex
+    fontFamily: IBM Plex Sans
     fontSize: 14px
     fontWeight: 400
     lineHeight: 20px
     letterSpacing: 0.25px
   label-lg-emphasized:
-    fontFamily: Google Sans Flex
+    fontFamily: IBM Plex Sans
     fontSize: 14px
-    fontWeight: 700
+    fontWeight: 600
     lineHeight: 20px
     letterSpacing: 0.1px
   label-md:
-    fontFamily: Google Sans Flex
+    fontFamily: IBM Plex Sans
     fontSize: 12px
     fontWeight: 500
     lineHeight: 16px
@@ -286,11 +283,11 @@ the M3 state spec.
 
 One family for interface text, one for machine output. Nothing else.
 
-**Google Sans Flex** for everything a person wrote. It is the Material 3 Expressive brand
-typeface, released under the SIL Open Font License, and it carries the `ROND` axis that the
-emphasized styles depend on. Self-host it from Fontsource as a single latin-subset variable
-WOFF2. Never load it from Google Fonts at runtime, because the site should render with no
-third-party request.
+**IBM Plex Sans** for everything a person wrote. It is the face of the project's own artwork,
+it is released under the SIL Open Font License, and its plain, even strokes read as a technical
+document rather than a consumer app. Self-host it from Fontsource as a single latin-subset
+variable WOFF2 carrying the weight axis. Never load it from Google Fonts at runtime, because the
+site should render with no third-party request.
 
 **JetBrains Mono** for everything the machine wrote: commands, output, paths, unit names, kernel
 version strings. This matches the app, where machine output is JetBrains Mono from
@@ -298,24 +295,23 @@ version strings. This matches the app, where machine output is JetBrains Mono fr
 
 The scale is the Material 3 type scale. The 2021 sizes are unchanged in Expressive; what changed
 is the addition of *emphasized* styles, which take the same size and line height and bump the
-weight one step. Headings, hero copy and button labels use the emphasized style with
-`font-variation-settings: "ROND" 100`. Body copy uses the baseline style with `ROND` at 0. The
-contrast between rounded headings and square body text is the expressive signature, and it only
-works if body text stays un-rounded.
+weight. Here that step is 400 to 700 for display and headline styles and 400 to 600 for titles
+and labels. Body copy stays at 400. The contrast between heavy headings and light body text is
+the whole expressive signature, so nothing else is bold.
 
 | Element | Style | Notes |
 | --- | --- | --- |
-| Hero headline | `display-lg-emphasized` | 57/64, weight 500, ROND 100. Drops to `display-md-emphasized` under 600px |
-| Section headline | `headline-lg-emphasized` | 32/40, weight 500, ROND 100 |
-| Card title | `title-md-emphasized` | 16/24, weight 700 |
+| Hero headline | `display-lg-emphasized` | 57/64, weight 700. Drops to `display-md-emphasized` under 600px |
+| Section headline | `headline-lg-emphasized` | 32/40, weight 700 |
+| Card title | `title-md-emphasized` | 16/24, weight 600 |
 | Section intro paragraph | `title-lg` | 22/28, weight 400, `on-surface-variant` |
 | Body copy | `body-lg` | 16/24 |
 | Supporting text, captions | `body-md` | 14/20, `on-surface-variant` |
-| Button and chip label | `label-lg-emphasized` | 14/20, weight 700 |
+| Button and chip label | `label-lg-emphasized` | 14/20, weight 600 |
 | Table header, metadata | `label-md` | 12/16, weight 500 |
 | Code, terminal, commands | `code` | JetBrains Mono 14/22 |
 
-Optical size is on (`font-optical-sizing: auto`). Line length is capped at 68 characters for body
+Line length is capped at 68 characters for body
 copy (`max-width: 68ch`), which is where a 16px sans stays comfortable. Headlines do not track
 tighter than 0; letter-spacing of −2px on a display headline is a web-template habit, not a
 Material one.
@@ -411,7 +407,10 @@ Motion), and never carry text or icons. They are never `primary`. The SVG masks 
 
 The phone frame is its own shape and it is fixed: bezel at 1.75% of the frame width, outer radius
 7.8%, screen radius 6.2%, a centred punch-hole camera at 5.2% of the screen width, in the bezel
-colour, with nothing drawn inside it. Frame colour `#0a0f12` (`--phone-frame`). This is a Galaxy S25 Ultra
+colour, with nothing drawn inside it. Frame colour `#0a0f12` (`--phone-frame`). The screenshots stop at
+the app's title bar, so the mockup draws a status bar (time, camera, signal icons) and a gesture
+bar around them in the app's own surface colours (`--phone-app-surface`, `--phone-app-bar`,
+`--phone-app-on-surface`). This is a Galaxy S25 Ultra
 silhouette, thin and square, and it is the same on every page at every size. Screenshots inside
 it are `object-fit: cover; object-position: top`.
 

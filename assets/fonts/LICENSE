@@ -1,10 +1,10 @@
 Fonts self-hosted for droidspaces.org. Each file is a subset of the upstream font; nothing else
 was changed. Regenerate from the sources below with fontTools (varLib.instancer, then subset).
 
-GoogleSansFlex.woff2
-  Source: @fontsource-variable/google-sans-flex 5.3.1, google-sans-flex-latin-full-normal.woff2
-  Kept axes: wght 400 to 700, ROND 0 to 100, opsz 6 to 144. Pinned: wdth 100, slnt 0, GRAD 0.
-  Licence: SIL Open Font License 1.1 (below, "Google Sans Flex").
+IBMPlexSans.woff2
+  Source: @fontsource-variable/ibm-plex-sans 5.3.0, ibm-plex-sans-latin-wght-normal.woff2
+  Kept axis: wght 400 to 700.
+  Licence: SIL Open Font License 1.1 (below, "IBM Plex Sans").
 
 JetBrainsMono.woff2
   Source: @fontsource-variable/jetbrains-mono, jetbrains-mono-latin-wght-normal.woff2
@@ -19,8 +19,8 @@ MaterialSymbolsRounded.woff2
   so markup can use the icon name as text.
   Licence: Apache License 2.0 (below).
 
-==== Google Sans Flex
-Copyright 2015 Google LLC. All Rights Reserved.
+==== IBM Plex Sans
+Copyright 2019 IBM Corp. All rights reserved. IBMPlexSans-Italic[wdth,wght].ttf: Copyright 2019 IBM Corp. All rights reserved.
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:

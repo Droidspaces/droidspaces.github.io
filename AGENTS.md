@@ -44,7 +44,7 @@ value has a source in Google's Material 3 token files or the Droidspaces Android
 
 The closed-world rule: **use only values defined in DESIGN.md.** No hex literal outside
 `tokens.css`. No radius that is not on the shape scale. No gap that is not on the spacing scale.
-No font that is not Google Sans Flex or JetBrains Mono. No easing that is not one of the five
+No font that is not IBM Plex Sans or JetBrains Mono. No easing that is not one of the five
 spring tokens. No breakpoint that is not 600, 840, 1200 or 1600. If the value you want is not in
 the file, the file is telling you not to want it.
 
