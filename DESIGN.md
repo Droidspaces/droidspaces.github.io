@@ -359,8 +359,9 @@ Compact is under 600, medium to 839, expanded to 1199, large to 1599. Layouts co
 lines, not at 768 or 1024.
 
 The hero is a two-column split at expanded and above: copy on the left at 5/12, phone mockup on
-the right at 7/12, vertically centred. Under 840 it stacks, copy first, and the phone takes 80% of the column
-and the shape behind it 120%, so the shape still frames the phone on both sides. At 840 and up a
+the right at 7/12, vertically centred. Under 840 it stacks, copy first, and the phone takes 72% of the column
+(at most 380px) and the shape behind it the full column (at most 520px), so the shape frames the
+phone on both sides and never runs past the edge of the screen. At 840 and up a
 shape is never wider than its own column. It sits at `z-index: -1` inside a phone stage that sets
 `isolation: isolate`, so it stays behind the phone and never over copy. The section itself is
 not isolated: a phone shadow has to cross into the next section, and a section that isolates

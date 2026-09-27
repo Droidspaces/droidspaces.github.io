@@ -418,8 +418,9 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
   z-index: -1; /* positioned and 640px wide, it would otherwise paint over the copy column beside it */
 }
 .shape-secondary { background: var(--md-sys-color-secondary-container); }
-/* stacked, the phone gives up a fifth of the column so the shape behind it frames it on both sides */
-@media (max-width: 839px) { .stage > .phone { width: min(80%, 380px); } .shape { width: 120%; } }
+/* stacked, the shape stays inside the screen (a clipped shape reads as a rendering fault) and the
+   phone gives up a quarter of the column, so the shape still frames it on both sides */
+@media (max-width: 839px) { .stage > .phone { width: min(72%, 380px); } .shape { width: min(100%, 520px); } }
 
 /* table: the comparison. Header a tier up, rules in outline-variant, the Droidspaces column tinted */
 .table-wrap { overflow-x: auto; border: 1px solid var(--md-sys-color-outline-variant); border-radius: var(--md-sys-shape-corner-xl); background: var(--md-sys-color-surface-container); }
