@@ -137,6 +137,33 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
 .chip:hover { background: var(--md-sys-color-secondary-container); border-color: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
 .chip[aria-pressed="true"], .chip-selected { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
 
+/* boot chain: the one sequence on the home page besides install steps. Ring markers on a rule, no
+   numerals and no primary, so it reads as a chain of events rather than a numbered feature list */
+.boot-chain { display: grid; gap: 24px; margin: 0 0 32px; padding: 0; list-style: none; }
+.boot-chain li { position: relative; padding-left: 32px; }
+.boot-chain li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px; /* centres the 12px ring on the h3's 24px line */
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-full);
+  background: var(--md-sys-color-surface);
+}
+.boot-chain li:not(:last-child)::after {
+  /* the rule runs from under this ring to the top of the next one, across the 24px gap */
+  content: "";
+  position: absolute;
+  left: 5.5px;
+  top: 18px;
+  bottom: -30px;
+  width: 1px;
+  background: var(--md-sys-color-outline-variant);
+}
+.boot-chain p { margin: 4px 0 0; }
+
 /* card: tonal depth only, one border, no shadow. Hover steps one surface tier */
 .card {
   padding: 24px;

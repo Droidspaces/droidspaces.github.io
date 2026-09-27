@@ -121,24 +121,43 @@
 
   <section class="section split split-phone-left">
     <div class="stage">
+      <div class="shape arrive" style="--shape: url(/assets/shapes/sunny.svg)"></div>
+      <div class="phone arrive"><div class="phone-screen"><div class="phone-display"><img src="/assets/screenshots/systemd-services.webp" width="720" height="1428" alt="The Systemd Services screen of a container, with 20 units running, listing act_runner (the Gitea Actions runner), chrony, containerd and cron, each running with stop and disable buttons" loading="lazy" decoding="async"></div></div></div>
+    </div>
+    <div>
+      <h2>Set it up once. Forget it.</h2>
+      <p class="title-lg">Droidspaces is an alternative to Docker and LXC, built for a phone. Your services run the way they would on a Linux server, and after the first setup nothing needs you.</p>
+      <ol class="boot-chain">
+        <li><h3>Your phone boots.</h3><p class="body-md">After an update, a reboot or a flat battery.</p></li>
+        <li><h3>Droidspaces starts your containers.</h3><p class="body-md">From init.rc or a boot script, before you unlock the phone, while /data is still encrypted.</p></li>
+        <li><h3>The init system starts your services.</h3><p class="body-md">systemd or OpenRC brings up every enabled unit. No app to open, no command to type.</p></li>
+      </ol>
+      <ul class="chip-set" aria-label="Services people run in Droidspaces">
+        <li class="chip">Gitea</li><li class="chip">Jellyfin</li><li class="chip">Docmost</li><li class="chip">Tailscale</li><li class="chip">Trilium</li><li class="chip">VS Code server</li><li class="chip">Websites</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section split">
+    <div class="stage">
       <div class="shape shape-secondary arrive" style="--shape: url(/assets/shapes/cookie-9.svg)"></div>
       <div class="phone arrive"><div class="phone-screen"><div class="phone-display" data-bar><img src="/assets/screenshots/terminal.webp" width="720" height="1428" alt="The app's built-in terminal inside an Ubuntu container showing fastfetch output and systemctl status with systemd as PID 1 and services such as docker, gitea, jellyfin and ssh running" loading="lazy" decoding="async"></div></div></div>
     </div>
     <div>
-      <h2>Real init. Real services.</h2>
-      <p class="title-lg">Each container gets its own PID, mount, UTS, IPC and cgroup namespace. systemd boots in 150 to 750 ms and starts services the way it does on a server.</p>
+      <h2>A real Linux, not an emulation.</h2>
+      <p class="title-lg">Each container gets its own PID, mount, UTS, IPC and cgroup namespace on the phone's kernel. systemd boots as PID 1 in 150 to 750 ms.</p>
       <ul class="chip-set" aria-label="Init systems and what the kernel gives each container">
         <li class="chip">systemd</li><li class="chip">OpenRC</li><li class="chip">runit</li><li class="chip">s6</li><li class="chip">PID namespace</li><li class="chip">Mount namespace</li><li class="chip">Cgroup v1 and v2</li><li class="chip">journald</li>
       </ul>
     </div>
   </section>
 
-  <section class="section split">
+  <section class="section split split-phone-left">
     <div>
-      <h2>Put it on a shelf. It keeps serving.</h2>
-      <p class="title-lg">Containers start at boot from post-fs-data, service.d or init.rc. Each one has its own monitor process, detached from the app, so closing or uninstalling the app stops nothing. Inside, they run their own containers and sandboxes.</p>
+      <h2>It sits on your network like a server.</h2>
+      <p class="title-lg">Each container has its own monitor process, detached from the app, so closing or uninstalling the app stops nothing. Inside, it runs services the way a Docker or LXC host does, and its own containers and sandboxes too.</p>
       <ul class="chip-set" aria-label="Networking, and what runs inside a container">
-        <li class="chip">NAT networking</li><li class="chip">Port forwarding</li><li class="chip">OpenWRT as a gateway</li><li class="chip">Tailscale</li><li class="chip">Docker</li><li class="chip">Podman</li><li class="chip">Flatpak</li><li class="chip">bwrap</li>
+        <li class="chip">NAT networking</li><li class="chip">Host networking</li><li class="chip">Port forwarding</li><li class="chip">OpenWRT as a gateway</li><li class="chip">Docker</li><li class="chip">Podman</li><li class="chip">Flatpak</li><li class="chip">bwrap</li>
       </ul>
     </div>
     <div class="stage">
@@ -147,7 +166,7 @@
     </div>
   </section>
 
-  <section class="section split split-phone-left">
+  <section class="section split">
     <div class="stage">
       <div class="phone-group">
         <figure class="phone" tabindex="0"><div class="phone-screen"><div class="phone-display" data-bar><img src="/assets/screenshots/home.webp" width="720" height="1428" alt="The Home screen showing the backend installed with the daemon running, four containers, kernel version, SELinux enforcing, Android 15 and aarch64" loading="lazy" decoding="async"></div></div><figcaption class="body-md">Home: backend state, kernel and architecture.</figcaption></figure>
@@ -159,7 +178,7 @@
       <h2>Run it from the app.</h2>
       <p class="title-lg">Install, start, stop and edit containers, open a terminal inside one, and watch its CPU, memory and addresses. The phone's hardware is one switch each.</p>
       <ul class="chip-set" aria-label="Hardware the app hands to a container">
-        <li class="chip">Turnip on Adreno</li><li class="chip">VirGL</li><li class="chip">Termux:X11</li><li class="chip">PulseAudio</li><li class="chip">USB</li><li class="chip">Cameras and sensors</li>
+        <li class="chip">Turnip on Adreno</li><li class="chip">VirGL</li><li class="chip">Termux:X11</li><li class="chip">PulseAudio</li><li class="chip">USB</li><li class="chip">Sensors</li>
       </ul>
     </div>
   </section>
