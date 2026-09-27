@@ -105,7 +105,7 @@ Work down this list and stop at the first answer that holds.
 3. Does CSS already do it? Scroll-driven animations, `@starting-style`, `linear()` easings,
    `light-dark()`, `mask-image`, View Transitions. The site targets current Chrome, Safari and
    Firefox. Reach for JavaScript only for the theme toggle, the copy button, the mobile
-   drawer, and on docs pages the search dialog and the device filter. Both docs controls ship
+   drawer, the arrival trigger (it adds a class; the animation is CSS), and on docs pages the search dialog and the device filter. Both docs controls ship
    `hidden` and only the script reveals them, so a docs page without JavaScript is complete.
 4. Does an existing asset cover it? Screenshots come from the main repository's
    `Documentation/resources/`. Shapes come from `assets/shapes/`. Do not generate new imagery,

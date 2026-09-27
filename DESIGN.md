@@ -548,7 +548,7 @@ The one sequence on the home page: phone boots, Droidspaces starts the container
 system starts the services. An `<ol>` of three steps, each an `h3` in `title-md-emphasized` and
 one `body-md` line. Steps are joined by a 1px `outline-variant` rule through 12px ring markers in
 `outline-variant` on `surface`. No numerals and no `primary`: it is a chain of events, not a
-numbered feature list. It does not animate.
+numbered feature list. It fills with scroll (see Motion).
 
 ### Tables
 
@@ -583,33 +583,41 @@ and `--motion-float`, which is generated but unused since phones stopped floatin
 drawn, so `--motion-spatial-fast` really does overshoot by 9.5% and settle, the way the Android
 button does.
 
-**Five kinds of motion exist on the site, and nothing else moves:**
+**Six kinds of motion exist on the site, and nothing else moves:**
 
-1. **Arrival.** When a phone mockup or decorative shape enters the viewport, it translates up 24px
-   and fades in over `--motion-spatial-default`, once. Text does not animate in. Cards do not
+1. **Arrival.** When a phone mockup or decorative shape reaches the screen, it translates up 24px
+   and fades in over `--motion-spatial-slow`, once. It is timed, not scroll-driven: a scroll-linked
+   entrance ran at the scroll's speed, so a fast flick popped objects in and every scroll frame
+   repainted them. `site.js` watches with an IntersectionObserver and starts the CSS animation;
+   the motion itself is still CSS. Objects already on screen at load are left alone. Text does not animate in. Cards do not
    animate in. Only the objects. The section's headline is already there when you get to it.
 2. **Press and hover.** Buttons morph on press. Surfaces step a tier on hover. Chips take
    `secondary-container` on hover. Icons fill. All use the springs above.
 3. **Carousel.** A phone promoted by hover or focus scales to 100% over
    `--motion-spatial-default`; its caption fades over `--motion-effects-default`. In the swipe
    carousel the scale and caption follow the scroll position, not a timer. When the overlapping
-   group arrives, the side phones fan out from behind the front one over the same `view()` range
-   as arrival.
+   group arrives, the side phones fan out from behind the front one, on the same timed trigger as
+   arrival.
 4. **Shape turn.** Decorative shapes turn once every 120 seconds, linear, forever, the way the
    M3 Expressive loading indicator they come from turns. `secondary-container` shapes turn the
    other way, so neighbours never look like one pattern. The turn runs on a timer, not on scroll,
    so the page keeps moving while the visitor reads. A shape arrives by fading in from 90% scale
    rather than by translating, because its translate is what centres it.
-5. **Shape morph.** The loading indicator on the downloads page cycles through `cookie-12`,
+5. **Boot chain fill.** As the boot chain moves up the screen, each ring turns `primary` in order
+   and the rule between rings fills, on the chain's own `view()` timeline. It is scroll-linked on
+   purpose: it pauses when the reader stops and runs back when they scroll back. The page never
+   locks scrolling to play it; a page that stops scrolling reads as broken and fights keyboard and
+   assistive scrolling. The fill is the section's one `primary`.
+6. **Shape morph.** The loading indicator on the downloads page cycles through `cookie-12`,
    `clover-4` and `sunny` by morphing the mask, which is the M3 Expressive loading indicator.
    Nothing else morphs.
 
-Scroll-driven animation (`animation-timeline: view()`) drives the arrival where supported, with
-`@starting-style` as the fallback. Nothing is hidden until an animation fires: the page renders
+Only `site.js` ever hides an object before its arrival, and only one that is below the screen, so
+nothing is hidden without JavaScript: the page renders
 complete with JavaScript disabled and with `prefers-reduced-motion: reduce`, in which case the
 shape turn stops, arrival becomes an instant fade, the button morph is disabled, the
 carousel loses its fan-out and scale (it still swipes and still hovers, instantly), and the swipe
-carousel shows every caption. The reduced-motion
+carousel shows every caption, and the boot chain stays drawn without filling. The reduced-motion
 branch is not optional.
 
 There is no float, no parallax, no marquee, no typing effect, no counter that counts up, no pulsing dot, no
@@ -637,7 +645,7 @@ Don't append an arrow to a link or button label.
 Don't use an em dash. Use a comma, a full stop, or rewrite the sentence.
 Don't write "Unlock", "Supercharge", "Seamless", "Blazing fast", "Next-generation" or "Reimagine".
 Don't build a row of three or six identical icon-title-text cards.
-Don't animate text, and don't animate anything on scroll except arrival and the swipe carousel.
+Don't animate text, and don't animate anything on scroll except the swipe carousel and the boot chain fill.
 Don't add a second shadow, a glow, a frosted card, or a dot grid background.
 Don't load a font, icon or script from a third-party origin at runtime.
 
