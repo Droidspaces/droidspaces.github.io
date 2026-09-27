@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="GPU acceleration, PulseAudio sound, and desktop environment auto-boot for Droidspaces containers on Android and Linux.">
+  <meta name="description" content="GPU acceleration, PulseAudio sound and desktop environment auto-boot for Droidspaces containers on Android and Linux.">
   <meta name="keywords" content="gpu, acceleration, droidspaces, termux, virgl, turnip, adreno, pulseaudio, sound, audio, desktop, xfce, container, graphics">
-  <title>Display, Audio & Desktop - Droidspaces Docs</title>
-  <meta property="og:title" content="Display, Audio & Desktop - Droidspaces Docs">
-  <meta property="og:description" content="GPU acceleration, PulseAudio sound, and desktop environment auto-boot for Droidspaces containers on Android and Linux.">
+  <title>Display, audio & desktop - Droidspaces Docs</title>
+  <meta property="og:title" content="Display, audio & desktop - Droidspaces Docs">
+  <meta property="og:description" content="GPU acceleration, PulseAudio sound and desktop environment auto-boot for Droidspaces containers on Android and Linux.">
   <meta property="og:url" content="https://www.droidspaces.org/docs/graphics-and-audio.html">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Display, Audio & Desktop - Droidspaces Docs">
-  <meta name="twitter:description" content="GPU acceleration, PulseAudio sound, and desktop environment auto-boot for Droidspaces containers on Android and Linux.">
+  <meta name="twitter:title" content="Display, audio & desktop - Droidspaces Docs">
+  <meta name="twitter:description" content="GPU acceleration, PulseAudio sound and desktop environment auto-boot for Droidspaces containers on Android and Linux.">
   <meta name="twitter:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
   <link rel="canonical" href="https://www.droidspaces.org/docs/graphics-and-audio.html">
   <link rel="icon" href="/favicon.ico">
@@ -41,94 +41,94 @@
 </nav>
 
 <div class="docs-layout">
-  <button class="doc-breadcrumb" popovertarget="sidebar"><span class="icon" aria-hidden="true">menu</span><span>Docs</span><span class="bc-sep">/</span><span class="bc-section">Guides</span><span class="bc-sep">/</span><span class="bc-label">Display, Audio & Desktop</span></button>
+  <button class="doc-breadcrumb" popovertarget="sidebar"><span class="icon" aria-hidden="true">menu</span><span>Docs</span><span class="bc-sep">/</span><span class="bc-section">Guides</span><span class="bc-sep">/</span><span class="bc-label">Display, audio & desktop</span></button>
   <aside class="sidebar" id="sidebar" popover>
     <button class="icon-button sidebar-close" popovertarget="sidebar" popovertargetaction="hide" aria-label="Close navigation"><span class="icon" aria-hidden="true">close</span></button>
     <button class="search-open" type="button" hidden><span class="icon" aria-hidden="true">search</span>Search the docs<kbd>Ctrl K</kbd></button>
 <details class="sidebar-group" open><summary class="sidebar-heading">Basics</summary>
-<a href="installation-android.html" class="sidebar-link">Android Installation</a>
-<a href="installation-linux.html" class="sidebar-link">Linux Installation</a>
+<a href="installation-android.html" class="sidebar-link">Android installation</a>
+<a href="installation-linux.html" class="sidebar-link">Linux installation</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Guides</summary>
-<a href="features.html" class="sidebar-link">Feature Deep Dives</a>
-<a href="graphics-and-audio.html" class="sidebar-link" aria-current="page">Display, Audio & Desktop</a>
-<a href="kernel-configuration.html" class="sidebar-link">Kernel Configuration</a>
-<a href="usage-android-app.html" class="sidebar-link">Android App Usage</a>
+<a href="features.html" class="sidebar-link">Feature deep dives</a>
+<a href="graphics-and-audio.html" class="sidebar-link" aria-current="page">Display, audio & desktop</a>
+<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
+<a href="usage-android-app.html" class="sidebar-link">Android app usage</a>
 <a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
-<a href="networking-from-zero.html" class="sidebar-link">Networking From Zero</a>
+<a href="networking-from-zero.html" class="sidebar-link">Networking from zero</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Recipes</summary>
-<a href="cool-things-you-can-do.html" class="sidebar-link">Cool Things You Can Do</a>
+<a href="cool-things-you-can-do.html" class="sidebar-link">Cool things you can do</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Reference</summary>
 <a href="troubleshooting.html" class="sidebar-link">Troubleshooting</a>
-<a href="community-supported-devices.html" class="sidebar-link">Community-Supported Devices</a>
+<a href="community-supported-devices.html" class="sidebar-link">Community-supported devices</a>
 <a href="nix-nixos.html" class="sidebar-link">Nix/NixOS</a>
 <a href="uninstallation.html" class="sidebar-link">Uninstallation</a>
 </details>
   </aside>
   <main class="docs-content">
     <article>
-<h1 id="droidspaces-display-audio--desktop-guide">Droidspaces Display, Audio &amp; Desktop Guide <a class="header-anchor" href="#droidspaces-display-audio--desktop-guide">#</a></h1>
-<p>This guide covers display setup, GPU acceleration, sound (PulseAudio), and desktop environment auto-boot for Droidspaces containers. On Android, as of <strong>v6.3.0</strong>, the X server, VirGL server, and PulseAudio daemon all launch automatically when a container starts - no manual Termux commands required.</p>
-<div class="callout callout-important"><strong class="callout-title">Important</strong><p><strong>Droidspaces does not ship PulseAudio, Termux:X11, or virglrenderer-android.</strong> These are upstream Termux packages installed by the setup script. Droidspaces only manages their lifecycle (launching, socket bridging, environment injection). If you encounter issues with audio quality, device compatibility, crashes, or rendering problems with any of these packages, report them to the <a href="https://github.com/termux/termux-packages" rel="noopener noreferrer">Termux packages</a> project, not to Droidspaces.</p></div>
-<h3 id="quick-navigation">Quick Navigation <a class="header-anchor" href="#quick-navigation">#</a></h3>
+<h1 id="droidspaces-display-audio--desktop-guide">Droidspaces display, audio &amp; desktop guide <a class="header-anchor" href="#droidspaces-display-audio--desktop-guide">#</a></h1>
+<p>This guide covers the display, GPU acceleration, sound (PulseAudio) and desktop environment auto-boot for Droidspaces containers. On Android, since <strong>v6.3.0</strong>, the X server, the VirGL server and the PulseAudio daemon all start automatically when a container starts. You do not run anything in Termux by hand.</p>
+<div class="callout callout-important"><strong class="callout-title">Important</strong><p><strong>Droidspaces does not ship PulseAudio, Termux:X11 or virglrenderer-android.</strong> They are upstream Termux packages, installed by the setup script. Droidspaces only manages their lifecycle: it launches them, bridges their sockets into the container and injects the environment. Problems with audio quality, device compatibility, crashes or rendering in any of these packages belong with the <a href="https://github.com/termux/termux-packages" rel="noopener noreferrer">Termux packages</a> project, not Droidspaces.</p></div>
+<h3 id="quick-navigation">Quick navigation <a class="header-anchor" href="#quick-navigation">#</a></h3>
 <ul>
-<li><a href="#requirements"><strong>Universal Requirements (Android)</strong></a></li>
-<li><a href="#android"><strong>Android Display &amp; GPU</strong></a>
+<li><a href="#requirements"><strong>Universal requirements (Android)</strong></a></li>
+<li><a href="#android"><strong>Android display &amp; GPU</strong></a>
 <ul>
-<li><a href="#termux-x11">01. Termux-X11 + llvmpipe (Software Rendering)</a></li>
-<li><a href="#virgl">02. Termux-X11 + VirGL (Non-Qualcomm GPUs)</a></li>
-<li><a href="#turnip">03. Turnip (Native Qualcomm/Adreno)</a></li>
+<li><a href="#termux-x11">01. Termux-X11 + llvmpipe (software rendering)</a></li>
+<li><a href="#virgl">02. Termux-X11 + VirGL (non-Qualcomm GPUs)</a></li>
+<li><a href="#turnip">03. Turnip (native Qualcomm/Adreno)</a></li>
 </ul>
 </li>
-<li><a href="#pulseaudio"><strong>Android Sound (PulseAudio)</strong></a></li>
-<li><a href="#de-autoboot"><strong>Desktop Environment Auto-Boot</strong></a></li>
-<li><a href="#linux"><strong>Linux Desktop (AMD/Intel)</strong></a></li>
+<li><a href="#pulseaudio"><strong>Android sound (PulseAudio)</strong></a></li>
+<li><a href="#de-autoboot"><strong>Desktop environment auto-boot</strong></a></li>
+<li><a href="#linux"><strong>Linux desktop (AMD/Intel)</strong></a></li>
 </ul>
 <hr />
 <p><a id="requirements"></a></p>
-<h2 id="universal-requirements-android">Universal Requirements (Android) <a class="header-anchor" href="#universal-requirements-android">#</a></h2>
-<p>Before setting up any display, GPU, or audio feature, ensure all of the following are met:</p>
+<h2 id="universal-requirements-android">Universal requirements (Android) <a class="header-anchor" href="#universal-requirements-android">#</a></h2>
+<p>Every display, GPU and audio feature below needs all three of these:</p>
 <ol>
 <li>
-<p><strong>Droidspaces v6.3.0 or higher</strong> - after updating, a <strong>full reboot is mandatory</strong> to apply the updated SELinux rules.</p>
+<p><strong>Droidspaces v6.3.0 or higher.</strong> After updating, <strong>reboot the device</strong>. The updated SELinux rules only apply after a full reboot.</p>
 </li>
 <li>
-<p><strong>Both <a href="https://github.com/termux/termux-app" rel="noopener noreferrer">Termux</a> and <a href="https://github.com/termux/termux-x11" rel="noopener noreferrer">Termux:X11</a> apps must be installed</strong> on your device.</p>
+<p><strong>Both the <a href="https://github.com/termux/termux-app" rel="noopener noreferrer">Termux</a> and <a href="https://github.com/termux/termux-x11" rel="noopener noreferrer">Termux:X11</a> apps installed</strong> on the device.</p>
 </li>
 <li>
-<p><strong>Run the Droidspaces setup script inside Termux</strong> (mandatory - installs Termux:X11, VirGL, PulseAudio, and patches the audio config):</p>
+<p><strong>The Droidspaces setup script, run inside Termux.</strong> It is mandatory: it installs Termux:X11, VirGL and PulseAudio, and patches the audio config.</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://github.com/ravindu644/Droidspaces-OSS/raw/refs/heads/dev/scripts/setup-termux.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 </code></pre></div>
 </li>
 </ol>
-<div class="callout callout-important"><strong class="callout-title">Important</strong><p>This script only needs to be run once. It installs all required display and audio dependencies into Termux.</p></div>
+<div class="callout callout-important"><strong class="callout-title">Important</strong><p>You only run this script once. It installs every display and audio dependency into Termux.</p></div>
 <hr />
 <p><a id="android"></a></p>
-<h2 id="android-display--gpu">Android Display &amp; GPU <a class="header-anchor" href="#android-display--gpu">#</a></h2>
-<p>As of v6.3.0, Droidspaces automatically launches the Termux:X11 X server (and VirGL server, if configured) when a container starts. It also injects the required environment variables into the container via <code>/run/droidspaces.env</code>, which is symlinked from <code>/etc/profile.d/droidspaces_env.sh</code> for automatic sourcing.</p>
-<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p><strong>Using <code>zsh</code>, <code>fish</code>, or another non-login shell?</strong></p>
-<p>These shells may not source <code>/etc/profile.d</code> automatically. Run this manually inside your container after booting: <code>source /run/droidspaces.env</code></p>
-<p>This sets <code>DISPLAY=:5</code> and (if VirGL is enabled) <code>GALLIUM_DRIVER=virpipe</code>.</p></div>
+<h2 id="android-display--gpu">Android display &amp; GPU <a class="header-anchor" href="#android-display--gpu">#</a></h2>
+<p>Since v6.3.0, Droidspaces starts the Termux:X11 X server (and the VirGL server, if configured) when a container starts. It writes the environment variables the container needs to <code>/run/droidspaces.env</code>, and <code>/etc/profile.d/droidspaces_env.sh</code> is a symlink to that file, so login shells source it automatically.</p>
+<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p><strong>Using <code>zsh</code>, <code>fish</code> or another non-login shell?</strong></p>
+<p>These shells may not source <code>/etc/profile.d</code>. After the container boots, run this inside it: <code>source /run/droidspaces.env</code></p>
+<p>That sets <code>DISPLAY=:5</code> and, if VirGL is enabled, <code>GALLIUM_DRIVER=virpipe</code>.</p></div>
 <hr />
-<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p><strong>Want an out-of-the-box desktop experience?</strong></p>
-<p>Our official XFCE rootfs tarballs have <strong>built-in XFCE auto-boot support</strong>. When you start the container with Termux:X11 (or VirGL) enabled, XFCE launches automatically and appears in the Termux:X11 app - no terminal commands needed.</p>
-<p>Download from the <a href="usage-android-app.html#rootfs-repository">Rootfs Repository</a> (search &quot;XFCE&quot;) or directly from <a href="https://github.com/Droidspaces/Droidspaces-rootfs-builder/releases/latest" rel="noopener noreferrer">Droidspaces Rootfs Builder Releases</a>.</p></div>
+<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p><strong>Want a desktop without any setup?</strong></p>
+<p>The official XFCE rootfs tarballs have <strong>XFCE auto-boot built in</strong>. Start the container with Termux:X11 (or VirGL) enabled and XFCE launches on its own and appears in the Termux:X11 app. No terminal commands.</p>
+<p>Get them from the <a href="usage-android-app.html#rootfs-repository">Rootfs Repository</a> (search &quot;XFCE&quot;) or from the <a href="https://github.com/Droidspaces/Droidspaces-rootfs-builder/releases/latest" rel="noopener noreferrer">Droidspaces Rootfs Builder Releases</a>.</p></div>
 <hr />
 <p><a id="termux-x11"></a></p>
 <h3 id="01-termux-x11--llvmpipe">01. Termux-X11 + llvmpipe <a class="header-anchor" href="#01-termux-x11--llvmpipe">#</a></h3>
-<p>Software rendering via <code>llvmpipe</code>. The most compatible method - works on any device regardless of GPU vendor.</p>
+<p>Software rendering with <code>llvmpipe</code>. This is the most compatible method: it works on any device, whatever the GPU vendor.</p>
 <h4 id="setup">Setup <a class="header-anchor" href="#setup">#</a></h4>
 <ol>
 <li>
-<p>Open the Droidspaces app and navigate to <strong>Edit container configuration</strong>.</p>
+<p>Open the Droidspaces app and go to <strong>Edit container configuration</strong>.</p>
 </li>
 <li>
-<p>Enable the <strong>Configure Termux:X11</strong> toggle and save.</p>
+<p>Turn on <strong>Configure Termux:X11</strong> and save.</p>
 </li>
 <li>
-<p>Start the container. Droidspaces will automatically launch the Termux:X11 X server - the Termux:X11 app will display the <strong>&quot;X&quot; cursor</strong>, confirming the server is ready.</p>
+<p>Start the container. Droidspaces launches the Termux:X11 X server, and the Termux:X11 app shows the <strong>&quot;X&quot; cursor</strong> when the server is ready.</p>
 </li>
 <li>
 <p>Open a terminal inside the container and run any GUI application:</p>
@@ -136,58 +136,58 @@
 </code></pre></div>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>startxfce4
 </code></pre></div>
-<p>The window will appear in the Termux:X11 app.</p>
+<p>The window appears in the Termux:X11 app.</p>
 </li>
 </ol>
-<div class="callout callout-note"><strong class="callout-title">Note</strong><p><strong>Hardware Access/GPU Access</strong> is not required for software rendering.</p></div>
+<div class="callout callout-note"><strong class="callout-title">Note</strong><p>Software rendering does not need <strong>Hardware Access/GPU Access</strong>.</p></div>
 <hr />
 <p><a id="virgl"></a></p>
 <h3 id="02-termux-x11--virgl">02. Termux-X11 + VirGL <a class="header-anchor" href="#02-termux-x11--virgl">#</a></h3>
-<p>Hardware-accelerated rendering for <strong>non-Qualcomm devices (Mali, PowerVR)</strong> via a <code>virglrenderer</code> bridge. Translates OpenGL calls from the container into commands the host Android GPU can execute.</p>
-<p>Droidspaces automatically starts both the X server and the VirGL server, and injects <code>DISPLAY=:5</code> and <code>GALLIUM_DRIVER=virpipe</code> into the container environment.</p>
+<p>Hardware-accelerated rendering for <strong>non-Qualcomm devices (Mali, PowerVR)</strong> through a <code>virglrenderer</code> bridge. It translates the container's OpenGL calls into commands the Android GPU on the host can execute.</p>
+<p>Droidspaces starts both the X server and the VirGL server, and injects <code>DISPLAY=:5</code> and <code>GALLIUM_DRIVER=virpipe</code> into the container environment.</p>
 <h4 id="setup-1">Setup <a class="header-anchor" href="#setup-1">#</a></h4>
 <ol>
 <li>
 <p>Open <strong>Edit container configuration</strong>.</p>
 </li>
 <li>
-<p>Enable both <strong>Configure Termux:X11</strong> and <strong>Configure VirGL 3D Acceleration</strong> toggles and save.</p>
+<p>Turn on both <strong>Configure Termux:X11</strong> and <strong>Configure VirGL 3D Acceleration</strong>, and save.</p>
 </li>
 <li>
-<p>Start the container. Both servers launch automatically. The Termux:X11 app will show the <strong>&quot;X&quot; cursor</strong> once ready.</p>
+<p>Start the container. Both servers launch, and the Termux:X11 app shows the <strong>&quot;X&quot; cursor</strong> when they are ready.</p>
 </li>
 <li>
 <p>Run any GUI application inside the container:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>glxgears
 </code></pre></div>
-<p>Look for <strong>&quot;VirGL&quot;</strong> in the renderer string to confirm acceleration is active.</p>
+<p>The renderer string should contain <strong>&quot;VirGL&quot;</strong>. That confirms acceleration is active.</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>startxfce4
 </code></pre></div>
 </li>
 </ol>
-<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p><strong>If the VirGL renderer fails to initialize</strong>, you can pass the Vulkan backend flag via the <strong>VirGL Extra Flags</strong> field in the container configuration:</p>
+<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p><strong>If the VirGL renderer fails to initialize</strong>, pass the Vulkan backend flag in the <strong>VirGL Extra Flags</strong> field of the container configuration:</p>
 <p><code>--angle-vulkan</code></p></div>
 <hr />
 <p><a id="turnip"></a></p>
-<h3 id="03-turnip-native-qualcommadreno">03. Turnip (Native Qualcomm/Adreno) <a class="header-anchor" href="#03-turnip-native-qualcommadreno">#</a></h3>
-<p>Near-native hardware acceleration for <strong>Qualcomm Adreno GPUs</strong> using the open-source Turnip Mesa driver. This bypasses VirGL entirely for direct GPU access.</p>
+<h3 id="03-turnip-native-qualcommadreno">03. Turnip (native Qualcomm/Adreno) <a class="header-anchor" href="#03-turnip-native-qualcommadreno">#</a></h3>
+<p>Near-native hardware acceleration for <strong>Qualcomm Adreno GPUs</strong> with the open-source Turnip Mesa driver. It skips VirGL and talks to the GPU directly.</p>
 <h4 id="requirements">Requirements <a class="header-anchor" href="#requirements">#</a></h4>
 <ul>
-<li>A custom Mesa driver installed from the <a href="https://github.com/lfdevs/mesa-for-android-container" rel="noopener noreferrer">Mesa for Android Container repository</a>.</li>
+<li>A custom Mesa driver from the <a href="https://github.com/lfdevs/mesa-for-android-container" rel="noopener noreferrer">Mesa for Android Container repository</a>.</li>
 </ul>
 <h4 id="setup-2">Setup <a class="header-anchor" href="#setup-2">#</a></h4>
 <ol>
 <li>
-<p>Install the custom Mesa driver following the instructions at <a href="https://github.com/lfdevs/mesa-for-android-container" rel="noopener noreferrer">Mesa for Android Container</a>.</p>
+<p>Install the custom Mesa driver by following the instructions at <a href="https://github.com/lfdevs/mesa-for-android-container" rel="noopener noreferrer">Mesa for Android Container</a>.</p>
 </li>
 <li>
-<p>Open <strong>Edit container configuration</strong> and apply the following:</p>
+<p>Open <strong>Edit container configuration</strong> and:</p>
 <ul>
 <li>
-<p>Enable <strong>GPU Access</strong> and <strong>Configure Termux:X11</strong>.</p>
+<p>Turn on <strong>GPU Access</strong> and <strong>Configure Termux:X11</strong>.</p>
 </li>
 <li>
-<p><strong>Disable</strong> the <strong>Configure VirGL 3D Acceleration</strong> toggle (VirGL must be off for Turnip).</p>
+<p>Turn <strong>off</strong> <strong>Configure VirGL 3D Acceleration</strong>. VirGL must be off for Turnip.</p>
 </li>
 <li>
 <p>Add these two environment variables:</p>
@@ -198,42 +198,42 @@ TU_DEBUG=noconform
 </ul>
 </li>
 <li>
-<p>Start the container. Droidspaces launches the X server automatically.</p>
+<p>Start the container. Droidspaces launches the X server.</p>
 </li>
 <li>
-<p>Run a GUI application inside the container - Turnip GPU acceleration will be active.</p>
+<p>Run a GUI application inside the container. It renders with Turnip GPU acceleration.</p>
 </li>
 </ol>
-<div class="callout callout-note"><strong class="callout-title">Note</strong><p><strong>Permission Management (Non-Root Users):</strong> If you are using a non-root user, you must grant them access to the GPU device nodes: <code>sudo usermod -aG droidspaces-gpu &lt;your_username&gt;</code></p></div>
+<div class="callout callout-note"><strong class="callout-title">Note</strong><p><strong>Non-root users:</strong> a non-root user needs access to the GPU device nodes. Grant it with <code>sudo usermod -aG droidspaces-gpu &lt;your_username&gt;</code></p></div>
 <hr />
 <p><a id="pulseaudio"></a></p>
-<h2 id="android-sound-pulseaudio">Android Sound (PulseAudio) <a class="header-anchor" href="#android-sound-pulseaudio">#</a></h2>
-<p>Droidspaces bridges Android's audio stack into your container using PulseAudio. When enabled, a PulseAudio daemon runs on the host as the Termux user (so Android's audio HAL grants it access to the device speaker), and its UNIX socket is bind-mounted into the container at <code>/tmp/.pulse-socket</code>. The environment variable <code>PULSE_SERVER=unix:/tmp/.pulse-socket</code> is injected automatically, so any application inside the container that speaks PulseAudio will produce sound with no manual configuration.</p>
-<div class="callout callout-warning"><strong class="callout-title">Warning</strong><p>PulseAudio audio passthrough may not work on all devices. Compatibility depends on the Android version, OEM audio HAL implementation, and the Termux PulseAudio build. If audio does not work on your device, this is a known limitation of the upstream packages on that platform.</p></div>
+<h2 id="android-sound-pulseaudio">Android sound (PulseAudio) <a class="header-anchor" href="#android-sound-pulseaudio">#</a></h2>
+<p>Droidspaces bridges Android's audio stack into the container with PulseAudio. When it is enabled, a PulseAudio daemon runs on the host as the Termux user, which is what gets it access to the device speaker from Android's audio HAL. Its UNIX socket is bind-mounted into the container at <code>/tmp/.pulse-socket</code>, and <code>PULSE_SERVER=unix:/tmp/.pulse-socket</code> is injected into the environment. Any application in the container that speaks PulseAudio then plays sound without further configuration.</p>
+<div class="callout callout-warning"><strong class="callout-title">Warning</strong><p>Audio passthrough may not work on every device. It depends on the Android version, the OEM audio HAL and the Termux PulseAudio build. If it does not work on your device, that is a known limitation of the upstream packages on that platform.</p></div>
 <h4 id="requirements-1">Requirements <a class="header-anchor" href="#requirements-1">#</a></h4>
 <ul>
-<li>PulseAudio must be installed in Termux - the <a href="#requirements">setup script</a> handles this automatically.</li>
+<li>PulseAudio installed in Termux. The <a href="#requirements">setup script</a> installs it.</li>
 </ul>
 <h4 id="setup-3">Setup <a class="header-anchor" href="#setup-3">#</a></h4>
 <ol>
 <li>
-<p>Open the Droidspaces app and navigate to <strong>Edit container configuration</strong>.</p>
+<p>Open the Droidspaces app and go to <strong>Edit container configuration</strong>.</p>
 </li>
 <li>
-<p>Enable the <strong>Configure PulseAudio</strong> toggle and save.</p>
+<p>Turn on <strong>Configure PulseAudio</strong> and save.</p>
 </li>
 <li>
-<p>Start the container. Droidspaces will:</p>
+<p>Start the container. Droidspaces:</p>
 <ul>
-<li>Launch the PulseAudio daemon as the Termux user.</li>
-<li>Wait for the socket at <code>/tmp/.pulse-socket</code> to appear before proceeding.</li>
-<li>Run <code>pactl set-default-sink AAudio_sink</code> to route audio to the device speaker.</li>
-<li>Bind-mount the socket into the container and inject <code>PULSE_SERVER</code>.</li>
+<li>Launches the PulseAudio daemon as the Termux user.</li>
+<li>Waits for the socket at <code>/tmp/.pulse-socket</code> to appear before it continues.</li>
+<li>Runs <code>pactl set-default-sink AAudio_sink</code> to route audio to the device speaker.</li>
+<li>Bind-mounts the socket into the container and injects <code>PULSE_SERVER</code>.</li>
 </ul>
-<p>You can also enable PulseAudio via the CLI flag <code>--pulse-audio</code>.</p>
+<p>From the CLI, the flag is <code>--pulse-audio</code>.</p>
 </li>
 <li>
-<p>Install and run any audio application inside the container. Because <code>PULSE_SERVER</code> is already set in the container environment, most apps work without any additional configuration:</p>
+<p>Install and run any audio application inside the container. <code>PULSE_SERVER</code> is already set, so most apps need no extra configuration:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Test audio output</span>
 paplay<span class="w"> </span>/path/to/sound.wav
 </code></pre></div>
@@ -242,15 +242,15 @@ pactl<span class="w"> </span>info
 </code></pre></div>
 </li>
 </ol>
-<div class="callout callout-note"><strong class="callout-title">Note</strong><p>PulseAudio sound is <strong>Android-only</strong>. On Linux desktop hosts, audio passthrough works via the host's own PulseAudio/PipeWire setup - no special configuration is needed in Droidspaces.</p></div>
-<div class="callout callout-note"><strong class="callout-title">Note</strong><p><strong>Samsung One UI 6.1+ devices:</strong> Droidspaces automatically injects <code>libskcodec.so</code> via <code>LD_PRELOAD</code> before starting PulseAudio. This fixes a hidden dependency in the OpenSL ES audio module specific to Samsung firmware. No action is required from you.</p></div>
+<div class="callout callout-note"><strong class="callout-title">Note</strong><p>PulseAudio sound is <strong>Android-only</strong>. On Linux desktop hosts, audio passthrough goes through the host's own PulseAudio/PipeWire setup, and Droidspaces needs no configuration for it.</p></div>
+<div class="callout callout-note"><strong class="callout-title">Note</strong><p><strong>Samsung One UI 6.1+ devices:</strong> Droidspaces injects <code>libskcodec.so</code> through <code>LD_PRELOAD</code> before it starts PulseAudio. This fixes a hidden dependency of the OpenSL ES audio module in Samsung firmware. You do not need to do anything.</p></div>
 <hr />
 <p><a id="de-autoboot"></a></p>
-<h2 id="desktop-environment-auto-boot">Desktop Environment Auto-Boot <a class="header-anchor" href="#desktop-environment-auto-boot">#</a></h2>
-<p>As of v6.3.0, when Termux:X11 is enabled in a container's configuration, Droidspaces guarantees the X server socket (<code>/tmp/.X11-unix/X5</code>) is live before the container's init system reaches <code>graphical.target</code>. This makes proper systemd-based DE auto-start possible with no race conditions.</p>
-<h3 id="how-the-official-xfce-tarballs-wire-it">How the Official XFCE Tarballs Wire It <a class="header-anchor" href="#how-the-official-xfce-tarballs-wire-it">#</a></h3>
-<p>Our official XFCE rootfs tarballs ship with a fully pre-configured auto-boot setup. Here's exactly how it works:</p>
-<p><strong>1. The <code>xfce-autostart.service</code> systemd unit</strong> is installed at <code>/etc/systemd/system/xfce-autostart.service</code> and enabled under <code>graphical.target</code>:</p>
+<h2 id="desktop-environment-auto-boot">Desktop environment auto-boot <a class="header-anchor" href="#desktop-environment-auto-boot">#</a></h2>
+<p>Since v6.3.0, when Termux:X11 is enabled in a container's configuration, Droidspaces guarantees that the X server socket (<code>/tmp/.X11-unix/X5</code>) is live before the container's init system reaches <code>graphical.target</code>. A systemd unit can therefore start a desktop environment at boot without racing the X server.</p>
+<h3 id="how-the-official-xfce-tarballs-wire-it">How the official XFCE tarballs wire it <a class="header-anchor" href="#how-the-official-xfce-tarballs-wire-it">#</a></h3>
+<p>The official XFCE rootfs tarballs ship with auto-boot already configured. It has two parts.</p>
+<p><strong>1. The <code>xfce-autostart.service</code> systemd unit</strong>, installed at <code>/etc/systemd/system/xfce-autostart.service</code> and enabled under <code>graphical.target</code>:</p>
 <div class="code-block"><span class="code-lang">ini</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="k">[Unit]</span>
 <span class="na">Description</span><span class="o">=</span><span class="s">XFCE Autostart</span>
 <span class="na">After</span><span class="o">=</span><span class="s">graphical.target</span>
@@ -258,79 +258,79 @@ pactl<span class="w"> </span>info
 <span class="k">[Service]</span>
 <span class="na">Type</span><span class="o">=</span><span class="s">simple</span>
 <span class="na">User</span><span class="o">=</span><span class="s">root</span>
-<span class="na">ExecCondition</span><span class="o">=</span><span class="s">/bin/sh -c "grep -q 'enable_termux_x11=1' /run/droidspaces/container.config"</span>
-<span class="na">ExecCondition</span><span class="o">=</span><span class="s">/bin/sh -c "test -S /tmp/.X11-unix/X5"</span>
+<span class="na">ExecCondition</span><span class="o">=</span><span class="s">/bin/sh -c &quot;grep -q &#39;enable_termux_x11=1&#39; /run/droidspaces/container.config&quot;</span>
+<span class="na">ExecCondition</span><span class="o">=</span><span class="s">/bin/sh -c &quot;test -S /tmp/.X11-unix/X5&quot;</span>
 <span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/xfce-start</span>
 <span class="na">Restart</span><span class="o">=</span><span class="s">on-failure</span>
 
 <span class="k">[Install]</span>
 <span class="na">WantedBy</span><span class="o">=</span><span class="s">graphical.target</span>
 </code></pre></div>
-<p>Two <code>ExecCondition</code> guards ensure XFCE only starts when it makes sense: the container must have Termux:X11 enabled in its config, and the X server socket must actually exist. If either condition fails, systemd skips the service silently - no errors, no crash loops.</p>
-<p><strong>2. The <code>/usr/local/bin/xfce-start</code> launcher script</strong> handles environment sourcing and user switching:</p>
+<p>The two <code>ExecCondition</code> lines decide whether XFCE starts at all: Termux:X11 must be enabled in the container config, and the X server socket must exist. If either check fails, systemd skips the service quietly, with no error and no crash loop.</p>
+<p><strong>2. The <code>/usr/local/bin/xfce-start</code> launcher script</strong>, which sources the environment and switches user:</p>
 <div class="code-block"><span class="code-lang">sh</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="ch">#!/bin/sh</span>
 
 <span class="nv">ENV_FILE</span><span class="o">=</span>/run/droidspaces.env
 <span class="nv">CONFIG</span><span class="o">=</span>/run/droidspaces/container.config
 
-<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$ENV_FILE</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span>.<span class="w"> </span><span class="s2">"</span><span class="nv">$ENV_FILE</span><span class="s2">"</span>
-<span class="w">    </span><span class="nv">WHITELIST</span><span class="o">=</span><span class="k">$(</span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'s/^export \([A-Za-z_][A-Za-z0-9_]*\)=.*/\1/p'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ENV_FILE</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">'\n'</span><span class="w"> </span><span class="s1">','</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s/,$//'</span><span class="k">)</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ENV_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>.<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ENV_FILE</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">WHITELIST</span><span class="o">=</span><span class="k">$(</span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;s/^export \([A-Za-z_][A-Za-z0-9_]*\)=.*/\1/p&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ENV_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="w"> </span><span class="s1">&#39;,&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/,$//&#39;</span><span class="k">)</span>
 <span class="k">else</span>
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span>:5
 <span class="w">    </span><span class="nv">WHITELIST</span><span class="o">=</span>DISPLAY
-<span class="w">    </span><span class="k">if</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">'enable_pulseaudio=1'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$CONFIG</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">&#39;enable_pulseaudio=1&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CONFIG</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">        </span><span class="nb">export</span><span class="w"> </span><span class="nv">PULSE_SERVER</span><span class="o">=</span>unix:/tmp/.pulse-socket
-<span class="w">        </span><span class="nv">WHITELIST</span><span class="o">=</span><span class="s2">"</span><span class="nv">$WHITELIST</span><span class="s2">,PULSE_SERVER"</span>
+<span class="w">        </span><span class="nv">WHITELIST</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WHITELIST</span><span class="s2">,PULSE_SERVER&quot;</span>
 <span class="w">    </span><span class="k">fi</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">'enable_virgl=1'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$CONFIG</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">&#39;enable_virgl=1&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CONFIG</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">        </span><span class="nb">export</span><span class="w"> </span><span class="nv">GALLIUM_DRIVER</span><span class="o">=</span>virpipe
-<span class="w">        </span><span class="nv">WHITELIST</span><span class="o">=</span><span class="s2">"</span><span class="nv">$WHITELIST</span><span class="s2">,GALLIUM_DRIVER"</span>
+<span class="w">        </span><span class="nv">WHITELIST</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WHITELIST</span><span class="s2">,GALLIUM_DRIVER&quot;</span>
 <span class="w">    </span><span class="k">fi</span>
 <span class="k">fi</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$XFCE_USER</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">exec</span><span class="w"> </span>su<span class="w"> </span>-l<span class="w"> </span>-w<span class="w"> </span><span class="s2">"</span><span class="nv">$WHITELIST</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$XFCE_USER</span><span class="s2">"</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">'exec /usr/bin/startxfce4'</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$XFCE_USER</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">exec</span><span class="w"> </span>su<span class="w"> </span>-l<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WHITELIST</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$XFCE_USER</span><span class="s2">&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;exec /usr/bin/startxfce4&#39;</span>
 <span class="k">else</span>
 <span class="w">    </span><span class="nb">exec</span><span class="w"> </span>/usr/bin/startxfce4
 <span class="k">fi</span>
 </code></pre></div>
-<p>The script first tries to source <code>/run/droidspaces.env</code> (written by Droidspaces at boot; contains <code>DISPLAY=:5</code>, <code>GALLIUM_DRIVER=virpipe</code> if VirGL is enabled, and <code>PULSE_SERVER</code> if PulseAudio is enabled). If the env file is missing for any reason, it falls back to reading the container config directly and building the environment manually. This makes the script robust against any init system startup ordering.</p>
-<h3 id="the-xfce_user-variable">The <code>XFCE_USER</code> Variable <a class="header-anchor" href="#the-xfce_user-variable">#</a></h3>
-<p>By default, <code>xfce-start</code> runs XFCE as <code>root</code>. If you want XFCE to run as a non-root user, set the <code>XFCE_USER</code> environment variable in your container's <strong>Environment Variables</strong> configuration in the Droidspaces app:</p>
+<p>The script first sources <code>/run/droidspaces.env</code>, which Droidspaces writes at boot. It contains <code>DISPLAY=:5</code>, plus <code>GALLIUM_DRIVER=virpipe</code> if VirGL is enabled and <code>PULSE_SERVER</code> if PulseAudio is enabled. If the file is missing for any reason, the script reads the container config directly and builds the same environment itself, so it works whatever order the init system starts things in.</p>
+<h3 id="the-xfce_user-variable">The <code>XFCE_USER</code> variable <a class="header-anchor" href="#the-xfce_user-variable">#</a></h3>
+<p>By default <code>xfce-start</code> runs XFCE as <code>root</code>. To run it as a non-root user, set <code>XFCE_USER</code> in the container's <strong>Environment Variables</strong> configuration in the Droidspaces app:</p>
 <div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>XFCE_USER=youruser
 </code></pre></div>
-<p>When <code>XFCE_USER</code> is set, the script uses <code>su -l -w &quot;$WHITELIST&quot;</code> to switch to that user while explicitly passing through only the required environment variables (<code>DISPLAY</code>, <code>GALLIUM_DRIVER</code>, <code>PULSE_SERVER</code>, etc.). This keeps the session clean - no root env leaking into the user session.</p>
-<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p>Make sure <code>youruser</code> exists inside the container and has a valid home directory before setting <code>XFCE_USER</code>. You can create one with <code>useradd -m youruser</code> inside the container.</p></div>
+<p>With <code>XFCE_USER</code> set, the script switches to that user with <code>su -l -w &quot;$WHITELIST&quot;</code>, which passes through only the variables it needs (<code>DISPLAY</code>, <code>GALLIUM_DRIVER</code>, <code>PULSE_SERVER</code> and so on). Nothing else from root's environment leaks into the user's session.</p>
+<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p><code>youruser</code> must exist inside the container and have a valid home directory before you set <code>XFCE_USER</code>. Create one inside the container with <code>useradd -m youruser</code>.</p></div>
 <hr />
-<h3 id="power-users-wire-any-desktop-environment">Power Users: Wire Any Desktop Environment <a class="header-anchor" href="#power-users-wire-any-desktop-environment">#</a></h3>
-<p>You can replicate this exact pattern for any DE (Plasma, GNOME, MATE, i3, etc.) in any container.</p>
+<h3 id="power-users-wire-any-desktop-environment">Power users: wire any desktop environment <a class="header-anchor" href="#power-users-wire-any-desktop-environment">#</a></h3>
+<p>The same pattern works for any DE (Plasma, GNOME, MATE, i3 and others) in any container.</p>
 <p><strong>Step 1:</strong> Create the launcher script at <code>/usr/local/bin/de-start</code>:</p>
 <div class="code-block"><span class="code-lang">sh</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="ch">#!/bin/sh</span>
 
 <span class="nv">ENV_FILE</span><span class="o">=</span>/run/droidspaces.env
 <span class="nv">CONFIG</span><span class="o">=</span>/run/droidspaces/container.config
 
-<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$ENV_FILE</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span>.<span class="w"> </span><span class="s2">"</span><span class="nv">$ENV_FILE</span><span class="s2">"</span>
-<span class="w">    </span><span class="nv">WHITELIST</span><span class="o">=</span><span class="k">$(</span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'s/^export \([A-Za-z_][A-Za-z0-9_]*\)=.*/\1/p'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ENV_FILE</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">'\n'</span><span class="w"> </span><span class="s1">','</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s/,$//'</span><span class="k">)</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ENV_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>.<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ENV_FILE</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">WHITELIST</span><span class="o">=</span><span class="k">$(</span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;s/^export \([A-Za-z_][A-Za-z0-9_]*\)=.*/\1/p&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ENV_FILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="w"> </span><span class="s1">&#39;,&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/,$//&#39;</span><span class="k">)</span>
 <span class="k">else</span>
 <span class="w">    </span><span class="nb">export</span><span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span>:5
 <span class="w">    </span><span class="nv">WHITELIST</span><span class="o">=</span>DISPLAY
-<span class="w">    </span><span class="k">if</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">'enable_pulseaudio=1'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$CONFIG</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">&#39;enable_pulseaudio=1&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CONFIG</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">        </span><span class="nb">export</span><span class="w"> </span><span class="nv">PULSE_SERVER</span><span class="o">=</span>unix:/tmp/.pulse-socket
-<span class="w">        </span><span class="nv">WHITELIST</span><span class="o">=</span><span class="s2">"</span><span class="nv">$WHITELIST</span><span class="s2">,PULSE_SERVER"</span>
+<span class="w">        </span><span class="nv">WHITELIST</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WHITELIST</span><span class="s2">,PULSE_SERVER&quot;</span>
 <span class="w">    </span><span class="k">fi</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">'enable_virgl=1'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$CONFIG</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">&#39;enable_virgl=1&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CONFIG</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">        </span><span class="nb">export</span><span class="w"> </span><span class="nv">GALLIUM_DRIVER</span><span class="o">=</span>virpipe
-<span class="w">        </span><span class="nv">WHITELIST</span><span class="o">=</span><span class="s2">"</span><span class="nv">$WHITELIST</span><span class="s2">,GALLIUM_DRIVER"</span>
+<span class="w">        </span><span class="nv">WHITELIST</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$WHITELIST</span><span class="s2">,GALLIUM_DRIVER&quot;</span>
 <span class="w">    </span><span class="k">fi</span>
 <span class="k">fi</span>
 
-<span class="nv">DE_CMD</span><span class="o">=</span><span class="s2">"startplasma-x11"</span><span class="w">   </span><span class="c1"># replace with your DE's start command</span>
+<span class="nv">DE_CMD</span><span class="o">=</span><span class="s2">&quot;startplasma-x11&quot;</span><span class="w">   </span><span class="c1"># replace with your DE&#39;s start command</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$XFCE_USER</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">exec</span><span class="w"> </span>su<span class="w"> </span>-l<span class="w"> </span>-w<span class="w"> </span><span class="s2">"</span><span class="nv">$WHITELIST</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$XFCE_USER</span><span class="s2">"</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">"exec </span><span class="nv">$DE_CMD</span><span class="s2">"</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$XFCE_USER</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">exec</span><span class="w"> </span>su<span class="w"> </span>-l<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$WHITELIST</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$XFCE_USER</span><span class="s2">&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;exec </span><span class="nv">$DE_CMD</span><span class="s2">&quot;</span>
 <span class="k">else</span>
 <span class="w">    </span><span class="nb">exec</span><span class="w"> </span><span class="nv">$DE_CMD</span>
 <span class="k">fi</span>
@@ -344,8 +344,8 @@ pactl<span class="w"> </span>info
 
 <span class="k">[Service]</span>
 <span class="na">Type</span><span class="o">=</span><span class="s">simple</span>
-<span class="na">ExecCondition</span><span class="o">=</span><span class="s">/bin/sh -c "grep -q 'enable_termux_x11=1' /run/droidspaces/container.config"</span>
-<span class="na">ExecCondition</span><span class="o">=</span><span class="s">/bin/sh -c "test -S /tmp/.X11-unix/X5"</span>
+<span class="na">ExecCondition</span><span class="o">=</span><span class="s">/bin/sh -c &quot;grep -q &#39;enable_termux_x11=1&#39; /run/droidspaces/container.config&quot;</span>
+<span class="na">ExecCondition</span><span class="o">=</span><span class="s">/bin/sh -c &quot;test -S /tmp/.X11-unix/X5&quot;</span>
 <span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/de-start</span>
 <span class="na">Restart</span><span class="o">=</span><span class="s">on-failure</span>
 
@@ -355,43 +355,43 @@ pactl<span class="w"> </span>info
 <p><strong>Step 3:</strong> Enable it:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>de-autostart.service
 </code></pre></div>
-<p>On next container boot with Termux:X11 enabled, your DE will appear in the Termux:X11 app automatically.</p>
-<div class="callout callout-note"><strong class="callout-title">Note</strong><p>The <code>XFCE_USER</code> variable name is a convention from our official tarballs. You can rename it to anything in your own script - what matters is the <code>su -l -w &quot;$WHITELIST&quot;</code> pattern for clean user switching with env passthrough.</p></div>
+<p>The next time the container boots with Termux:X11 enabled, the DE appears in the Termux:X11 app.</p>
+<div class="callout callout-note"><strong class="callout-title">Note</strong><p><code>XFCE_USER</code> is only the name the official tarballs use. Call it anything in your own script. The part that matters is <code>su -l -w &quot;$WHITELIST&quot;</code>, which switches user and passes the environment through.</p></div>
 <hr />
 <p><a id="linux"></a></p>
-<h2 id="linux-desktop-amdintel">Linux Desktop (AMD/Intel) <a class="header-anchor" href="#linux-desktop-amdintel">#</a></h2>
-<p>On Linux-based hosts, GPU acceleration works natively with zero additional configuration within Droidspaces.</p>
+<h2 id="linux-desktop-amdintel">Linux desktop (AMD/Intel) <a class="header-anchor" href="#linux-desktop-amdintel">#</a></h2>
+<p>On a Linux host, GPU acceleration works natively. Droidspaces needs no extra configuration for it.</p>
 <h4 id="requirements-2">Requirements <a class="header-anchor" href="#requirements-2">#</a></h4>
 <ul>
-<li>An active X11 or Wayland session on your host.</li>
-<li>Functional GPU drivers (Mesa/Intel/AMD).</li>
+<li>An active X11 or Wayland session on the host.</li>
+<li>Working GPU drivers (Mesa/Intel/AMD).</li>
 </ul>
-<h4 id="implementation-steps">Implementation Steps <a class="header-anchor" href="#implementation-steps">#</a></h4>
+<h4 id="implementation-steps">Implementation steps <a class="header-anchor" href="#implementation-steps">#</a></h4>
 <ol>
 <li>
-<p><strong>Enable Hardware Access</strong>: Ensure the <strong>Hardware Access</strong> toggle is enabled in your container configuration (or use the <code>--hw-access</code> CLI flag).</p>
+<p><strong>Enable hardware access.</strong> Turn on <strong>Hardware Access</strong> in the container configuration, or pass the <code>--hw-access</code> CLI flag.</p>
 </li>
 <li>
-<p><strong>Xhost Permission</strong>: On your host machine, allow the container to connect to your X server:</p>
+<p><strong>Grant X server access.</strong> On the host, allow the container to connect to your X server:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>xhost<span class="w"> </span>+local:
 </code></pre></div>
 </li>
 <li>
-<p><strong>Set Display Variable</strong>: Add the host's <code>DISPLAY</code> number to the container's environment (usually <code>:0</code>):</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="nb">echo</span><span class="w"> </span><span class="s2">"DISPLAY=:0"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/environment
+<p><strong>Set the display variable.</strong> Add the host's <code>DISPLAY</code> number (usually <code>:0</code>) to the container's environment:</p>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;DISPLAY=:0&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/environment
 </code></pre></div>
 </li>
 <li>
-<p><strong>Run Applications</strong>: GUI applications launched from the container will render natively with full hardware acceleration.</p>
+<p><strong>Run applications.</strong> GUI applications launched from the container render natively with full hardware acceleration.</p>
 </li>
 </ol>
 
     </article>
     <p class="doc-edit"><a href="https://github.com/ravindu644/Droidspaces-OSS/edit/main/Documentation/Graphics-and-Audio.md" rel="noopener noreferrer"><span class="icon" aria-hidden="true">edit</span>Edit this page on GitHub</a></p>
-<nav class="doc-nav" aria-label="Pages"><a href="features.html" class="doc-nav-prev"><small>Previous</small>Feature Deep Dives</a><a href="kernel-configuration.html" class="doc-nav-next"><small>Next</small>Kernel Configuration</a></nav>
+<nav class="doc-nav" aria-label="Pages"><a href="features.html" class="doc-nav-prev"><small>Previous</small>Feature deep dives</a><a href="kernel-configuration.html" class="doc-nav-next"><small>Next</small>Kernel configuration</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h3"><a href="#quick-navigation">Quick Navigation</a></li><li class="toc-h2"><a href="#universal-requirements-android">Universal Requirements (Android)</a></li><li class="toc-h2"><a href="#android-display--gpu">Android Display &amp; GPU</a></li><li class="toc-h3"><a href="#01-termux-x11--llvmpipe">01. Termux-X11 + llvmpipe</a></li><li class="toc-h3"><a href="#02-termux-x11--virgl">02. Termux-X11 + VirGL</a></li><li class="toc-h3"><a href="#03-turnip-native-qualcommadreno">03. Turnip (Native Qualcomm/Adreno)</a></li><li class="toc-h2"><a href="#android-sound-pulseaudio">Android Sound (PulseAudio)</a></li><li class="toc-h2"><a href="#desktop-environment-auto-boot">Desktop Environment Auto-Boot</a></li><li class="toc-h3"><a href="#how-the-official-xfce-tarballs-wire-it">How the Official XFCE Tarballs Wire It</a></li><li class="toc-h3"><a href="#the-xfce_user-variable">The XFCE_USER Variable</a></li><li class="toc-h3"><a href="#power-users-wire-any-desktop-environment">Power Users: Wire Any Desktop Environment</a></li><li class="toc-h2"><a href="#linux-desktop-amdintel">Linux Desktop (AMD/Intel)</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h3"><a href="#quick-navigation">Quick navigation</a></li><li class="toc-h2"><a href="#universal-requirements-android">Universal requirements (Android)</a></li><li class="toc-h2"><a href="#android-display--gpu">Android display &amp; GPU</a></li><li class="toc-h3"><a href="#01-termux-x11--llvmpipe">01. Termux-X11 + llvmpipe</a></li><li class="toc-h3"><a href="#02-termux-x11--virgl">02. Termux-X11 + VirGL</a></li><li class="toc-h3"><a href="#03-turnip-native-qualcommadreno">03. Turnip (native Qualcomm/Adreno)</a></li><li class="toc-h2"><a href="#android-sound-pulseaudio">Android sound (PulseAudio)</a></li><li class="toc-h2"><a href="#desktop-environment-auto-boot">Desktop environment auto-boot</a></li><li class="toc-h3"><a href="#how-the-official-xfce-tarballs-wire-it">How the official XFCE tarballs wire it</a></li><li class="toc-h3"><a href="#the-xfce_user-variable">The XFCE_USER variable</a></li><li class="toc-h3"><a href="#power-users-wire-any-desktop-environment">Power users: wire any desktop environment</a></li><li class="toc-h2"><a href="#linux-desktop-amdintel">Linux desktop (AMD/Intel)</a></li></ul></nav>
   </aside>
 </div>
 <dialog class="search-dialog" aria-label="Search the docs">

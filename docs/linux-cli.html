@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Full Droidspaces Linux CLI reference. Every command, flag, and config option explained.">
+  <meta name="description" content="Reference for the droidspaces command line: every command, flag and config file key.">
   <meta name="keywords" content="droidspaces, cli, linux, container, command, line, reference, bind, mount, nat, networking">
   <title>Linux CLI - Droidspaces Docs</title>
   <meta property="og:title" content="Linux CLI - Droidspaces Docs">
-  <meta property="og:description" content="Full Droidspaces Linux CLI reference. Every command, flag, and config option explained.">
+  <meta property="og:description" content="Reference for the droidspaces command line: every command, flag and config file key.">
   <meta property="og:url" content="https://www.droidspaces.org/docs/linux-cli.html">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Linux CLI - Droidspaces Docs">
-  <meta name="twitter:description" content="Full Droidspaces Linux CLI reference. Every command, flag, and config option explained.">
+  <meta name="twitter:description" content="Reference for the droidspaces command line: every command, flag and config file key.">
   <meta name="twitter:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
   <link rel="canonical" href="https://www.droidspaces.org/docs/linux-cli.html">
   <link rel="icon" href="/favicon.ico">
@@ -46,62 +46,62 @@
     <button class="icon-button sidebar-close" popovertarget="sidebar" popovertargetaction="hide" aria-label="Close navigation"><span class="icon" aria-hidden="true">close</span></button>
     <button class="search-open" type="button" hidden><span class="icon" aria-hidden="true">search</span>Search the docs<kbd>Ctrl K</kbd></button>
 <details class="sidebar-group" open><summary class="sidebar-heading">Basics</summary>
-<a href="installation-android.html" class="sidebar-link">Android Installation</a>
-<a href="installation-linux.html" class="sidebar-link">Linux Installation</a>
+<a href="installation-android.html" class="sidebar-link">Android installation</a>
+<a href="installation-linux.html" class="sidebar-link">Linux installation</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Guides</summary>
-<a href="features.html" class="sidebar-link">Feature Deep Dives</a>
-<a href="graphics-and-audio.html" class="sidebar-link">Display, Audio & Desktop</a>
-<a href="kernel-configuration.html" class="sidebar-link">Kernel Configuration</a>
-<a href="usage-android-app.html" class="sidebar-link">Android App Usage</a>
+<a href="features.html" class="sidebar-link">Feature deep dives</a>
+<a href="graphics-and-audio.html" class="sidebar-link">Display, audio & desktop</a>
+<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
+<a href="usage-android-app.html" class="sidebar-link">Android app usage</a>
 <a href="linux-cli.html" class="sidebar-link" aria-current="page">Linux CLI</a>
-<a href="networking-from-zero.html" class="sidebar-link">Networking From Zero</a>
+<a href="networking-from-zero.html" class="sidebar-link">Networking from zero</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Recipes</summary>
-<a href="cool-things-you-can-do.html" class="sidebar-link">Cool Things You Can Do</a>
+<a href="cool-things-you-can-do.html" class="sidebar-link">Cool things you can do</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Reference</summary>
 <a href="troubleshooting.html" class="sidebar-link">Troubleshooting</a>
-<a href="community-supported-devices.html" class="sidebar-link">Community-Supported Devices</a>
+<a href="community-supported-devices.html" class="sidebar-link">Community-supported devices</a>
 <a href="nix-nixos.html" class="sidebar-link">Nix/NixOS</a>
 <a href="uninstallation.html" class="sidebar-link">Uninstallation</a>
 </details>
   </aside>
   <main class="docs-content">
     <article>
-<h1 id="linux-cli-guide">Linux CLI Guide <a class="header-anchor" href="#linux-cli-guide">#</a></h1>
-<p>Complete guide to using Droidspaces from the command line on Linux.</p>
-<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p><strong>Using the CLI on Android:</strong> All command-line arguments work exactly the same on Android.</p>
-<p>Once the backend is installed via the app, the <code>droidspaces</code> binary is located at <code>/data/local/Droidspaces/bin/droidspaces</code>.</p>
-<p>Also, you can view the full interactive, <strong>more advanced</strong> command-line documentation offline at any time by running:
+<h1 id="linux-cli-guide">Linux CLI guide <a class="header-anchor" href="#linux-cli-guide">#</a></h1>
+<p>How to run Droidspaces from the command line on Linux.</p>
+<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p><strong>Using the CLI on Android:</strong> every command-line argument works the same way on Android.</p>
+<p>Once the app has installed the backend, the <code>droidspaces</code> binary is at <code>/data/local/Droidspaces/bin/droidspaces</code>.</p>
+<p>The full interactive command-line documentation, which goes further than this page, is available offline at any time:
 <code>droidspaces docs</code></p></div>
 <hr />
-<h2 id="quick-navigation">Quick Navigation <a class="header-anchor" href="#quick-navigation">#</a></h2>
-<p><a href="#getting-started">1. Getting Started</a><br />
-<a href="#command-reference">2. Command Reference</a><br />
-<a href="#options-flags">3. Options &amp; Flags</a><br />
-<a href="#configs">4. Configuration Files</a><br />
-<a href="#common-workflows">5. Common Workflows</a><br />
-<a href="#advanced-usage">6. Advanced Usage &amp; Lifecycle</a><br />
-<a href="#system-requirements">7. System Requirements</a></p>
+<h2 id="quick-navigation">Quick navigation <a class="header-anchor" href="#quick-navigation">#</a></h2>
+<p><a href="#getting-started">1. Getting started</a><br />
+<a href="#command-reference">2. Command reference</a><br />
+<a href="#options-flags">3. Options and flags</a><br />
+<a href="#configs">4. Configuration files</a><br />
+<a href="#common-workflows">5. Common workflows</a><br />
+<a href="#advanced-usage">6. Advanced usage and lifecycle</a><br />
+<a href="#system-requirements">7. System requirements</a></p>
 <hr />
 <p><a id="getting-started"></a></p>
-<h2 id="1-getting-started">1. Getting Started <a class="header-anchor" href="#1-getting-started">#</a></h2>
-<h3 id="start-your-first-container">Start Your First Container <a class="header-anchor" href="#start-your-first-container">#</a></h3>
+<h2 id="1-getting-started">1. Getting started <a class="header-anchor" href="#1-getting-started">#</a></h2>
+<h3 id="start-your-first-container">Start your first container <a class="header-anchor" href="#start-your-first-container">#</a></h3>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># From a rootfs directory</span>
 sudo<span class="w"> </span>droidspaces<span class="w"> </span>--rootfs<span class="o">=</span>/path/to/rootfs<span class="w"> </span>start
 
 <span class="c1"># From an ext4 image</span>
 sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>--rootfs-img<span class="o">=</span>/path/to/rootfs.img<span class="w"> </span>start
 </code></pre></div>
-<h3 id="enter-the-container">Enter the Container <a class="header-anchor" href="#enter-the-container">#</a></h3>
+<h3 id="enter-the-container">Enter the container <a class="header-anchor" href="#enter-the-container">#</a></h3>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Enter as root</span>
 sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>enter
 
 <span class="c1"># Enter as a specific user</span>
 sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>enter<span class="w"> </span>username
 </code></pre></div>
-<h3 id="stop-the-container">Stop the Container <a class="header-anchor" href="#stop-the-container">#</a></h3>
+<h3 id="stop-the-container">Stop the container <a class="header-anchor" href="#stop-the-container">#</a></h3>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Stop a single container</span>
 sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>stop
 
@@ -110,7 +110,7 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 </code></pre></div>
 <hr />
 <p><a id="command-reference"></a></p>
-<h2 id="2-command-reference">2. Command Reference <a class="header-anchor" href="#2-command-reference">#</a></h2>
+<h2 id="2-command-reference">2. Command reference <a class="header-anchor" href="#2-command-reference">#</a></h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -125,11 +125,11 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 </tr>
 <tr>
 <td><code>stop</code></td>
-<td>Gracefully shut down one or more containers.</td>
+<td>Shut down one or more containers cleanly.</td>
 </tr>
 <tr>
 <td><code>restart</code></td>
-<td>Fast restart (under 200ms) by preserving loop mounts.</td>
+<td>Restart in under 200 ms by keeping the loop mounts in place.</td>
 </tr>
 <tr>
 <td><code>enter [user]</code></td>
@@ -141,7 +141,7 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 </tr>
 <tr>
 <td><code>info</code></td>
-<td>Show deep technical details about a container. With <code>--format</code>, print them as JSON.</td>
+<td>Show detailed technical information about a container. With <code>--format</code>, print them as JSON.</td>
 </tr>
 <tr>
 <td><code>show</code></td>
@@ -149,7 +149,7 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 </tr>
 <tr>
 <td><code>scan</code></td>
-<td>Detect and register orphaned/untracked containers.</td>
+<td>Find and register orphaned or untracked containers.</td>
 </tr>
 <tr>
 <td><code>check</code></td>
@@ -157,7 +157,7 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 </tr>
 <tr>
 <td><code>docs</code></td>
-<td>Open the interactive terminal-based documentation.</td>
+<td>Open the interactive documentation in the terminal.</td>
 </tr>
 <tr>
 <td><code>help</code></td>
@@ -171,8 +171,8 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 </table></div>
 <hr />
 <p><a id="options-flags"></a></p>
-<h2 id="3-options--flags">3. Options &amp; Flags <a class="header-anchor" href="#3-options--flags">#</a></h2>
-<h3 id="rootfs-selection">Rootfs Selection <a class="header-anchor" href="#rootfs-selection">#</a></h3>
+<h2 id="3-options--flags">3. Options &amp; flags <a class="header-anchor" href="#3-options--flags">#</a></h2>
+<h3 id="rootfs-selection">Rootfs selection <a class="header-anchor" href="#rootfs-selection">#</a></h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -190,12 +190,12 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <tr>
 <td><code>--rootfs-img=PATH</code></td>
 <td><code>-i</code></td>
-<td>Path to an ext4 rootfs image file or block device. Automatically mounted.</td>
+<td>Path to an ext4 rootfs image file or block device. Droidspaces mounts it for you.</td>
 </tr>
 </tbody>
 </table></div>
-<p><em>Note: These are mutually exclusive. <code>--name</code> is mandatory when using <code>--rootfs-img</code>.</em></p>
-<h3 id="container-identity--configuration">Container Identity &amp; Configuration <a class="header-anchor" href="#container-identity--configuration">#</a></h3>
+<p><em>Note: these two are mutually exclusive. <code>--name</code> is required with <code>--rootfs-img</code>.</em></p>
+<h3 id="container-identity--configuration">Container identity &amp; configuration <a class="header-anchor" href="#container-identity--configuration">#</a></h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -218,12 +218,12 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <tr>
 <td><code>--conf=PATH</code></td>
 <td><code>-C</code></td>
-<td>Load container configuration directly from a config file.</td>
+<td>Load the container configuration from a config file.</td>
 </tr>
 <tr>
 <td><code>--reset</code></td>
 <td></td>
-<td>Reset container config to defaults (preserves name, rootfs path).</td>
+<td>Reset the container config to defaults, keeping the name and rootfs path.</td>
 </tr>
 </tbody>
 </table></div>
@@ -245,12 +245,12 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <tr>
 <td><code>--upstream=IFACE</code></td>
 <td></td>
-<td>Pin the NAT WAN to specific interface(s); disables automatic uplink detection. Comma-separated, priority-ordered, supports wildcards. Example: <code>--upstream=wlan0,rmnet*</code>. NAT mode only.</td>
+<td>Pin the NAT WAN to specific interface(s). Turns off automatic uplink detection. Comma-separated, priority-ordered, supports wildcards. Example: <code>--upstream=wlan0,rmnet*</code>. NAT mode only.</td>
 </tr>
 <tr>
 <td><code>--port HOST:CONT[/proto]</code></td>
 <td></td>
-<td>Forward host port to container (NAT mode). Supports TCP/UDP.</td>
+<td>Forward a host port to the container (NAT mode). TCP and UDP.</td>
 </tr>
 <tr>
 <td><code>--dns=SERVERS</code></td>
@@ -264,8 +264,8 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 </tr>
 </tbody>
 </table></div>
-<h4 id="gateway-mode">Gateway Mode <a class="header-anchor" href="#gateway-mode">#</a></h4>
-<p>Delegate a container's LAN to another running container (e.g. OpenWRT), which then owns DHCP, DNS, firewall and routing. Droidspaces only does the L2 plumbing. See <a href="networking-from-zero.html">Networking From Zero</a> for the full guide.</p>
+<h4 id="gateway-mode">Gateway mode <a class="header-anchor" href="#gateway-mode">#</a></h4>
+<p>Hand a container's LAN to another running container (for example OpenWRT), which then owns DHCP, DNS, firewall and routing. Droidspaces only does the L2 plumbing. See <a href="networking-from-zero.html">Networking From Zero</a> for the full guide.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -297,7 +297,7 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 </tr>
 </tbody>
 </table></div>
-<h3 id="feature-flags">Feature Flags <a class="header-anchor" href="#feature-flags">#</a></h3>
+<h3 id="feature-flags">Feature flags <a class="header-anchor" href="#feature-flags">#</a></h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -315,7 +315,7 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <tr>
 <td><code>--volatile</code></td>
 <td><code>-V</code></td>
-<td>Ephemeral mode. Changes are stored in RAM and lost on exit.</td>
+<td>Ephemeral mode. Changes live in RAM and are lost on exit.</td>
 </tr>
 <tr>
 <td><code>--hw-access</code></td>
@@ -325,7 +325,7 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <tr>
 <td><code>--gpu</code></td>
 <td></td>
-<td>Exclusively enable GPU acceleration. Scans the host <code>/dev</code> for known GPU nodes and securely maps only them into the container without exposing other host hardware. (Ignored if <code>-H</code> is passed).</td>
+<td>Enable GPU acceleration only. Scans the host <code>/dev</code> for known GPU nodes and maps only those into the container, without exposing other host hardware. Ignored if <code>-H</code> is passed.</td>
 </tr>
 <tr>
 <td><code>--allow-vts</code></td>
@@ -355,16 +355,16 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <tr>
 <td><code>--force-cgroupv1</code></td>
 <td></td>
-<td>Force legacy Cgroup V1 hierarchy. Required if the host kernel has a broken or partial Cgroups V2 implementation (common on older Android 4.x kernels).</td>
+<td>Force the legacy cgroup v1 hierarchy. Required if the host kernel has a broken or partial cgroup v2 implementation (common on older Android 4.x kernels).</td>
 </tr>
 <tr>
 <td><code>--privileged=TAGS</code></td>
 <td></td>
-<td>Relax security protections. Accepts a comma-separated list of tags: <code>nomask</code>, <code>nocaps</code>, <code>noseccomp</code>, <code>shared</code>, <code>full</code>. Use with extreme caution.</td>
+<td>Relax security protections. Takes a comma-separated list of tags: <code>nomask</code>, <code>nocaps</code>, <code>noseccomp</code>, <code>shared</code>, <code>full</code>. Use with extreme caution.</td>
 </tr>
 </tbody>
 </table></div>
-<h3 id="bind-mounts">Bind Mounts <a class="header-anchor" href="#bind-mounts">#</a></h3>
+<h3 id="bind-mounts">Bind mounts <a class="header-anchor" href="#bind-mounts">#</a></h3>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -384,14 +384,14 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <p><strong>Formats:</strong></p>
 <ul>
 <li>Multiple mounts: <code>-B /src1:/dst1,/src2:/dst2</code> or <code>-B /src1:/dst1 -B /src2:/dst2</code></li>
-<li>Max limits: Up to 16 mounts per container.</li>
+<li>Limit: up to 16 mounts per container.</li>
 <li>Missing host paths are skipped with a warning.</li>
 </ul>
 <hr />
 <p><a id="configs"></a></p>
-<h2 id="4-configuration-files">4. Configuration Files <a class="header-anchor" href="#4-configuration-files">#</a></h2>
-<p>Instead of relying solely on long command-line arguments, Droidspaces allows you to define container environments in a <code>.config</code> file and load it using the <code>--conf</code> flag.</p>
-<p>Below is a reference of every supported key in the configuration file:</p>
+<h2 id="4-configuration-files">4. Configuration files <a class="header-anchor" href="#4-configuration-files">#</a></h2>
+<p>Instead of a long list of arguments, you can describe a container in a <code>.config</code> file and load it with <code>--conf</code>.</p>
+<p>Every supported key:</p>
 <div class="code-block"><span class="code-lang">ini</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Droidspaces Container Configuration</span>
 <span class="c1"># Generated automatically - Changes may be overwritten</span>
 
@@ -404,7 +404,7 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <span class="c1"># Absolute path to the rootfs directory or .img file</span>
 <span class="na">rootfs_path</span><span class="o">=</span><span class="s">/home/user/ubuntu-24.04-rootfs.img</span>
 
-<span class="c1"># Custom path to store the container's PID file</span>
+<span class="c1"># Custom path to store the container&#39;s PID file</span>
 <span class="na">pidfile</span><span class="o">=</span><span class="s">/var/lib/Droidspaces/Pids/ubuntu.pid</span>
 
 <span class="c1"># Comma-separated list of host directories to bind mount (src:dest)</span>
@@ -452,12 +452,12 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 </code></pre></div>
 <hr />
 <p><a id="common-workflows"></a></p>
-<h2 id="5-common-workflows">5. Common Workflows <a class="header-anchor" href="#5-common-workflows">#</a></h2>
-<h3 id="running-with-a-config-file">Running with a Config File <a class="header-anchor" href="#running-with-a-config-file">#</a></h3>
-<p>Instead of passing many flags, you can load everything from a <code>.config</code> file:</p>
+<h2 id="5-common-workflows">5. Common workflows <a class="header-anchor" href="#5-common-workflows">#</a></h2>
+<h3 id="running-with-a-config-file">Running with a config file <a class="header-anchor" href="#running-with-a-config-file">#</a></h3>
+<p>Load everything from a <code>.config</code> file instead of passing flags:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>droidspaces<span class="w"> </span>--conf<span class="o">=</span>./my-container.config<span class="w"> </span>start
 </code></pre></div>
-<h3 id="persistent-development">Persistent Development <a class="header-anchor" href="#persistent-development">#</a></h3>
+<h3 id="persistent-development">Persistent development <a class="header-anchor" href="#persistent-development">#</a></h3>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>droidspaces<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--name<span class="o">=</span>dev<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--rootfs<span class="o">=</span>/path/to/ubuntu-rootfs<span class="w"> </span><span class="se">\</span>
@@ -465,7 +465,7 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <span class="w">  </span>--bind-mount<span class="o">=</span>/home/user/projects:/workspace<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>start
 </code></pre></div>
-<h3 id="nat-isolation-with-port-forwarding">NAT Isolation with Port Forwarding <a class="header-anchor" href="#nat-isolation-with-port-forwarding">#</a></h3>
+<h3 id="nat-isolation-with-port-forwarding">NAT isolation with port forwarding <a class="header-anchor" href="#nat-isolation-with-port-forwarding">#</a></h3>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>droidspaces<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--name<span class="o">=</span>server<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--rootfs-img<span class="o">=</span>/path/to/rootfs.img<span class="w"> </span><span class="se">\</span>
@@ -473,8 +473,8 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <span class="w">  </span>--port<span class="o">=</span><span class="m">8080</span>:80<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>start
 </code></pre></div>
-<h3 id="nat-with-a-pinned-uplink">NAT with a Pinned Uplink <a class="header-anchor" href="#nat-with-a-pinned-uplink">#</a></h3>
-<p>Force the container's internet out through a specific interface instead of following the host's active network. Pin a VPN tunnel (<code>tun0</code>) as a killswitch, or <code>rmnet*</code> to stay on mobile data while the phone uses Wi-Fi:</p>
+<h3 id="nat-with-a-pinned-uplink">NAT with a pinned uplink <a class="header-anchor" href="#nat-with-a-pinned-uplink">#</a></h3>
+<p>Send the container's traffic out through a specific interface instead of following the host's active network. Pin a VPN tunnel (<code>tun0</code>) as a killswitch, or <code>rmnet*</code> to stay on mobile data while the phone uses Wi-Fi:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>droidspaces<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--name<span class="o">=</span>vpnbox<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--rootfs-img<span class="o">=</span>/path/to/rootfs.img<span class="w"> </span><span class="se">\</span>
@@ -482,31 +482,31 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <span class="w">  </span>--upstream<span class="o">=</span>tun0<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>start
 </code></pre></div>
-<h3 id="gateway-mode-lan-owned-by-openwrt">Gateway Mode (LAN owned by OpenWRT) <a class="header-anchor" href="#gateway-mode-lan-owned-by-openwrt">#</a></h3>
-<p>Start the router container first (in NAT mode), then attach clients to it:</p>
+<h3 id="gateway-mode-lan-owned-by-openwrt">Gateway mode (LAN owned by OpenWRT) <a class="header-anchor" href="#gateway-mode-lan-owned-by-openwrt">#</a></h3>
+<p>Start the router container first, in NAT mode, then attach clients to it:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># 1. the router</span>
 sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>openwrt<span class="w"> </span>--rootfs<span class="o">=</span>/data/openwrt<span class="w"> </span>--net<span class="o">=</span>nat<span class="w"> </span>start
 
 <span class="c1"># 2. a client whose LAN/DHCP/firewall is owned by openwrt</span>
 sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>kali<span class="w"> </span>--rootfs<span class="o">=</span>/data/kali<span class="w"> </span>--net<span class="o">=</span>gateway<span class="w"> </span>--gateway<span class="o">=</span>openwrt<span class="w"> </span>start
 </code></pre></div>
-<h3 id="ephemeral-testing">Ephemeral Testing <a class="header-anchor" href="#ephemeral-testing">#</a></h3>
+<h3 id="ephemeral-testing">Ephemeral testing <a class="header-anchor" href="#ephemeral-testing">#</a></h3>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span><span class="nb">test</span><span class="w"> </span>--rootfs<span class="o">=</span>/path/to/rootfs<span class="w"> </span>--volatile<span class="w"> </span>start
 </code></pre></div>
-<h3 id="one-off-commands">One-Off Commands <a class="header-anchor" href="#one-off-commands">#</a></h3>
+<h3 id="one-off-commands">One-off commands <a class="header-anchor" href="#one-off-commands">#</a></h3>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>run<span class="w"> </span>uname<span class="w"> </span>-a
 <span class="c1"># Use sh -c for pipes:</span>
-sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>run<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">"ps aux | grep init"</span>
+sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>run<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;ps aux | grep init&quot;</span>
 <span class="c1"># Run as a specific user with -u/--user:</span>
 sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>-u<span class="w"> </span>myuser<span class="w"> </span>run<span class="w"> </span>whoami
 sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>-u<span class="w"> </span>myuser<span class="w"> </span>run<span class="w"> </span>env
-sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>-u<span class="w"> </span>myuser<span class="w"> </span>run<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">"id &amp;&amp; env"</span>
+sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>-u<span class="w"> </span>myuser<span class="w"> </span>run<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;id &amp;&amp; env&quot;</span>
 </code></pre></div>
-<h3 id="gpu-acceleration">GPU Acceleration <a class="header-anchor" href="#gpu-acceleration">#</a></h3>
-<p>Ensure only the GPU nodes (and not all host hardware) are securely exposed:</p>
+<h3 id="gpu-acceleration">GPU acceleration <a class="header-anchor" href="#gpu-acceleration">#</a></h3>
+<p>Expose only the GPU nodes, not all host hardware:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>gpu-app<span class="w"> </span>--rootfs<span class="o">=</span>/path/to/rootfs<span class="w"> </span>--gpu<span class="w"> </span>start
 </code></pre></div>
-<h3 id="deep-customization-privileged-mode">Deep Customization (Privileged Mode) <a class="header-anchor" href="#deep-customization-privileged-mode">#</a></h3>
+<h3 id="deep-customization-privileged-mode">Deep customization (privileged mode) <a class="header-anchor" href="#deep-customization-privileged-mode">#</a></h3>
 <p>For cases where you need unmasked access:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>privileged-box<span class="w"> </span>--rootfs<span class="o">=</span>/path/to/rootfs<span class="w"> </span>--privileged<span class="o">=</span>full<span class="w"> </span>start
 <span class="c1"># Or mix and match tags:</span>
@@ -514,20 +514,20 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 </code></pre></div>
 <hr />
 <p><a id="advanced-usage"></a></p>
-<h2 id="6-advanced-usage--lifecycle">6. Advanced Usage &amp; Lifecycle <a class="header-anchor" href="#6-advanced-usage--lifecycle">#</a></h2>
-<h3 id="container-recovery">Container Recovery <a class="header-anchor" href="#container-recovery">#</a></h3>
-<p>If a container was started outside the current session, or its host-side PID file / config file was lost or corrupted, use <code>scan</code> to resurrect it from the container's isolated <code>/run</code> memory:</p>
+<h2 id="6-advanced-usage--lifecycle">6. Advanced usage &amp; lifecycle <a class="header-anchor" href="#6-advanced-usage--lifecycle">#</a></h2>
+<h3 id="container-recovery">Container recovery <a class="header-anchor" href="#container-recovery">#</a></h3>
+<p>If a container was started outside the current session, or its host-side PID file or config file was lost or corrupted, <code>scan</code> recovers it from the container's isolated <code>/run</code> memory:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>droidspaces<span class="w"> </span>scan
 </code></pre></div>
 <hr />
 <p><a id="system-requirements"></a></p>
-<h2 id="7-system-requirements">7. System Requirements <a class="header-anchor" href="#7-system-requirements">#</a></h2>
-<p>Always run the built-in checker to verify your kernel supports the required namespaces and features:</p>
+<h2 id="7-system-requirements">7. System requirements <a class="header-anchor" href="#7-system-requirements">#</a></h2>
+<p>Run the built-in checker to confirm your kernel supports the required namespaces and features:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>droidspaces<span class="w"> </span>check
 </code></pre></div>
-<p>See the <a href="kernel-configuration.html">Kernel Configuration Guide</a> for a deep dive into technical requirements.</p>
+<p>The <a href="kernel-configuration.html">Kernel Configuration Guide</a> covers the requirements in detail.</p>
 <hr />
-<h2 id="next-steps">Next Steps <a class="header-anchor" href="#next-steps">#</a></h2>
+<h2 id="next-steps">Next steps <a class="header-anchor" href="#next-steps">#</a></h2>
 <ul>
 <li><a href="features.html">Feature Deep Dives</a></li>
 <li><a href="troubleshooting.html">Troubleshooting</a></li>
@@ -536,10 +536,10 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 
     </article>
     <p class="doc-edit"><a href="https://github.com/ravindu644/Droidspaces-OSS/edit/main/Documentation/Linux-CLI.md" rel="noopener noreferrer"><span class="icon" aria-hidden="true">edit</span>Edit this page on GitHub</a></p>
-<nav class="doc-nav" aria-label="Pages"><a href="usage-android-app.html" class="doc-nav-prev"><small>Previous</small>Android App Usage</a><a href="networking-from-zero.html" class="doc-nav-next"><small>Next</small>Networking From Zero</a></nav>
+<nav class="doc-nav" aria-label="Pages"><a href="usage-android-app.html" class="doc-nav-prev"><small>Previous</small>Android app usage</a><a href="networking-from-zero.html" class="doc-nav-next"><small>Next</small>Networking from zero</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#quick-navigation">Quick Navigation</a></li><li class="toc-h2"><a href="#1-getting-started">1. Getting Started</a></li><li class="toc-h3"><a href="#start-your-first-container">Start Your First Container</a></li><li class="toc-h3"><a href="#enter-the-container">Enter the Container</a></li><li class="toc-h3"><a href="#stop-the-container">Stop the Container</a></li><li class="toc-h2"><a href="#2-command-reference">2. Command Reference</a></li><li class="toc-h2"><a href="#3-options--flags">3. Options &amp; Flags</a></li><li class="toc-h3"><a href="#rootfs-selection">Rootfs Selection</a></li><li class="toc-h3"><a href="#container-identity--configuration">Container Identity &amp; Configuration</a></li><li class="toc-h3"><a href="#networking">Networking</a></li><li class="toc-h3"><a href="#feature-flags">Feature Flags</a></li><li class="toc-h3"><a href="#bind-mounts">Bind Mounts</a></li><li class="toc-h2"><a href="#4-configuration-files">4. Configuration Files</a></li><li class="toc-h2"><a href="#5-common-workflows">5. Common Workflows</a></li><li class="toc-h3"><a href="#running-with-a-config-file">Running with a Config File</a></li><li class="toc-h3"><a href="#persistent-development">Persistent Development</a></li><li class="toc-h3"><a href="#nat-isolation-with-port-forwarding">NAT Isolation with Port Forwarding</a></li><li class="toc-h3"><a href="#nat-with-a-pinned-uplink">NAT with a Pinned Uplink</a></li><li class="toc-h3"><a href="#gateway-mode-lan-owned-by-openwrt">Gateway Mode (LAN owned by OpenWRT)</a></li><li class="toc-h3"><a href="#ephemeral-testing">Ephemeral Testing</a></li><li class="toc-h3"><a href="#one-off-commands">One-Off Commands</a></li><li class="toc-h3"><a href="#gpu-acceleration">GPU Acceleration</a></li><li class="toc-h3"><a href="#deep-customization-privileged-mode">Deep Customization (Privileged Mode)</a></li><li class="toc-h2"><a href="#6-advanced-usage--lifecycle">6. Advanced Usage &amp; Lifecycle</a></li><li class="toc-h3"><a href="#container-recovery">Container Recovery</a></li><li class="toc-h2"><a href="#7-system-requirements">7. System Requirements</a></li><li class="toc-h2"><a href="#next-steps">Next Steps</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#quick-navigation">Quick navigation</a></li><li class="toc-h2"><a href="#1-getting-started">1. Getting started</a></li><li class="toc-h3"><a href="#start-your-first-container">Start your first container</a></li><li class="toc-h3"><a href="#enter-the-container">Enter the container</a></li><li class="toc-h3"><a href="#stop-the-container">Stop the container</a></li><li class="toc-h2"><a href="#2-command-reference">2. Command reference</a></li><li class="toc-h2"><a href="#3-options--flags">3. Options &amp; flags</a></li><li class="toc-h3"><a href="#rootfs-selection">Rootfs selection</a></li><li class="toc-h3"><a href="#container-identity--configuration">Container identity &amp; configuration</a></li><li class="toc-h3"><a href="#networking">Networking</a></li><li class="toc-h3"><a href="#feature-flags">Feature flags</a></li><li class="toc-h3"><a href="#bind-mounts">Bind mounts</a></li><li class="toc-h2"><a href="#4-configuration-files">4. Configuration files</a></li><li class="toc-h2"><a href="#5-common-workflows">5. Common workflows</a></li><li class="toc-h3"><a href="#running-with-a-config-file">Running with a config file</a></li><li class="toc-h3"><a href="#persistent-development">Persistent development</a></li><li class="toc-h3"><a href="#nat-isolation-with-port-forwarding">NAT isolation with port forwarding</a></li><li class="toc-h3"><a href="#nat-with-a-pinned-uplink">NAT with a pinned uplink</a></li><li class="toc-h3"><a href="#gateway-mode-lan-owned-by-openwrt">Gateway mode (LAN owned by OpenWRT)</a></li><li class="toc-h3"><a href="#ephemeral-testing">Ephemeral testing</a></li><li class="toc-h3"><a href="#one-off-commands">One-off commands</a></li><li class="toc-h3"><a href="#gpu-acceleration">GPU acceleration</a></li><li class="toc-h3"><a href="#deep-customization-privileged-mode">Deep customization (privileged mode)</a></li><li class="toc-h2"><a href="#6-advanced-usage--lifecycle">6. Advanced usage &amp; lifecycle</a></li><li class="toc-h3"><a href="#container-recovery">Container recovery</a></li><li class="toc-h2"><a href="#7-system-requirements">7. System requirements</a></li><li class="toc-h2"><a href="#next-steps">Next steps</a></li></ul></nav>
   </aside>
 </div>
 <dialog class="search-dialog" aria-label="Search the docs">

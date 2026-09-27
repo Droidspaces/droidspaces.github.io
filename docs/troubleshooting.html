@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Troubleshoot Droidspaces containers: systemd hangs, paranoid networking, SELinux corruption, OverlayFS f2fs, sparse image reclaim, WiFi power save.">
+  <meta name="description" content="Fixes for common Droidspaces container problems: systemd hangs, paranoid networking, SELinux corruption, OverlayFS on f2fs, sparse image reclaim, Wi-Fi power save.">
   <meta name="keywords" content="droidspaces, troubleshooting, systemd, hang, fix, network, issues, selinux, overlayfs, ffs, container, errors">
   <title>Troubleshooting - Droidspaces Docs</title>
   <meta property="og:title" content="Troubleshooting - Droidspaces Docs">
-  <meta property="og:description" content="Troubleshoot Droidspaces containers: systemd hangs, paranoid networking, SELinux corruption, OverlayFS f2fs, sparse image reclaim, WiFi power save.">
+  <meta property="og:description" content="Fixes for common Droidspaces container problems: systemd hangs, paranoid networking, SELinux corruption, OverlayFS on f2fs, sparse image reclaim, Wi-Fi power save.">
   <meta property="og:url" content="https://www.droidspaces.org/docs/troubleshooting.html">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Troubleshooting - Droidspaces Docs">
-  <meta name="twitter:description" content="Troubleshoot Droidspaces containers: systemd hangs, paranoid networking, SELinux corruption, OverlayFS f2fs, sparse image reclaim, WiFi power save.">
+  <meta name="twitter:description" content="Fixes for common Droidspaces container problems: systemd hangs, paranoid networking, SELinux corruption, OverlayFS on f2fs, sparse image reclaim, Wi-Fi power save.">
   <meta name="twitter:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
   <link rel="canonical" href="https://www.droidspaces.org/docs/troubleshooting.html">
   <link rel="icon" href="/favicon.ico">
@@ -46,23 +46,23 @@
     <button class="icon-button sidebar-close" popovertarget="sidebar" popovertargetaction="hide" aria-label="Close navigation"><span class="icon" aria-hidden="true">close</span></button>
     <button class="search-open" type="button" hidden><span class="icon" aria-hidden="true">search</span>Search the docs<kbd>Ctrl K</kbd></button>
 <details class="sidebar-group" open><summary class="sidebar-heading">Basics</summary>
-<a href="installation-android.html" class="sidebar-link">Android Installation</a>
-<a href="installation-linux.html" class="sidebar-link">Linux Installation</a>
+<a href="installation-android.html" class="sidebar-link">Android installation</a>
+<a href="installation-linux.html" class="sidebar-link">Linux installation</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Guides</summary>
-<a href="features.html" class="sidebar-link">Feature Deep Dives</a>
-<a href="graphics-and-audio.html" class="sidebar-link">Display, Audio & Desktop</a>
-<a href="kernel-configuration.html" class="sidebar-link">Kernel Configuration</a>
-<a href="usage-android-app.html" class="sidebar-link">Android App Usage</a>
+<a href="features.html" class="sidebar-link">Feature deep dives</a>
+<a href="graphics-and-audio.html" class="sidebar-link">Display, audio & desktop</a>
+<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
+<a href="usage-android-app.html" class="sidebar-link">Android app usage</a>
 <a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
-<a href="networking-from-zero.html" class="sidebar-link">Networking From Zero</a>
+<a href="networking-from-zero.html" class="sidebar-link">Networking from zero</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Recipes</summary>
-<a href="cool-things-you-can-do.html" class="sidebar-link">Cool Things You Can Do</a>
+<a href="cool-things-you-can-do.html" class="sidebar-link">Cool things you can do</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Reference</summary>
 <a href="troubleshooting.html" class="sidebar-link" aria-current="page">Troubleshooting</a>
-<a href="community-supported-devices.html" class="sidebar-link">Community-Supported Devices</a>
+<a href="community-supported-devices.html" class="sidebar-link">Community-supported devices</a>
 <a href="nix-nixos.html" class="sidebar-link">Nix/NixOS</a>
 <a href="uninstallation.html" class="sidebar-link">Uninstallation</a>
 </details>
@@ -70,69 +70,68 @@
   <main class="docs-content">
     <article>
 <h1 id="troubleshooting">Troubleshooting <a class="header-anchor" href="#troubleshooting">#</a></h1>
-<p>Common issues, their causes, and how to fix them.</p>
-<h3 id="quick-navigation">Quick Navigation <a class="header-anchor" href="#quick-navigation">#</a></h3>
+<p>Common problems, what causes them, and how to fix them.</p>
+<h3 id="quick-navigation">Quick navigation <a class="header-anchor" href="#quick-navigation">#</a></h3>
 <ul>
-<li><a href="#modern-distros-arch-fedora-etc-failure-on-legacy-kernels">Modern Distros (Arch, Fedora, etc.) Failure on Legacy Kernels</a></li>
+<li><a href="#modern-distros-arch-fedora-etc-failure-on-legacy-kernels">Modern distros (Arch, Fedora, etc.) failure on legacy kernels</a></li>
 <li><a href="#required-key-not-available">&quot;Required key not available&quot; (ENOKEY)</a></li>
-<li><a href="#mount-errors-on-kernel-414">Mount Errors on Kernel 4.14</a></li>
-<li><a href="#overlayfs-not-supported-f2fs">OverlayFS Not Supported (f2fs)</a></li>
-<li><a href="#container-name-conflicts">Container Name Conflicts</a></li>
-<li><a href="#systemd-hangs-on-older-kernels">Systemd Hangs on Older Kernels</a></li>
-<li><a href="#container-wont-stop">Container Won't Stop</a></li>
-<li><a href="#rootfs-image-io-errors-on-android">Rootfs Image I/O Errors on Android</a></li>
-<li><a href="#paranoid-networking">Networking is completely dead - ping fails with &quot;socket: permission denied&quot;</a></li>
-<li><a href="#dns--name-resolution-issues">DNS / Name Resolution Issues</a></li>
-<li><a href="#wifimobile-data-disconnects">WiFi/Mobile Data Disconnects</a></li>
-<li><a href="#selinux-induced-rootfs-corruption-directory-mode">SELinux-Induced Rootfs Corruption</a></li>
-<li><a href="#reclaim-storage">Reclaiming Storage (Sparse Image)</a></li>
-<li><a href="#nuke-wifi-powersave">WIFI <code>Power save: on</code> make the networking experience sluggish in Android</a></li>
-<li><a href="#getting-help">Getting Help</a></li>
+<li><a href="#mount-errors-on-kernel-414">Mount errors on kernel 4.14</a></li>
+<li><a href="#overlayfs-not-supported-f2fs">OverlayFS not supported (f2fs)</a></li>
+<li><a href="#container-name-conflicts">Container name conflicts</a></li>
+<li><a href="#systemd-hangs-on-older-kernels">systemd hangs on older kernels</a></li>
+<li><a href="#container-wont-stop">Container won't stop</a></li>
+<li><a href="#rootfs-image-io-errors-on-android">Rootfs image I/O errors on Android</a></li>
+<li><a href="#paranoid-networking">Networking is completely dead: ping fails with &quot;socket: permission denied&quot;</a></li>
+<li><a href="#dns--name-resolution-issues">DNS / name resolution issues</a></li>
+<li><a href="#wifimobile-data-disconnects">WiFi/mobile data disconnects</a></li>
+<li><a href="#selinux-induced-rootfs-corruption-directory-mode">SELinux-induced rootfs corruption</a></li>
+<li><a href="#reclaim-storage">Reclaiming storage (sparse image)</a></li>
+<li><a href="#nuke-wifi-powersave">Wi-Fi <code>Power save: on</code> makes networking sluggish on Android</a></li>
+<li><a href="#getting-help">Getting help</a></li>
 </ul>
 <hr />
 <p><a id="modern-distros"></a></p>
-<h2 id="modern-distros-arch-fedora-etc-failure-on-legacy-kernels">Modern Distros (Arch, Fedora, etc.) Failure on Legacy Kernels <a class="header-anchor" href="#modern-distros-arch-fedora-etc-failure-on-legacy-kernels">#</a></h2>
-<p>This is not a bug in Droidspaces; it is a limitation of the distribution's <code>systemd</code> version. Modern distributions like Arch Linux, Fedora, or openSUSE use recent versions of <code>systemd</code> (v258 and newer) that require kernel features missing in older versions. On legacy kernels (3.18, 4.4, 4.9, 4.14, 4.19), these distros will either fail to boot with an &quot;Unsupported Kernel&quot; message, crash during initialization, or appear to hang when executing <code>systemctl</code> commands.</p>
-<p>Systemd's development philosophy increasingly targets modern Linux environments. Starting with v258 (released in September 2025), the codebase was purged of many legacy workarounds and backward-compatibility layers intended for pre-5.4 kernels.</p>
-<p>Specifically, developers removed old capability checks, deprecated fallback mechanisms, and deleted obsolete D-Bus methods.</p>
-<p>By removing these fallbacks, modern <code>systemd</code> assumes modern kernel APIs are present. When they are not (as in legacy kernels), it hard-fails rather than degrading gracefully.</p>
-<p><strong>Cause:</strong> The host kernel is too old to support modern syscalls and features required by newer <code>systemd</code> versions.</p>
-<p>Legacy kernels lack modern system calls (e.g., <code>clone3</code>, <code>openat2</code>, or newer <code>bpf</code> hooks) that <code>systemd</code> now utilizes by default. When <code>systemd</code> invokes a syscall that a 4.14 or 4.19 kernel doesn't recognize, the kernel rejects it, leading to a failure.</p>
+<h2 id="modern-distros-arch-fedora-etc-failure-on-legacy-kernels">Modern distros (Arch, Fedora, etc.) failure on legacy kernels <a class="header-anchor" href="#modern-distros-arch-fedora-etc-failure-on-legacy-kernels">#</a></h2>
+<p>This is not a Droidspaces bug. It is a limitation of the distribution's <code>systemd</code> version. Arch Linux, Fedora, openSUSE and other current distributions ship recent <code>systemd</code> (v258 and newer), which needs kernel features that older kernels do not have. On legacy kernels (3.18, 4.4, 4.9, 4.14, 4.19) these distros either refuse to boot with an &quot;Unsupported Kernel&quot; message, crash during initialization, or appear to hang when you run <code>systemctl</code> commands.</p>
+<p>systemd increasingly targets modern Linux. Starting with v258 (released in September 2025), many legacy workarounds and backward-compatibility layers for pre-5.4 kernels were removed from the codebase: old capability checks, deprecated fallback mechanisms and obsolete D-Bus methods.</p>
+<p>Without those fallbacks, modern <code>systemd</code> assumes modern kernel APIs are present. When they are not, as on legacy kernels, it fails hard instead of degrading gracefully.</p>
+<p><strong>Cause:</strong> The host kernel is too old for the syscalls and features newer <code>systemd</code> versions require.</p>
+<p>Legacy kernels lack newer system calls (e.g., <code>clone3</code>, <code>openat2</code>, or newer <code>bpf</code> hooks) that <code>systemd</code> now uses by default. When <code>systemd</code> makes a syscall a 4.14 or 4.19 kernel does not know, the kernel rejects it and systemd fails.</p>
 <p><strong>Solution:</strong></p>
 <ul>
-<li>Use any container that utilizes <strong>OpenRC</strong>, <strong>runit</strong>, or <strong>s6</strong> as its init system.</li>
+<li>Use any container that uses <strong>OpenRC</strong>, <strong>runit</strong>, or <strong>s6</strong> as its init system.</li>
 <li>Use distributions with <code>systemd</code> versions older than v258, such as <strong>Ubuntu 22.04</strong>, <strong>Ubuntu 24.04</strong>, <strong>Ubuntu 25.04</strong>, or <strong>Ubuntu 25.10 (which uses v257.9 as of March 2026)</strong>.</li>
 <li>Use <strong>Debian 12 (Bookworm)</strong> or <strong>Debian 13 (Trixie)</strong>.</li>
 </ul>
 <hr />
 <h2 id="required-key-not-available">&quot;Required key not available&quot; <a class="header-anchor" href="#required-key-not-available">#</a></h2>
-<p><strong>Symptoms:</strong> The container crashes or filesystem operations fail with &quot;Required key not available&quot; errors. Most commonly seen on Android devices with File-Based Encryption (FBE).</p>
-<p><strong>Cause:</strong> systemd services inside the container attempt to create new session keyrings, which causes the process to lose access to Android's FBE encryption keys.</p>
+<p><strong>Symptoms:</strong> The container crashes, or filesystem operations fail with &quot;Required key not available&quot; errors. Most often seen on Android devices with File-Based Encryption (FBE).</p>
+<p><strong>Cause:</strong> systemd services inside the container create new session keyrings, and the process loses access to Android's FBE encryption keys.</p>
 <p><strong>Affected kernels:</strong> 3.18, 4.4, 4.9, 4.14, 4.19 (legacy Android kernels)</p>
-<p><strong>Solution:</strong> This is handled automatically by Droidspaces' Adaptive Seccomp Shield on kernels below 5.0. The shield intercepts keyring-related syscalls and returns <code>ENOSYS</code>, causing systemd to fall back to the existing session keyring.</p>
-<p>If you're still seeing this error:</p>
+<p><strong>Solution:</strong> On kernels below 5.0, Droidspaces' Adaptive Seccomp Shield handles this automatically. It intercepts the keyring syscalls and returns <code>ENOSYS</code>, so systemd falls back to the existing session keyring.</p>
+<p>If you still see this error:</p>
 <ul>
 <li>Verify your Droidspaces binary is up to date (v4.2.4+)</li>
 <li>Run <code>droidspaces check</code> to verify seccomp support</li>
 <li>Ensure <code>CONFIG_SECCOMP=y</code> and <code>CONFIG_SECCOMP_FILTER=y</code> are in your kernel config</li>
 <li>Move to <strong>rootfs.img mode</strong> (recommended on Android to isolate filesystem keys)</li>
-<li><strong>Advanced</strong>: Decrypt the <code>/data</code> partition by surgically editing the <code>fstab</code> file in <code>boot</code>/<code>vendor</code>/<code>vendor_boot</code> partitions (requires advanced Android modding knowledge)</li>
+<li><strong>Advanced</strong>: Decrypt the <code>/data</code> partition by editing the <code>fstab</code> file in <code>boot</code>/<code>vendor</code>/<code>vendor_boot</code> partitions (requires advanced Android modding knowledge)</li>
 </ul>
 <hr />
-<h2 id="mount-errors-on-kernel-414">Mount Errors on Kernel 4.14 <a class="header-anchor" href="#mount-errors-on-kernel-414">#</a></h2>
-<p><strong>Symptoms:</strong> The first container start attempt after stopping fails with a mount error, but the second attempt succeeds.</p>
-<p><strong>Cause:</strong> On kernel 4.14, loop device cleanup is asynchronous. After unmounting a rootfs image, the loop device may not be fully released when the next mount attempt occurs.</p>
-<p><strong>Solution:</strong> Droidspaces v4.2.3+ includes a 3-attempt retry loop with <code>sync()</code> calls and 1-second settle delays between attempts. This handles the race condition automatically.</p>
-<p>If you're still experiencing issues:</p>
+<h2 id="mount-errors-on-kernel-414">Mount errors on kernel 4.14 <a class="header-anchor" href="#mount-errors-on-kernel-414">#</a></h2>
+<p><strong>Symptoms:</strong> The first start after stopping a container fails with a mount error, and the second attempt succeeds.</p>
+<p><strong>Cause:</strong> On kernel 4.14, loop device cleanup is asynchronous. After a rootfs image is unmounted, the loop device may not be fully released by the time the next mount runs.</p>
+<p><strong>Solution:</strong> Droidspaces v4.2.3+ retries the mount up to 3 times, with <code>sync()</code> calls and a 1-second settle delay between attempts. This handles the race automatically.</p>
+<p>If you still have problems:</p>
 <ul>
 <li>Update to the latest Droidspaces version</li>
 <li>Wait a few seconds between stopping and starting a container</li>
 <li>Use <code>sync</code> before restarting: <code>sync &amp;&amp; droidspaces --name=mycontainer restart</code></li>
 </ul>
 <hr />
-<h2 id="overlayfs-not-supported-f2fs">OverlayFS Not Supported (f2fs) <a class="header-anchor" href="#overlayfs-not-supported-f2fs">#</a></h2>
-<p><strong>Symptoms:</strong> Starting a container with <code>--volatile</code> fails with an error about OverlayFS not being supported or f2fs incompatibility.</p>
-<p><strong>Cause:</strong> Most Android devices use f2fs for the <code>/data</code> partition. OverlayFS on many Android kernels (4.14, 5.15) does not support f2fs as a lower directory.</p>
+<h2 id="overlayfs-not-supported-f2fs">OverlayFS not supported (f2fs) <a class="header-anchor" href="#overlayfs-not-supported-f2fs">#</a></h2>
+<p><strong>Symptoms:</strong> Starting a container with <code>--volatile</code> fails with an error saying OverlayFS is not supported or f2fs is incompatible.</p>
+<p><strong>Cause:</strong> Most Android devices use f2fs for the <code>/data</code> partition. OverlayFS on many Android kernels (4.14, 5.15) does not accept f2fs as a lower directory.</p>
 <p><strong>Solution:</strong> Use a rootfs image instead of a directory:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># This will fail on f2fs:</span>
 droidspaces<span class="w"> </span>--rootfs<span class="o">=</span>/data/rootfs<span class="w"> </span>--volatile<span class="w"> </span>start
@@ -141,17 +140,17 @@ droidspaces<span class="w"> </span>--rootfs<span class="o">=</span>/data/rootfs<
 droidspaces<span class="w"> </span>--name<span class="o">=</span><span class="nb">test</span><span class="w"> </span>--rootfs-img<span class="o">=</span>/data/rootfs.img<span class="w"> </span>--volatile<span class="w"> </span>start
 </code></pre></div>
 <hr />
-<h2 id="container-name-conflicts">Container Name Conflicts <a class="header-anchor" href="#container-name-conflicts">#</a></h2>
-<p><strong>Symptoms:</strong> Starting a container fails because a container with the same name is already running, or PID file conflicts occur.</p>
+<h2 id="container-name-conflicts">Container name conflicts <a class="header-anchor" href="#container-name-conflicts">#</a></h2>
+<p><strong>Symptoms:</strong> A container fails to start because one with the same name is already running, or PID files conflict.</p>
 <p><strong>Solution:</strong></p>
 <ol>
 <li>
-<p>Check what's currently running:</p>
+<p>Check what is running:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>droidspaces<span class="w"> </span>show
 </code></pre></div>
 </li>
 <li>
-<p>If the container is listed but you believe it's actually stopped, clean up stale state:</p>
+<p>If the container is listed but you believe it has stopped, clean up the stale state:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>droidspaces<span class="w"> </span>scan
 </code></pre></div>
 </li>
@@ -162,28 +161,28 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span><span class="nb
 </li>
 </ol>
 <hr />
-<h2 id="systemd-hangs-on-older-kernels">Systemd Hangs on Older Kernels <a class="header-anchor" href="#systemd-hangs-on-older-kernels">#</a></h2>
-<p><strong>Symptoms:</strong> The entire systemd hangs or becomes unresponsive when starting a container on legacy kernels (3.18, 4.4, 4.9, 4.14, 4.19).</p>
+<h2 id="systemd-hangs-on-older-kernels">systemd hangs on older kernels <a class="header-anchor" href="#systemd-hangs-on-older-kernels">#</a></h2>
+<p><strong>Symptoms:</strong> systemd hangs or stops responding when a container starts on a legacy kernel (3.18, 4.4, 4.9, 4.14, 4.19).</p>
 <p><strong>Cause:</strong> systemd's service sandboxing (<code>PrivateTmp=yes</code>, <code>ProtectSystem=yes</code>) triggers a race condition in the kernel's VFS <code>grab_super</code> path on legacy kernels.</p>
 <p><strong>Solution:</strong> This is a kernel bug (<code>grab_super()</code> on 4.14.113 and neighbours) and Droidspaces cannot work around it. Use a kernel that carries the fix.</p>
 <hr />
-<h2 id="container-wont-stop">Container Won't Stop <a class="header-anchor" href="#container-wont-stop">#</a></h2>
-<p><strong>Symptoms:</strong> <code>droidspaces stop</code> takes more than 15 seconds to stop the container and eventually fail.</p>
-<p><strong>Cause:</strong> Exact same cuase of <a href="#systemd-hangs-on-older-kernels">Systemd Hangs on Older Kernels</a>.</p>
+<h2 id="container-wont-stop">Container won't stop <a class="header-anchor" href="#container-wont-stop">#</a></h2>
+<p><strong>Symptoms:</strong> <code>droidspaces stop</code> takes more than 15 seconds and then fails.</p>
+<p><strong>Cause:</strong> The same as <a href="#systemd-hangs-on-older-kernels">systemd hangs on older kernels</a>.</p>
 <p><strong>Solution:</strong> This is a kernel bug (<code>grab_super()</code> on 4.14.113 and neighbours) and Droidspaces cannot work around it. Use a kernel that carries the fix.</p>
 <hr />
-<h2 id="rootfs-image-io-errors-on-android">Rootfs Image I/O Errors on Android <a class="header-anchor" href="#rootfs-image-io-errors-on-android">#</a></h2>
-<p><strong>Symptoms:</strong> Loop-mounting a rootfs image silently fails.</p>
-<p><strong>Cause:</strong> On certain Android devices, the SELinux context of the <code>.img</code> file prevents the loop driver from performing I/O.</p>
-<p><strong>Solution:</strong> Droidspaces v4.3.0+ automatically applies the <code>vold_data_file</code> SELinux context to image files before mounting. If you're on an older version, update to the latest release.</p>
-<p>You can also manually apply the context:</p>
+<h2 id="rootfs-image-io-errors-on-android">Rootfs image I/O errors on Android <a class="header-anchor" href="#rootfs-image-io-errors-on-android">#</a></h2>
+<p><strong>Symptoms:</strong> Loop-mounting a rootfs image fails silently.</p>
+<p><strong>Cause:</strong> On some Android devices, the SELinux context of the <code>.img</code> file stops the loop driver from doing I/O.</p>
+<p><strong>Solution:</strong> Droidspaces v4.3.0+ applies the <code>vold_data_file</code> SELinux context to image files before mounting them. On an older version, update to the latest release.</p>
+<p>You can also apply the context by hand:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>chcon<span class="w"> </span>u:object_r:vold_data_file:s0<span class="w"> </span>/path/to/rootfs.img
 </code></pre></div>
 <hr />
 <p><a id="paranoid-networking"></a></p>
 <h2 id="networking-is-completely-dead---ping-fails-with-socket-permission-denied">Networking is completely dead - ping fails with &quot;socket: permission denied&quot; <a class="header-anchor" href="#networking-is-completely-dead---ping-fails-with-socket-permission-denied">#</a></h2>
-<p><strong>Symptoms:</strong> You have no internet access inside the container. Even basic commands like <code>ping</code> fail immediately with a <code>socket: permission denied</code> error, even when running as root.</p>
-<p><strong>Cause:</strong> This is caused by <strong>Android Paranoid Networking</strong>, a security feature found in many Android kernels (especially version 4.14 and older). Unlike standard Linux, the Android kernel restricts network socket creation to specific supplementary Group IDs (GIDs). Without these specific IDs, the kernel's security hooks block the process:</p>
+<p><strong>Symptoms:</strong> There is no internet access inside the container. Even <code>ping</code> fails immediately with <code>socket: permission denied</code>, even as root.</p>
+<p><strong>Cause:</strong> <strong>Android Paranoid Networking</strong>, a security feature in many Android kernels (especially 4.14 and older). Unlike standard Linux, the Android kernel allows network socket creation only to processes in specific supplementary group IDs (GIDs). Without them, the kernel's security hooks block the process:</p>
 <ul>
 <li><strong>AID_INET (3003):</strong> Required to create any AF_INET/AF_INET6 socket. Without this, <code>connect()</code> and <code>bind()</code> calls fail.</li>
 <li><strong>AID_NET_RAW (3004):</strong> Required for <code>ping</code> and other raw networking tasks.</li>
@@ -192,24 +191,24 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span><span class="nb
 <p><strong>Solutions:</strong></p>
 <ul>
 <li>
-<p><strong>Kernel Level Fix:</strong> If you are building your own kernel, the most effective solution is to disable this restriction entirely in your kernel configuration:</p>
+<p><strong>Kernel fix:</strong> If you build your own kernel, the most effective fix is to turn the restriction off in the kernel configuration:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="nv">CONFIG_ANDROID_PARANOID_NETWORK</span><span class="o">=</span>n
 </code></pre></div>
 </li>
 <li>
-<p><strong>Userland Fix:</strong> Use a rootfs that has been specifically patched to include these Android-specific GIDs in the group database. Our official rootfs tarballs come pre-configured to handle these permission requirements:</p>
+<p><strong>Userland fix:</strong> Use a rootfs that has these Android GIDs added to its group database. Our official rootfs tarballs come with them already configured:</p>
 <p><a href="https://github.com/ravindu644/Droidspaces-rootfs-builder/releases/latest" rel="noopener noreferrer">Droidspaces-rootfs-builder Releases</a></p>
 </li>
 </ul>
 <hr />
-<h2 id="dns--name-resolution-issues">DNS / Name Resolution Issues <a class="header-anchor" href="#dns--name-resolution-issues">#</a></h2>
-<p><strong>Symptoms:</strong> Internet works (you can ping IPs), but domain names fail to resolve, even though <code>/etc/resolv.conf</code> has the correct DNS nameservers. This issue happens especially with Mobile Data, but can also occur on Wi-Fi with some ISPs.</p>
-<p><strong>Cause:</strong> It seems some ISPs don’t like custom DNS setups. They completely block common DNS servers like <code>8.8.8.8</code> and <code>1.1.1.1</code>.</p>
-<p><strong>Solution:</strong> Use your ISP’s own DNS servers instead of custom ones.</p>
+<h2 id="dns--name-resolution-issues">DNS / name resolution issues <a class="header-anchor" href="#dns--name-resolution-issues">#</a></h2>
+<p><strong>Symptoms:</strong> Internet works (you can ping IPs), but domain names do not resolve, even though <code>/etc/resolv.conf</code> lists the correct nameservers. It happens mostly on mobile data, but also on Wi-Fi with some ISPs.</p>
+<p><strong>Cause:</strong> Some ISPs appear to block custom DNS setups, including common public DNS servers like <code>8.8.8.8</code> and <code>1.1.1.1</code>.</p>
+<p><strong>Solution:</strong> Use your ISP's own DNS servers instead of custom ones.</p>
 <ol>
 <li>
-<p>Run this command in an Android root shell to get the default DNS addresses your ISP assigned:</p>
-<div class="code-block"><span class="code-lang">shell</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>dumpsys<span class="w"> </span>connectivity<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s/}}/\n/g'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">'InterfaceName: wlan0'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-o<span class="w"> </span><span class="s1">'DnsAddresses: \[[^]]*\]'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-o<span class="w"> </span><span class="s1">'/[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s1">'/'</span>
+<p>Run this command in an Android root shell to get the DNS addresses your ISP assigned:</p>
+<div class="code-block"><span class="code-lang">shell</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>dumpsys<span class="w"> </span>connectivity<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/}}/\n/g&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;InterfaceName: wlan0&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-o<span class="w"> </span><span class="s1">&#39;DnsAddresses: \[[^]]*\]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-o<span class="w"> </span><span class="s1">&#39;/[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;/&#39;</span>
 </code></pre></div>
 </li>
 <li>
@@ -217,13 +216,13 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span><span class="nb
 </li>
 </ol>
 <hr />
-<h2 id="wifimobile-data-disconnects">WiFi/Mobile Data Disconnects <a class="header-anchor" href="#wifimobile-data-disconnects">#</a></h2>
-<p><strong>Symptoms:</strong> WiFi or mobile data permanently stops working on the host device during container start or stop processes. You may be unable to turn them back on without a device reboot.</p>
-<p><strong>Cause:</strong> The container's <code>systemd-networkd</code> service may conflict with Android's network management or attempt to override host-side network configurations.</p>
+<h2 id="wifimobile-data-disconnects">WiFi/mobile data disconnects <a class="header-anchor" href="#wifimobile-data-disconnects">#</a></h2>
+<p><strong>Symptoms:</strong> Wi-Fi or mobile data on the host stops working while a container starts or stops, and may not come back on without a device reboot.</p>
+<p><strong>Cause:</strong> The container's <code>systemd-networkd</code> service can conflict with Android's network management or try to override the host's network configuration.</p>
 <p><strong>Solutions:</strong></p>
 <ul>
 <li>
-<p>If you are using the host networking mode: Mask the <code>systemd-networkd</code> service inside the container to prevent it from starting:</p>
+<p>In host networking mode, mask the <code>systemd-networkd</code> service inside the container so it never starts:</p>
 <ol>
 <li><strong>Via Android App</strong>: Go to <strong>Panel</strong> -&gt; <strong>Container Name</strong> -&gt; <strong>Manage</strong> (Systemd Menu) and find <code>systemd-networkd</code>, then tap on 3 dot icon next to the <code>systemd-networkd</code> card and select <strong>Mask</strong>.</li>
 <li><strong>Via Terminal</strong>:<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>mask<span class="w"> </span>systemd-networkd
@@ -232,50 +231,50 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span><span class="nb
 </ol>
 </li>
 <li>
-<p>Use isolated NAT mode for maximum networking freedom without any conflicts to the host's networking.</p>
+<p>Use NAT mode, where the container has its own network stack and cannot conflict with the host's.</p>
 </li>
 </ul>
 <hr />
-<h2 id="selinux-induced-rootfs-corruption-directory-mode">SELinux-Induced Rootfs Corruption (Directory Mode) <a class="header-anchor" href="#selinux-induced-rootfs-corruption-directory-mode">#</a></h2>
-<p><strong>Symptoms:</strong> Symbolic link sizes changing unexpectedly (e.g., <code>dpkg</code> warnings about <code>libstdc++.so.6</code>), shared library load failures (<code>LD_LIBRARY_PATH</code> issues), or random binary crashes.</p>
-<p><strong>Cause:</strong> On Android, the <code>/data/local/Droidspaces/Containers</code> directory often receives a generic SELinux context. This causes the kernel to block or silently interfere with advanced filesystem operations (like creating certain symlinks or special files) when running in <strong>Directory-based mode</strong> (<code>--rootfs=/path/to/dir</code>). Because every file and symlink inside the directory tree is exposed directly to the host filesystem, Android's SELinux policy can relabel or restrict individual entries, corrupting the internal Linux filesystem's expected layout.</p>
-<p><strong>Recommended Solution:</strong> Move to <strong>rootfs.img mode</strong> (<code>--rootfs-img=/path/to/rootfs.img</code>).</p>
-<p>In this mode, the rootfs is stored as a standalone ext4 image and loop-mounted at runtime. SELinux xattr labels for files inside the image are encapsulated within the image's own filesystem metadata, so Android's policy engine cannot relabel or conflict with them. This avoids the core problem of the host assigning a generic context to every file in the directory tree.</p>
-<div class="callout callout-note"><strong class="callout-title">Note</strong><p>SELinux enforcement still applies at the process level - the container process's domain and access to the loop device or mount point remain subject to host policy. The <code>.img</code> mode does not create a fully SELinux-transparent environment, but it does eliminate host-side interference with the internal filesystem's structure and extended attributes.</p></div>
-<div class="callout callout-warning"><strong class="callout-title">Warning</strong><p>While switching to <code>permissive</code> mode may seem to fix this, it is <strong>not recommended</strong> as a permanent solution. If the rootfs has already been corrupted by SELinux denials, the damage is often permanent and cannot be undone by simply changing modes.</p></div>
+<h2 id="selinux-induced-rootfs-corruption-directory-mode">SELinux-induced rootfs corruption (directory mode) <a class="header-anchor" href="#selinux-induced-rootfs-corruption-directory-mode">#</a></h2>
+<p><strong>Symptoms:</strong> Symbolic link sizes change unexpectedly (e.g., <code>dpkg</code> warnings about <code>libstdc++.so.6</code>), shared libraries fail to load (<code>LD_LIBRARY_PATH</code> issues), or binaries crash at random.</p>
+<p><strong>Cause:</strong> On Android, the <code>/data/local/Droidspaces/Containers</code> directory often gets a generic SELinux context. In <strong>directory-based mode</strong> (<code>--rootfs=/path/to/dir</code>), the kernel then blocks or silently interferes with some filesystem operations, such as creating certain symlinks or special files. Every file and symlink in the directory tree is exposed directly to the host filesystem, so Android's SELinux policy can relabel or restrict individual entries and corrupt the layout the Linux system inside expects.</p>
+<p><strong>Recommended solution:</strong> Move to <strong>rootfs.img mode</strong> (<code>--rootfs-img=/path/to/rootfs.img</code>).</p>
+<p>In this mode the rootfs is a standalone ext4 image, loop-mounted at runtime. The SELinux xattr labels of files inside the image live in the image's own filesystem metadata, where Android's policy engine cannot relabel or conflict with them. The host no longer assigns a generic context to every file in the tree.</p>
+<div class="callout callout-note"><strong class="callout-title">Note</strong><p>SELinux enforcement still applies at the process level: the container process's domain and its access to the loop device or mount point remain subject to host policy. The <code>.img</code> mode does not make the environment fully SELinux-transparent, but it does stop the host from interfering with the internal filesystem's structure and extended attributes.</p></div>
+<div class="callout callout-warning"><strong class="callout-title">Warning</strong><p>Switching SELinux to <code>permissive</code> may look like a fix, but it is <strong>not recommended</strong> as a permanent solution. If the rootfs has already been corrupted by SELinux denials, the damage is often permanent, and changing modes will not undo it.</p></div>
 <hr />
 <p><a id="reclaim-storage"></a></p>
-<h2 id="reclaiming-storage-sparse-image">Reclaiming Storage (Sparse Image) <a class="header-anchor" href="#reclaiming-storage-sparse-image">#</a></h2>
-<p><strong>Symptoms:</strong> You have deleted large files or uninstalled heavy packages inside a container using <strong>Sparse Image mode</strong> (<code>rootfs.img</code>), but the <code>rootfs.img</code> file on your Android internal storage still takes up the same amount of space (it doesn't &quot;shrink&quot; back).</p>
-<p><strong>Cause:</strong> Ext4 sparse images expand as you write data, but the host filesystem cannot automatically detect when blocks are freed inside the image. This is especially common on legacy kernels (e.g., 4.14).</p>
-<p><strong>Solution:</strong> Use <code>fstrim</code> inside the container to tell the kernel to &quot;discard&quot; unused blocks, which punches holes in the sparse image and reclaims space on the physical disk.</p>
+<h2 id="reclaiming-storage-sparse-image">Reclaiming storage (sparse image) <a class="header-anchor" href="#reclaiming-storage-sparse-image">#</a></h2>
+<p><strong>Symptoms:</strong> You deleted large files or removed heavy packages inside a container in <strong>Sparse Image mode</strong> (<code>rootfs.img</code>), but the <code>rootfs.img</code> file on your Android internal storage takes up the same space as before. It does not shrink back.</p>
+<p><strong>Cause:</strong> Ext4 sparse images grow as data is written, but the host filesystem cannot tell on its own when blocks inside the image are freed. This is especially common on legacy kernels (e.g., 4.14).</p>
+<p><strong>Solution:</strong> Run <code>fstrim</code> inside the container. It tells the kernel to discard unused blocks, which punches holes in the sparse image and frees the space on the physical disk.</p>
 <ol>
 <li><strong>Start the container</strong> normally.</li>
 <li><strong>Run fstrim</strong> as root inside the container:<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>fstrim<span class="w"> </span>-av
 </code></pre></div>
 </li>
-<li>The command will report how many bytes were trimmed. You will notice the <code>rootfs.img</code> size on your Android storage has now decreased to match the actual data usage.</li>
+<li>The command reports how many bytes were trimmed. The <code>rootfs.img</code> size on your Android storage now drops to match the data actually in use.</li>
 </ol>
 <hr />
 <p><a id="nuke-wifi-powersave"></a></p>
-<h2 id="wi-fi-power-save-on-causing-sluggish-networking-on-android">Wi-Fi <code>Power save: on</code> Causing Sluggish Networking on Android <a class="header-anchor" href="#wi-fi-power-save-on-causing-sluggish-networking-on-android">#</a></h2>
-<p><strong>Symptoms:</strong> Android automatically puts Wi-Fi hardware into power-saving mode when the device's screen turns off. This can cause sluggish networking or dropped connections within containers. Because there is no universal toggle to disable this behavior from the Android userspace, you must explicitly force the power save state to &quot;off&quot; using a background service.</p>
-<p><strong>Solution:</strong> You can create a lightweight, dedicated container in host networking mode (<code>--net=host</code>) that runs a simple &quot;watchdog&quot; script to keep Wi-Fi power save disabled. We recommend using a minimal Alpine Linux container for this purpose.</p>
-<p>Here is how to set it up:</p>
-<h3 id="1-install-required-utilities">1. Install Required Utilities <a class="header-anchor" href="#1-install-required-utilities">#</a></h3>
-<p>First, ensure that the <code>iw</code> utility is installed in your container.</p>
+<h2 id="wi-fi-power-save-on-causing-sluggish-networking-on-android">Wi-Fi <code>Power save: on</code> causing sluggish networking on Android <a class="header-anchor" href="#wi-fi-power-save-on-causing-sluggish-networking-on-android">#</a></h2>
+<p><strong>Symptoms:</strong> Android puts the Wi-Fi hardware into power-saving mode when the screen turns off. Networking in containers becomes sluggish or connections drop. Android userspace has no universal toggle to turn this off, so you have to force power save off yourself from a background service.</p>
+<p><strong>Solution:</strong> Create a small, dedicated container in host networking mode (<code>--net=host</code>) that runs a &quot;watchdog&quot; script to keep Wi-Fi power save off. We recommend a minimal Alpine Linux container for this.</p>
+<p>To set it up:</p>
+<h3 id="1-install-required-utilities">1. Install required utilities <a class="header-anchor" href="#1-install-required-utilities">#</a></h3>
+<p>First, make sure the <code>iw</code> utility is installed in the container.</p>
 <ul>
 <li><strong>Alpine:</strong> <code>apk add iw</code></li>
 <li><strong>Ubuntu/Debian:</strong> <code>apt install iw</code></li>
 </ul>
-<h3 id="2-create-the-watchdog-script">2. Create the Watchdog Script <a class="header-anchor" href="#2-create-the-watchdog-script">#</a></h3>
-<p>Create a new file at <code>/usr/local/bin/wifi-watchdog.sh</code> with the following content:</p>
+<h3 id="2-create-the-watchdog-script">2. Create the watchdog script <a class="header-anchor" href="#2-create-the-watchdog-script">#</a></h3>
+<p>Create <code>/usr/local/bin/wifi-watchdog.sh</code> with this content:</p>
 <div class="code-block"><span class="code-lang">shell</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="ch">#!/bin/sh</span>
 <span class="k">while</span><span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">    </span><span class="c1"># Check if power save is "on"</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span>/usr/sbin/iw<span class="w"> </span>dev<span class="w"> </span>wlan0<span class="w"> </span>get<span class="w"> </span>power_save<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">"on"</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="c1"># Check if power save is &quot;on&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>/usr/sbin/iw<span class="w"> </span>dev<span class="w"> </span>wlan0<span class="w"> </span>get<span class="w"> </span>power_save<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;on&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">        </span>/usr/sbin/iw<span class="w"> </span>dev<span class="w"> </span>wlan0<span class="w"> </span><span class="nb">set</span><span class="w"> </span>power_save<span class="w"> </span>off
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>date<span class="k">)</span><span class="s2">: WiFi Power Save was ON. Forced OFF."</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/tmp/wifi-fix.log
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>date<span class="k">)</span><span class="s2">: WiFi Power Save was ON. Forced OFF.&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/tmp/wifi-fix.log
 <span class="w">    </span><span class="k">fi</span>
 <span class="w">    </span>sleep<span class="w"> </span><span class="m">60</span>
 <span class="k">done</span>
@@ -283,21 +282,21 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span><span class="nb
 <p>Make the script executable:</p>
 <div class="code-block"><span class="code-lang">shell</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/wifi-watchdog.sh
 </code></pre></div>
-<h3 id="3-wire-up-the-init-service">3. Wire Up the Init Service <a class="header-anchor" href="#3-wire-up-the-init-service">#</a></h3>
-<p>Depending on your container's init system, configure the script to run as a background service.</p>
+<h3 id="3-wire-up-the-init-service">3. Wire up the init service <a class="header-anchor" href="#3-wire-up-the-init-service">#</a></h3>
+<p>Set the script up as a background service for your container's init system.</p>
 <p><strong>For OpenRC (Alpine Linux)</strong></p>
 <p>Create a service file at <code>/etc/init.d/wifi-watchdog</code>:</p>
 <div class="code-block"><span class="code-lang">shell</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="ch">#!/sbin/openrc-run</span>
 
-<span class="nv">name</span><span class="o">=</span><span class="s2">"WiFi PowerSave Watchdog"</span>
-<span class="nv">description</span><span class="o">=</span><span class="s2">"Ensures wlan0 power_save stays off"</span>
+<span class="nv">name</span><span class="o">=</span><span class="s2">&quot;WiFi PowerSave Watchdog&quot;</span>
+<span class="nv">description</span><span class="o">=</span><span class="s2">&quot;Ensures wlan0 power_save stays off&quot;</span>
 
 <span class="c1"># Use the path to your loop script</span>
-<span class="nv">command</span><span class="o">=</span><span class="s2">"/usr/local/bin/wifi-watchdog.sh"</span>
+<span class="nv">command</span><span class="o">=</span><span class="s2">&quot;/usr/local/bin/wifi-watchdog.sh&quot;</span>
 
 <span class="c1"># This tells OpenRC to handle the backgrounding and PID creation</span>
 <span class="nv">command_background</span><span class="o">=</span><span class="nb">true</span>
-<span class="nv">pidfile</span><span class="o">=</span><span class="s2">"/run/</span><span class="si">${</span><span class="nv">RC_SVCNAME</span><span class="si">}</span><span class="s2">.pid"</span>
+<span class="nv">pidfile</span><span class="o">=</span><span class="s2">&quot;/run/</span><span class="si">${</span><span class="nv">RC_SVCNAME</span><span class="si">}</span><span class="s2">.pid&quot;</span>
 
 <span class="c1"># Ensure it only starts after the network is available</span>
 depend<span class="o">()</span><span class="w"> </span><span class="o">{</span>
@@ -334,10 +333,10 @@ systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> 
 <span class="c1"># Start it now</span>
 systemctl<span class="w"> </span>start<span class="w"> </span>wifi-watchdog
 </code></pre></div>
-<div class="callout callout-note"><strong class="callout-title">Note</strong><p>This workaround <strong>requires Host Networking Mode</strong> (<code>--net=host</code>). The script expects direct access to Android's <code>wlan0</code> interface, which is not visible in <code>NAT</code> or <code>None</code> modes. We recommend dedicating a small &quot;burner&quot; container specifically for this watchdog.</p></div>
+<div class="callout callout-note"><strong class="callout-title">Note</strong><p>This workaround <strong>requires host networking mode</strong> (<code>--net=host</code>). The script needs direct access to Android's <code>wlan0</code> interface, which is not visible in <code>NAT</code> or <code>None</code> modes. We recommend a small &quot;burner&quot; container used only for this watchdog.</p></div>
 <hr />
-<h2 id="getting-help">Getting Help <a class="header-anchor" href="#getting-help">#</a></h2>
-<p>If your issue isn't listed here:</p>
+<h2 id="getting-help">Getting help <a class="header-anchor" href="#getting-help">#</a></h2>
+<p>If your problem is not listed here:</p>
 <ol>
 <li>Run <code>droidspaces check</code> and note any failures</li>
 <li>Check the container logs: <code>droidspaces --name=mycontainer run journalctl -n 100</code></li>
@@ -348,10 +347,10 @@ systemctl<span class="w"> </span>start<span class="w"> </span>wifi-watchdog
 
     </article>
     <p class="doc-edit"><a href="https://github.com/ravindu644/Droidspaces-OSS/edit/main/Documentation/Troubleshooting.md" rel="noopener noreferrer"><span class="icon" aria-hidden="true">edit</span>Edit this page on GitHub</a></p>
-<nav class="doc-nav" aria-label="Pages"><a href="cool-things-you-can-do.html" class="doc-nav-prev"><small>Previous</small>Cool Things You Can Do</a><a href="community-supported-devices.html" class="doc-nav-next"><small>Next</small>Community-Supported Devices</a></nav>
+<nav class="doc-nav" aria-label="Pages"><a href="cool-things-you-can-do.html" class="doc-nav-prev"><small>Previous</small>Cool things you can do</a><a href="community-supported-devices.html" class="doc-nav-next"><small>Next</small>Community-supported devices</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h3"><a href="#quick-navigation">Quick Navigation</a></li><li class="toc-h2"><a href="#modern-distros-arch-fedora-etc-failure-on-legacy-kernels">Modern Distros (Arch, Fedora, etc.) Failure on Legacy Kernels</a></li><li class="toc-h2"><a href="#required-key-not-available">&quot;Required key not available&quot;</a></li><li class="toc-h2"><a href="#mount-errors-on-kernel-414">Mount Errors on Kernel 4.14</a></li><li class="toc-h2"><a href="#overlayfs-not-supported-f2fs">OverlayFS Not Supported (f2fs)</a></li><li class="toc-h2"><a href="#container-name-conflicts">Container Name Conflicts</a></li><li class="toc-h2"><a href="#systemd-hangs-on-older-kernels">Systemd Hangs on Older Kernels</a></li><li class="toc-h2"><a href="#container-wont-stop">Container Won&#x27;t Stop</a></li><li class="toc-h2"><a href="#rootfs-image-io-errors-on-android">Rootfs Image I/O Errors on Android</a></li><li class="toc-h2"><a href="#networking-is-completely-dead---ping-fails-with-socket-permission-denied">Networking is completely dead - ping fails with &quot;socket: permission denied&quot;</a></li><li class="toc-h2"><a href="#dns--name-resolution-issues">DNS / Name Resolution Issues</a></li><li class="toc-h2"><a href="#wifimobile-data-disconnects">WiFi/Mobile Data Disconnects</a></li><li class="toc-h2"><a href="#selinux-induced-rootfs-corruption-directory-mode">SELinux-Induced Rootfs Corruption (Directory Mode)</a></li><li class="toc-h2"><a href="#reclaiming-storage-sparse-image">Reclaiming Storage (Sparse Image)</a></li><li class="toc-h2"><a href="#wi-fi-power-save-on-causing-sluggish-networking-on-android">Wi-Fi Power save: on Causing Sluggish Networking on Android</a></li><li class="toc-h3"><a href="#1-install-required-utilities">1. Install Required Utilities</a></li><li class="toc-h3"><a href="#2-create-the-watchdog-script">2. Create the Watchdog Script</a></li><li class="toc-h3"><a href="#3-wire-up-the-init-service">3. Wire Up the Init Service</a></li><li class="toc-h2"><a href="#getting-help">Getting Help</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h3"><a href="#quick-navigation">Quick navigation</a></li><li class="toc-h2"><a href="#modern-distros-arch-fedora-etc-failure-on-legacy-kernels">Modern distros (Arch, Fedora, etc.) failure on legacy kernels</a></li><li class="toc-h2"><a href="#required-key-not-available">&quot;Required key not available&quot;</a></li><li class="toc-h2"><a href="#mount-errors-on-kernel-414">Mount errors on kernel 4.14</a></li><li class="toc-h2"><a href="#overlayfs-not-supported-f2fs">OverlayFS not supported (f2fs)</a></li><li class="toc-h2"><a href="#container-name-conflicts">Container name conflicts</a></li><li class="toc-h2"><a href="#systemd-hangs-on-older-kernels">systemd hangs on older kernels</a></li><li class="toc-h2"><a href="#container-wont-stop">Container won&#x27;t stop</a></li><li class="toc-h2"><a href="#rootfs-image-io-errors-on-android">Rootfs image I/O errors on Android</a></li><li class="toc-h2"><a href="#networking-is-completely-dead---ping-fails-with-socket-permission-denied">Networking is completely dead - ping fails with &quot;socket: permission denied&quot;</a></li><li class="toc-h2"><a href="#dns--name-resolution-issues">DNS / name resolution issues</a></li><li class="toc-h2"><a href="#wifimobile-data-disconnects">WiFi/mobile data disconnects</a></li><li class="toc-h2"><a href="#selinux-induced-rootfs-corruption-directory-mode">SELinux-induced rootfs corruption (directory mode)</a></li><li class="toc-h2"><a href="#reclaiming-storage-sparse-image">Reclaiming storage (sparse image)</a></li><li class="toc-h2"><a href="#wi-fi-power-save-on-causing-sluggish-networking-on-android">Wi-Fi Power save: on causing sluggish networking on Android</a></li><li class="toc-h3"><a href="#1-install-required-utilities">1. Install required utilities</a></li><li class="toc-h3"><a href="#2-create-the-watchdog-script">2. Create the watchdog script</a></li><li class="toc-h3"><a href="#3-wire-up-the-init-service">3. Wire up the init service</a></li><li class="toc-h2"><a href="#getting-help">Getting help</a></li></ul></nav>
   </aside>
 </div>
 <dialog class="search-dialog" aria-label="Search the docs">

@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Run NixOS inside Droidspaces containers. Build tarballs, configure compatibility, and try the experimental Finix system.">
+  <meta name="description" content="Run NixOS in Droidspaces containers: build a tarball, import the compatibility module, and try the experimental Finix system.">
   <meta name="keywords" content="nixos, droidspaces, nix, container, android, finix, containerized">
   <title>Nix/NixOS - Droidspaces Docs</title>
   <meta property="og:title" content="Nix/NixOS - Droidspaces Docs">
-  <meta property="og:description" content="Run NixOS inside Droidspaces containers. Build tarballs, configure compatibility, and try the experimental Finix system.">
+  <meta property="og:description" content="Run NixOS in Droidspaces containers: build a tarball, import the compatibility module, and try the experimental Finix system.">
   <meta property="og:url" content="https://www.droidspaces.org/docs/nix-nixos.html">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Nix/NixOS - Droidspaces Docs">
-  <meta name="twitter:description" content="Run NixOS inside Droidspaces containers. Build tarballs, configure compatibility, and try the experimental Finix system.">
+  <meta name="twitter:description" content="Run NixOS in Droidspaces containers: build a tarball, import the compatibility module, and try the experimental Finix system.">
   <meta name="twitter:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
   <link rel="canonical" href="https://www.droidspaces.org/docs/nix-nixos.html">
   <link rel="icon" href="/favicon.ico">
@@ -46,23 +46,23 @@
     <button class="icon-button sidebar-close" popovertarget="sidebar" popovertargetaction="hide" aria-label="Close navigation"><span class="icon" aria-hidden="true">close</span></button>
     <button class="search-open" type="button" hidden><span class="icon" aria-hidden="true">search</span>Search the docs<kbd>Ctrl K</kbd></button>
 <details class="sidebar-group" open><summary class="sidebar-heading">Basics</summary>
-<a href="installation-android.html" class="sidebar-link">Android Installation</a>
-<a href="installation-linux.html" class="sidebar-link">Linux Installation</a>
+<a href="installation-android.html" class="sidebar-link">Android installation</a>
+<a href="installation-linux.html" class="sidebar-link">Linux installation</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Guides</summary>
-<a href="features.html" class="sidebar-link">Feature Deep Dives</a>
-<a href="graphics-and-audio.html" class="sidebar-link">Display, Audio & Desktop</a>
-<a href="kernel-configuration.html" class="sidebar-link">Kernel Configuration</a>
-<a href="usage-android-app.html" class="sidebar-link">Android App Usage</a>
+<a href="features.html" class="sidebar-link">Feature deep dives</a>
+<a href="graphics-and-audio.html" class="sidebar-link">Display, audio & desktop</a>
+<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
+<a href="usage-android-app.html" class="sidebar-link">Android app usage</a>
 <a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
-<a href="networking-from-zero.html" class="sidebar-link">Networking From Zero</a>
+<a href="networking-from-zero.html" class="sidebar-link">Networking from zero</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Recipes</summary>
-<a href="cool-things-you-can-do.html" class="sidebar-link">Cool Things You Can Do</a>
+<a href="cool-things-you-can-do.html" class="sidebar-link">Cool things you can do</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Reference</summary>
 <a href="troubleshooting.html" class="sidebar-link">Troubleshooting</a>
-<a href="community-supported-devices.html" class="sidebar-link">Community-Supported Devices</a>
+<a href="community-supported-devices.html" class="sidebar-link">Community-supported devices</a>
 <a href="nix-nixos.html" class="sidebar-link" aria-current="page">Nix/NixOS</a>
 <a href="uninstallation.html" class="sidebar-link">Uninstallation</a>
 </details>
@@ -70,42 +70,42 @@
   <main class="docs-content">
     <article>
 <h1 id="getting-started-with-nixos-on-droidspaces">Getting started with NixOS on Droidspaces <a class="header-anchor" href="#getting-started-with-nixos-on-droidspaces">#</a></h1>
-<p>To build a minimal tarball archive to be used with Droidspaces, run:</p>
+<p>To build a minimal tarball for Droidspaces, run:</p>
 <div class="code-block"><span class="code-lang">sh</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>nix<span class="w"> </span>build<span class="w"> </span>github:ravindu644/Droidspaces-OSS#nixosDroidspacesTarballs.aarch64-linux.minimal
 </code></pre></div>
-<p>If your device has a kernel version 5.4 or below, use <code>minimal-with-systemd-v259</code> instead. (Systemd v260 and above have dropped support for kernel 5.4 and below.)</p>
+<p>If your device runs kernel 5.4 or older, use <code>minimal-with-systemd-v259</code> instead. systemd v260 and later dropped support for kernel 5.4 and older.</p>
 <div class="code-block"><span class="code-lang">sh</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>nix<span class="w"> </span>build<span class="w"> </span>github:ravindu644/Droidspaces-OSS#nixosDroidspacesTarballs.aarch64-linux.minimal-with-systemd-v259
 </code></pre></div>
-<p>If the container boots, you can proceed to configuring NixOS for Droidspaces.</p>
+<p>If the container boots, go on to configuring NixOS for Droidspaces.</p>
 <h1 id="configuring-nixos-for-droidspaces">Configuring NixOS for Droidspaces <a class="header-anchor" href="#configuring-nixos-for-droidspaces">#</a></h1>
-<p>To run NixOS on Droidspaces smoothly, import the <code>working-droidspaces-rootfs-minimal</code> module into your NixOS system.</p>
+<p>Import the <code>working-droidspaces-rootfs-minimal</code> module into your NixOS system:</p>
 <div class="code-block"><span class="code-lang">nix</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># flake.nix</span>
-droidspaces<span class="o">.</span><span class="ss">url</span> <span class="o">=</span> <span class="s2">"github:ravindu644/Droidspaces-OSS"</span><span class="p">;</span>
+droidspaces<span class="o">.</span><span class="ss">url</span> <span class="o">=</span> <span class="s2">&quot;github:ravindu644/Droidspaces-OSS&quot;</span><span class="p">;</span>
 
 <span class="c1"># configuration</span>
 <span class="p">{</span>inputs<span class="p">,</span> <span class="o">...</span><span class="p">}:</span> <span class="p">{</span>
   <span class="ss">imports</span> <span class="o">=</span> <span class="p">[</span>inputs<span class="o">.</span>droidspaces<span class="o">.</span>nixosModules<span class="o">.</span>working-droidspaces-rootfs-minimal<span class="p">];</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><strong>NOTE:</strong> As previously mentioned, kernel 5.4 and below will not be able to run NixOS systems from newer nixpkgs, so use a pinned nixpkgs version:</p>
-<div class="code-block"><span class="code-lang">nix</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>nixpkgs-with-systemd-v259<span class="o">.</span><span class="ss">url</span> <span class="o">=</span> <span class="s2">"github:NixOS/nixpkgs/b86751bc4085f48661017fa226dee99fab6c651b"</span><span class="p">;</span>
+<p><strong>Note:</strong> as mentioned above, kernel 5.4 and older cannot run NixOS systems from newer nixpkgs, so use a pinned nixpkgs version:</p>
+<div class="code-block"><span class="code-lang">nix</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>nixpkgs-with-systemd-v259<span class="o">.</span><span class="ss">url</span> <span class="o">=</span> <span class="s2">&quot;github:NixOS/nixpkgs/b86751bc4085f48661017fa226dee99fab6c651b&quot;</span><span class="p">;</span>
 </code></pre></div>
-<p>Adding this module will also let you build your system as a tarball archive:</p>
+<p>The module also lets you build your system as a tarball:</p>
 <div class="code-block"><span class="code-lang">sh</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>nix<span class="w"> </span>build<span class="w"> </span>.#&lt;hostname&gt;.config.system.build.tarball
 </code></pre></div>
-<h1 id="systemd-issues-on-older-kernels">Systemd issues on older kernels <a class="header-anchor" href="#systemd-issues-on-older-kernels">#</a></h1>
-<p>Newer systemd versions may have trouble running on older kernels. You may need to find and use an older nixpkgs release that still supports your kernel.</p>
+<h1 id="systemd-issues-on-older-kernels">systemd issues on older kernels <a class="header-anchor" href="#systemd-issues-on-older-kernels">#</a></h1>
+<p>Newer systemd versions may fail to run on older kernels. If yours does, find and use an older nixpkgs release that still supports your kernel.</p>
 <h1 id="nixos-without-systemd">NixOS without systemd <a class="header-anchor" href="#nixos-without-systemd">#</a></h1>
-<p>If you don't want to run systemd, you can change the init path in Droidspaces to <code>/bin/sh</code>. This will allow you to enter the container normally, but systemd services will not be running.</p>
+<p>If you don't want systemd, set the init path in Droidspaces to <code>/bin/sh</code>. You can enter the container as usual, but no systemd services will run.</p>
 <h1 id="finix-no-more-systemd-experimental">Finix (no more systemd) (experimental) <a class="header-anchor" href="#finix-no-more-systemd-experimental">#</a></h1>
-<p>Finix is an experimental NixOS-like system running finit instead of systemd.</p>
+<p>Finix is an experimental NixOS-like system that runs finit instead of systemd.</p>
 <p>To build a Finix tarball:</p>
 <div class="code-block"><span class="code-lang">sh</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>nix<span class="w"> </span>build<span class="w"> </span>github:ravindu644/Droidspaces-OSS#finixDroidspacesTarballs.aarch64-linux.experimental
 </code></pre></div>
 
     </article>
     <p class="doc-edit"><a href="https://github.com/ravindu644/Droidspaces-OSS/edit/main/Documentation/Nix-NixOS.md" rel="noopener noreferrer"><span class="icon" aria-hidden="true">edit</span>Edit this page on GitHub</a></p>
-<nav class="doc-nav" aria-label="Pages"><a href="community-supported-devices.html" class="doc-nav-prev"><small>Previous</small>Community-Supported Devices</a><a href="uninstallation.html" class="doc-nav-next"><small>Next</small>Uninstallation</a></nav>
+<nav class="doc-nav" aria-label="Pages"><a href="community-supported-devices.html" class="doc-nav-prev"><small>Previous</small>Community-supported devices</a><a href="uninstallation.html" class="doc-nav-next"><small>Next</small>Uninstallation</a></nav>
   </main>
   <aside class="toc-column">
 

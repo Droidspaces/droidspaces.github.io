@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Community-maintained compatibility list of Android devices verified to run Droidspaces.">
+  <meta name="description" content="Android devices that community members have run Droidspaces on, with kernel sources and downloads.">
   <meta name="keywords" content="droidspaces, supported, devices, android, device, compatibility, kernel, support, list, hardware">
-  <title>Community-Supported Devices - Droidspaces Docs</title>
-  <meta property="og:title" content="Community-Supported Devices - Droidspaces Docs">
-  <meta property="og:description" content="Community-maintained compatibility list of Android devices verified to run Droidspaces.">
+  <title>Community-supported devices - Droidspaces Docs</title>
+  <meta property="og:title" content="Community-supported devices - Droidspaces Docs">
+  <meta property="og:description" content="Android devices that community members have run Droidspaces on, with kernel sources and downloads.">
   <meta property="og:url" content="https://www.droidspaces.org/docs/community-supported-devices.html">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Community-Supported Devices - Droidspaces Docs">
-  <meta name="twitter:description" content="Community-maintained compatibility list of Android devices verified to run Droidspaces.">
+  <meta name="twitter:title" content="Community-supported devices - Droidspaces Docs">
+  <meta name="twitter:description" content="Android devices that community members have run Droidspaces on, with kernel sources and downloads.">
   <meta name="twitter:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
   <link rel="canonical" href="https://www.droidspaces.org/docs/community-supported-devices.html">
   <link rel="icon" href="/favicon.ico">
@@ -41,28 +41,28 @@
 </nav>
 
 <div class="docs-layout">
-  <button class="doc-breadcrumb" popovertarget="sidebar"><span class="icon" aria-hidden="true">menu</span><span>Docs</span><span class="bc-sep">/</span><span class="bc-section">Reference</span><span class="bc-sep">/</span><span class="bc-label">Community-Supported Devices</span></button>
+  <button class="doc-breadcrumb" popovertarget="sidebar"><span class="icon" aria-hidden="true">menu</span><span>Docs</span><span class="bc-sep">/</span><span class="bc-section">Reference</span><span class="bc-sep">/</span><span class="bc-label">Community-supported devices</span></button>
   <aside class="sidebar" id="sidebar" popover>
     <button class="icon-button sidebar-close" popovertarget="sidebar" popovertargetaction="hide" aria-label="Close navigation"><span class="icon" aria-hidden="true">close</span></button>
     <button class="search-open" type="button" hidden><span class="icon" aria-hidden="true">search</span>Search the docs<kbd>Ctrl K</kbd></button>
 <details class="sidebar-group" open><summary class="sidebar-heading">Basics</summary>
-<a href="installation-android.html" class="sidebar-link">Android Installation</a>
-<a href="installation-linux.html" class="sidebar-link">Linux Installation</a>
+<a href="installation-android.html" class="sidebar-link">Android installation</a>
+<a href="installation-linux.html" class="sidebar-link">Linux installation</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Guides</summary>
-<a href="features.html" class="sidebar-link">Feature Deep Dives</a>
-<a href="graphics-and-audio.html" class="sidebar-link">Display, Audio & Desktop</a>
-<a href="kernel-configuration.html" class="sidebar-link">Kernel Configuration</a>
-<a href="usage-android-app.html" class="sidebar-link">Android App Usage</a>
+<a href="features.html" class="sidebar-link">Feature deep dives</a>
+<a href="graphics-and-audio.html" class="sidebar-link">Display, audio & desktop</a>
+<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
+<a href="usage-android-app.html" class="sidebar-link">Android app usage</a>
 <a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
-<a href="networking-from-zero.html" class="sidebar-link">Networking From Zero</a>
+<a href="networking-from-zero.html" class="sidebar-link">Networking from zero</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Recipes</summary>
-<a href="cool-things-you-can-do.html" class="sidebar-link">Cool Things You Can Do</a>
+<a href="cool-things-you-can-do.html" class="sidebar-link">Cool things you can do</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Reference</summary>
 <a href="troubleshooting.html" class="sidebar-link">Troubleshooting</a>
-<a href="community-supported-devices.html" class="sidebar-link" aria-current="page">Community-Supported Devices</a>
+<a href="community-supported-devices.html" class="sidebar-link" aria-current="page">Community-supported devices</a>
 <a href="nix-nixos.html" class="sidebar-link">Nix/NixOS</a>
 <a href="uninstallation.html" class="sidebar-link">Uninstallation</a>
 </details>
@@ -70,12 +70,12 @@
   <main class="docs-content">
     <article>
 <h1 id="community-supported-android-devices">Community-supported Android devices <a class="header-anchor" href="#community-supported-android-devices">#</a></h1><div class="device-filter" hidden><label for="device-filter">Filter devices</label><input id="device-filter" type="search" placeholder="Device, model, kernel or maintainer" autocomplete="off"></div>
-<div class="callout callout-note"><strong class="callout-title">Note</strong><p>If you want to add your own Droidspaces kernel to this table, check out the <a href="#contribution-guidelines">Contribution guidelines</a> section.</p></div>
-<div class="callout callout-warning"><strong class="callout-title">Warning</strong><p>Flashing a custom kernel requires an unlocked bootloader. The Droidspaces developers are not responsible for any bricked devices, data loss, or hardware failure resulting from kernel installation.</p>
-<p>This list is provided solely to help you locate device-specific source code.</p>
-<p>These repositories have not been deeply audited or reviewed by the Droidspaces team. Proceed at your own risk.</p></div>
-<p>This document is a community-maintained compatibility list for Android devices known to run Droidspaces successfully. It is intended to help people choose phones for self-hosting, especially when buying second-hand hardware.</p>
-<h2 id="non-gki-devices-kernel-419-and-lower">Non-GKI Devices (Kernel 4.19 and lower) <a class="header-anchor" href="#non-gki-devices-kernel-419-and-lower">#</a></h2>
+<div class="callout callout-note"><strong class="callout-title">Note</strong><p>To add your own Droidspaces kernel to these tables, follow the <a href="#contribution-guidelines">contribution guidelines</a>.</p></div>
+<div class="callout callout-warning"><strong class="callout-title">Warning</strong><p>Flashing a custom kernel requires an unlocked bootloader. The Droidspaces developers are not responsible for bricked devices, data loss or hardware failure caused by installing a kernel.</p>
+<p>This list exists only to help you find device-specific source code.</p>
+<p>The Droidspaces team has not audited or reviewed these repositories in depth. Use them at your own risk.</p></div>
+<p>This is a community-maintained list of Android devices known to run Droidspaces. It is meant to help you choose a phone for self-hosting, especially when buying second-hand hardware.</p>
+<h2 id="non-gki-devices-kernel-419-and-lower">Non-GKI devices (kernel 4.19 and lower) <a class="header-anchor" href="#non-gki-devices-kernel-419-and-lower">#</a></h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -247,7 +247,7 @@
 </tr>
 </tbody>
 </table></div>
-<h2 id="gki-devices-kernel-54-and-up">GKI Devices (Kernel 5.4 and up) <a class="header-anchor" href="#gki-devices-kernel-54-and-up">#</a></h2>
+<h2 id="gki-devices-kernel-54-and-up">GKI devices (kernel 5.4 and up) <a class="header-anchor" href="#gki-devices-kernel-54-and-up">#</a></h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -3195,20 +3195,20 @@
 </tbody>
 </table></div>
 <h2 id="contribution-guidelines">Contribution guidelines <a class="header-anchor" href="#contribution-guidelines">#</a></h2>
-<p>To keep this list useful and reliable, please follow these rules when adding or updating entries:</p>
+<p>When you add or update an entry, follow these rules so the list stays usable:</p>
 <ul>
 <li>Add one device per row.</li>
 <li>Fill every column completely.</li>
 <li>Contributions should be honest, complete, and verifiable.</li>
-<li>Provide a direct downloadable kernel archive (<code>zip</code>, <code>tar</code>, <code>img</code>) or a downloadable kernel package; inexperienced users should not need to compile the kernel themselves.</li>
+<li>Provide a direct downloadable kernel archive (<code>zip</code>, <code>tar</code>, <code>img</code>) or a downloadable kernel package. Inexperienced users should not have to compile the kernel themselves.</li>
 <li>Provide the exact source code link for your Droidspaces kernel in the Kernel Source column.</li>
-<li>Document the exact <code>Baseband / Build</code> string (Mandatory for Non-GKI devices only).</li>
-<li>Specify the <code>Root Method</code> used, such as <code>Magisk</code>, <code>KernelSU</code>, <code>APatch</code> or <code>none</code>.(Compile only the kernel without adding any implementation methods; you need to patch <code>init_boot</code> yourself to achieve root.)</li>
+<li>Document the exact <code>Baseband / Build</code> string (mandatory for non-GKI devices only).</li>
+<li>Specify the <code>Root Method</code> used, such as <code>Magisk</code>, <code>KernelSU</code>, <code>APatch</code> or <code>none</code> (<code>none</code> means the kernel was built without a root implementation, and you patch <code>init_boot</code> yourself to get root).</li>
 <li>Set <code>Status</code> to one of: <code>Working</code>, <code>Partial</code>, or <code>Unusable</code>.</li>
-<li>In Notes, include known quirks and issues, additional setup steps, and recommended workloads.</li>
+<li>In the notes column, list known quirks and issues, extra setup steps and recommended workloads.</li>
 <li>Submit contributions through GitHub pull requests.</li>
-<li>Update entries when status changes, and keep the information current.</li>
-<li>Match the entry to the kernel list in the table. 5.4 devices go in the 5.4 section, 5.10 devices go into the 5.10 section, and so forth. This helps maintain readability and reduce the cost of maintaining the list.</li>
+<li>Update your entry when its status changes, and keep it current.</li>
+<li>Put the entry in the table that matches its kernel version: 5.4 devices in the 5.4 section, 5.10 devices in the 5.10 section, and so on. This keeps the list readable and cheaper to maintain.</li>
 </ul>
 
     </article>
@@ -3216,7 +3216,7 @@
 <nav class="doc-nav" aria-label="Pages"><a href="troubleshooting.html" class="doc-nav-prev"><small>Previous</small>Troubleshooting</a><a href="nix-nixos.html" class="doc-nav-next"><small>Next</small>Nix/NixOS</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#non-gki-devices-kernel-419-and-lower">Non-GKI Devices (Kernel 4.19 and lower)</a></li><li class="toc-h2"><a href="#gki-devices-kernel-54-and-up">GKI Devices (Kernel 5.4 and up)</a></li><li class="toc-h2"><a href="#contribution-guidelines">Contribution guidelines</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#non-gki-devices-kernel-419-and-lower">Non-GKI devices (kernel 4.19 and lower)</a></li><li class="toc-h2"><a href="#gki-devices-kernel-54-and-up">GKI devices (kernel 5.4 and up)</a></li><li class="toc-h2"><a href="#contribution-guidelines">Contribution guidelines</a></li></ul></nav>
   </aside>
 </div>
 <dialog class="search-dialog" aria-label="Search the docs">

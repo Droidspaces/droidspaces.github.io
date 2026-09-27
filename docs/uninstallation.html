@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Safely uninstall Droidspaces from Android and Linux. Remove containers, backend data, APK, and system files completely.">
+  <meta name="description" content="Remove Droidspaces from Android and Linux: containers, backend data, the APK and system files.">
   <meta name="keywords" content="uninstall, droidspaces, remove, android, delete, rootfs, cleanup, container, runtime, backend, data">
   <title>Uninstallation - Droidspaces Docs</title>
   <meta property="og:title" content="Uninstallation - Droidspaces Docs">
-  <meta property="og:description" content="Safely uninstall Droidspaces from Android and Linux. Remove containers, backend data, APK, and system files completely.">
+  <meta property="og:description" content="Remove Droidspaces from Android and Linux: containers, backend data, the APK and system files.">
   <meta property="og:url" content="https://www.droidspaces.org/docs/uninstallation.html">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Uninstallation - Droidspaces Docs">
-  <meta name="twitter:description" content="Safely uninstall Droidspaces from Android and Linux. Remove containers, backend data, APK, and system files completely.">
+  <meta name="twitter:description" content="Remove Droidspaces from Android and Linux: containers, backend data, the APK and system files.">
   <meta name="twitter:image" content="https://i.ibb.co/d4PLN7Gg/og-image.png">
   <link rel="canonical" href="https://www.droidspaces.org/docs/uninstallation.html">
   <link rel="icon" href="/favicon.ico">
@@ -46,67 +46,67 @@
     <button class="icon-button sidebar-close" popovertarget="sidebar" popovertargetaction="hide" aria-label="Close navigation"><span class="icon" aria-hidden="true">close</span></button>
     <button class="search-open" type="button" hidden><span class="icon" aria-hidden="true">search</span>Search the docs<kbd>Ctrl K</kbd></button>
 <details class="sidebar-group" open><summary class="sidebar-heading">Basics</summary>
-<a href="installation-android.html" class="sidebar-link">Android Installation</a>
-<a href="installation-linux.html" class="sidebar-link">Linux Installation</a>
+<a href="installation-android.html" class="sidebar-link">Android installation</a>
+<a href="installation-linux.html" class="sidebar-link">Linux installation</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Guides</summary>
-<a href="features.html" class="sidebar-link">Feature Deep Dives</a>
-<a href="graphics-and-audio.html" class="sidebar-link">Display, Audio & Desktop</a>
-<a href="kernel-configuration.html" class="sidebar-link">Kernel Configuration</a>
-<a href="usage-android-app.html" class="sidebar-link">Android App Usage</a>
+<a href="features.html" class="sidebar-link">Feature deep dives</a>
+<a href="graphics-and-audio.html" class="sidebar-link">Display, audio & desktop</a>
+<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
+<a href="usage-android-app.html" class="sidebar-link">Android app usage</a>
 <a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
-<a href="networking-from-zero.html" class="sidebar-link">Networking From Zero</a>
+<a href="networking-from-zero.html" class="sidebar-link">Networking from zero</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Recipes</summary>
-<a href="cool-things-you-can-do.html" class="sidebar-link">Cool Things You Can Do</a>
+<a href="cool-things-you-can-do.html" class="sidebar-link">Cool things you can do</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Reference</summary>
 <a href="troubleshooting.html" class="sidebar-link">Troubleshooting</a>
-<a href="community-supported-devices.html" class="sidebar-link">Community-Supported Devices</a>
+<a href="community-supported-devices.html" class="sidebar-link">Community-supported devices</a>
 <a href="nix-nixos.html" class="sidebar-link">Nix/NixOS</a>
 <a href="uninstallation.html" class="sidebar-link" aria-current="page">Uninstallation</a>
 </details>
   </aside>
   <main class="docs-content">
     <article>
-<h1 id="uninstallation-guide">Uninstallation Guide <a class="header-anchor" href="#uninstallation-guide">#</a></h1>
-<p>This guide explains how to safely and completely remove Droidspaces from your system.</p>
+<h1 id="uninstallation-guide">Uninstallation guide <a class="header-anchor" href="#uninstallation-guide">#</a></h1>
+<p>How to remove Droidspaces completely.</p>
 <hr />
-<h2 id="android-app">Android (App) <a class="header-anchor" href="#android-app">#</a></h2>
-<p>Follow these steps to ensure all container data and backend files are removed.</p>
+<h2 id="android-app">Android (app) <a class="header-anchor" href="#android-app">#</a></h2>
+<p>These steps remove all container data and backend files.</p>
 <ol>
-<li><strong>Stop Containers</strong>: Ensure all running containers are stopped from the <strong>Containers</strong> tab.</li>
-<li><strong>Delete Containers</strong>:
+<li><strong>Stop containers</strong>: stop every running container from the <strong>Containers</strong> tab.</li>
+<li><strong>Delete containers</strong>:
 <ul>
 <li>Go to the <strong>Containers</strong> tab.</li>
 <li>Long-press each container card and select <strong>Uninstall Container</strong>. This deletes the rootfs image and its configuration.</li>
 </ul>
 </li>
-<li><strong>Remove Backend Data</strong>:
+<li><strong>Remove backend data</strong>:
 <ul>
-<li>Using a root file manager or a terminal (like Termux with root access), delete the following directory:</li>
+<li>With a root file manager or a terminal (Termux with root access, for example), delete this directory:</li>
 </ul>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>su<span class="w"> </span>-c<span class="w"> </span><span class="s2">"rm -rf /data/local/Droidspaces"</span>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>su<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;rm -rf /data/local/Droidspaces&quot;</span>
 </code></pre></div>
 </li>
-<li><strong>Uninstall APK</strong>: Uninstall the Droidspaces app from your Android settings or launcher.</li>
-<li><strong>Reboot</strong>: Disable or remove the Magisk/KernelSU <code>Droidspaces: Run-at-boot</code> module from your root manager, then reboot to clear any remaining Droidspaces stuff.</li>
+<li><strong>Uninstall the APK</strong>: uninstall the Droidspaces app from Android settings or your launcher.</li>
+<li><strong>Reboot</strong>: disable or remove the Magisk/KernelSU <code>Droidspaces: Run-at-boot</code> module in your root manager, then reboot to clear anything Droidspaces left behind.</li>
 </ol>
 <hr />
 <h2 id="linux-cli">Linux (CLI) <a class="header-anchor" href="#linux-cli">#</a></h2>
 <ol>
 <li>
-<p><strong>Stop Containers</strong>: Stop all running containers.</p>
+<p><strong>Stop containers</strong>: stop every running container.</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>web,db<span class="w"> </span>stop
 </code></pre></div>
 </li>
 <li>
-<p><strong>Remove Filesystem</strong>: Delete the Droidspaces workspace directory. This will remove stale PID files, and logs.</p>
+<p><strong>Remove the workspace</strong>: delete the Droidspaces workspace directory. This removes stale PID files and logs.</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/Droidspaces
 </code></pre></div>
 </li>
 <li>
-<p><strong>Remove Binary</strong>: Delete the <code>droidspaces</code> binary.</p>
+<p><strong>Remove the binary</strong>: delete the <code>droidspaces</code> binary.</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>rm<span class="w"> </span>/usr/local/bin/droidspaces
 <span class="c1"># Or wherever you installed it</span>
 </code></pre></div>
@@ -118,7 +118,7 @@
 <nav class="doc-nav" aria-label="Pages"><a href="nix-nixos.html" class="doc-nav-prev"><small>Previous</small>Nix/NixOS</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#android-app">Android (App)</a></li><li class="toc-h2"><a href="#linux-cli">Linux (CLI)</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#android-app">Android (app)</a></li><li class="toc-h2"><a href="#linux-cli">Linux (CLI)</a></li></ul></nav>
   </aside>
 </div>
 <dialog class="search-dialog" aria-label="Search the docs">
