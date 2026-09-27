@@ -50,6 +50,9 @@
   --motion-float: linear(0, 0.017, 0.067, 0.1464, 0.25, 0.3706, 0.5, 0.6294, 0.75, 0.8536, 0.933, 0.983, 1, 0.983, 0.933, 0.8536, 0.75, 0.6294, 0.5, 0.3706, 0.25, 0.1464, 0.067, 0.017, 0);
   --phone-frame: #0a0f12;
   --shadow-phone: 0 40px 90px rgba(0, 0, 0, 0.55);
+  --phone-app-surface: #222d31;
+  --phone-app-bar: #313f48;
+  --phone-app-on-surface: #e2e3e8;
 }
 :root[data-theme="light"] { color-scheme: light; }
 :root[data-theme="dark"] { color-scheme: dark; }

@@ -35,5 +35,7 @@ out += `  --motion-press: 350ms cubic-bezier(0.42, 1.67, 0.21, 0.9); /* @materia
 const FLOAT = Array.from({ length: 25 }, (_, i) => ((1 - Math.cos(2 * Math.PI * i / 24)) / 2).toFixed(4).replace(/\.?0+$/, "") || "0");
 out += `  --motion-float: linear(${FLOAT.join(", ")});\n`;
 // The phone mockup is the only object on the page, so it is the only element with a literal colour and a shadow (DESIGN.md Shapes, Elevation).
-out += `  --phone-frame: #0a0f12;\n  --shadow-phone: 0 40px 90px rgba(0, 0, 0, 0.55);\n}\n:root[data-theme="light"] { color-scheme: light; }\n:root[data-theme="dark"] { color-scheme: dark; }\n`;
+out += `  --phone-frame: #0a0f12;\n  --shadow-phone: 0 40px 90px rgba(0, 0, 0, 0.55);\n`;
+// The drawn status bar and gesture bar inside the mockup match the app's Catppuccin screens: surface, bottom bar and title text, sampled from the screenshots.
+out += `  --phone-app-surface: #222d31;\n  --phone-app-bar: #313f48;\n  --phone-app-on-surface: #e2e3e8;\n}\n:root[data-theme="light"] { color-scheme: light; }\n:root[data-theme="dark"] { color-scheme: dark; }\n`;
 process.stdout.write(out);
