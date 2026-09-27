@@ -354,8 +354,10 @@ lines, not at 768 or 1024.
 The hero is a two-column split at expanded and above: copy on the left at 5/12, phone mockup on
 the right at 7/12, vertically centred. Under 840 it stacks, copy first, and the phone takes 80% of the column
 and the shape behind it 120%, so the shape still frames the phone on both sides. At 840 and up a
-shape is never wider than its own column. It sits at `z-index: -1` inside a section that sets
-`isolation: isolate`, so it paints above the section's band and never over copy; `main` clips
+shape is never wider than its own column. It sits at `z-index: -1` inside a phone stage that sets
+`isolation: isolate`, so it paints above the section's band and never over copy. The section
+itself is not isolated: a phone shadow has to cross into the next band, and a section that
+isolates cuts it off in a hard grey line; `main` clips
 horizontal overflow so it can never scroll the page either.
 
 The home page has six sections: the hero, init and services, the home server, the app carousel,
