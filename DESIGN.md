@@ -355,9 +355,9 @@ The hero is a two-column split at expanded and above: copy on the left at 5/12, 
 the right at 7/12, vertically centred. Under 840 it stacks, copy first, and the phone takes 80% of the column
 and the shape behind it 120%, so the shape still frames the phone on both sides. At 840 and up a
 shape is never wider than its own column. It sits at `z-index: -1` inside a phone stage that sets
-`isolation: isolate`, so it paints above the section's band and never over copy. The section
-itself is not isolated: a phone shadow has to cross into the next band, and a section that
-isolates cuts it off in a hard grey line; `main` clips
+`isolation: isolate`, so it stays behind the phone and never over copy. The section itself is
+not isolated: a phone shadow has to cross into the next section, and a section that isolates
+cuts it off in a hard line; `main` clips
 horizontal overflow so it can never scroll the page either.
 
 The home page has six sections: the hero, init and services, the home server, the app carousel,
@@ -366,11 +366,9 @@ the comparison, and requirements with the download.
 Feature sections alternate the side the phone sits on. Text, then phone; phone, then text. This
 replaces the row of six identical cards.
 
-The second rhythm is tonal. Sections are full width, with the 1200px measure carried by their side
-padding, and every second one (init, the app, get it running) sits on a `surface-container-low`
-band. It is the same one-step surface change the cards use, applied to the page, so the long
-stretches of background read as structure rather than as empty space. No gradient, no border
-between bands.
+The page background is one unbroken `surface`. Sections carry the 1200px measure in their side
+padding and have no fill of their own. Alternating tonal bands were tried and removed: at every
+band edge the eye reads a separator line, and the page stops feeling like one surface.
 
 Cards appear in one place: the comparison against PRoot, chroot and QEMU, where a table is the
 honest format and cards would hide the comparison. Everywhere else, content sits directly on the

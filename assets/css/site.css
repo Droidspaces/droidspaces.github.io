@@ -358,8 +358,8 @@ code, pre, kbd, .code { font: 400 14px/22px "JetBrains Mono", monospace; letter-
   position: relative;
   display: flex;
   justify-content: center;
-  /* the shape's z-index: -1 stays inside the stage, so it paints above a section band. Isolating
-     the stage and not the section lets the phone shadow spill across the band edge instead of being cut there */
+  /* the shape's z-index: -1 stays inside the stage, behind the phone. Isolating the section instead
+     would cut the phone shadow off where the next section starts */
   isolation: isolate;
 }
 .stage > .phone { width: min(100%, 380px); z-index: 1; }
@@ -416,10 +416,9 @@ main { overflow-x: clip; } /* a shape wider than its column must not scroll the 
 /* page layout: 1200px content, 24px gutters (16 under 600), sections 96 tall (64 under 840) */
 .section {
   --gutter: 24px;
-  /* full width so a band can span the viewport; the 1200px measure lives in the padding */
+  /* the 1200px measure lives in the padding */
   padding: 96px max(var(--gutter), calc((100% - 1200px) / 2));
 }
-.section-band { background: var(--md-sys-color-surface-container-low); } /* tonal rhythm: the M3 surface step, no gradient */
 .section > h1, .section > h2 { margin-bottom: 16px; }
 .section > .title-lg { margin: 0 0 32px; }
 .split { display: grid; gap: 48px; align-items: center; }
