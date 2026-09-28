@@ -121,7 +121,7 @@
   <section class="section hero split">
     <div>
       <h1>A homelab that keeps running when the power cuts.</h1>
-      <p class="title-lg">Your old Android phone has a battery, mobile data and a Linux kernel. <strong>Droidspaces</strong> runs Linux containers on Android: a full distribution boots on that kernel, with systemd or OpenRC as PID 1. No emulation, no virtual machine.</p>
+      <p class="title-lg">Your old Android phone has a battery, mobile data and a Linux kernel. <strong>Droidspaces</strong> runs full Linux distributions on that kernel as containers, with systemd or OpenRC as PID 1. No emulation, no virtual machine.</p>
       <div class="actions">
         <a href="/downloads.html" class="button button-filled"><span class="icon" aria-hidden="true">download</span>Download</a>
         <a href="/docs/installation-android.html" class="button button-outlined"><span class="icon" aria-hidden="true">menu_book</span>Read the docs</a>
@@ -160,7 +160,7 @@
     </div>
     <div>
       <h2>A real Linux, not an emulation.</h2>
-      <p class="title-lg">Each container gets <a href="/docs/features.html">its own PID, mount, UTS, IPC, cgroup and network namespace</a> on the phone's kernel, <a href="/docs/networking-from-zero.html">behind NAT by default</a>. systemd boots as PID 1 in 150 to 750 ms.</p>
+      <p class="title-lg">Each container gets its own PID, mount, UTS, IPC, cgroup and network namespace on the phone's kernel, behind NAT by default. systemd boots as PID 1 in 150 to 750 ms.</p>
       <ul class="chip-set" aria-label="Init systems and what the kernel gives each container">
         <li class="chip">systemd</li><li class="chip">OpenRC</li><li class="chip">runit</li><li class="chip">s6</li><li class="chip">PID namespace</li><li class="chip">Mount namespace</li><li class="chip">Cgroup v1 and v2</li><li class="chip">journald</li>
       </ul>
@@ -170,7 +170,7 @@
   <section class="section split split-phone-left">
     <div>
       <h2>It sits on your network like a server.</h2>
-      <p class="title-lg">Each container has its own monitor process, detached from the app, so closing or uninstalling the app stops nothing. Inside, it runs services the way a Docker or LXC host does. <a href="/docs/cool-things-you-can-do.html">Docker on Android</a> runs nested in a container too, on every supported kernel.</p>
+      <p class="title-lg">Each container has its own monitor daemon, detached from the app, so closing or uninstalling the app stops nothing. Inside a container you run services the way you would on a Linux server, including nested containers: Docker, Podman and LXC itself.</p>
       <ul class="chip-set" aria-label="Networking, and what runs inside a container">
         <li class="chip">NAT networking</li><li class="chip">Host networking</li><li class="chip">Port forwarding</li><li class="chip">OpenWRT as a gateway</li><li class="chip">Docker</li><li class="chip">Podman</li><li class="chip">Flatpak</li><li class="chip">bwrap</li>
       </ul>
@@ -226,7 +226,7 @@
 
   <section class="section">
     <h2>Get it running.</h2>
-    <p class="title-lg">The APK carries the runtime and the app, and the docs list the <a href="/docs/community-supported-devices.html">phones known to run it</a>. Linux gets a static tarball.</p>
+    <p class="title-lg">The APK carries the runtime and the app. Linux gets a static tarball.</p>
     <div class="columns">
       <div>
         <h3>Android</h3>
