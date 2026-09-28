@@ -486,7 +486,7 @@ Height 56px (M3 `md` size). Three variants and no more:
 A section has one filled button. "Download" is filled. "Read the docs" beside it is outlined.
 Two filled buttons next to each other is the tell of a template.
 
-Labels are `label-lg-emphasized`, one line, sentence case. "Download for Android", not "DOWNLOAD
+Labels are `label-lg-emphasized`, one line, sentence case. "Download the APK", not "DOWNLOAD
 NOW". No arrow glyph appended to the label; the button is already the arrow.
 
 Icons inside buttons are Material Symbols Rounded, 20px, `FILL 0` at rest and `FILL 1` on hover,

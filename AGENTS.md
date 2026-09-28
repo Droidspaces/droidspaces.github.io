@@ -84,7 +84,7 @@ who will check the claims, and it sounds that way.
 - Plain sentences. Say what the thing does, in the words a kernel developer would use.
 - Specific over impressive: "boots systemd as PID 1 in 150 to 750 milliseconds" beats "lightning
   fast".
-- Sentence case everywhere. Buttons are "Download for Android", not "DOWNLOAD NOW".
+- Sentence case everywhere. Buttons are "Download the APK", not "DOWNLOAD NOW".
 - No "Unlock", "Supercharge", "Seamless", "Blazing", "Next-generation", "Reimagine",
   "Effortless", "Empower". If a headline could sit on any SaaS site, rewrite it until it could
   only sit on this one.
