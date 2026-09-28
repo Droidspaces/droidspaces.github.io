@@ -22,7 +22,7 @@
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
-  <link rel="stylesheet" href="/assets/css/main.css?v=9241e40239">
+  <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Cool things you can do", "description": "Two recipes: a mobile server behind Tailscale, UFW and Fail2Ban, and Docker running nested inside a Droidspaces container.", "url": "https://www.droidspaces.org/docs/cool-things-you-can-do.html", "inLanguage": "en", "dateModified": "2026-09-28", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Cool things you can do", "item": "https://www.droidspaces.org/docs/cool-things-you-can-do.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
@@ -312,15 +312,6 @@ systemctl<span class="w"> </span>restart<span class="w"> </span>docker
   <aside class="toc-column">
 <nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h3"><a href="#quick-navigation">Quick navigation</a></li><li class="toc-h2"><a href="#1-setting-up-a-secure-mobile-server-tailscale--ufw--fail2ban">1. Setting up a secure &quot;mobile server&quot; (Tailscale + UFW + Fail2Ban)</a></li><li class="toc-h3"><a href="#prerequisites">Prerequisites</a></li><li class="toc-h3"><a href="#step-1-install-networking-tools--compatibility-layer">Step 1: Install networking tools &amp; compatibility layer</a></li><li class="toc-h3"><a href="#step-2-personal-user-setup--ssh-hardening">Step 2: Personal user setup &amp; SSH hardening</a></li><li class="toc-h3"><a href="#step-3-set-up-tailscale">Step 3: Set up Tailscale</a></li><li class="toc-h3"><a href="#step-4-secure-the-container-with-ufw-firewall">Step 4: Secure the container with UFW (firewall)</a></li><li class="toc-h3"><a href="#step-5-add-brute-force-protection-with-fail2ban">Step 5: Add brute-force protection with Fail2Ban</a></li><li class="toc-h2"><a href="#2-running-docker-containers-nested-containerization">2. Running Docker containers (nested containerization)</a></li><li class="toc-h3"><a href="#prerequisites-1">Prerequisites</a></li><li class="toc-h3"><a href="#step-1-ensure-nat-networking">Step 1: Ensure NAT networking</a></li><li class="toc-h3"><a href="#step-2-compatibility-layer-iptables-legacy">Step 2: Compatibility layer (iptables-legacy)</a></li><li class="toc-h3"><a href="#step-3-install-docker">Step 3: Install Docker</a></li><li class="toc-h3"><a href="#step-4-non-root-user-setup">Step 4: Non-root user setup</a></li><li class="toc-h3"><a href="#step-5-verify-installation">Step 5: Verify installation</a></li><li class="toc-h3"><a href="#last-resort-for-host-mode-or-legacy-kernels-old-kernels-only">&quot;Last resort&quot; for host mode or legacy kernels (old kernels only)</a></li></ul></nav>
   </aside>
-</div>
-<dialog class="search-dialog" aria-label="Search the docs">
-  <form method="dialog" class="search-form">
-    <span class="icon" aria-hidden="true">search</span>
-    <input type="search" class="search-input" placeholder="Search the docs" autocomplete="off" aria-label="Search the docs">
-    <button class="icon-button" aria-label="Close search"><span class="icon" aria-hidden="true">close</span></button>
-  </form>
-  <ul class="search-results"></ul>
-</dialog>
 <footer class="footer">
   <div class="footer-inner">
     <div>
@@ -333,8 +324,7 @@ systemctl<span class="w"> </span>restart<span class="w"> </span>docker
         <li><a href="/downloads.html">Download</a></li>
         <li><a href="/docs/">Documentation</a></li>
         <li><a href="/docs/community-supported-devices.html">Devices</a></li>
-        <li><a href="https://github.com/ravindu644/Droidspaces-OSS" rel="noopener noreferrer">Source code</a></li>
-        <li><a href="https://github.com/ravindu644/Droidspaces-OSS/releases" rel="noopener noreferrer">Releases</a></li>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS" rel="noopener noreferrer">GitHub</a></li>
       </ul>
     </div>
     <div>
@@ -357,6 +347,15 @@ systemctl<span class="w"> </span>restart<span class="w"> </span>docker
 </footer>
 <a href="#" class="button button-tonal to-top" aria-label="Back to top"><span class="icon" aria-hidden="true">arrow_upward</span></a>
 
+</div>
+<dialog class="search-dialog" aria-label="Search the docs">
+  <form method="dialog" class="search-form">
+    <span class="icon" aria-hidden="true">search</span>
+    <input type="search" class="search-input" placeholder="Search the docs" autocomplete="off" aria-label="Search the docs">
+    <button class="icon-button" aria-label="Close search"><span class="icon" aria-hidden="true">close</span></button>
+  </form>
+  <ul class="search-results"></ul>
+</dialog>
 <script src="/assets/js/site.js?v=21a4abed9c" defer></script>
 <script src="/assets/js/docs.js?v=5decf57516" defer></script>
 </body>

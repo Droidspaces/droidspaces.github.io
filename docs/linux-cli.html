@@ -22,7 +22,7 @@
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
-  <link rel="stylesheet" href="/assets/css/main.css?v=9241e40239">
+  <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Linux CLI", "description": "Reference for the droidspaces command line: every command, flag and config file key.", "url": "https://www.droidspaces.org/docs/linux-cli.html", "inLanguage": "en", "dateModified": "2026-09-28", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Linux CLI", "item": "https://www.droidspaces.org/docs/linux-cli.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
@@ -547,15 +547,6 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
   <aside class="toc-column">
 <nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#quick-navigation">Quick navigation</a></li><li class="toc-h2"><a href="#1-getting-started">1. Getting started</a></li><li class="toc-h3"><a href="#start-your-first-container">Start your first container</a></li><li class="toc-h3"><a href="#enter-the-container">Enter the container</a></li><li class="toc-h3"><a href="#stop-the-container">Stop the container</a></li><li class="toc-h2"><a href="#2-command-reference">2. Command reference</a></li><li class="toc-h2"><a href="#3-options--flags">3. Options &amp; flags</a></li><li class="toc-h3"><a href="#rootfs-selection">Rootfs selection</a></li><li class="toc-h3"><a href="#container-identity--configuration">Container identity &amp; configuration</a></li><li class="toc-h3"><a href="#networking">Networking</a></li><li class="toc-h3"><a href="#feature-flags">Feature flags</a></li><li class="toc-h3"><a href="#bind-mounts">Bind mounts</a></li><li class="toc-h2"><a href="#4-configuration-files">4. Configuration files</a></li><li class="toc-h2"><a href="#5-common-workflows">5. Common workflows</a></li><li class="toc-h3"><a href="#running-with-a-config-file">Running with a config file</a></li><li class="toc-h3"><a href="#persistent-development">Persistent development</a></li><li class="toc-h3"><a href="#nat-isolation-with-port-forwarding">NAT isolation with port forwarding</a></li><li class="toc-h3"><a href="#nat-with-a-pinned-uplink">NAT with a pinned uplink</a></li><li class="toc-h3"><a href="#gateway-mode-lan-owned-by-openwrt">Gateway mode (LAN owned by OpenWRT)</a></li><li class="toc-h3"><a href="#ephemeral-testing">Ephemeral testing</a></li><li class="toc-h3"><a href="#one-off-commands">One-off commands</a></li><li class="toc-h3"><a href="#gpu-acceleration">GPU acceleration</a></li><li class="toc-h3"><a href="#deep-customization-privileged-mode">Deep customization (privileged mode)</a></li><li class="toc-h2"><a href="#6-advanced-usage--lifecycle">6. Advanced usage &amp; lifecycle</a></li><li class="toc-h3"><a href="#container-recovery">Container recovery</a></li><li class="toc-h2"><a href="#7-system-requirements">7. System requirements</a></li><li class="toc-h2"><a href="#next-steps">Next steps</a></li></ul></nav>
   </aside>
-</div>
-<dialog class="search-dialog" aria-label="Search the docs">
-  <form method="dialog" class="search-form">
-    <span class="icon" aria-hidden="true">search</span>
-    <input type="search" class="search-input" placeholder="Search the docs" autocomplete="off" aria-label="Search the docs">
-    <button class="icon-button" aria-label="Close search"><span class="icon" aria-hidden="true">close</span></button>
-  </form>
-  <ul class="search-results"></ul>
-</dialog>
 <footer class="footer">
   <div class="footer-inner">
     <div>
@@ -568,8 +559,7 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
         <li><a href="/downloads.html">Download</a></li>
         <li><a href="/docs/">Documentation</a></li>
         <li><a href="/docs/community-supported-devices.html">Devices</a></li>
-        <li><a href="https://github.com/ravindu644/Droidspaces-OSS" rel="noopener noreferrer">Source code</a></li>
-        <li><a href="https://github.com/ravindu644/Droidspaces-OSS/releases" rel="noopener noreferrer">Releases</a></li>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS" rel="noopener noreferrer">GitHub</a></li>
       </ul>
     </div>
     <div>
@@ -592,6 +582,15 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 </footer>
 <a href="#" class="button button-tonal to-top" aria-label="Back to top"><span class="icon" aria-hidden="true">arrow_upward</span></a>
 
+</div>
+<dialog class="search-dialog" aria-label="Search the docs">
+  <form method="dialog" class="search-form">
+    <span class="icon" aria-hidden="true">search</span>
+    <input type="search" class="search-input" placeholder="Search the docs" autocomplete="off" aria-label="Search the docs">
+    <button class="icon-button" aria-label="Close search"><span class="icon" aria-hidden="true">close</span></button>
+  </form>
+  <ul class="search-results"></ul>
+</dialog>
 <script src="/assets/js/site.js?v=21a4abed9c" defer></script>
 <script src="/assets/js/docs.js?v=5decf57516" defer></script>
 </body>

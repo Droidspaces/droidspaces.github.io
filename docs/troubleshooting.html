@@ -22,7 +22,7 @@
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
-  <link rel="stylesheet" href="/assets/css/main.css?v=9241e40239">
+  <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Troubleshooting", "description": "Fixes for common Droidspaces container problems: systemd hangs, paranoid networking, SELinux corruption, OverlayFS on f2fs, sparse image reclaim, Wi-Fi power save.", "url": "https://www.droidspaces.org/docs/troubleshooting.html", "inLanguage": "en", "dateModified": "2026-09-28", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Troubleshooting", "item": "https://www.droidspaces.org/docs/troubleshooting.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
@@ -358,15 +358,6 @@ systemctl<span class="w"> </span>start<span class="w"> </span>wifi-watchdog
   <aside class="toc-column">
 <nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h3"><a href="#quick-navigation">Quick navigation</a></li><li class="toc-h2"><a href="#modern-distros-arch-fedora-etc-failure-on-legacy-kernels">Modern distros (Arch, Fedora, etc.) failure on legacy kernels</a></li><li class="toc-h2"><a href="#required-key-not-available">&quot;Required key not available&quot;</a></li><li class="toc-h2"><a href="#mount-errors-on-kernel-414">Mount errors on kernel 4.14</a></li><li class="toc-h2"><a href="#overlayfs-not-supported-f2fs">OverlayFS not supported (f2fs)</a></li><li class="toc-h2"><a href="#container-name-conflicts">Container name conflicts</a></li><li class="toc-h2"><a href="#systemd-hangs-on-older-kernels">systemd hangs on older kernels</a></li><li class="toc-h2"><a href="#container-wont-stop">Container won&#x27;t stop</a></li><li class="toc-h2"><a href="#rootfs-image-io-errors-on-android">Rootfs image I/O errors on Android</a></li><li class="toc-h2"><a href="#networking-is-completely-dead---ping-fails-with-socket-permission-denied">Networking is completely dead - ping fails with &quot;socket: permission denied&quot;</a></li><li class="toc-h2"><a href="#dns--name-resolution-issues">DNS / name resolution issues</a></li><li class="toc-h2"><a href="#wifimobile-data-disconnects">WiFi/mobile data disconnects</a></li><li class="toc-h2"><a href="#selinux-induced-rootfs-corruption-directory-mode">SELinux-induced rootfs corruption (directory mode)</a></li><li class="toc-h2"><a href="#reclaiming-storage-sparse-image">Reclaiming storage (sparse image)</a></li><li class="toc-h2"><a href="#wi-fi-power-save-on-causing-sluggish-networking-on-android">Wi-Fi Power save: on causing sluggish networking on Android</a></li><li class="toc-h3"><a href="#1-install-required-utilities">1. Install required utilities</a></li><li class="toc-h3"><a href="#2-create-the-watchdog-script">2. Create the watchdog script</a></li><li class="toc-h3"><a href="#3-wire-up-the-init-service">3. Wire up the init service</a></li><li class="toc-h2"><a href="#getting-help">Getting help</a></li></ul></nav>
   </aside>
-</div>
-<dialog class="search-dialog" aria-label="Search the docs">
-  <form method="dialog" class="search-form">
-    <span class="icon" aria-hidden="true">search</span>
-    <input type="search" class="search-input" placeholder="Search the docs" autocomplete="off" aria-label="Search the docs">
-    <button class="icon-button" aria-label="Close search"><span class="icon" aria-hidden="true">close</span></button>
-  </form>
-  <ul class="search-results"></ul>
-</dialog>
 <footer class="footer">
   <div class="footer-inner">
     <div>
@@ -379,8 +370,7 @@ systemctl<span class="w"> </span>start<span class="w"> </span>wifi-watchdog
         <li><a href="/downloads.html">Download</a></li>
         <li><a href="/docs/">Documentation</a></li>
         <li><a href="/docs/community-supported-devices.html">Devices</a></li>
-        <li><a href="https://github.com/ravindu644/Droidspaces-OSS" rel="noopener noreferrer">Source code</a></li>
-        <li><a href="https://github.com/ravindu644/Droidspaces-OSS/releases" rel="noopener noreferrer">Releases</a></li>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS" rel="noopener noreferrer">GitHub</a></li>
       </ul>
     </div>
     <div>
@@ -403,6 +393,15 @@ systemctl<span class="w"> </span>start<span class="w"> </span>wifi-watchdog
 </footer>
 <a href="#" class="button button-tonal to-top" aria-label="Back to top"><span class="icon" aria-hidden="true">arrow_upward</span></a>
 
+</div>
+<dialog class="search-dialog" aria-label="Search the docs">
+  <form method="dialog" class="search-form">
+    <span class="icon" aria-hidden="true">search</span>
+    <input type="search" class="search-input" placeholder="Search the docs" autocomplete="off" aria-label="Search the docs">
+    <button class="icon-button" aria-label="Close search"><span class="icon" aria-hidden="true">close</span></button>
+  </form>
+  <ul class="search-results"></ul>
+</dialog>
 <script src="/assets/js/site.js?v=21a4abed9c" defer></script>
 <script src="/assets/js/docs.js?v=5decf57516" defer></script>
 </body>

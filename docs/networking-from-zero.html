@@ -22,7 +22,7 @@
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
-  <link rel="stylesheet" href="/assets/css/main.css?v=9241e40239">
+  <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Networking from zero", "description": "Every networking concept behind Droidspaces gateway mode, from the start: IP addresses, LAN, WAN, DHCP, DNS, NAT, bridges, veth pairs, network namespaces and OpenWRT.", "url": "https://www.droidspaces.org/docs/networking-from-zero.html", "inLanguage": "en", "dateModified": "2026-09-28", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Networking from zero", "item": "https://www.droidspaces.org/docs/networking-from-zero.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
@@ -776,15 +776,6 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span>torbox<span cla
   <aside class="toc-column">
 <nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h3"><a href="#quick-navigation">Quick navigation</a></li><li class="toc-h2"><a href="#part-1-the-absolute-basics">Part 1: The absolute basics</a></li><li class="toc-h3"><a href="#what-is-an-ip-address">What is an IP address?</a></li><li class="toc-h3"><a href="#what-is-a-network">What is a network?</a></li><li class="toc-h3"><a href="#lan---local-area-network">LAN - Local Area Network</a></li><li class="toc-h3"><a href="#wan---wide-area-network">WAN - Wide Area Network</a></li><li class="toc-h3"><a href="#gateway">Gateway</a></li><li class="toc-h2"><a href="#part-2-how-data-actually-gets-delivered">Part 2: How data actually gets delivered</a></li><li class="toc-h3"><a href="#mac-address-vs-ip-address">MAC address vs IP address</a></li><li class="toc-h3"><a href="#what-is-a-packet">What is a packet?</a></li><li class="toc-h2"><a href="#part-3-dhcp-how-you-get-an-ip-address">Part 3: DHCP (how you get an IP address)</a></li><li class="toc-h3"><a href="#the-problem">The problem</a></li><li class="toc-h3"><a href="#the-solution-dhcp">The solution: DHCP</a></li><li class="toc-h2"><a href="#part-4-dns-how-names-become-addresses">Part 4: DNS (how names become addresses)</a></li><li class="toc-h3"><a href="#the-problem-1">The problem</a></li><li class="toc-h3"><a href="#the-solution-dns">The solution: DNS</a></li><li class="toc-h2"><a href="#part-5-nat-the-magic-your-router-does">Part 5: NAT (the magic your router does)</a></li><li class="toc-h3"><a href="#the-problem-2">The problem</a></li><li class="toc-h3"><a href="#the-solution-nat">The solution: NAT</a></li><li class="toc-h3"><a href="#nat-in-droidspaces">NAT in Droidspaces</a></li><li class="toc-h3"><a href="#how-nat-mode-picks-the-wan-uplink-automatic">How NAT mode picks the WAN uplink (automatic)</a></li><li class="toc-h3"><a href="#pinning-the-uplink-manually-with---upstream">Pinning the uplink manually with --upstream</a></li><li class="toc-h3"><a href="#use-cases-for---upstream">Use cases for --upstream</a></li><li class="toc-h2"><a href="#part-6-bridges-and-virtual-cables-linux-plumbing">Part 6: Bridges and virtual cables (Linux plumbing)</a></li><li class="toc-h3"><a href="#what-is-a-network-bridge">What is a network bridge?</a></li><li class="toc-h3"><a href="#what-is-a-veth-pair">What is a veth pair?</a></li><li class="toc-h3"><a href="#how-nat-mode-uses-bridges-and-veths">How NAT mode uses bridges and veths</a></li><li class="toc-h2"><a href="#part-7-network-namespaces-how-containers-are-isolated">Part 7: Network namespaces (how containers are isolated)</a></li><li class="toc-h3"><a href="#what-is-a-namespace">What is a namespace?</a></li><li class="toc-h2"><a href="#part-8-openwrt-and-what-it-is">Part 8: OpenWRT and what it is</a></li><li class="toc-h3"><a href="#what-is-openwrt">What is OpenWRT?</a></li><li class="toc-h2"><a href="#part-9-the-new-gateway-mode---putting-it-all-together">Part 9: The new gateway mode - putting it all together</a></li><li class="toc-h3"><a href="#why-does-gateway-mode-exist">Why does gateway mode exist?</a></li><li class="toc-h3"><a href="#the-architecture">The architecture</a></li><li class="toc-h3"><a href="#step-by-step---what-happens-when-you-start-a-gateway-mode-container">Step by step - what happens when you start a gateway-mode container</a></li><li class="toc-h3"><a href="#what-lazy-attachment-means">What &quot;lazy attachment&quot; means</a></li><li class="toc-h3"><a href="#why-resolvconf-is-left-alone-in-gateway-mode">Why resolv.conf is left alone in gateway mode</a></li><li class="toc-h3"><a href="#why-bridge-nf-call-iptables-is-set-to-0">Why bridge-nf-call-iptables is set to 0</a></li><li class="toc-h3"><a href="#start-order-and-automatic-self-healing">Start order and automatic self-healing</a></li><li class="toc-h3"><a href="#what-happens-when-containers-stop">What happens when containers stop</a></li><li class="toc-h2"><a href="#part-10-gateway-mode-flags-and-configuration">Part 10: Gateway mode flags and configuration</a></li><li class="toc-h3"><a href="#required-vs-optional-flags">Required vs optional flags</a></li><li class="toc-h3"><a href="#what---gateway-net-does">What --gateway-net does</a></li><li class="toc-h3"><a href="#what---gateway-iface-does">What --gateway-iface does</a></li><li class="toc-h3"><a href="#the-flag-conflict-you-must-avoid">The flag conflict you must avoid</a></li><li class="toc-h3"><a href="#validation-rules-and-kernel-requirements">Validation rules and kernel requirements</a></li><li class="toc-h2"><a href="#part-11-comparing-all-networking-modes">Part 11: Comparing all networking modes</a></li><li class="toc-h2"><a href="#part-12-real-world-use-cases-for-gateway-mode">Part 12: Real-world use cases for gateway mode</a></li><li class="toc-h3"><a href="#1-vpn-killswitch-for-specific-containers">1. VPN killswitch for specific containers</a></li><li class="toc-h3"><a href="#2-multiple-isolated-lan-segments">2. Multiple isolated LAN segments</a></li><li class="toc-h3"><a href="#3-traffic-analysis">3. Traffic analysis</a></li><li class="toc-h3"><a href="#4-custom-dns-filtering">4. Custom DNS filtering</a></li><li class="toc-h3"><a href="#5-bandwidth-shaping">5. Bandwidth shaping</a></li><li class="toc-h2"><a href="#quick-reference---terms">Quick reference - terms</a></li></ul></nav>
   </aside>
-</div>
-<dialog class="search-dialog" aria-label="Search the docs">
-  <form method="dialog" class="search-form">
-    <span class="icon" aria-hidden="true">search</span>
-    <input type="search" class="search-input" placeholder="Search the docs" autocomplete="off" aria-label="Search the docs">
-    <button class="icon-button" aria-label="Close search"><span class="icon" aria-hidden="true">close</span></button>
-  </form>
-  <ul class="search-results"></ul>
-</dialog>
 <footer class="footer">
   <div class="footer-inner">
     <div>
@@ -797,8 +788,7 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span>torbox<span cla
         <li><a href="/downloads.html">Download</a></li>
         <li><a href="/docs/">Documentation</a></li>
         <li><a href="/docs/community-supported-devices.html">Devices</a></li>
-        <li><a href="https://github.com/ravindu644/Droidspaces-OSS" rel="noopener noreferrer">Source code</a></li>
-        <li><a href="https://github.com/ravindu644/Droidspaces-OSS/releases" rel="noopener noreferrer">Releases</a></li>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS" rel="noopener noreferrer">GitHub</a></li>
       </ul>
     </div>
     <div>
@@ -821,6 +811,15 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span>torbox<span cla
 </footer>
 <a href="#" class="button button-tonal to-top" aria-label="Back to top"><span class="icon" aria-hidden="true">arrow_upward</span></a>
 
+</div>
+<dialog class="search-dialog" aria-label="Search the docs">
+  <form method="dialog" class="search-form">
+    <span class="icon" aria-hidden="true">search</span>
+    <input type="search" class="search-input" placeholder="Search the docs" autocomplete="off" aria-label="Search the docs">
+    <button class="icon-button" aria-label="Close search"><span class="icon" aria-hidden="true">close</span></button>
+  </form>
+  <ul class="search-results"></ul>
+</dialog>
 <script src="/assets/js/site.js?v=21a4abed9c" defer></script>
 <script src="/assets/js/docs.js?v=5decf57516" defer></script>
 </body>

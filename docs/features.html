@@ -22,7 +22,7 @@
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
-  <link rel="stylesheet" href="/assets/css/main.css?v=9241e40239">
+  <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Feature deep dives", "description": "How each Droidspaces feature works: namespace isolation, init system support, OverlayFS volatile mode, GPU acceleration, cgroup isolation, seccomp shields, and Android-specific tuning.", "url": "https://www.droidspaces.org/docs/features.html", "inLanguage": "en", "dateModified": "2026-09-28", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Feature deep dives", "item": "https://www.droidspaces.org/docs/features.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
@@ -541,15 +541,6 @@ The container still detects new USB drives, keyboards and network interfaces, wi
   <aside class="toc-column">
 <nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#namespace-isolation">Namespace isolation</a></li><li class="toc-h3"><a href="#what-are-namespaces">What are namespaces?</a></li><li class="toc-h3"><a href="#network-namespace-isolation---net">Network namespace isolation ( --net )</a></li><li class="toc-h3"><a href="#how-it-compares-to-chroot">How it compares to chroot</a></li><li class="toc-h2"><a href="#init-system-support">Init system support</a></li><li class="toc-h3"><a href="#why-init-systems-matter">Why init systems matter</a></li><li class="toc-h3"><a href="#how-droidspaces-enables-it">How Droidspaces enables it</a></li><li class="toc-h3"><a href="#supported-init-systems">Supported init systems</a></li><li class="toc-h2"><a href="#volatile-mode">Volatile mode</a></li><li class="toc-h3"><a href="#what-is-volatile-mode">What is volatile mode?</a></li><li class="toc-h3"><a href="#how-it-works">How it works</a></li><li class="toc-h3"><a href="#use-cases">Use cases</a></li><li class="toc-h3"><a href="#usage">Usage</a></li><li class="toc-h3"><a href="#known-limitation-f2fs-on-android">Known limitation: f2fs on Android</a></li><li class="toc-h2"><a href="#hardware-access-mode">Hardware access mode</a></li><li class="toc-h3"><a href="#what-it-does">What it does</a></li><li class="toc-h3"><a href="#security-implications">Security implications</a></li><li class="toc-h3"><a href="#the-systemd-258-fix">The systemd 258+ fix</a></li><li class="toc-h3"><a href="#usage-1">Usage</a></li><li class="toc-h3"><a href="#automatic-gpu-group-setup">Automatic GPU group setup</a></li><li class="toc-h3"><a href="#x11-socket-mounting">X11 socket mounting</a></li><li class="toc-h3"><a href="#supported-gpu-families">Supported GPU families</a></li><li class="toc-h2"><a href="#custom-bind-mounts">Custom bind mounts</a></li><li class="toc-h3"><a href="#what-are-bind-mounts">What are bind mounts?</a></li><li class="toc-h3"><a href="#syntax">Syntax</a></li><li class="toc-h3"><a href="#limits">Limits</a></li><li class="toc-h3"><a href="#automatic-directory-creation">Automatic directory creation</a></li><li class="toc-h3"><a href="#soft-fail-model">Soft-fail model</a></li><li class="toc-h3"><a href="#security">Security</a></li><li class="toc-h2"><a href="#network-isolation-4-modes">Network isolation (4 modes)</a></li><li class="toc-h3"><a href="#1-host-mode---nethost---default">1. Host mode ( --net=host ) - default</a></li><li class="toc-h3"><a href="#2-nat-mode---netnat">2. NAT mode ( --net=nat )</a></li><li class="toc-h3"><a href="#3-none-mode---netnone">3. None mode ( --net=none )</a></li><li class="toc-h3"><a href="#4-gateway-mode---netgateway">4. Gateway mode ( --net=gateway )</a></li><li class="toc-h3"><a href="#port-forwarding-nat-mode">Port forwarding (NAT mode)</a></li><li class="toc-h3"><a href="#real-time-uplink-monitoring">Real-time uplink monitoring</a></li><li class="toc-h3"><a href="#manual-uplink-pinning---upstream">Manual uplink pinning ( --upstream )</a></li><li class="toc-h2"><a href="#rootfs-image-support">Rootfs image support</a></li><li class="toc-h3"><a href="#why-use-images">Why use images?</a></li><li class="toc-h3"><a href="#how-it-works-1">How it works</a></li><li class="toc-h3"><a href="#usage-2">Usage</a></li><li class="toc-h2"><a href="#cgroup-isolation">Cgroup isolation</a></li><li class="toc-h3"><a href="#what-it-does-1">What it does</a></li><li class="toc-h3"><a href="#why-it-matters">Why it matters</a></li><li class="toc-h3"><a href="#the-jail-trick">The &quot;jail&quot; trick</a></li><li class="toc-h3"><a href="#cgroup-v1-and-v2-support">Cgroup v1 and v2 support</a></li><li class="toc-h3"><a href="#forcing-legacy-cgroup-v1---force-cgroupv1">Forcing legacy cgroup v1 ( --force-cgroupv1 )</a></li><li class="toc-h3"><a href="#the-su-fix">The su fix</a></li><li class="toc-h2"><a href="#adaptive-security">Adaptive security</a></li><li class="toc-h3"><a href="#1-fbe-keyring-conflict-automatic">1. FBE keyring conflict (automatic)</a></li><li class="toc-h2"><a href="#sandboxing---allow-sandboxing">Sandboxing ( --allow-sandboxing )</a></li><li class="toc-h3"><a href="#what-it-changes">What it changes</a></li><li class="toc-h3"><a href="#what-it-costs">What it costs</a></li><li class="toc-h3"><a href="#usage-3">Usage</a></li><li class="toc-h2"><a href="#android-specific-tuning">Android-specific tuning</a></li><li class="toc-h3"><a href="#1-android-network--hardware-groups">1. Android network &amp; hardware groups</a></li><li class="toc-h3"><a href="#2-udev-trigger--service-overrides">2. Udev trigger &amp; service overrides</a></li><li class="toc-h3"><a href="#3-optimizing-systemd--logging">3. Optimizing systemd &amp; logging</a></li><li class="toc-h3"><a href="#4-nat-mode-network-guards">4. NAT mode network guards</a></li><li class="toc-h3"><a href="#5-storage-and-dhcp-configuration">5. Storage and DHCP configuration</a></li></ul></nav>
   </aside>
-</div>
-<dialog class="search-dialog" aria-label="Search the docs">
-  <form method="dialog" class="search-form">
-    <span class="icon" aria-hidden="true">search</span>
-    <input type="search" class="search-input" placeholder="Search the docs" autocomplete="off" aria-label="Search the docs">
-    <button class="icon-button" aria-label="Close search"><span class="icon" aria-hidden="true">close</span></button>
-  </form>
-  <ul class="search-results"></ul>
-</dialog>
 <footer class="footer">
   <div class="footer-inner">
     <div>
@@ -562,8 +553,7 @@ The container still detects new USB drives, keyboards and network interfaces, wi
         <li><a href="/downloads.html">Download</a></li>
         <li><a href="/docs/">Documentation</a></li>
         <li><a href="/docs/community-supported-devices.html">Devices</a></li>
-        <li><a href="https://github.com/ravindu644/Droidspaces-OSS" rel="noopener noreferrer">Source code</a></li>
-        <li><a href="https://github.com/ravindu644/Droidspaces-OSS/releases" rel="noopener noreferrer">Releases</a></li>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS" rel="noopener noreferrer">GitHub</a></li>
       </ul>
     </div>
     <div>
@@ -586,6 +576,15 @@ The container still detects new USB drives, keyboards and network interfaces, wi
 </footer>
 <a href="#" class="button button-tonal to-top" aria-label="Back to top"><span class="icon" aria-hidden="true">arrow_upward</span></a>
 
+</div>
+<dialog class="search-dialog" aria-label="Search the docs">
+  <form method="dialog" class="search-form">
+    <span class="icon" aria-hidden="true">search</span>
+    <input type="search" class="search-input" placeholder="Search the docs" autocomplete="off" aria-label="Search the docs">
+    <button class="icon-button" aria-label="Close search"><span class="icon" aria-hidden="true">close</span></button>
+  </form>
+  <ul class="search-results"></ul>
+</dialog>
 <script src="/assets/js/site.js?v=21a4abed9c" defer></script>
 <script src="/assets/js/docs.js?v=5decf57516" defer></script>
 </body>
