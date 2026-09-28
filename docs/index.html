@@ -3,12 +3,152 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Documentation - Droidspaces</title>
-  <link rel="canonical" href="https://www.droidspaces.org/docs/installation-android.html">
-  <meta http-equiv="refresh" content="0; url=installation-android.html">
-  <script>location.href = "installation-android.html";</script>
+  <meta name="description" content="Every Droidspaces guide: install on Android or Linux, build the kernel, use the app and the CLI, networking, graphics and audio, recipes, troubleshooting and supported devices.">
+  <title>Documentation - Droidspaces Docs</title>
+  <meta property="og:title" content="Documentation - Droidspaces Docs">
+  <meta property="og:description" content="Every Droidspaces guide: install on Android or Linux, build the kernel, use the app and the CLI, networking, graphics and audio, recipes, troubleshooting and supported devices.">
+  <meta property="og:url" content="https://www.droidspaces.org/docs/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Droidspaces">
+  <meta property="og:image" content="https://www.droidspaces.org/assets/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Droidspaces wordmark, the words Linux containers on Android, and a terminal starting an Ubuntu container">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Documentation - Droidspaces Docs">
+  <meta name="twitter:description" content="Every Droidspaces guide: install on Android or Linux, build the kernel, use the app and the CLI, networking, graphics and audio, recipes, troubleshooting and supported devices.">
+  <meta name="twitter:image" content="https://www.droidspaces.org/assets/images/og-image.png">
+  <link rel="canonical" href="https://www.droidspaces.org/docs/">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/assets/css/site.css?v=cc75b1bcea">
+  <link rel="stylesheet" href="/assets/css/main.css?v=42b54cd116">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "CollectionPage", "headline": "Documentation", "description": "Every Droidspaces guide: install on Android or Linux, build the kernel, use the app and the CLI, networking, graphics and audio, recipes, troubleshooting and supported devices.", "url": "https://www.droidspaces.org/docs/", "inLanguage": "en", "dateModified": "2026-09-28", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}]}]</script>
+  <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
-  <p>Redirecting to <a href="installation-android.html">Installation</a>...</p>
+<a class="button button-filled skip-link" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Main">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><svg viewBox="8.25 10.35 31.5 27.3" fill="currentColor" aria-hidden="true"><path d="M36.85 30.16H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 34.97c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.85 21.00H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 25.82c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.84 11.74H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 16.57c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/></svg> Droidspaces</a>
+    <div id="nav-drawer" class="nav-drawer" popover>
+      <button class="icon-button nav-close" popovertarget="nav-drawer" popovertargetaction="hide" aria-label="Close menu"><span class="icon" aria-hidden="true">close</span></button>
+      <ul class="nav-links">
+        <li><a href="/docs/" aria-current="page">Documentation</a></li>
+        <li><a href="/downloads.html">Downloads</a></li>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://t.me/Droidspaces" rel="noopener noreferrer">Telegram</a></li>
+      </ul>
+    </div>
+    <button class="icon-button theme-toggle" id="theme-toggle" aria-label="Toggle theme"><span class="icon" aria-hidden="true"></span></button>
+    <button class="icon-button nav-menu" popovertarget="nav-drawer" aria-label="Open menu"><span class="icon" aria-hidden="true">menu</span></button>
+  </div>
+</nav>
+
+<div class="docs-layout">
+  <button class="doc-breadcrumb" popovertarget="sidebar"><span class="icon" aria-hidden="true">menu</span><span>Docs</span></button>
+  <aside class="sidebar" id="sidebar" popover>
+    <button class="icon-button sidebar-close" popovertarget="sidebar" popovertargetaction="hide" aria-label="Close navigation"><span class="icon" aria-hidden="true">close</span></button>
+    <button class="search-open" type="button" hidden><span class="icon" aria-hidden="true">search</span>Search the docs<kbd>Ctrl K</kbd></button>
+<details class="sidebar-group" open><summary class="sidebar-heading">Basics</summary>
+<a href="installation-android.html" class="sidebar-link">Android installation</a>
+<a href="installation-linux.html" class="sidebar-link">Linux installation</a>
+</details>
+<details class="sidebar-group" open><summary class="sidebar-heading">Guides</summary>
+<a href="features.html" class="sidebar-link">Feature deep dives</a>
+<a href="graphics-and-audio.html" class="sidebar-link">Display, audio & desktop</a>
+<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
+<a href="usage-android-app.html" class="sidebar-link">Android app usage</a>
+<a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
+<a href="networking-from-zero.html" class="sidebar-link">Networking from zero</a>
+</details>
+<details class="sidebar-group" open><summary class="sidebar-heading">Recipes</summary>
+<a href="cool-things-you-can-do.html" class="sidebar-link">Cool things you can do</a>
+</details>
+<details class="sidebar-group" open><summary class="sidebar-heading">Reference</summary>
+<a href="troubleshooting.html" class="sidebar-link">Troubleshooting</a>
+<a href="community-supported-devices.html" class="sidebar-link">Community-supported devices</a>
+<a href="nix-nixos.html" class="sidebar-link">Nix/NixOS</a>
+<a href="uninstallation.html" class="sidebar-link">Uninstallation</a>
+</details>
+  </aside>
+  <main id="main" class="docs-content">
+    <article>
+<h1>Documentation</h1>
+<p>Every guide for Droidspaces, the Linux container runtime for Android and Linux.</p>
+<h2 id="basics">Basics</h2><ul>
+<li><a href="installation-android.html">Android installation</a>: Install Droidspaces on a rooted Android device: install the APK, let the app set up the backend, and create a Linux container without typing a terminal command.</li>
+<li><a href="installation-linux.html">Linux installation</a>: Install Droidspaces on a Linux desktop or server: download the tarball, install the binary, build a rootfs image and boot the first container.</li>
+</ul>
+<h2 id="guides">Guides</h2><ul>
+<li><a href="features.html">Feature deep dives</a>: How each Droidspaces feature works: namespace isolation, init system support, OverlayFS volatile mode, GPU acceleration, cgroup isolation, seccomp shields, and Android-specific tuning.</li>
+<li><a href="graphics-and-audio.html">Display, audio &amp; desktop</a>: GPU acceleration, PulseAudio sound and desktop environment auto-boot for Droidspaces containers on Android and Linux.</li>
+<li><a href="kernel-configuration.html">Kernel configuration</a>: How to compile an Android kernel with Droidspaces support: the config options and patches for non-GKI and GKI kernels.</li>
+<li><a href="usage-android-app.html">Android app usage</a>: Using the Droidspaces Android app: managing containers, networking, stats, the terminal and kernel settings.</li>
+<li><a href="linux-cli.html">Linux CLI</a>: Reference for the droidspaces command line: every command, flag and config file key.</li>
+<li><a href="networking-from-zero.html">Networking from zero</a>: Every networking concept behind Droidspaces gateway mode, from the start: IP addresses, LAN, WAN, DHCP, DNS, NAT, bridges, veth pairs, network namespaces and OpenWRT.</li>
+</ul>
+<h2 id="recipes">Recipes</h2><ul>
+<li><a href="cool-things-you-can-do.html">Cool things you can do</a>: Two recipes: a mobile server behind Tailscale, UFW and Fail2Ban, and Docker running nested inside a Droidspaces container.</li>
+</ul>
+<h2 id="reference">Reference</h2><ul>
+<li><a href="troubleshooting.html">Troubleshooting</a>: Fixes for common Droidspaces container problems: systemd hangs, paranoid networking, SELinux corruption, OverlayFS on f2fs, sparse image reclaim, Wi-Fi power save.</li>
+<li><a href="community-supported-devices.html">Community-supported devices</a>: Android devices that community members have run Droidspaces on, with kernel sources and downloads.</li>
+<li><a href="nix-nixos.html">Nix/NixOS</a>: Run NixOS in Droidspaces containers: build a tarball, import the compatibility module, and try the experimental Finix system.</li>
+<li><a href="uninstallation.html">Uninstallation</a>: Remove Droidspaces from Android and Linux: containers, backend data, the APK and system files.</li>
+</ul>
+    </article>
+    <p class="doc-edit"><a href="https://github.com/ravindu644/Droidspaces-OSS/tree/main/Documentation" rel="noopener noreferrer"><span class="icon" aria-hidden="true">edit</span>Edit this page on GitHub</a></p>
+
+  </main>
+  <aside class="toc-column">
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#basics">Basics</a></li><li class="toc-h2"><a href="#guides">Guides</a></li><li class="toc-h2"><a href="#recipes">Recipes</a></li><li class="toc-h2"><a href="#reference">Reference</a></li></ul></nav>
+  </aside>
+</div>
+<dialog class="search-dialog" aria-label="Search the docs">
+  <form method="dialog" class="search-form">
+    <span class="icon" aria-hidden="true">search</span>
+    <input type="search" class="search-input" placeholder="Search the docs" autocomplete="off" aria-label="Search the docs">
+    <button class="icon-button" aria-label="Close search"><span class="icon" aria-hidden="true">close</span></button>
+  </form>
+  <ul class="search-results"></ul>
+</dialog>
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <a href="/" class="nav-logo"><svg viewBox="8.25 10.35 31.5 27.3" fill="currentColor" aria-hidden="true"><path d="M36.85 30.16H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 34.97c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.85 21.00H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 25.82c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/><path d="M36.84 11.74H11.15c-0.82 0-1.48 0.68-1.48 1.52v3.05c0 0.84 0.66 1.52 1.48 1.52h25.69c0.82 0 1.48-0.68 1.48-1.52v-3.05c0-0.84-0.66-1.52-1.48-1.52ZM12.58 16.57c-0.95 0-1.73-0.79-1.73-1.77s0.77-1.77 1.73-1.77 1.73 0.79 1.73 1.77-0.77 1.77-1.73 1.77Z"/></svg> Droidspaces</a>
+      <p>A Linux container runtime for Android. It boots systemd or OpenRC as PID 1 on the phone's own kernel.</p>
+    </div>
+    <div>
+      <h3>Project</h3>
+      <ul>
+        <li><a href="/docs/">Documentation</a></li>
+        <li><a href="/downloads.html">Downloads</a></li>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS" rel="noopener noreferrer">Source code</a></li>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS/releases" rel="noopener noreferrer">Releases</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Community</h3>
+      <ul>
+        <li><a href="https://t.me/Droidspaces" rel="noopener noreferrer">Telegram</a></li>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS/issues" rel="noopener noreferrer">Issues</a></li>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS/graphs/contributors" rel="noopener noreferrer">Contributors</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Legal</h3>
+      <ul>
+        <li><a href="https://github.com/ravindu644/Droidspaces-OSS/blob/main/LICENSE" rel="noopener noreferrer">GPLv3 licence</a></li>
+        <li><a href="https://github.com/Droidspaces/droidspaces.github.io" rel="noopener noreferrer">This site's source</a>, MIT licence</li>
+        <li>Maintained by <a href="https://github.com/ravindu644" rel="noopener noreferrer">ravindu644</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<a href="#" class="button button-tonal to-top" aria-label="Back to top"><span class="icon" aria-hidden="true">arrow_upward</span></a>
+
+<script src="/assets/js/site.js?v=21a4abed9c" defer></script>
+<script src="/assets/js/docs.js?v=5decf57516" defer></script>
 </body>
 </html>
