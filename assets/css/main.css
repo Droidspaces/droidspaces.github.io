@@ -86,8 +86,12 @@ html { scroll-padding-top: 80px; } /* an anchor lands below the 64px sticky nav,
 
 @media (min-width: 840px) {
   .docs-layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); align-items: start; }
+  /* the footer is a row of the grid, under the article only, so the sticky tree keeps its place
+     while the footer scrolls in; outside the grid the tree scrolled away with the grid's end */
+  .docs-layout .footer { grid-column: 2 / -1; }
   .sidebar {
     display: block;
+    grid-row: 1 / -1;
     position: sticky;
     inset: 64px auto auto; /* undo the popover's inset: 0 */
     width: auto;
