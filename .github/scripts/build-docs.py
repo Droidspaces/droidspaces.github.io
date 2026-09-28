@@ -126,22 +126,6 @@ FALLBACK_DESC = {
     'uninstallation': 'Safely uninstall Droidspaces from Android and Linux. Remove containers, backend data, APK, and system files completely.',
 }
 
-FALLBACK_KEYWORDS = {
-    'installation-android': 'install Droidspaces Android, rooted Android container, APK install, atomic backend, sparse image',
-    'installation-linux': 'install Droidspaces Linux, Linux container runtime, rootfs tarball, ext4 image, Linux namespaces',
-    'features': 'Droidspaces features, namespace isolation, cgroup v2, OverlayFS, volatile mode, init system, GPU hardware access',
-    'gpu-acceleration': 'GPU acceleration Android container, Turnip Adreno, VirGL GPU, Termux X11, llvmpipe',
-    'kernel-configuration': 'kernel configuration Droidspaces, GKI kABI patches, Android kernel compile, namespace kernel config',
-    'usage-android-app': 'Droidspaces Android app, container manager Android, NAT mode, built-in terminal, systemd service manager',
-    'linux-cli': 'Droidspaces CLI, Linux container command line, droidspaces command reference, bind mount, NAT networking',
-    'cool-things-you-can-do': 'Droidspaces mobile server, Tailscale Android container, UFW Fail2Ban container, Docker nested',
-    'common-errors': 'Droidspaces common errors, ENOKEY fix, GrapheneOS, SuSFS conflict, container mount error, systemd hang',
-    'troubleshooting': 'Droidspaces troubleshooting, systemd hang legacy kernel, paranoid networking, ping permission denied',
-    'community-supported-devices': 'Droidspaces supported devices, Android kernel list, device compatibility, custom kernel downloads',
-    'nix-nixos': 'NixOS Droidspaces, Nix container, Flake, systemd v259 legacy kernel, Finix experimental',
-    'uninstallation': 'uninstall Droidspaces, remove Android container runtime, delete rootfs, remove backend files',
-}
-
 def parse_metadata(md):
     m = re.match(r'^\s*<!--\s*(.*?)-->\s*', md, re.DOTALL)
     if not m:
@@ -167,8 +151,7 @@ def load_pages(docs_dir):
         section = meta.get('section', FALLBACK_SECTIONS.get(slug, 'Guides'))
         order = int(meta.get('order', FALLBACK_ORDER.get(slug, 99)))
         desc = meta.get('desc', FALLBACK_DESC.get(slug, f'Droidspaces documentation - {title}'))
-        keywords = meta.get('keywords', FALLBACK_KEYWORDS.get(slug, 'Droidspaces, Linux containers, Android containers'))
-        pages.append((slug, title, section, order, desc, keywords, fname))
+        pages.append((slug, title, section, order, desc, fname))
     pages.sort(key=lambda p: (SECTION_ORDER.get(p[2], 99), p[3]))
     return pages
 
@@ -226,27 +209,70 @@ def fill(template_path, values):
         page = page.replace('{{' + key + '}}', value)
     return page
 
-def make_page(title, body, slug, nav_template, footer_template, pages, fname=''):
+SOURCE_REPO = os.environ.get('SOURCE_REPO', '/tmp/source')
+SITE = 'https://www.droidspaces.org'
+ORG = {'@type': 'Organization', 'name': 'Droidspaces', 'url': SITE + '/',
+       'sameAs': [REPO, 'https://t.me/Droidspaces']}
+
+def git_date(repo, path):
+    """The commit date of a file, or None when it has uncommitted changes or no history.
+    None means "changed now": the caller writes today, which is what the change is."""
+    try:
+        if subprocess.run(['git', '-C', repo, 'diff', '--quiet', 'HEAD', '--', path]).returncode:
+            return None
+        out = subprocess.run(['git', '-C', repo, 'log', '-1', '--format=%cs', '--', path],
+                             capture_output=True, text=True, check=True).stdout.strip()
+        return out or None
+    except Exception:
+        return None
+
+def today():
+    return __import__('datetime').date.today().isoformat()
+
+def page_jsonld(title, desc, url, fname):
+    """TechArticle with the source markdown's commit date, and the breadcrumb Google still shows.
+    The visible breadcrumb is inside a <button>, so it cannot carry links; this carries them."""
+    crumbs = [('Home', SITE + '/'), ('Documentation', SITE + '/docs/')]
+    if fname:
+        crumbs.append((title, url))
+    return json.dumps([
+        {'@context': 'https://schema.org', '@type': 'TechArticle' if fname else 'CollectionPage',
+         'headline': title, 'description': desc, 'url': url, 'inLanguage': 'en',
+         'dateModified': git_date(SOURCE_REPO, f'Documentation/{fname}') or today(),
+         'author': ORG, 'publisher': ORG, 'isPartOf': {'@type': 'WebSite', 'name': 'Droidspaces', 'url': SITE + '/'}},
+        {'@context': 'https://schema.org', '@type': 'BreadcrumbList',
+         'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': u} for i, (n, u) in enumerate(crumbs)]},
+    ], ensure_ascii=False)
+
+def make_page(title, body, slug, nav_template, footer_template, pages, fname='', desc=None):
     s = sidebar(pages, slug)
     nav_btns = nav_buttons(pages, slug)
     bc_html = breadcrumb(pages, slug)
-    seo = {}
-    for p in pages:
-        if p[0] == slug:
-            seo = {'desc': p[4], 'keywords': p[5]}
-            break
-    desc = seo.get('desc', f'Droidspaces documentation - {title}')
-    keywords = seo.get('keywords', 'Droidspaces, Linux containers, Android containers')
+    desc = desc or next((p[4] for p in pages if p[0] == slug), f'Droidspaces documentation - {title}')
+    url = f'{SITE}/docs/' if slug == 'index' else f'{SITE}/docs/{slug}.html'
 
     nav_html = nav_template.replace('{{DOCS_ATTR}}', ' aria-current="page"').replace('{{DOWNLOADS_ATTR}}', '')
     if slug == 'community-supported-devices':
         # right above the first device table, where the reader is when they want it
         body = body.replace('<div class="table-wrap">', DEVICE_FILTER + '<div class="table-wrap">', 1)
-    edit = f'https://github.com/ravindu644/Droidspaces-OSS/edit/main/Documentation/{fname}'
+    edit = f'{REPO}/edit/main/Documentation/{fname}' if fname else f'{REPO}/tree/main/Documentation'
     return fill(os.path.join(ROOT, 'template.html'), {
-        'TITLE': title, 'DESC': desc, 'KEYWORDS': keywords, 'SLUG': slug, 'NAV': nav_html,
+        'TITLE': title, 'DESC': desc, 'URL': url, 'NAV': nav_html,
         'BREADCRUMB': bc_html, 'SIDEBAR': s, 'BODY': body, 'DOC_NAV': nav_btns, 'FOOTER': footer_template,
-        'TOC': toc(body), 'EDIT_URL': edit})
+        'TOC': toc(body), 'EDIT_URL': edit, 'JSONLD': page_jsonld(title, desc, url, fname)})
+
+def docs_index(pages):
+    """The documentation hub: every page with its description, grouped like the sidebar.
+    It replaced a redirect stub, so the nav's Documentation link lands on a page with links."""
+    out = ['<h1>Documentation</h1>',
+           '<p>Every guide for Droidspaces, the Linux container runtime for Android and Linux.</p>']
+    for section in ['Basics', 'Guides', 'Recipes', 'Reference']:
+        items = [p for p in pages if p[2] == section]
+        if items:
+            out.append(f'<h2 id="{slugify(section)}">{section}</h2><ul>')
+            out += [f'<li><a href="{p[0]}.html">{escape(p[1])}</a>: {escape(p[4])}</li>' for p in items]
+            out.append('</ul>')
+    return '\n'.join(out)
 
 def fix_img_paths(html):
     return re.sub(r'Documentation/resources/', r'assets/resources/', html)
@@ -381,18 +407,17 @@ def build_downloads_page(root, nav_template, footer_template):
     print("OK: downloads.html")
 
 def generate_sitemap(root, pages):
-    # every page the build rendered, so a page added or removed upstream is never stale here
-    base = 'https://www.droidspaces.org'
-    today = __import__('datetime').date.today().isoformat()
-    urls = [('/', 1.0), ('/downloads.html', 0.9)]
-    urls += [(f'/docs/{p[0]}.html', 0.9 if p[2] == 'Basics' else 0.7) for p in pages]
+    # every page the build rendered, so a page added or removed upstream is never stale here.
+    # lastmod is the file's commit date, or today when this build changed it: a sitemap that
+    # says today for every URL on every build is one Google has said it stops reading.
+    # changefreq and priority are not read by any engine, so they are not written.
+    urls = [('/', 'index.html'), ('/downloads.html', 'downloads.html'), ('/docs/', 'docs/index.html')]
+    urls += [(f'/docs/{p[0]}.html', f'docs/{p[0]}.html') for p in pages]
     lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    for loc, pri in urls:
+    for loc, path in urls:
         lines.append('  <url>')
-        lines.append(f'    <loc>{base}{loc}</loc>')
-        lines.append(f'    <lastmod>{today}</lastmod>')
-        lines.append(f'    <changefreq>monthly</changefreq>')
-        lines.append(f'    <priority>{pri}</priority>')
+        lines.append(f'    <loc>{SITE}{loc}</loc>')
+        lines.append(f'    <lastmod>{git_date(root, path) or today()}</lastmod>')
         lines.append('  </url>')
     lines.append('</urlset>')
     with open(os.path.join(root, 'sitemap.xml'), 'w') as f:
@@ -436,7 +461,7 @@ if __name__ == '__main__':
     pages = load_pages(docs_dir)
     search_index = []
 
-    for slug, title, section, order, desc, keywords, fname in pages:
+    for slug, title, section, order, desc, fname in pages:
         path = os.path.join(docs_dir, fname)
         if not os.path.exists(path):
             print(f"SKIP: {fname} not found")
@@ -457,6 +482,10 @@ if __name__ == '__main__':
     with open(os.path.join(out_dir, 'search.json'), 'w') as f:
         json.dump(search_index, f, ensure_ascii=False, separators=(',', ':'))
     print("OK: search.json")
+    with open(os.path.join(out_dir, 'index.html'), 'w') as f:
+        f.write(make_page('Documentation', docs_index(pages), 'index', nav_template, footer_template, pages,
+                          desc='Every Droidspaces guide: install on Android or Linux, build the kernel, use the app and the CLI, networking, graphics and audio, recipes, troubleshooting and supported devices.'))
+    print("OK: index.html (docs)")
 
     # Stamp index.html
     index_path = os.path.join(root, 'index.html')
@@ -483,7 +512,7 @@ if __name__ == '__main__':
             index_html,
         )
     stats = {'stars': fetch_stars(),
-             'contributors': count_contributors(os.environ.get('SOURCE_REPO', '/tmp/source'))}
+             'contributors': count_contributors(SOURCE_REPO)}
     for key, value in stats.items():
         if value:
             index_html = re.sub(
