@@ -86,7 +86,7 @@
 <h1 id="configuring-nixos-for-droidspaces">Configuring NixOS for Droidspaces <a class="header-anchor" href="#configuring-nixos-for-droidspaces">#</a></h1>
 <p>Import the <code>working-droidspaces-rootfs-minimal</code> module into your NixOS system:</p>
 <div class="code-block"><span class="code-lang">nix</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># flake.nix</span>
-droidspaces<span class="o">.</span><span class="ss">url</span> <span class="o">=</span> <span class="s2">"github:ravindu644/Droidspaces-OSS"</span><span class="p">;</span>
+droidspaces<span class="o">.</span><span class="ss">url</span> <span class="o">=</span> <span class="s2">&quot;github:ravindu644/Droidspaces-OSS&quot;</span><span class="p">;</span>
 
 <span class="c1"># configuration</span>
 <span class="p">{</span>inputs<span class="p">,</span> <span class="o">...</span><span class="p">}:</span> <span class="p">{</span>
@@ -94,7 +94,7 @@ droidspaces<span class="o">.</span><span class="ss">url</span> <span class="o">=
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>Note:</strong> as mentioned above, kernel 5.4 and older cannot run NixOS systems from newer nixpkgs, so use a pinned nixpkgs version:</p>
-<div class="code-block"><span class="code-lang">nix</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>nixpkgs-with-systemd-v259<span class="o">.</span><span class="ss">url</span> <span class="o">=</span> <span class="s2">"github:NixOS/nixpkgs/b86751bc4085f48661017fa226dee99fab6c651b"</span><span class="p">;</span>
+<div class="code-block"><span class="code-lang">nix</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>nixpkgs-with-systemd-v259<span class="o">.</span><span class="ss">url</span> <span class="o">=</span> <span class="s2">&quot;github:NixOS/nixpkgs/b86751bc4085f48661017fa226dee99fab6c651b&quot;</span><span class="p">;</span>
 </code></pre></div>
 <p>The module also lets you build your system as a tarball:</p>
 <div class="code-block"><span class="code-lang">sh</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>nix<span class="w"> </span>build<span class="w"> </span>.#&lt;hostname&gt;.config.system.build.tarball

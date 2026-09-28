@@ -410,7 +410,7 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <span class="c1"># Absolute path to the rootfs directory or .img file</span>
 <span class="na">rootfs_path</span><span class="o">=</span><span class="s">/home/user/ubuntu-24.04-rootfs.img</span>
 
-<span class="c1"># Custom path to store the container's PID file</span>
+<span class="c1"># Custom path to store the container&#39;s PID file</span>
 <span class="na">pidfile</span><span class="o">=</span><span class="s">/var/lib/Droidspaces/Pids/ubuntu.pid</span>
 
 <span class="c1"># Comma-separated list of host directories to bind mount (src:dest)</span>
@@ -502,11 +502,11 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <h3 id="one-off-commands">One-off commands <a class="header-anchor" href="#one-off-commands">#</a></h3>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>run<span class="w"> </span>uname<span class="w"> </span>-a
 <span class="c1"># Use sh -c for pipes:</span>
-sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>run<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">"ps aux | grep init"</span>
+sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>run<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;ps aux | grep init&quot;</span>
 <span class="c1"># Run as a specific user with -u/--user:</span>
 sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>-u<span class="w"> </span>myuser<span class="w"> </span>run<span class="w"> </span>whoami
 sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>-u<span class="w"> </span>myuser<span class="w"> </span>run<span class="w"> </span>env
-sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>-u<span class="w"> </span>myuser<span class="w"> </span>run<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">"id &amp;&amp; env"</span>
+sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>-u<span class="w"> </span>myuser<span class="w"> </span>run<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;id &amp;&amp; env&quot;</span>
 </code></pre></div>
 <h3 id="gpu-acceleration">GPU acceleration <a class="header-anchor" href="#gpu-acceleration">#</a></h3>
 <p>Expose only the GPU nodes, not all host hardware:</p>

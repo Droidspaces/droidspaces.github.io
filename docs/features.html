@@ -503,7 +503,7 @@ bwrap<span class="w"> </span>--unshare-user<span class="w"> </span>--proc<span c
 <ul>
 <li><strong>Hardware access guards</strong>: udev services are only useful when hardware access is enabled, so Droidspaces injects a drop-in <code>ExecCondition</code> override that stops <code>systemd-udevd.service</code>, <code>systemd-udev-trigger.service</code>, and <code>systemd-udev-settle.service</code> from starting unless the container is configured with hardware access (<code>enable_hw_access=1</code>):<div class="code-block"><span class="code-lang">ini</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="k">[Service]</span>
 <span class="na">ExecCondition</span><span class="o">=</span>
-<span class="na">ExecCondition</span><span class="o">=</span><span class="s">/bin/sh -c "grep -q 'enable_hw_access=1' /run/droidspaces/container.config"</span>
+<span class="na">ExecCondition</span><span class="o">=</span><span class="s">/bin/sh -c &quot;grep -q &#39;enable_hw_access=1&#39; /run/droidspaces/container.config&quot;</span>
 </code></pre></div>
 </li>
 <li><strong>Safe udev trigger</strong>: Instead of scanning everything, Droidspaces overrides the default <code>systemd-udev-trigger.service</code> with a drop-in. With hardware access enabled, the trigger is limited to a fixed, safe subset of subsystems:<div class="code-block"><span class="code-lang">ini</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="k">[Service]</span>
@@ -526,7 +526,7 @@ The container still detects new USB drives, keyboards and network interfaces, wi
 <p>Droidspaces injects a drop-in <code>ExecCondition</code> override for the standard network services (such as <code>NetworkManager.service</code>, <code>systemd-networkd.service</code>, <code>dhcpcd.service</code>, and <code>systemd-resolved.service</code>), so they run only when the container is configured in NAT mode:</p>
 <div class="code-block"><span class="code-lang">ini</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="k">[Service]</span>
 <span class="na">ExecCondition</span><span class="o">=</span>
-<span class="na">ExecCondition</span><span class="o">=</span><span class="s">/bin/sh -c "grep -q 'net_mode=nat' /run/droidspaces/container.config"</span>
+<span class="na">ExecCondition</span><span class="o">=</span><span class="s">/bin/sh -c &quot;grep -q &#39;net_mode=nat&#39; /run/droidspaces/container.config&quot;</span>
 </code></pre></div>
 <h3 id="5-storage-and-dhcp-configuration">5. Storage and DHCP configuration <a class="header-anchor" href="#5-storage-and-dhcp-configuration">#</a></h3>
 <ul>
