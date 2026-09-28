@@ -494,8 +494,9 @@ from the bottom right corner of the viewport on every page. It is tonal so the f
 whatever section is on screen stays the one `primary`. It appears once a viewport of content has
 scrolled past, by a scroll timeline, so a browser without scroll timelines just always has it.
 
-Icons inside buttons are Material Symbols Rounded, 20px, `FILL 0` at rest and `FILL 1` on hover,
-animated over the effects spring. The icon leads the label.
+Icons inside buttons are Material Symbols Rounded, 20px, `FILL 0`, and they stay outlined on
+hover: a glyph that fills while the button morphs was two things moving at once. The icon leads
+the label.
 
 ### Chips
 
@@ -604,7 +605,7 @@ button does.
    the motion itself is still CSS. Objects already on screen at load are left alone. Text does not animate in. Cards do not
    animate in. Only the objects. The section's headline is already there when you get to it.
 2. **Press and hover.** Buttons morph on press. Surfaces step a tier on hover. Chips take
-   `secondary-container` on hover. Icons fill. All use the springs above.
+   `secondary-container` on hover. Icons do not change. All use the springs above.
 3. **Carousel.** A phone promoted by hover or focus scales to 100% over
    `--motion-spatial-default`; its caption fades over `--motion-effects-default`. In the swipe
    carousel the scale and caption follow the scroll position, not a timer. When the overlapping

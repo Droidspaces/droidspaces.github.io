@@ -15,7 +15,7 @@
 }
 @font-face {
   font-family: "Material Symbols Rounded";
-  src: url("../fonts/MaterialSymbolsRounded.woff2?v=8290203482") format("woff2");
+  src: url("../fonts/MaterialSymbolsRounded.woff2?v=b66606f76c") format("woff2");
   font-weight: 400;
   font-display: block; /* an icon glyph shown as its ligature text is worse than a blank */
 }
@@ -77,7 +77,6 @@ p { text-wrap: pretty; }
   letter-spacing: 0; /* the glyphs are ligatures, and any letter-spacing turns ligatures off */
   display: inline-block;
   font-variation-settings: "FILL" 0, "opsz" 24;
-  transition: font-variation-settings var(--motion-effects-fast);
   user-select: none;
 }
 
@@ -104,7 +103,6 @@ p { text-wrap: pretty; }
   transition: border-radius var(--motion-press), background-color var(--motion-effects-fast);
 }
 .button .icon { font-size: 20px; font-variation-settings: "FILL" 0, "opsz" 20; }
-.button:hover .icon { font-variation-settings: "FILL" 1, "opsz" 20; }
 .button:active { border-radius: var(--md-sys-shape-corner-md); }
 .button-filled { background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); }
 .button-filled:hover { background: color-mix(in srgb, var(--md-sys-color-primary), var(--md-sys-color-on-primary) 8%); }
@@ -120,7 +118,6 @@ p { text-wrap: pretty; }
 /* back to top: the one icon-only button, tonal so the section's filled button stays the one primary */
 .to-top { position: fixed; right: 16px; bottom: 16px; z-index: 9; width: 56px; padding: 0; }
 .to-top .icon { font-size: 24px; font-variation-settings: "FILL" 0, "opsz" 24; }
-.to-top:hover .icon { font-variation-settings: "FILL" 1, "opsz" 24; }
 @supports (animation-timeline: scroll()) {
   /* hidden until a viewport of content has scrolled past, without JavaScript. Without scroll
      timelines the button is simply always there, which is still a working page */
