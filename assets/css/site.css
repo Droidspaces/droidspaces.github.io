@@ -15,7 +15,7 @@
 }
 @font-face {
   font-family: "Material Symbols Rounded";
-  src: url("../fonts/MaterialSymbolsRounded.woff2?v=3504ff4748") format("woff2");
+  src: url("../fonts/MaterialSymbolsRounded.woff2?v=8290203482") format("woff2");
   font-weight: 400;
   font-display: block; /* an icon glyph shown as its ligature text is worse than a blank */
 }
@@ -116,6 +116,16 @@ p { text-wrap: pretty; }
   background: color-mix(in srgb, transparent, var(--md-sys-color-on-surface) 12%);
   color: color-mix(in srgb, transparent, var(--md-sys-color-on-surface) 38%);
   pointer-events: none;
+}
+/* back to top: the one icon-only button, tonal so the section's filled button stays the one primary */
+.to-top { position: fixed; right: 16px; bottom: 16px; z-index: 9; width: 56px; padding: 0; }
+.to-top .icon { font-size: 24px; font-variation-settings: "FILL" 0, "opsz" 24; }
+.to-top:hover .icon { font-variation-settings: "FILL" 1, "opsz" 24; }
+@supports (animation-timeline: scroll()) {
+  /* hidden until a viewport of content has scrolled past, without JavaScript. Without scroll
+     timelines the button is simply always there, which is still a working page */
+  @keyframes to-top-show { from { opacity: 0; visibility: hidden; } }
+  .to-top { animation: to-top-show linear both; animation-timeline: scroll(root); animation-range: 100vh calc(100vh + 64px); }
 }
 
 /* icon button: theme toggle, copy, drawer. 48px is the tap minimum design does not override */

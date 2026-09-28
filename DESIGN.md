@@ -489,6 +489,11 @@ Two filled buttons next to each other is the tell of a template.
 Labels are `label-lg-emphasized`, one line, sentence case. "Download the APK", not "DOWNLOAD
 NOW". No arrow glyph appended to the label; the button is already the arrow.
 
+The one icon-only button is back to top: tonal, 56px square, a 24px `arrow_upward`, pinned 16px
+from the bottom right corner of the viewport on every page. It is tonal so the filled button in
+whatever section is on screen stays the one `primary`. It appears once a viewport of content has
+scrolled past, by a scroll timeline, so a browser without scroll timelines just always has it.
+
 Icons inside buttons are Material Symbols Rounded, 20px, `FILL 0` at rest and `FILL 1` on hover,
 animated over the effects spring. The icon leads the label.
 
