@@ -244,6 +244,12 @@ def page_jsonld(title, desc, url, fname):
          'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': u} for i, (n, u) in enumerate(crumbs)]},
     ], ensure_ascii=False)
 
+def nav_for(nav_template, current):
+    """The nav partial with aria-current on the one link that matches the page, or none."""
+    for key, name in [('DOCS_ATTR', 'docs'), ('DOWNLOADS_ATTR', 'downloads'), ('DEVICES_ATTR', 'devices')]:
+        nav_template = nav_template.replace('{{' + key + '}}', ' aria-current="page"' if current == name else '')
+    return nav_template
+
 def make_page(title, body, slug, nav_template, footer_template, pages, fname='', desc=None):
     s = sidebar(pages, slug)
     nav_btns = nav_buttons(pages, slug)
@@ -251,7 +257,7 @@ def make_page(title, body, slug, nav_template, footer_template, pages, fname='',
     desc = desc or next((p[4] for p in pages if p[0] == slug), f'Droidspaces documentation - {title}')
     url = f'{SITE}/docs/' if slug == 'index' else f'{SITE}/docs/{slug}.html'
 
-    nav_html = nav_template.replace('{{DOCS_ATTR}}', ' aria-current="page"').replace('{{DOWNLOADS_ATTR}}', '')
+    nav_html = nav_for(nav_template, 'devices' if slug == 'community-supported-devices' else 'docs')
     if slug == 'community-supported-devices':
         # right above the first device table, where the reader is when they want it
         body = body.replace('<div class="table-wrap">', DEVICE_FILTER + '<div class="table-wrap">', 1)
@@ -370,7 +376,7 @@ def fetch_latest_release():
 
 
 def build_downloads_page(root, nav_template, footer_template):
-    dl_nav = nav_template.replace('{{DOCS_ATTR}}', '').replace('{{DOWNLOADS_ATTR}}', ' aria-current="page"')
+    dl_nav = nav_for(nav_template, 'downloads')
     release_info = fetch_latest_release()
     if release_info:
         version = release_info['version']
@@ -491,7 +497,7 @@ if __name__ == '__main__':
     index_path = os.path.join(root, 'index.html')
     with open(index_path) as f:
         index_html = f.read()
-    index_nav = nav_template.replace('{{DOCS_ATTR}}', '').replace('{{DOWNLOADS_ATTR}}', '')
+    index_nav = nav_for(nav_template, None)
     index_html = re.sub(
         r'<!--NAV_START-->.*?<!--NAV_END-->',
         f'<!--NAV_START-->\n{index_nav}\n<!--NAV_END-->',
@@ -535,7 +541,7 @@ if __name__ == '__main__':
     build_downloads_page(root, nav_template, footer_template)
 
     # Generate 404.html
-    four04_nav = nav_template.replace('{{DOCS_ATTR}}', '').replace('{{DOWNLOADS_ATTR}}', '')
+    four04_nav = nav_for(nav_template, None)
     four04_html = fill(os.path.join(root, 'template-404.html'), {'NAV': four04_nav, 'FOOTER': footer_template})
     with open(os.path.join(root, '404.html'), 'w') as f:
         f.write(four04_html)
