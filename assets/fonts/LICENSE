@@ -16,7 +16,7 @@ MaterialSymbolsRounded.woff2
   Kept axes: FILL 0 to 1, opsz 20 to 24. Pinned: wght 400, GRAD 0.
   Subset to: menu, close, dark_mode, light_mode, download, menu_book, content_copy, check,
   android, terminal, wifi, signal_cellular_4_bar, battery_full, search, expand_more, edit,
-  arrow_upward, and
+  arrow_upward, smartphone, and
   the space. Ligatures kept so markup can use the icon name as text. Subset first, then
   instance, with layout_closure off, or the letters pull in every icon they can spell.
   Licence: Apache License 2.0 (below).
