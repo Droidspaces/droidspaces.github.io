@@ -536,6 +536,11 @@ on `surface-container-low`, radius 16 on its open edge, no border, the scrim beh
 separating. Items are 56px tall at full radius, and the current page sits on `secondary-container`
 with `on-secondary-container` text, which is the drawer's active indicator.
 
+The docs page tree is the M3 standard navigation drawer: 280px, on `surface` like the bar and the
+page, no divider. The section labels and the active pill are its only structure, so the bar, the
+tree and the article read as one plane. Under 840px it becomes a modal drawer from the left, the
+mirror of the menu drawer, opened from the breadcrumb row that stays under the bar.
+
 ### Phone mockup
 
 One component, one silhouette, described under Shapes. It takes a screenshot. Phones do not
