@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Cool things you can do", "description": "Two recipes: a mobile server behind Tailscale, UFW and Fail2Ban, and Docker running nested inside a Droidspaces container.", "url": "https://www.droidspaces.org/docs/cool-things-you-can-do.html", "inLanguage": "en", "dateModified": "2026-09-28", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Cool things you can do", "item": "https://www.droidspaces.org/docs/cool-things-you-can-do.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Cool things you can do", "description": "Two recipes: a mobile server behind Tailscale, UFW and Fail2Ban, and Docker running nested inside a Droidspaces container.", "url": "https://www.droidspaces.org/docs/cool-things-you-can-do.html", "inLanguage": "en", "dateModified": "2026-10-03", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Cool things you can do", "item": "https://www.droidspaces.org/docs/cool-things-you-can-do.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -179,10 +179,10 @@ systemctl<span class="w"> </span>restart<span class="w"> </span>ssh
 </ol>
 <hr />
 <h3 id="step-4-secure-the-container-with-ufw-firewall">Step 4: Secure the container with UFW (firewall) <a class="header-anchor" href="#step-4-secure-the-container-with-ufw-firewall">#</a></h3>
-<p>Droidspaces NAT mode currently supports IPv4 only, so disable IPv6 in UFW to avoid initialization errors.</p>
+<p>NAT mode is dual-stack, so UFW can manage IPv6 as well. Skip the first step unless the container runs with <code>--disable-ipv6</code>, in which case UFW fails to initialise its IPv6 rules.</p>
 <ol>
 <li>
-<p><strong>Disable IPv6 in UFW</strong>:</p>
+<p><strong>Disable IPv6 in UFW</strong> (only with <code>--disable-ipv6</code>):</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/IPV6=yes/IPV6=no/&#39;</span><span class="w"> </span>/etc/default/ufw
 </code></pre></div>
 </li>

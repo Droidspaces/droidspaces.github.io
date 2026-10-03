@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Kernel configuration", "description": "How to compile an Android kernel with Droidspaces support: the config options and patches for non-GKI and GKI kernels.", "url": "https://www.droidspaces.org/docs/kernel-configuration.html", "inLanguage": "en", "dateModified": "2026-09-28", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Kernel configuration", "item": "https://www.droidspaces.org/docs/kernel-configuration.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Kernel configuration", "description": "How to compile an Android kernel with Droidspaces support: the config options and patches for non-GKI and GKI kernels.", "url": "https://www.droidspaces.org/docs/kernel-configuration.html", "inLanguage": "en", "dateModified": "2026-10-03", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Kernel configuration", "item": "https://www.droidspaces.org/docs/kernel-configuration.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -171,6 +171,19 @@ https://github.com/ravindu644/Android-Kernel-Tutorials</p></div>
 <span class="nv">CONFIG_NF_NAT_IPV4</span><span class="o">=</span>y
 <span class="nv">CONFIG_IP_NF_NAT</span><span class="o">=</span>y
 
+<span class="c"># IPv6 in NAT mode (NAT66). Optional: without these, NAT containers are IPv4 only</span>
+<span class="nv">CONFIG_IPV6</span><span class="o">=</span>y
+<span class="nv">CONFIG_IPV6_MULTIPLE_TABLES</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP6_NF_IPTABLES</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP6_NF_FILTER</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP6_NF_MANGLE</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP6_NF_NAT</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP6_NF_TARGET_MASQUERADE</span><span class="o">=</span>y
+
+<span class="c"># legacy compat</span>
+<span class="nv">CONFIG_NF_CONNTRACK_IPV6</span><span class="o">=</span>y
+<span class="nv">CONFIG_NF_NAT_IPV6</span><span class="o">=</span>y
+
 <span class="c"># Disable this on older kernels to make internet work</span>
 <span class="nv">CONFIG_ANDROID_PARANOID_NETWORK</span><span class="o">=</span>n
 
@@ -268,6 +281,10 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 <span class="c"># Fix for docker unsafe procfs error</span>
 <span class="nv">CONFIG_USER_NS</span><span class="o">=</span>y
 
+<span class="c"># IPv6 in NAT mode (NAT66)</span>
+<span class="nv">CONFIG_IP6_NF_NAT</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP6_NF_TARGET_MASQUERADE</span><span class="o">=</span>y
+
 <span class="c"># UFW support</span>
 <span class="nv">CONFIG_NETFILTER_XT_TARGET_REJECT</span><span class="o">=</span>y
 <span class="nv">CONFIG_NETFILTER_XT_TARGET_LOG</span><span class="o">=</span>y
@@ -317,6 +334,7 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 <li>devtmpfs support</li>
 <li>OverlayFS support (optional, for volatile mode)</li>
 <li>VETH and Bridge support (optional, for NAT mode)</li>
+<li>IPv6 NAT support (optional, for IPv6 in NAT mode)</li>
 <li>PTY/devpts support</li>
 <li>Loop device support</li>
 <li>ext4 support</li>
@@ -398,6 +416,11 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 <td>VETH / Bridge</td>
 <td><code>CONFIG_VETH</code> / <code>CONFIG_BRIDGE</code></td>
 <td>NAT mode unavailable.</td>
+</tr>
+<tr>
+<td>IPv6 NAT</td>
+<td><code>CONFIG_IP6_NF_NAT</code> / <code>CONFIG_IP6_NF_TARGET_MASQUERADE</code></td>
+<td>NAT containers are IPv4 only.</td>
 </tr>
 <tr>
 <td>Seccomp</td>
