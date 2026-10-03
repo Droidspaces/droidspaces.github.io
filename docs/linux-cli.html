@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Linux CLI", "description": "Reference for the droidspaces command line: every command, flag and config file key.", "url": "https://www.droidspaces.org/docs/linux-cli.html", "inLanguage": "en", "dateModified": "2026-10-03", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Linux CLI", "item": "https://www.droidspaces.org/docs/linux-cli.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Linux CLI", "description": "Reference for the droidspaces command line: every command, flag and config file key.", "url": "https://www.droidspaces.org/docs/linux-cli.html", "inLanguage": "en", "dateModified": "2026-10-04", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Linux CLI", "item": "https://www.droidspaces.org/docs/linux-cli.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -370,6 +370,30 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 </tr>
 </tbody>
 </table></div>
+<h3 id="resource-limits">Resource limits <a class="header-anchor" href="#resource-limits">#</a></h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--memory=SIZE</code></td>
+<td>Most RAM the container may use. Takes <code>K</code>, <code>M</code>, <code>G</code> or <code>T</code> suffixes, for example <code>--memory=2G</code>. Minimum 4M.</td>
+</tr>
+<tr>
+<td><code>--cpus=COUNT</code></td>
+<td>Most CPU time, in cores. Fractions are fine, for example <code>--cpus=1.5</code>.</td>
+</tr>
+<tr>
+<td><code>--pids-limit=N</code></td>
+<td>Most processes and threads at once.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Each limit needs kernel support and is skipped with a warning that names the missing option if the kernel lacks it. A limit is saved in the container's config, so it applies on every later start. See <a href="features.html#resource-limits">Resource limits</a>.</p>
 <h3 id="bind-mounts">Bind mounts <a class="header-anchor" href="#bind-mounts">#</a></h3>
 <div class="table-wrap"><table>
 <thead>
@@ -450,6 +474,14 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 
 <span class="c1"># Run the container in the foreground instead of forking</span>
 <span class="na">foreground</span><span class="o">=</span><span class="s">0</span>
+
+<span class="c1"># Resource limits. Leave a key out for no limit.</span>
+<span class="c1"># memory_limit is in bytes, pids_limit is a process count.</span>
+<span class="c1"># CPU time is cpu_quota microseconds per cpu_period: 200000 / 100000 = 2 cores.</span>
+<span class="na">memory_limit</span><span class="o">=</span><span class="s">2147483648</span>
+<span class="na">cpu_quota</span><span class="o">=</span><span class="s">200000</span>
+<span class="na">cpu_period</span><span class="o">=</span><span class="s">100000</span>
+<span class="na">pids_limit</span><span class="o">=</span><span class="s">1024</span>
 
 <span class="c1"># ----------------------------------------</span>
 <span class="c1"># Android App Configuration</span>
@@ -545,7 +577,7 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <nav class="doc-nav" aria-label="Pages"><a href="usage-android-app.html" class="doc-nav-prev"><small>Previous</small>Android app usage</a><a href="networking-from-zero.html" class="doc-nav-next"><small>Next</small>Networking from zero</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#quick-navigation">Quick navigation</a></li><li class="toc-h2"><a href="#1-getting-started">1. Getting started</a></li><li class="toc-h3"><a href="#start-your-first-container">Start your first container</a></li><li class="toc-h3"><a href="#enter-the-container">Enter the container</a></li><li class="toc-h3"><a href="#stop-the-container">Stop the container</a></li><li class="toc-h2"><a href="#2-command-reference">2. Command reference</a></li><li class="toc-h2"><a href="#3-options--flags">3. Options &amp; flags</a></li><li class="toc-h3"><a href="#rootfs-selection">Rootfs selection</a></li><li class="toc-h3"><a href="#container-identity--configuration">Container identity &amp; configuration</a></li><li class="toc-h3"><a href="#networking">Networking</a></li><li class="toc-h3"><a href="#feature-flags">Feature flags</a></li><li class="toc-h3"><a href="#bind-mounts">Bind mounts</a></li><li class="toc-h2"><a href="#4-configuration-files">4. Configuration files</a></li><li class="toc-h2"><a href="#5-common-workflows">5. Common workflows</a></li><li class="toc-h3"><a href="#running-with-a-config-file">Running with a config file</a></li><li class="toc-h3"><a href="#persistent-development">Persistent development</a></li><li class="toc-h3"><a href="#nat-isolation-with-port-forwarding">NAT isolation with port forwarding</a></li><li class="toc-h3"><a href="#nat-with-a-pinned-uplink">NAT with a pinned uplink</a></li><li class="toc-h3"><a href="#gateway-mode-lan-owned-by-openwrt">Gateway mode (LAN owned by OpenWRT)</a></li><li class="toc-h3"><a href="#ephemeral-testing">Ephemeral testing</a></li><li class="toc-h3"><a href="#one-off-commands">One-off commands</a></li><li class="toc-h3"><a href="#gpu-acceleration">GPU acceleration</a></li><li class="toc-h3"><a href="#deep-customization-privileged-mode">Deep customization (privileged mode)</a></li><li class="toc-h2"><a href="#6-advanced-usage--lifecycle">6. Advanced usage &amp; lifecycle</a></li><li class="toc-h3"><a href="#container-recovery">Container recovery</a></li><li class="toc-h2"><a href="#7-system-requirements">7. System requirements</a></li><li class="toc-h2"><a href="#next-steps">Next steps</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#quick-navigation">Quick navigation</a></li><li class="toc-h2"><a href="#1-getting-started">1. Getting started</a></li><li class="toc-h3"><a href="#start-your-first-container">Start your first container</a></li><li class="toc-h3"><a href="#enter-the-container">Enter the container</a></li><li class="toc-h3"><a href="#stop-the-container">Stop the container</a></li><li class="toc-h2"><a href="#2-command-reference">2. Command reference</a></li><li class="toc-h2"><a href="#3-options--flags">3. Options &amp; flags</a></li><li class="toc-h3"><a href="#rootfs-selection">Rootfs selection</a></li><li class="toc-h3"><a href="#container-identity--configuration">Container identity &amp; configuration</a></li><li class="toc-h3"><a href="#networking">Networking</a></li><li class="toc-h3"><a href="#feature-flags">Feature flags</a></li><li class="toc-h3"><a href="#resource-limits">Resource limits</a></li><li class="toc-h3"><a href="#bind-mounts">Bind mounts</a></li><li class="toc-h2"><a href="#4-configuration-files">4. Configuration files</a></li><li class="toc-h2"><a href="#5-common-workflows">5. Common workflows</a></li><li class="toc-h3"><a href="#running-with-a-config-file">Running with a config file</a></li><li class="toc-h3"><a href="#persistent-development">Persistent development</a></li><li class="toc-h3"><a href="#nat-isolation-with-port-forwarding">NAT isolation with port forwarding</a></li><li class="toc-h3"><a href="#nat-with-a-pinned-uplink">NAT with a pinned uplink</a></li><li class="toc-h3"><a href="#gateway-mode-lan-owned-by-openwrt">Gateway mode (LAN owned by OpenWRT)</a></li><li class="toc-h3"><a href="#ephemeral-testing">Ephemeral testing</a></li><li class="toc-h3"><a href="#one-off-commands">One-off commands</a></li><li class="toc-h3"><a href="#gpu-acceleration">GPU acceleration</a></li><li class="toc-h3"><a href="#deep-customization-privileged-mode">Deep customization (privileged mode)</a></li><li class="toc-h2"><a href="#6-advanced-usage--lifecycle">6. Advanced usage &amp; lifecycle</a></li><li class="toc-h3"><a href="#container-recovery">Container recovery</a></li><li class="toc-h2"><a href="#7-system-requirements">7. System requirements</a></li><li class="toc-h2"><a href="#next-steps">Next steps</a></li></ul></nav>
   </aside>
 <footer class="footer">
   <div class="footer-inner">

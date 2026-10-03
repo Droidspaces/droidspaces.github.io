@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Kernel configuration", "description": "How to compile an Android kernel with Droidspaces support: the config options and patches for non-GKI and GKI kernels.", "url": "https://www.droidspaces.org/docs/kernel-configuration.html", "inLanguage": "en", "dateModified": "2026-10-03", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Kernel configuration", "item": "https://www.droidspaces.org/docs/kernel-configuration.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Kernel configuration", "description": "How to compile an Android kernel with Droidspaces support: the config options and patches for non-GKI and GKI kernels.", "url": "https://www.droidspaces.org/docs/kernel-configuration.html", "inLanguage": "en", "dateModified": "2026-10-04", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Kernel configuration", "item": "https://www.droidspaces.org/docs/kernel-configuration.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -122,12 +122,16 @@ https://github.com/ravindu644/Android-Kernel-Tutorials</p></div>
 <span class="c"># Control groups support</span>
 <span class="nv">CONFIG_CGROUPS</span><span class="o">=</span>y
 <span class="nv">CONFIG_CGROUP_DEVICE</span><span class="o">=</span>y
-<span class="nv">CONFIG_CGROUP_PIDS</span><span class="o">=</span>y
-<span class="nv">CONFIG_MEMCG</span><span class="o">=</span>y
 <span class="nv">CONFIG_CGROUP_SCHED</span><span class="o">=</span>y
 <span class="nv">CONFIG_FAIR_GROUP_SCHED</span><span class="o">=</span>y
 <span class="nv">CONFIG_CGROUP_FREEZER</span><span class="o">=</span>y
 <span class="nv">CONFIG_CGROUP_NET_PRIO</span><span class="o">=</span>y
+
+<span class="c"># Resource limits: --memory, --cpus, --pids-limit, in that order.</span>
+<span class="c"># Optional: a limit whose option is missing is skipped with a warning</span>
+<span class="nv">CONFIG_MEMCG</span><span class="o">=</span>y
+<span class="nv">CONFIG_CFS_BANDWIDTH</span><span class="o">=</span>y
+<span class="nv">CONFIG_CGROUP_PIDS</span><span class="o">=</span>y
 
 <span class="c"># Device filesystem support</span>
 <span class="nv">CONFIG_DEVTMPFS</span><span class="o">=</span>y
@@ -258,7 +262,8 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 <h3 id="step-2-edit-gki_defconfig">Step 2: Edit <code>gki_defconfig</code> <a class="header-anchor" href="#step-2-edit-gki_defconfig">#</a></h3>
 <p>Do not use separate fragment files here. Edit <code>arch/arm64/configs/gki_defconfig</code> directly and apply this <strong>GKI-only configuration</strong>.</p>
 <p>These options are tested on all GKI kernels and do not break the ABI.</p>
-<div class="callout callout-warning"><strong class="callout-title">Warning</strong><p><strong>Do not</strong> enable anything beyond the GKI configuration below. These specific options are kABI-safe only in combination with the Step 1 patch.</p></div>
+<div class="callout callout-warning"><strong class="callout-title">Warning</strong><p><strong>Do not</strong> enable anything beyond the GKI configuration below. These specific options are kABI-safe only in combination with the Step 1 patch.</p>
+<p>The <strong>Resource limits</strong> group at the end is the exception: it is not kABI-tested. Leave it out unless you need CPU or process limits, and test each option on its own.</p></div>
 <div class="code-block"><span class="code-lang">makefile</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c"># Kernel configurations for full DroidSpaces support for GKI</span>
 <span class="c"># Copyright (C) 2026 ravindu644 &lt;droidcasts@protonmail.com&gt;</span>
 
@@ -300,6 +305,12 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 <span class="c"># For NixOS support</span>
 <span class="nv">CONFIG_TMPFS_POSIX_ACL</span><span class="o">=</span>y
 <span class="nv">CONFIG_TMPFS_XATTR</span><span class="o">=</span>y
+
+<span class="c"># Resource limits: --cpus and --pids-limit. CONFIG_MEMCG is already on in GKI.</span>
+<span class="c"># Not covered by the kABI patches: both resize scheduler and cgroup structures</span>
+<span class="c"># that vendor modules read. Enable one at a time and be ready for a bootloop</span>
+<span class="nv">CONFIG_CFS_BANDWIDTH</span><span class="o">=</span>y
+<span class="nv">CONFIG_CGROUP_PIDS</span><span class="o">=</span>y
 </code></pre></div>
 <p><strong>How to edit the file:</strong></p>
 <ul>
@@ -335,6 +346,7 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 <li>OverlayFS support (optional, for volatile mode)</li>
 <li>VETH and Bridge support (optional, for NAT mode)</li>
 <li>IPv6 NAT support (optional, for IPv6 in NAT mode)</li>
+<li>Memory, CPU and process limit support (optional, for <code>--memory</code>, <code>--cpus</code> and <code>--pids-limit</code>)</li>
 <li>PTY/devpts support</li>
 <li>Loop device support</li>
 <li>ext4 support</li>
@@ -426,6 +438,21 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 <td>Seccomp</td>
 <td><code>CONFIG_SECCOMP=y</code></td>
 <td>Seccomp shield disabled. Security risk.</td>
+</tr>
+<tr>
+<td>Memory limit</td>
+<td><code>CONFIG_MEMCG=y</code></td>
+<td><code>--memory</code> is skipped.</td>
+</tr>
+<tr>
+<td>CPU limit</td>
+<td><code>CONFIG_CFS_BANDWIDTH=y</code></td>
+<td><code>--cpus</code> is skipped.</td>
+</tr>
+<tr>
+<td>Process limit</td>
+<td><code>CONFIG_CGROUP_PIDS=y</code></td>
+<td><code>--pids-limit</code> is skipped.</td>
 </tr>
 </tbody>
 </table></div>

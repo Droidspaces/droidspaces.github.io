@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Android app usage", "description": "Using the Droidspaces Android app: managing containers, networking, stats, the terminal and kernel settings.", "url": "https://www.droidspaces.org/docs/usage-android-app.html", "inLanguage": "en", "dateModified": "2026-10-03", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Android app usage", "item": "https://www.droidspaces.org/docs/usage-android-app.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Android app usage", "description": "Using the Droidspaces Android app: managing containers, networking, stats, the terminal and kernel settings.", "url": "https://www.droidspaces.org/docs/usage-android-app.html", "inLanguage": "en", "dateModified": "2026-10-04", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Android app usage", "item": "https://www.droidspaces.org/docs/usage-android-app.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -141,12 +141,24 @@
 <h3 id="port-forwarding">Port forwarding <a class="header-anchor" href="#port-forwarding">#</a></h3>
 <p>In NAT mode, the <strong>Port Forwarding</strong> section maps host ports to container ports (for example <code>22:22</code>). It also takes <strong>port ranges</strong> (for example <code>1000-2000:1000-2000</code>) for services that need several contiguous ports.</p>
 <hr />
+<h2 id="resource-limits">Resource limits <a class="header-anchor" href="#resource-limits">#</a></h2>
+<p>The container settings have a <strong>Resource Limits</strong> section, above <strong>Advanced Options</strong>:</p>
+<ul>
+<li><strong>Limit memory</strong>: a slider from 128 MB up to the device's total RAM.</li>
+<li><strong>Limit CPU</strong>: a slider from half a core up to the device's core count.</li>
+<li><strong>Limit processes</strong>: the most processes and threads the container may have at once.</li>
+</ul>
+<p>Turn a switch off for no limit. Changes apply the next time the container starts.</p>
+<p>A switch that is greyed out means the kernel cannot enforce that limit, and the card names the missing option, for example <code>CONFIG_CFS_BANDWIDTH</code> for CPU. Most stock Android kernels lack the CPU and process options, see <a href="features.html#resource-limits">Resource limits</a>.</p>
+<p>Limits that are set appear on the container's card next to the hostname and network mode.</p>
+<hr />
 <h2 id="panel-tab-active-environments">Panel tab (active environments) <a class="header-anchor" href="#panel-tab-active-environments">#</a></h2>
 <p>The <strong>Panel</strong> tab shows only running containers. Tap a running container's card to open its <strong>Details Screen</strong>.</p>
 <h3 id="container-details-screen">Container details screen <a class="header-anchor" href="#container-details-screen">#</a></h3>
 <p>This screen shows what is going on inside the running container:</p>
 <ul>
 <li><strong>Distribution Info</strong>: the pretty name, version, per-container uptime, hostname and <strong>IP Address (IPv4)</strong>.</li>
+<li><strong>CPU and RAM usage</strong>: for a container with a limit, shown against that limit, for example <code>94/512 MB (18%)</code>. Without one, as a share of the whole device.</li>
 <li><strong>Available Users</strong>: the users found in the rootfs.</li>
 <li><strong>Copy Login</strong>: pick a user from the dropdown and tap this to copy a command like <code>su -c 'droidspaces enter [user]'</code>.</li>
 <li><strong>Terminal</strong>: open an interactive terminal emulator inside the container, in the Droidspaces app itself.</li>
@@ -188,7 +200,7 @@
 <nav class="doc-nav" aria-label="Pages"><a href="kernel-configuration.html" class="doc-nav-prev"><small>Previous</small>Kernel configuration</a><a href="linux-cli.html" class="doc-nav-next"><small>Next</small>Linux CLI</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#bottom-navigation">Bottom navigation</a></li><li class="toc-h2"><a href="#containers-tab">Containers tab</a></li><li class="toc-h2"><a href="#rootfs-repository">Rootfs repository</a></li><li class="toc-h3"><a href="#how-it-works">How it works</a></li><li class="toc-h3"><a href="#adding-custom-repositories">Adding custom repositories</a></li><li class="toc-h2"><a href="#networking-configuration">Networking configuration</a></li><li class="toc-h3"><a href="#internet-uplink-nat-mode">Internet uplink (NAT mode)</a></li><li class="toc-h3"><a href="#port-forwarding">Port forwarding</a></li><li class="toc-h2"><a href="#panel-tab-active-environments">Panel tab (active environments)</a></li><li class="toc-h3"><a href="#container-details-screen">Container details screen</a></li><li class="toc-h2"><a href="#accessing-the-container-shell">Accessing the container shell</a></li><li class="toc-h3"><a href="#method-1-built-in-terminal-v570">Method 1: Built-in terminal (v5.7.0+)</a></li><li class="toc-h3"><a href="#method-2-external-terminal-copy-login">Method 2: External terminal (Copy Login)</a></li><li class="toc-h2"><a href="#settings--requirements">Settings &amp; requirements</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#bottom-navigation">Bottom navigation</a></li><li class="toc-h2"><a href="#containers-tab">Containers tab</a></li><li class="toc-h2"><a href="#rootfs-repository">Rootfs repository</a></li><li class="toc-h3"><a href="#how-it-works">How it works</a></li><li class="toc-h3"><a href="#adding-custom-repositories">Adding custom repositories</a></li><li class="toc-h2"><a href="#networking-configuration">Networking configuration</a></li><li class="toc-h3"><a href="#internet-uplink-nat-mode">Internet uplink (NAT mode)</a></li><li class="toc-h3"><a href="#port-forwarding">Port forwarding</a></li><li class="toc-h2"><a href="#resource-limits">Resource limits</a></li><li class="toc-h2"><a href="#panel-tab-active-environments">Panel tab (active environments)</a></li><li class="toc-h3"><a href="#container-details-screen">Container details screen</a></li><li class="toc-h2"><a href="#accessing-the-container-shell">Accessing the container shell</a></li><li class="toc-h3"><a href="#method-1-built-in-terminal-v570">Method 1: Built-in terminal (v5.7.0+)</a></li><li class="toc-h3"><a href="#method-2-external-terminal-copy-login">Method 2: External terminal (Copy Login)</a></li><li class="toc-h2"><a href="#settings--requirements">Settings &amp; requirements</a></li></ul></nav>
   </aside>
 <footer class="footer">
   <div class="footer-inner">
