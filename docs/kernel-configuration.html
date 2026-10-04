@@ -443,17 +443,17 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 </tr>
 <tr>
 <td>Memory limit</td>
-<td><code>CONFIG_MEMCG=y</code></td>
+<td><code>CONFIG_MEMCG=y</code>, and no <code>cgroup_disable=memory</code> on the kernel command line</td>
 <td><code>--memory</code> is skipped.</td>
 </tr>
 <tr>
 <td>CPU limit</td>
-<td><code>CONFIG_CFS_BANDWIDTH=y</code></td>
+<td><code>CONFIG_CFS_BANDWIDTH=y</code>, and no <code>cgroup_disable=cpu</code> on the kernel command line</td>
 <td><code>--cpus</code> is skipped.</td>
 </tr>
 <tr>
 <td>Process limit</td>
-<td><code>CONFIG_CGROUP_PIDS=y</code></td>
+<td><code>CONFIG_CGROUP_PIDS=y</code>, and no <code>cgroup_disable=pids</code> on the kernel command line</td>
 <td><code>--pids-limit</code> is skipped.</td>
 </tr>
 <tr>
