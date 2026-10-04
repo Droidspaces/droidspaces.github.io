@@ -265,7 +265,7 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 <p>Do not use separate fragment files here. Edit <code>arch/arm64/configs/gki_defconfig</code> directly and apply this <strong>GKI-only configuration</strong>.</p>
 <p>These options are tested on all GKI kernels and do not break the ABI.</p>
 <div class="callout callout-warning"><strong class="callout-title">Warning</strong><p><strong>Do not</strong> enable anything beyond the GKI configuration below. These specific options are kABI-safe only in combination with the Step 1 patch.</p>
-<p>The <strong>Resource limits</strong> group at the end is the exception: it is not kABI-tested. Leave it out unless you need CPU or process limits, and test each option on its own.</p></div>
+<p>The <strong>Resource limits</strong> group at the end is the exception: <code>CONFIG_CFS_BANDWIDTH</code> and <code>CONFIG_CGROUP_PIDS</code> <strong>break the kABI</strong>, and no patch here covers them. See <a href="#gki-resource-limits">CPU and process limits on GKI</a> before you touch them. Memory limits need nothing extra, <code>CONFIG_MEMCG</code> is already on in GKI.</p></div>
 <div class="code-block"><span class="code-lang">makefile</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c"># Kernel configurations for full DroidSpaces support for GKI</span>
 <span class="c"># Copyright (C) 2026 ravindu644 &lt;droidcasts@protonmail.com&gt;</span>
 
@@ -309,10 +309,14 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 <span class="nv">CONFIG_TMPFS_XATTR</span><span class="o">=</span>y
 
 <span class="c"># Resource limits: --cpus and --pids-limit. CONFIG_MEMCG is already on in GKI.</span>
-<span class="c"># Not covered by the kABI patches: both resize scheduler and cgroup structures</span>
-<span class="c"># that vendor modules read. Enable one at a time and be ready for a bootloop</span>
-<span class="nv">CONFIG_CFS_BANDWIDTH</span><span class="o">=</span>y
-<span class="nv">CONFIG_CGROUP_PIDS</span><span class="o">=</span>y
+<span class="c"># These two BREAK the kABI and no patch covers them: they resize scheduler and</span>
+<span class="c"># cgroup structures, which changes the CRC of thousands of exported symbols.</span>
+<span class="c"># Stock vendor modules then refuse to load and the device bootloops.</span>
+<span class="c"># Leave them commented out unless you rebuild EVERY kernel module from the</span>
+<span class="c"># same source and flash vendor_boot, vendor_dlkm and system_dlkm together</span>
+<span class="c"># with the new boot.img, all at once.</span>
+<span class="c"># CONFIG_CFS_BANDWIDTH=y</span>
+<span class="c"># CONFIG_CGROUP_PIDS=y</span>
 </code></pre></div>
 <p><strong>How to edit the file:</strong></p>
 <ul>
@@ -327,6 +331,18 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 <h3 id="step-4-flash-and-test">Step 4: Flash and test <a class="header-anchor" href="#step-4-flash-and-test">#</a></h3>
 <p>Flash the compiled <code>boot.img</code> or <code>Image</code> with Odin, fastboot, Heimdall, Anykernel3 or whatever your device uses. The patches are kABI-safe, so your stock vendor modules keep working.</p>
 <p>After booting, open the Droidspaces app and go to <strong>Settings</strong> (gear icon) -&gt; <strong>Requirements</strong> -&gt; <strong>Check Requirements</strong> to verify the setup.</p>
+<p><a id="gki-resource-limits"></a></p>
+<h3 id="cpu-and-process-limits-on-gki">CPU and process limits on GKI <a class="header-anchor" href="#cpu-and-process-limits-on-gki">#</a></h3>
+<p><code>CONFIG_CFS_BANDWIDTH</code> (for <code>--cpus</code>) and <code>CONFIG_CGROUP_PIDS</code> (for <code>--pids-limit</code>) are commented out in the configuration above on purpose.</p>
+<p>Both change the size of scheduler and cgroup structures that almost every exported kernel function refers to. Measured on a 5.15 GKI tree, enabling the two changed the CRC of 4101 exported symbols. Stock vendor modules were built against the old CRCs, so they refuse to load (&quot;disagrees about version of symbol&quot;), and without its display, storage and Wi-Fi drivers the device bootloops. Unlike <code>CONFIG_SYSVIPC</code>, the new fields do not fit in the reserved kABI padding, so there is no patch for this.</p>
+<div class="callout callout-caution"><strong class="callout-title">Caution</strong><p>Only enable these two options if you can do <strong>all</strong> of the following:</p>
+<ol>
+<li>Rebuild <strong>every</strong> kernel module from the same source tree and configuration as the kernel.</li>
+<li>Flash the rebuilt modules in <code>vendor_boot</code>, <code>vendor_dlkm</code> and <code>system_dlkm</code> <strong>together with</strong> the new kernel in <code>boot.img</code>, all at once. One stale partition is enough for a bootloop.</li>
+</ol>
+<p>If any module on your device is prebuilt and has no source, you cannot enable them.</p>
+<p>Do not turn off <code>CONFIG_MODVERSIONS</code> or force-load modules to get past the check. The structures really did change, and a stock module would read the wrong offsets.</p></div>
+<p>Without these options Droidspaces still works: <code>--cpus</code> and <code>--pids-limit</code> are skipped with a warning, and the app greys out the two toggles.</p>
 <hr />
 <p><a id="testing"></a></p>
 <h2 id="testing-your-kernel">Testing your kernel <a class="header-anchor" href="#testing-your-kernel">#</a></h2>
@@ -525,7 +541,7 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 <nav class="doc-nav" aria-label="Pages"><a href="graphics-and-audio.html" class="doc-nav-prev"><small>Previous</small>Display, audio & desktop</a><a href="usage-android-app.html" class="doc-nav-next"><small>Next</small>Android app usage</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h3"><a href="#quick-navigation">Quick navigation</a></li><li class="toc-h2"><a href="#overview">Overview</a></li><li class="toc-h2"><a href="#configuring-non-gki-kernels-legacy-kernels">Configuring non-GKI kernels (legacy kernels)</a></li><li class="toc-h3"><a href="#step-1-mandatory-configuration">Step 1: Mandatory configuration</a></li><li class="toc-h3"><a href="#step-2-firewall-support-ufwfail2ban---optional">Step 2: Firewall support (UFW/Fail2ban) - optional</a></li><li class="toc-h3"><a href="#step-3-apply-patches">Step 3: Apply patches</a></li><li class="toc-h3"><a href="#step-4-build-flash-and-test">Step 4: Build, flash and test</a></li><li class="toc-h2"><a href="#configuring-gki-kernels">Configuring GKI kernels</a></li><li class="toc-h3"><a href="#step-1-apply-the-mandatory-kabi-patches">Step 1: Apply the mandatory kABI patches</a></li><li class="toc-h3"><a href="#step-2-edit-gki_defconfig">Step 2: Edit gki_defconfig</a></li><li class="toc-h3"><a href="#step-3-compile">Step 3: Compile</a></li><li class="toc-h3"><a href="#step-4-flash-and-test">Step 4: Flash and test</a></li><li class="toc-h2"><a href="#testing-your-kernel">Testing your kernel</a></li><li class="toc-h3"><a href="#1-run-the-requirements-check">1. Run the requirements check</a></li><li class="toc-h3"><a href="#2-understanding-the-results">2. Understanding the results</a></li><li class="toc-h3"><a href="#3-what-to-do-if-something-is-missing">3. What to do if something is missing</a></li><li class="toc-h2"><a href="#recommended-kernel-versions">Recommended kernel versions</a></li><li class="toc-h2"><a href="#nested-containers-docker-podman-lxc">Nested containers (Docker, Podman, LXC)</a></li><li class="toc-h3"><a href="#legacy-kernel-considerations-419-and-below">Legacy kernel considerations (4.19 and below)</a></li><li class="toc-h2"><a href="#additional-resources">Additional resources</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h3"><a href="#quick-navigation">Quick navigation</a></li><li class="toc-h2"><a href="#overview">Overview</a></li><li class="toc-h2"><a href="#configuring-non-gki-kernels-legacy-kernels">Configuring non-GKI kernels (legacy kernels)</a></li><li class="toc-h3"><a href="#step-1-mandatory-configuration">Step 1: Mandatory configuration</a></li><li class="toc-h3"><a href="#step-2-firewall-support-ufwfail2ban---optional">Step 2: Firewall support (UFW/Fail2ban) - optional</a></li><li class="toc-h3"><a href="#step-3-apply-patches">Step 3: Apply patches</a></li><li class="toc-h3"><a href="#step-4-build-flash-and-test">Step 4: Build, flash and test</a></li><li class="toc-h2"><a href="#configuring-gki-kernels">Configuring GKI kernels</a></li><li class="toc-h3"><a href="#step-1-apply-the-mandatory-kabi-patches">Step 1: Apply the mandatory kABI patches</a></li><li class="toc-h3"><a href="#step-2-edit-gki_defconfig">Step 2: Edit gki_defconfig</a></li><li class="toc-h3"><a href="#step-3-compile">Step 3: Compile</a></li><li class="toc-h3"><a href="#step-4-flash-and-test">Step 4: Flash and test</a></li><li class="toc-h3"><a href="#cpu-and-process-limits-on-gki">CPU and process limits on GKI</a></li><li class="toc-h2"><a href="#testing-your-kernel">Testing your kernel</a></li><li class="toc-h3"><a href="#1-run-the-requirements-check">1. Run the requirements check</a></li><li class="toc-h3"><a href="#2-understanding-the-results">2. Understanding the results</a></li><li class="toc-h3"><a href="#3-what-to-do-if-something-is-missing">3. What to do if something is missing</a></li><li class="toc-h2"><a href="#recommended-kernel-versions">Recommended kernel versions</a></li><li class="toc-h2"><a href="#nested-containers-docker-podman-lxc">Nested containers (Docker, Podman, LXC)</a></li><li class="toc-h3"><a href="#legacy-kernel-considerations-419-and-below">Legacy kernel considerations (4.19 and below)</a></li><li class="toc-h2"><a href="#additional-resources">Additional resources</a></li></ul></nav>
   </aside>
 <footer class="footer">
   <div class="footer-inner">
