@@ -442,7 +442,8 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span>ubuntu<span cla
 </ul>
 <p>Without cgroup isolation systemd cannot work: containers would collide in the cgroup hierarchy and service management would fail.</p>
 <h3 id="the-jail-trick">The &quot;jail&quot; trick <a class="header-anchor" href="#the-jail-trick">#</a></h3>
-<p>Before creating the cgroup namespace, Droidspaces moves the monitor process into the container's own cgroup. When <code>unshare(CLONE_NEWCGROUP)</code> is then called, the root of the new namespace maps to the container's subtree.</p>
+<p>A cgroup namespace is rooted wherever the process sits when it is created. So for every boot, the short-lived process that forks the container's init first joins the container's own cgroup and only then calls <code>unshare(CLONE_NEWCGROUP)</code>, and the root of the new namespace maps to the container's subtree.</p>
+<p>The supervising monitor never enters that cgroup. The cgroup is created fresh for each boot, including a restart and a reboot from inside the container, and removed when the container stops, so limits always match the current configuration.</p>
 <h3 id="cgroup-v1-and-v2-support">Cgroup v1 and v2 support <a class="header-anchor" href="#cgroup-v1-and-v2-support">#</a></h3>
 <p>Droidspaces supports both cgroup versions:</p>
 <ul>
@@ -483,6 +484,7 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span>ubuntu<span cla
 </tbody>
 </table></div>
 <p>If an option is missing, the limit is skipped at start with a warning that names it. See <a href="kernel-configuration.html">Kernel Configuration</a> to add them.</p>
+<p><code>--pids-limit</code> has a floor of 16. The limit counts every task in the container's cgroup, including the two the runtime keeps there and the three each <code>enter</code> or <code>run</code> session starts with. A systemd distribution needs far more, typically a few hundred.</p>
 <p><code>--memory</code> limits RAM only. A container that goes over it is pushed into swap (zram on Android) before anything is killed.</p>
 <h4 id="where-a-limit-is-applied">Where a limit is applied <a class="header-anchor" href="#where-a-limit-is-applied">#</a></h4>
 <p>For each limit Droidspaces looks for the controller in the container's cgroup v2 directory first. If it is not there, it finds the v1 hierarchy that owns the controller, wherever the host mounted it, and puts the container in <code>droidspaces/&lt;name&gt;</code> inside it. On a typical Android phone that means memory at <code>/dev/memcg/droidspaces/&lt;name&gt;</code>, while the container's own view, the one systemd manages, stays cgroup v2. <code>enter</code> and <code>run</code> sessions join the same cgroups, so they are held to the same limits.</p>
@@ -496,6 +498,7 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span>ubuntu<span cla
 <p>The same block, without the usage figures, is printed after <code>start</code> and <code>restart</code>.</p>
 <p><code>info --format</code> adds <code>memory_limit</code> (bytes), <code>cpu_quota</code>, <code>cpu_period</code> (microseconds) and <code>pids_limit</code>. <code>show --format</code> and <code>info --format</code> add <code>ram_limit_kb</code> and <code>cpu_limit_permill</code> per container, on the same scale as <code>ram_used_kb</code> and <code>cpu_permill</code>. All are 0 when unlimited.</p>
 <p>Memory use means one thing everywhere for a container with a memory cgroup: what the cgroup is charged, minus its file cache, which the kernel reclaims on its own. <code>info</code>, <code>show --format</code> and <code>free</code> or fastfetch inside the container all report that figure. The limit itself still counts the cache, so a container can be pushed to reclaim before &quot;used&quot; reaches the limit.</p>
+<p>One gap: a program that asks the kernel through the <code>sysinfo()</code> system call, and not through <code>/proc</code>, still sees the host's memory, load and uptime. OpenWRT's LuCI is the common case. The limit is enforced regardless, see <a href="troubleshooting.html#sysinfo-host-values">Troubleshooting</a>.</p>
 <h4 id="in-the-android-app">In the Android app <a class="header-anchor" href="#in-the-android-app">#</a></h4>
 <p>The container settings have a <strong>Resource Limits</strong> section with a switch per limit. Memory and CPU open a slider bounded by the device's real RAM and core count, the process limit a number field. A limit the kernel cannot enforce is greyed out with the missing option named. The limits also show on the container's card and in the installation summary, and the Panel tab shows usage against the limit, for example <code>94/512 MB (18%)</code>.</p>
 <h3 id="the-su-fix">The <code>su</code> fix <a class="header-anchor" href="#the-su-fix">#</a></h3>
