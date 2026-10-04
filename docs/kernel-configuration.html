@@ -127,11 +127,13 @@ https://github.com/ravindu644/Android-Kernel-Tutorials</p></div>
 <span class="nv">CONFIG_CGROUP_FREEZER</span><span class="o">=</span>y
 <span class="nv">CONFIG_CGROUP_NET_PRIO</span><span class="o">=</span>y
 
-<span class="c"># Resource limits: --memory, --cpus, --pids-limit, in that order.</span>
+<span class="c"># Resource limits: --memory, --cpus, --pids-limit, in that order, then the</span>
+<span class="c"># accounting that reports CPU usage on kernels before 4.15.</span>
 <span class="c"># Optional: a limit whose option is missing is skipped with a warning</span>
 <span class="nv">CONFIG_MEMCG</span><span class="o">=</span>y
 <span class="nv">CONFIG_CFS_BANDWIDTH</span><span class="o">=</span>y
 <span class="nv">CONFIG_CGROUP_PIDS</span><span class="o">=</span>y
+<span class="nv">CONFIG_CGROUP_CPUACCT</span><span class="o">=</span>y
 
 <span class="c"># Device filesystem support</span>
 <span class="nv">CONFIG_DEVTMPFS</span><span class="o">=</span>y
@@ -453,6 +455,11 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 <td>Process limit</td>
 <td><code>CONFIG_CGROUP_PIDS=y</code></td>
 <td><code>--pids-limit</code> is skipped.</td>
+</tr>
+<tr>
+<td>CPU usage accounting</td>
+<td><code>CONFIG_CGROUP_CPUACCT=y</code> (kernels before 4.15)</td>
+<td><code>info</code> shows no CPU usage, and a CPU-limited container sees the host's figures in <code>/proc/stat</code>.</td>
 </tr>
 </tbody>
 </table></div>
