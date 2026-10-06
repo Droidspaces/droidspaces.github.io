@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Linux CLI", "description": "Reference for the droidspaces command line: every command, flag and config file key.", "url": "https://www.droidspaces.org/docs/linux-cli.html", "inLanguage": "en", "dateModified": "2026-10-04", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Linux CLI", "item": "https://www.droidspaces.org/docs/linux-cli.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Linux CLI", "description": "Reference for the droidspaces command line: every command, flag and config file key.", "url": "https://www.droidspaces.org/docs/linux-cli.html", "inLanguage": "en", "dateModified": "2026-10-06", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Linux CLI", "item": "https://www.droidspaces.org/docs/linux-cli.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -326,7 +326,7 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <tr>
 <td><code>--hw-access</code></td>
 <td><code>-H</code></td>
-<td>Expose host hardware (GPU, USB, etc.). Auto-detects GPU group IDs and creates matching groups inside the container. Mounts X11 socket for GUI apps (Termux X11 on Android, <code>/tmp/.X11-unix</code> on Linux). See <a href="features.html#hardware-access-mode">Safety Warning</a>.</td>
+<td>Expose host hardware (GPU, USB, etc.). Auto-detects GPU group IDs and creates matching groups inside the container. See <a href="features.html#hardware-access-mode">Safety Warning</a>.</td>
 </tr>
 <tr>
 <td><code>--gpu</code></td>
@@ -344,9 +344,9 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <td>Let unprivileged Docker, Podman, Flatpak, bwrap and browser sandboxes run inside the container. Weakens isolation. See <a href="features.html#sandboxing">Sandboxing</a>.</td>
 </tr>
 <tr>
-<td><code>--termux-x11</code></td>
+<td><code>--x11</code></td>
 <td><code>-X</code></td>
-<td>Mount X11 socket for Termux-X11 display (Android only).</td>
+<td>Bridge the host X11 socket into the container. Launches Termux:X11 on Android.</td>
 </tr>
 <tr>
 <td><code>--enable-android-storage</code></td>
@@ -460,8 +460,8 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 <span class="c1"># Auto-detect and securely map GPU nodes without full hardware access</span>
 <span class="na">enable_gpu_mode</span><span class="o">=</span><span class="s">0</span>
 
-<span class="c1"># Android: Setup Termux X11 socket</span>
-<span class="na">enable_termux_x11</span><span class="o">=</span><span class="s">0</span>
+<span class="c1"># Bridge the host X11 socket (Termux:X11 on Android)</span>
+<span class="na">enable_x11</span><span class="o">=</span><span class="s">0</span>
 
 <span class="c1"># Android: Setup Android internal shared storage mount</span>
 <span class="na">enable_android_storage</span><span class="o">=</span><span class="s">0</span>
