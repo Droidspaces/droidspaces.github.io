@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Android installation", "description": "Install Droidspaces on a rooted Android device: install the APK, let the app set up the backend, and create a Linux container without typing a terminal command.", "url": "https://www.droidspaces.org/docs/installation-android.html", "inLanguage": "en", "dateModified": "2026-09-28", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Android installation", "item": "https://www.droidspaces.org/docs/installation-android.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Android installation", "description": "Install Droidspaces on a rooted Android device: install the APK, let the app set up the backend, and create a Linux container without typing a terminal command.", "url": "https://www.droidspaces.org/docs/installation-android.html", "inLanguage": "en", "dateModified": "2026-10-10", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Android installation", "item": "https://www.droidspaces.org/docs/installation-android.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -123,6 +123,27 @@
 <li><strong>Select your tarball</strong> from storage.</li>
 <li>Follow the same <strong>configuration wizard</strong> steps as above.</li>
 </ol>
+<p>An archive can include a regular <code>container.config</code> file at its root, alongside <code>bin/</code>,
+<code>etc/</code> and <code>usr/</code>. The app reads its usual <code>key=value</code> settings and prefills the wizard.
+The file may contain the complete config from an installed container or only the settings
+you want to recommend. Missing settings use the wizard defaults. Every setting in the
+file is applied, hardware access and privileged mode included, so the wizard shows a
+warning page before the configuration page. Review it there and change anything you do
+not want before installing. Recommendations use the existing config parser without
+additional field filtering. Rootfs validation still runs before extraction.</p>
+<p>Exporting a container includes its current host-side <code>container.config</code> as the first
+archive member, replacing any old copy in the rootfs. This lets the app read exported
+recommendations without decompressing the rest of the archive. If the first member is
+not <code>container.config</code> or <code>./container.config</code>, the app skips recommendations and opens
+the default configuration wizard. It does not search later entries.
+The new container name and storage location come from the wizard. Bind mounts use the
+existing <code>bind_mounts=source:destination[:ro],...</code> format and can be reviewed in the wizard.</p>
+<p>Environment variables are left out of an export by default, because they often hold
+passwords and tokens. When the container has any, the export asks first, and turning on
+&quot;Include environment variables&quot; adds them as a <code>container.env</code> member right after
+<code>container.config</code>. Importing that archive fills the wizard's environment variables too.
+Neither member is ever extracted into the new rootfs. The rootfs
+itself is not modified during export.</p>
 <div class="callout callout-note"><strong class="callout-title">Note</strong><p>Both methods end in the same wizard. The only difference is where the tarball comes from.</p></div>
 <h2 id="verification--settings">Verification &amp; settings <a class="header-anchor" href="#verification--settings">#</a></h2>
 <p>You can check the system status at any time:</p>
