@@ -79,15 +79,15 @@
 <p>The app has three tabs along the bottom, <strong>Home</strong>, <strong>Containers</strong> and <strong>Panel</strong>, and a gear icon in the top right for <strong>Settings</strong>. This page goes through them in that order. If you have not installed a container yet, start with the <a href="installation-android.html">installation guide</a>.</p>
 <h2 id="home">Home <a class="header-anchor" href="#home">#</a></h2>
 <p align="center">
-  <img src="resources/gallery/01-home.png" width="30%">
+  <img src="resources/gallery/01-home.png?v=285127ffda" width="30%">
 </p>
 <p>A status card says whether the backend is installed and up to date, which version it is, and whether the daemon is running. Below it are the number of installed and running containers and the device's kernel version, SELinux state, Android version and architecture. The card at the bottom opens the installation guide.</p>
 <p>&quot;Backend: Update available&quot; appears after an app update. Tap it to install the new backend; running containers are not affected.</p>
 <h2 id="containers">Containers <a class="header-anchor" href="#containers">#</a></h2>
 <p align="center">
-  <img src="resources/gallery/02-containers.png" width="30%">
-  <img src="resources/gallery/03-container-menu.png" width="30%">
-  <img src="resources/gallery/15-start-logs.png" width="30%">
+  <img src="resources/gallery/02-containers.png?v=45e1543e25" width="30%">
+  <img src="resources/gallery/03-container-menu.png?v=e184855001" width="30%">
+  <img src="resources/gallery/15-start-logs.png?v=2b8a23ba33" width="30%">
 </p>
 <p>Every installed container has a card with its name, state, hostname, network mode, image size and resource limits, plus the options that are turned on. <strong>Start</strong> boots the container. A log window opens and shows the backend's output live, and you can close it once the operation finishes; <strong>Stop</strong> and <strong>Restart</strong> do the same. Once the container is running the card shows its PID and the buttons change to <strong>Stop</strong> and <strong>Restart</strong>.</p>
 <p>Press and hold a card for its menu:</p>
@@ -101,8 +101,8 @@
 <p>The <strong>+</strong> button adds a container, from the <strong>Repository</strong> or <strong>Install from file</strong>.</p>
 <h3 id="repository">Repository <a class="header-anchor" href="#repository">#</a></h3>
 <p align="center">
-  <img src="resources/gallery/04-add-container.png" width="30%">
-  <img src="resources/gallery/05-repository.png" width="30%">
+  <img src="resources/gallery/04-add-container.png?v=8d2b9683f8" width="30%">
+  <img src="resources/gallery/05-repository.png?v=cf09a32e18" width="30%">
 </p>
 <p>A list of distributions built for Droidspaces, filtered to your device's architecture. Search by name. <strong>Download</strong> fetches the tarball into your Downloads folder and shows progress on the card; a notification tells you when it is done, and the button turns into <strong>Install</strong>. A download that fails gets a <strong>Retry</strong> button, and a tarball downloaded earlier is recognised the next time you open the sheet.</p>
 <p><strong>Manage Repositories</strong> in the sheet's header lets you subscribe to other feeds that publish a <code>rootfs.json</code>. The Linux Containers mirror is the one worth adding, for distributions and versions the official repository does not build:</p>
@@ -112,20 +112,20 @@
 <p>Picks a <code>.tar.xz</code> or <code>.tar.gz</code> rootfs archive from the phone's storage. A container exported from Droidspaces carries its settings and they are filled into the wizard, with a warning page first so you can review them. Any other rootfs tarball works too, as long as it has an init system.</p>
 <h3 id="the-setup-wizard">The setup wizard <a class="header-anchor" href="#the-setup-wizard">#</a></h3>
 <p align="center">
-  <img src="resources/gallery/16-wizard-name.png" width="30%">
-  <img src="resources/gallery/17-wizard-config.png" width="30%">
-  <img src="resources/gallery/18-wizard-network.png" width="30%">
+  <img src="resources/gallery/16-wizard-name.png?v=21c6890469" width="30%">
+  <img src="resources/gallery/17-wizard-config.png?v=f7ed2eb806" width="30%">
+  <img src="resources/gallery/18-wizard-network.png?v=3e9fab6535" width="30%">
 </p>
 <p align="center">
-  <img src="resources/gallery/19-wizard-limits.png" width="30%">
-  <img src="resources/gallery/20-wizard-storage.png" width="30%">
-  <img src="resources/gallery/21-wizard-summary.png" width="30%">
+  <img src="resources/gallery/19-wizard-limits.png?v=2e2f3dd7f6" width="30%">
+  <img src="resources/gallery/20-wizard-storage.png?v=a0e8dbe770" width="30%">
+  <img src="resources/gallery/21-wizard-summary.png?v=7ea702a5a2" width="30%">
 </p>
 <p>Name and hostname, then the configuration form, then storage, then a summary. The <a href="installation-android.html#the-setup-wizard">installation guide</a> walks through it, and <a href="features.html">container settings</a> explains every toggle.</p>
 <h2 id="panel">Panel <a class="header-anchor" href="#panel">#</a></h2>
 <p align="center">
-  <img src="resources/gallery/09-panel.png" width="30%">
-  <img src="resources/gallery/10-container-details.png" width="30%">
+  <img src="resources/gallery/09-panel.png?v=f1120d5dd0" width="30%">
+  <img src="resources/gallery/10-container-details.png?v=76e913842c" width="30%">
 </p>
 <p>Only running containers appear here, each with its uptime, IP address, CPU and RAM. With a memory or CPU limit set, usage is shown against the limit. <strong>Terminal</strong> opens a shell straight from the card. Tapping anywhere else on the card opens the container's details.</p>
 <h3 id="container-details">Container details <a class="header-anchor" href="#container-details">#</a></h3>
@@ -138,21 +138,21 @@
 </ul>
 <h3 id="managing-services">Managing services <a class="header-anchor" href="#managing-services">#</a></h3>
 <p align="center">
-  <img src="resources/gallery/11-systemd-services.png" width="30%">
+  <img src="resources/gallery/11-systemd-services.png?v=82c6a56fbb" width="30%">
 </p>
 <p><strong>Systemd.</strong> The list shows every unit with its state and is filterable: all, enabled, disabled, masked, static, or units in an abnormal state. Each one can be started, stopped, restarted, enabled, disabled or masked, and <strong>View logs</strong> shows its journal. <strong>Inspect unit</strong> opens the unit's properties, dependencies and <code>systemctl status</code> output, and <strong>Edit override</strong> writes a drop-in for it, so you can change a service's settings from the phone without a text editor in the container.</p>
 <p><strong>OpenRC</strong> and <strong>OpenWrt (procd)</strong> get the same list with start, stop, restart, enable and disable, and reload on OpenWrt.</p>
 <h2 id="terminal">Terminal <a class="header-anchor" href="#terminal">#</a></h2>
 <p align="center">
-  <img src="resources/gallery/12-terminal.png" width="30%">
-  <img src="resources/gallery/22-terminal-settings.png" width="30%">
+  <img src="resources/gallery/12-terminal.png?v=fd489d55c0" width="30%">
+  <img src="resources/gallery/22-terminal-settings.png?v=4894c3bb59" width="30%">
 </p>
 <p>The built-in terminal opens a shell in the container as the user you pick. Tabs are labelled <code>user@hostname</code>; the <strong>+</strong> tab opens another session, and asks for the user each time. Sessions run in a foreground service, so they survive leaving the screen, switching apps and the screen turning off, and the notification has an exit button and a wake lock toggle.</p>
 <p>Pinch to zoom changes the text size. Tapping the terminal opens the keyboard. The <strong>Terminal</strong> page under <strong>Settings</strong> has the font, with a custom monospace font import, the starting text size, a dark mode for the terminal page only, a confirmation before a tab closes, and <strong>Open Keyboard On Tap</strong>. Turn that one off when you work in an editor, so a tap only moves the cursor; a keyboard button then appears in the terminal to open and close the keyboard.</p>
 <h2 id="settings">Settings <a class="header-anchor" href="#settings">#</a></h2>
 <p align="center">
-  <img src="resources/gallery/13-settings.png" width="30%">
-  <img src="resources/gallery/14-requirements-check.png" width="30%">
+  <img src="resources/gallery/13-settings.png?v=b6ec2e2d9b" width="30%">
+  <img src="resources/gallery/14-requirements-check.png?v=dd0df5bfbb" width="30%">
 </p>
 <p><strong>Backend</strong></p>
 <ul>
