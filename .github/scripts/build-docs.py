@@ -450,6 +450,11 @@ def stamp_assets(root):
         html = open(page).read()
         stamped = re.sub(r'(/assets/(?:css|js)/[\w.-]+)(?:\?v=\w+)?"',
                          lambda m: f'{m.group(1)}?v={ver(os.path.join(root, m.group(1).lstrip("/")))}"', html)
+        # the screenshots in the docs pages sit at docs/resources/ and are cached by the CDN the
+        # same way, including a 404 fetched before the first deploy that added them
+        stamped = re.sub(r'(src="resources/[\w./-]+)(?:\?v=\w+)?"',
+                         lambda m: f'{m.group(1)}?v={ver(os.path.join(root, "docs", m.group(1)[5:]))}"'
+                         if os.path.exists(os.path.join(root, "docs", m.group(1)[5:])) else m.group(0), stamped)
         if stamped != html:
             open(page, 'w').write(stamped)
     print("OK: asset versions")
