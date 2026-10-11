@@ -672,6 +672,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <th>Host Mode</th>
 <th>None Mode</th>
 <th>Gateway Mode</th>
+<th>Macvlan Mode</th>
 </tr>
 </thead>
 <tbody>
@@ -681,6 +682,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>Android (shared)</td>
 <td>Nobody (loopback only)</td>
 <td>OpenWRT dnsmasq</td>
+<td>The LAN's DHCP server (your router)</td>
 </tr>
 <tr>
 <td>Who does NAT?</td>
@@ -688,6 +690,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>Android</td>
 <td>N/A</td>
 <td>OpenWRT (via Droidspaces NAT on OpenWRT's WAN)</td>
+<td>Your router, as for any LAN device</td>
 </tr>
 <tr>
 <td>Who manages firewall?</td>
@@ -695,6 +698,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>Android</td>
 <td>N/A</td>
 <td>OpenWRT</td>
+<td>The container itself</td>
 </tr>
 <tr>
 <td>Who manages DNS?</td>
@@ -702,6 +706,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>Android</td>
 <td>Nobody</td>
 <td>OpenWRT dnsmasq</td>
+<td>The LAN's DHCP server</td>
 </tr>
 <tr>
 <td>Container isolated from host network?</td>
@@ -709,6 +714,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>No</td>
 <td>Yes</td>
 <td>Yes</td>
+<td>Yes (the phone cannot even reach it over that NIC)</td>
 </tr>
 <tr>
 <td>Internet access?</td>
@@ -716,6 +722,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>Yes</td>
 <td>No</td>
 <td>Yes (via gateway container)</td>
+<td>Yes (via the LAN's router)</td>
 </tr>
 <tr>
 <td>IPv6?</td>
@@ -723,6 +730,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>Whatever Android has</td>
 <td>Loopback only</td>
 <td>Yes, once OpenWRT is set up for it (see Part 10)</td>
+<td>Whatever the LAN advertises</td>
 </tr>
 <tr>
 <td>Needs a second container to function?</td>
@@ -730,6 +738,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>No</td>
 <td>No</td>
 <td>Yes (the gateway container)</td>
+<td>No, but a wired NIC and <code>CONFIG_MACVLAN</code></td>
 </tr>
 <tr>
 <td>Good for</td>
@@ -737,6 +746,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>Maximum performance, no veth or bridge in the path</td>
 <td>Offline / sandboxed workloads</td>
 <td>Router appliance, VPN gateway, segmented LANs</td>
+<td>A real LAN address, OpenWRT on a physical LAN</td>
 </tr>
 </tbody>
 </table></div>

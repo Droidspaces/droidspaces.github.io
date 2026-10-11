@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Kernel configuration", "description": "How to compile an Android kernel with Droidspaces support: the config options and patches for non-GKI and GKI kernels.", "url": "https://www.droidspaces.org/docs/kernel-configuration.html", "inLanguage": "en", "dateModified": "2026-10-04", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Kernel configuration", "item": "https://www.droidspaces.org/docs/kernel-configuration.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Kernel configuration", "description": "How to compile an Android kernel with Droidspaces support: the config options and patches for non-GKI and GKI kernels.", "url": "https://www.droidspaces.org/docs/kernel-configuration.html", "inLanguage": "en", "dateModified": "2026-10-10", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Kernel configuration", "item": "https://www.droidspaces.org/docs/kernel-configuration.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -190,6 +190,10 @@ https://github.com/ravindu644/Android-Kernel-Tutorials</p></div>
 <span class="nv">CONFIG_NF_CONNTRACK_IPV6</span><span class="o">=</span>y
 <span class="nv">CONFIG_NF_NAT_IPV6</span><span class="o">=</span>y
 
+<span class="c"># Macvlan mode (--net=macvlan): a container straight on a wired LAN.</span>
+<span class="c"># Optional: without it, macvlan mode is unavailable</span>
+<span class="nv">CONFIG_MACVLAN</span><span class="o">=</span>y
+
 <span class="c"># Disable this on older kernels to make internet work</span>
 <span class="nv">CONFIG_ANDROID_PARANOID_NETWORK</span><span class="o">=</span>n
 
@@ -292,6 +296,10 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 <span class="nv">CONFIG_IP6_NF_NAT</span><span class="o">=</span>y
 <span class="nv">CONFIG_IP6_NF_TARGET_MASQUERADE</span><span class="o">=</span>y
 
+<span class="c"># Macvlan mode (--net=macvlan). kABI-safe: on a 5.15 GKI tree it changed none</span>
+<span class="c"># of the 8423 exported symbols, and the driver is self-contained</span>
+<span class="nv">CONFIG_MACVLAN</span><span class="o">=</span>y
+
 <span class="c"># UFW support</span>
 <span class="nv">CONFIG_NETFILTER_XT_TARGET_REJECT</span><span class="o">=</span>y
 <span class="nv">CONFIG_NETFILTER_XT_TARGET_LOG</span><span class="o">=</span>y
@@ -363,6 +371,7 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 <li>devtmpfs support</li>
 <li>OverlayFS support (optional, for volatile mode)</li>
 <li>VETH and Bridge support (optional, for NAT mode)</li>
+<li>Macvlan support (optional, for macvlan mode)</li>
 <li>IPv6 NAT support (optional, for IPv6 in NAT mode)</li>
 <li>Memory, CPU and process limit support (optional, for <code>--memory</code>, <code>--cpus</code> and <code>--pids-limit</code>)</li>
 <li>PTY/devpts support</li>
@@ -451,6 +460,11 @@ patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </s
 <td>IPv6 NAT</td>
 <td><code>CONFIG_IP6_NF_NAT</code> / <code>CONFIG_IP6_NF_TARGET_MASQUERADE</code></td>
 <td>NAT containers are IPv4 only.</td>
+</tr>
+<tr>
+<td>Macvlan</td>
+<td><code>CONFIG_MACVLAN</code></td>
+<td>Macvlan mode unavailable.</td>
 </tr>
 <tr>
 <td>Seccomp</td>
