@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Install Droidspaces on a Linux desktop or server: download the tarball, install the binary, build a rootfs image and boot the first container.">
+  <meta name="description" content="Install Droidspaces on a Linux desktop or server: install the binary, get a rootfs, put it in an ext4 image, and boot the first container.">
   <title>Linux installation - Droidspaces Docs</title>
   <meta property="og:title" content="Linux installation - Droidspaces Docs">
-  <meta property="og:description" content="Install Droidspaces on a Linux desktop or server: download the tarball, install the binary, build a rootfs image and boot the first container.">
+  <meta property="og:description" content="Install Droidspaces on a Linux desktop or server: install the binary, get a rootfs, put it in an ext4 image, and boot the first container.">
   <meta property="og:url" content="https://www.droidspaces.org/docs/installation-linux.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Droidspaces">
@@ -16,14 +16,14 @@
   <meta property="og:image:alt" content="The Droidspaces wordmark, the words Linux containers on Android, and a terminal starting an Ubuntu container">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Linux installation - Droidspaces Docs">
-  <meta name="twitter:description" content="Install Droidspaces on a Linux desktop or server: download the tarball, install the binary, build a rootfs image and boot the first container.">
+  <meta name="twitter:description" content="Install Droidspaces on a Linux desktop or server: install the binary, get a rootfs, put it in an ext4 image, and boot the first container.">
   <meta name="twitter:image" content="https://www.droidspaces.org/assets/images/og-image.png">
   <link rel="canonical" href="https://www.droidspaces.org/docs/installation-linux.html">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Linux installation", "description": "Install Droidspaces on a Linux desktop or server: download the tarball, install the binary, build a rootfs image and boot the first container.", "url": "https://www.droidspaces.org/docs/installation-linux.html", "inLanguage": "en", "dateModified": "2026-09-28", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Linux installation", "item": "https://www.droidspaces.org/docs/installation-linux.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Linux installation", "description": "Install Droidspaces on a Linux desktop or server: install the binary, get a rootfs, put it in an ext4 image, and boot the first container.", "url": "https://www.droidspaces.org/docs/installation-linux.html", "inLanguage": "en", "dateModified": "2026-10-12", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Linux installation", "item": "https://www.droidspaces.org/docs/installation-linux.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -56,15 +56,15 @@
 <a href="installation-linux.html" class="sidebar-link" aria-current="page">Linux installation</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Guides</summary>
-<a href="features.html" class="sidebar-link">Feature deep dives</a>
-<a href="graphics-and-audio.html" class="sidebar-link">Display, audio & desktop</a>
-<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
-<a href="usage-android-app.html" class="sidebar-link">Android app usage</a>
+<a href="usage-android-app.html" class="sidebar-link">Android app guide</a>
+<a href="features.html" class="sidebar-link">Container settings</a>
 <a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
+<a href="graphics-and-audio.html" class="sidebar-link">Display, audio and desktop</a>
+<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
 <a href="networking-from-zero.html" class="sidebar-link">Networking from zero</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Recipes</summary>
-<a href="cool-things-you-can-do.html" class="sidebar-link">Cool things you can do</a>
+<a href="cool-things-you-can-do.html" class="sidebar-link">Recipes</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Reference</summary>
 <a href="troubleshooting.html" class="sidebar-link">Troubleshooting</a>
@@ -75,99 +75,65 @@
   </aside>
   <main id="main" class="docs-content">
     <article>
-<h1 id="linux-installation-guide">Linux installation guide <a class="header-anchor" href="#linux-installation-guide">#</a></h1>
-<p>This guide covers installing Droidspaces on a Linux desktop or server.</p>
-<h2 id="prerequisites">Prerequisites <a class="header-anchor" href="#prerequisites">#</a></h2>
-<p>Most modern Linux distributions already have everything Droidspaces needs. You do not need a special kernel configuration or any extra packages.</p>
-<p><strong>Requirements:</strong></p>
-<ul>
-<li>Root privileges (<code>sudo</code>)</li>
-</ul>
-<h2 id="step-1-download-the-release">Step 1: Download the release <a class="header-anchor" href="#step-1-download-the-release">#</a></h2>
-<p>Download the <strong>Droidspaces Backend Tarball</strong> from the <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/latest" rel="noopener noreferrer">latest release page</a>.</p>
-<p>Or download it from the command line:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Replace VERSION with the actual version (e.g., v4.3.0)</span>
-wget<span class="w"> </span>https://github.com/ravindu644/Droidspaces-OSS/releases/download/VERSION/droidspaces-vVERSION-DATE.tar.gz
+<h1 id="linux-installation">Linux installation <a class="header-anchor" href="#linux-installation">#</a></h1>
+<p>Droidspaces is one static binary on Linux. Any current distribution has everything it needs, and the only requirement is root.</p>
+<h2 id="step-1-install-the-binary">Step 1: Install the binary <a class="header-anchor" href="#step-1-install-the-binary">#</a></h2>
+<p>Every release ships <code>.deb</code> packages for amd64, arm64, armhf, i386 and riscv64, and a tarball with the binary for each architecture.</p>
+<p>On Debian, Ubuntu and their derivatives:</p>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>droidspaces_*_amd64.deb
 </code></pre></div>
-<h2 id="step-2-extract-and-install">Step 2: Extract and install <a class="header-anchor" href="#step-2-extract-and-install">#</a></h2>
-<h3 id="identify-your-architecture">Identify your architecture <a class="header-anchor" href="#identify-your-architecture">#</a></h3>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>uname<span class="w"> </span>-m
+<p>On anything else, extract the tarball and copy the binary for your CPU somewhere on your <code>PATH</code>. <code>uname -m</code> tells you which one: <code>x86_64</code>, <code>aarch64</code>, <code>armv7l</code> (use <code>armhf</code>), <code>i686</code> (use <code>x86</code>) or <code>riscv64</code>.</p>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>tar<span class="w"> </span>-xzf<span class="w"> </span>droidspaces-v*.tar.gz
+sudo<span class="w"> </span>install<span class="w"> </span>-m<span class="w"> </span><span class="m">755</span><span class="w"> </span>droidspaces-v*/x86_64/droidspaces<span class="w"> </span>/usr/local/bin/droidspaces
 </code></pre></div>
-<p>It prints one of <code>x86_64</code>, <code>aarch64</code>, <code>armv7l</code> (armhf) or <code>i686</code> (x86).</p>
-<h3 id="install-the-binary">Install the binary <a class="header-anchor" href="#install-the-binary">#</a></h3>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Extract the tarball</span>
-tar<span class="w"> </span>xzf<span class="w"> </span>droidspaces-v*.tar.gz
-
-<span class="c1"># Navigate into the extracted directory</span>
-<span class="nb">cd</span><span class="w"> </span>droidspaces-v*/
-
-<span class="c1"># Copy the binary for your architecture to a directory in your PATH</span>
-sudo<span class="w"> </span>cp<span class="w"> </span>x86_64/droidspaces<span class="w"> </span>/usr/local/bin/droidspaces
-
-<span class="c1"># Make it executable</span>
-sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/droidspaces
-</code></pre></div>
-<h2 id="step-3-verify-installation">Step 3: Verify installation <a class="header-anchor" href="#step-3-verify-installation">#</a></h2>
-<p>Run the requirements checker:</p>
+<h2 id="step-2-check-the-system">Step 2: Check the system <a class="header-anchor" href="#step-2-check-the-system">#</a></h2>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>droidspaces<span class="w"> </span>check
 </code></pre></div>
-<p>Every check should pass with a green checkmark. A modern Linux desktop supports all of them out of the box.</p>
-<h2 id="step-4-get-a-rootfs">Step 4: Get a rootfs <a class="header-anchor" href="#step-4-get-a-rootfs">#</a></h2>
-<p>Your first container needs a Linux root filesystem. We recommend the official <strong>Linux Containers image repository</strong>, which has clean, pre-built rootfs tarballs for dozens of distributions.</p>
-<p><strong>Download URL</strong>: <a href="https://images.linuxcontainers.org/images/" rel="noopener noreferrer">images.linuxcontainers.org/images/</a></p>
-<p>Browse to the distribution you want (for example <code>ubuntu/noble/amd64/default/</code>) and download <code>rootfs.tar.xz</code>.</p>
-<div class="callout callout-important"><strong class="callout-title">Important</strong><p>You <strong>must</strong> extract the rootfs tarball with <code>sudo</code> in both methods below, so that file ownership (<code>UID 0</code>) and setuid permissions survive. Without it the container is broken: the binaries are not owned by root inside it, so commands like <code>sudo</code> do not work, and system services may fail to start.</p></div>
+<p>Every line should pass. The optional ones at the bottom cover features such as bridges, macvlan, IPv6 NAT and resource limits, and a missing one only disables that feature.</p>
+<h2 id="step-3-get-a-rootfs">Step 3: Get a rootfs <a class="header-anchor" href="#step-3-get-a-rootfs">#</a></h2>
+<p>A container needs a root filesystem of the distribution you want to run. The <a href="https://images.linuxcontainers.org/images/" rel="noopener noreferrer">Linux Containers image server</a> has clean builds of most distributions. Browse to one, for example <code>ubuntu/noble/amd64/default/</code>, and download <code>rootfs.tar.xz</code>.</p>
+<div class="callout callout-important"><strong class="callout-title">Important</strong><p>Extract with <code>sudo</code>. Without it the files inside the container are not owned by root, setuid bits are lost, and <code>sudo</code> and several services inside the container stop working.</p></div>
+<p>You can keep the rootfs in a directory or in an ext4 image file. The image is one file you can copy to another machine or phone, and it keeps the container's filesystem separate from the host's. Use whichever you prefer.</p>
+<p><strong>A directory:</strong></p>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>mkdir<span class="w"> </span>ubuntu
+sudo<span class="w"> </span>tar<span class="w"> </span>-xf<span class="w"> </span>rootfs.tar.xz<span class="w"> </span>-C<span class="w"> </span>ubuntu
+</code></pre></div>
+<p><strong>An ext4 image</strong> (the file is sparse, so a 16 GB image takes only the space the container uses):</p>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>truncate<span class="w"> </span>-s<span class="w"> </span>16G<span class="w"> </span>ubuntu.img
+mkfs.ext4<span class="w"> </span>-L<span class="w"> </span>ubuntu<span class="w"> </span>ubuntu.img
+mkdir<span class="w"> </span>mnt
+sudo<span class="w"> </span>mount<span class="w"> </span>ubuntu.img<span class="w"> </span>mnt
+sudo<span class="w"> </span>tar<span class="w"> </span>-xf<span class="w"> </span>rootfs.tar.xz<span class="w"> </span>-C<span class="w"> </span>mnt
+sudo<span class="w"> </span>umount<span class="w"> </span>mnt
+rmdir<span class="w"> </span>mnt
+</code></pre></div>
+<h2 id="step-4-start-enter-stop">Step 4: Start, enter, stop <a class="header-anchor" href="#step-4-start-enter-stop">#</a></h2>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>ubuntu<span class="w"> </span>--rootfs<span class="o">=</span>/path/to/ubuntu<span class="w"> </span>start
+<span class="c1"># or, for an image:</span>
+sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>ubuntu<span class="w"> </span>--rootfs-img<span class="o">=</span>/path/to/ubuntu.img<span class="w"> </span>start
+
+sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>ubuntu<span class="w"> </span>enter
+sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>ubuntu<span class="w"> </span>stop
+</code></pre></div>
+<p>The flags you pass to the first <code>start</code> are saved in the container's config file, so later starts only need <code>--name</code>. <code>droidspaces show</code> lists what is running.</p>
+<h2 id="optional-run-the-daemon">Optional: run the daemon <a class="header-anchor" href="#optional-run-the-daemon">#</a></h2>
+<p>The CLI works without a daemon on Linux. Running one lets members of a <code>droidspaces</code> group use the CLI without <code>sudo</code>, and restarts cleanly with the system. The repository has a systemd unit:</p>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>groupadd<span class="w"> </span>droidspaces
+sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>droidspaces<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$USER</span><span class="s2">&quot;</span>
+sudo<span class="w"> </span>cp<span class="w"> </span>init/systemd-service/droidspaces.service<span class="w"> </span>/etc/systemd/system/
+sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>droidspaces
+</code></pre></div>
+<p>The unit expects the binary at <code>/usr/bin/droidspaces</code>, which is where the <code>.deb</code> puts it. Edit <code>ExecStart</code> if yours is elsewhere. Log out and in again for the group to apply.</p>
 <hr />
-<h3 id="option-a-use-a-directory-rootfs">Option A: Use a directory rootfs <a class="header-anchor" href="#option-a-use-a-directory-rootfs">#</a></h3>
-<p>Extract the tarball into a directory:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>mkdir<span class="w"> </span>my-container
-sudo<span class="w"> </span>tar<span class="w"> </span>-xvf<span class="w"> </span>rootfs.tar.xz<span class="w"> </span>-C<span class="w"> </span>my-container
-</code></pre></div>
-<h3 id="option-b-create-an-ext4-image-recommended">Option B: Create an ext4 image (recommended) <a class="header-anchor" href="#option-b-create-an-ext4-image-recommended">#</a></h3>
-<p>A rootfs inside a single <code>.img</code> file is easier to move between machines and avoids conflicts with the host filesystem.</p>
-<ol>
-<li>
-<p><strong>Create a sparse image file</strong> (16GB in this example):</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>truncate<span class="w"> </span>-s<span class="w"> </span>16G<span class="w"> </span>rootfs.img
-</code></pre></div>
-</li>
-<li>
-<p><strong>Format it as ext4</strong>:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>mkfs.ext4<span class="w"> </span>-L<span class="w"> </span>Droidspaces<span class="w"> </span>rootfs.img
-</code></pre></div>
-</li>
-<li>
-<p><strong>Mount the image</strong>:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>mkdir<span class="w"> </span>-p<span class="w"> </span>rootfs_mount
-sudo<span class="w"> </span>mount<span class="w"> </span>rootfs.img<span class="w"> </span>rootfs_mount
-</code></pre></div>
-</li>
-<li>
-<p><strong>Extract the rootfs tarball into the mountpoint</strong>:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>tar<span class="w"> </span>-xvf<span class="w"> </span>/path/to/rootfs.tar.xz<span class="w"> </span>-C<span class="w"> </span>rootfs_mount
-</code></pre></div>
-</li>
-<li>
-<p><strong>Unmount and clean up</strong>:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sudo<span class="w"> </span>umount<span class="w"> </span>rootfs_mount
-rmdir<span class="w"> </span>rootfs_mount
-</code></pre></div>
-</li>
-</ol>
-<p>Boot it with:
-<code>sudo droidspaces --name=my-container --rootfs-img=rootfs.img start</code></p>
-<h2 id="next-steps">Next steps <a class="header-anchor" href="#next-steps">#</a></h2>
-<ul>
-<li><a href="linux-cli.html">Linux CLI Guide</a> for the full command and flag reference</li>
-<li><a href="features.html">Feature Deep Dives</a> for a detailed explanation of each feature</li>
-</ul>
+<p>Previous: <a href="installation-android.html">Android installation</a> | Next: <a href="usage-android-app.html">Android app guide</a></p>
 
     </article>
     <p class="doc-edit"><a href="https://github.com/ravindu644/Droidspaces-OSS/edit/main/Documentation/Installation-Linux.md" rel="noopener noreferrer"><span class="icon" aria-hidden="true">edit</span>Edit this page on GitHub</a></p>
-<nav class="doc-nav" aria-label="Pages"><a href="installation-android.html" class="doc-nav-prev"><small>Previous</small>Android installation</a><a href="features.html" class="doc-nav-next"><small>Next</small>Feature deep dives</a></nav>
+<nav class="doc-nav" aria-label="Pages"><a href="installation-android.html" class="doc-nav-prev"><small>Previous</small>Android installation</a><a href="usage-android-app.html" class="doc-nav-next"><small>Next</small>Android app guide</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#prerequisites">Prerequisites</a></li><li class="toc-h2"><a href="#step-1-download-the-release">Step 1: Download the release</a></li><li class="toc-h2"><a href="#step-2-extract-and-install">Step 2: Extract and install</a></li><li class="toc-h3"><a href="#identify-your-architecture">Identify your architecture</a></li><li class="toc-h3"><a href="#install-the-binary">Install the binary</a></li><li class="toc-h2"><a href="#step-3-verify-installation">Step 3: Verify installation</a></li><li class="toc-h2"><a href="#step-4-get-a-rootfs">Step 4: Get a rootfs</a></li><li class="toc-h3"><a href="#option-a-use-a-directory-rootfs">Option A: Use a directory rootfs</a></li><li class="toc-h3"><a href="#option-b-create-an-ext4-image-recommended">Option B: Create an ext4 image (recommended)</a></li><li class="toc-h2"><a href="#next-steps">Next steps</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#step-1-install-the-binary">Step 1: Install the binary</a></li><li class="toc-h2"><a href="#step-2-check-the-system">Step 2: Check the system</a></li><li class="toc-h2"><a href="#step-3-get-a-rootfs">Step 3: Get a rootfs</a></li><li class="toc-h2"><a href="#step-4-start-enter-stop">Step 4: Start, enter, stop</a></li><li class="toc-h2"><a href="#optional-run-the-daemon">Optional: run the daemon</a></li></ul></nav>
   </aside>
 <footer class="footer">
   <div class="footer-inner">

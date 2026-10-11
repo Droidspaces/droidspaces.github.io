@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Android installation", "description": "Install Droidspaces on a rooted Android device: install the APK, let the app set up the backend, and create a Linux container without typing a terminal command.", "url": "https://www.droidspaces.org/docs/installation-android.html", "inLanguage": "en", "dateModified": "2026-10-10", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Android installation", "item": "https://www.droidspaces.org/docs/installation-android.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Android installation", "description": "Install Droidspaces on a rooted Android device: install the APK, let the app set up the backend, and create a Linux container without typing a terminal command.", "url": "https://www.droidspaces.org/docs/installation-android.html", "inLanguage": "en", "dateModified": "2026-10-12", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Android installation", "item": "https://www.droidspaces.org/docs/installation-android.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -56,15 +56,15 @@
 <a href="installation-linux.html" class="sidebar-link">Linux installation</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Guides</summary>
-<a href="features.html" class="sidebar-link">Feature deep dives</a>
-<a href="graphics-and-audio.html" class="sidebar-link">Display, audio & desktop</a>
-<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
-<a href="usage-android-app.html" class="sidebar-link">Android app usage</a>
+<a href="usage-android-app.html" class="sidebar-link">Android app guide</a>
+<a href="features.html" class="sidebar-link">Container settings</a>
 <a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
+<a href="graphics-and-audio.html" class="sidebar-link">Display, audio and desktop</a>
+<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
 <a href="networking-from-zero.html" class="sidebar-link">Networking from zero</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Recipes</summary>
-<a href="cool-things-you-can-do.html" class="sidebar-link">Cool things you can do</a>
+<a href="cool-things-you-can-do.html" class="sidebar-link">Recipes</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Reference</summary>
 <a href="troubleshooting.html" class="sidebar-link">Troubleshooting</a>
@@ -75,96 +75,68 @@
   </aside>
   <main id="main" class="docs-content">
     <article>
-<h1 id="android-installation-guide">Android installation guide <a class="header-anchor" href="#android-installation-guide">#</a></h1>
-<p>On Android, Droidspaces needs no terminal. Everything from the first install to running a full Linux distribution is done in the app.</p>
-<h2 id="prerequisites">Prerequisites <a class="header-anchor" href="#prerequisites">#</a></h2>
-<ol>
-<li><strong>A rooted device</strong>, using one of the <a href="https://github.com/ravindu644/Droidspaces-OSS/blob/main/README.md#rooting-requirements">supported rooting solutions</a>.</li>
-<li><strong>A compatible kernel</strong> with Droidspaces support enabled. See the <a href="kernel-configuration.html">Kernel Configuration Guide</a>.</li>
-</ol>
+<h1 id="android-installation">Android installation <a class="header-anchor" href="#android-installation">#</a></h1>
+<p>Everything on Android happens in the app, from installing the backend to opening a shell in a running container. This page takes you from a rooted phone to that shell.</p>
+<h2 id="before-you-start">Before you start <a class="header-anchor" href="#before-you-start">#</a></h2>
+<p>You need two things.</p>
+<p><strong>Root.</strong> KernelSU is the recommended root method. Magisk and APatch work as well. Their root shells carry a seccomp filter that blocks what a container runtime needs, which is why the backend runs as a daemon started at boot rather than from the shell. That is the default, and the reboot the app asks for after installing is all it takes.</p>
+<p><strong>A kernel with container support.</strong> Most stock kernels are missing options that Droidspaces needs, especially PID and IPC namespaces. The <a href="kernel-configuration.html">kernel configuration guide</a> lists them and explains how to build a kernel with them. If you would rather not build one, the <a href="community-supported-devices.html">community-supported devices</a> page links to kernels other users have built. The app tells you on first launch whether your kernel is supported.</p>
+<div class="callout callout-caution"><strong class="callout-title">Caution</strong><p>GrapheneOS is not supported. It blocks system calls that container isolation depends on, root or not.</p>
+<p>SuSFS is not supported. If you use it anyway, turn off &quot;Hide sus mounts for all processes&quot; in its settings or containers will not boot, and do not report bugs seen with it enabled.</p></div>
 <h2 id="step-1-install-the-app">Step 1: Install the app <a class="header-anchor" href="#step-1-install-the-app">#</a></h2>
 <ol>
-<li>Download the <strong>Droidspaces APK</strong> from the <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/latest" rel="noopener noreferrer">latest release</a>.</li>
-<li>Install the APK on your device.</li>
-<li><strong>Grant root access</strong> and open the app.</li>
+<li>Download the APK from the <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/latest" rel="noopener noreferrer">latest release</a> and install it.</li>
+<li>On KernelSU and APatch, allow root for the Droidspaces app in your root manager first. Magisk asks when the app requests it.</li>
+<li>Open the app and tap <strong>Get Started</strong>.</li>
+<li>Tap <strong>Check Root Access</strong> and, on Magisk, allow the request.</li>
+<li>The app installs the backend on its own: the <code>droidspaces</code> binary and a static BusyBox go to <code>/data/local/Droidspaces/bin</code>, and a small boot module goes to your root manager so the daemon and your containers can start at boot. This takes a few seconds.</li>
+<li>Read the result. &quot;Droidspaces backend installed successfully&quot; means your kernel passed the probe. If it says the kernel has no Droidspaces support, go to the <a href="kernel-configuration.html">kernel configuration guide</a> before continuing.</li>
+<li>Reboot when the app asks. The reboot applies the SELinux rules the backend needs and starts the daemon.</li>
 </ol>
-<h2 id="step-2-automatic-backend-setup">Step 2: Automatic backend setup <a class="header-anchor" href="#step-2-automatic-backend-setup">#</a></h2>
-<p>On first launch, Droidspaces does an <strong>atomic installation</strong> of the backend:</p>
-<ul>
-<li>It detects the device architecture (<code>aarch64</code>, <code>armhf</code>, etc.).</li>
-<li>It extracts the <code>droidspaces</code> and <code>busybox</code> binaries to <code>/data/local/Droidspaces/bin</code>.</li>
-<li>It moves them into place atomically, so the install succeeds even while an older version is running.</li>
-<li>It verifies checksums, so a corrupted binary is not installed.</li>
-</ul>
-<h2 id="step-3-setting-up-your-first-container">Step 3: Setting up your first container <a class="header-anchor" href="#step-3-setting-up-your-first-container">#</a></h2>
-<p>You don't extract rootfs files by hand. The app does it.</p>
-<h3 id="option-a-install-from-the-rootfs-repository-recommended">Option A: Install from the Rootfs Repository (recommended) <a class="header-anchor" href="#option-a-install-from-the-rootfs-repository-recommended">#</a></h3>
-<p>This is the shortest path. The app can browse, download and install distros itself, with no manual download.</p>
+<p>After the reboot, on a supported kernel, the <strong>Home</strong> tab shows &quot;Backend: Installed&quot; with a &quot;DAEMON&quot; chip, and your kernel version, SELinux status and architecture underneath.</p>
+<h2 id="step-2-install-a-container">Step 2: Install a container <a class="header-anchor" href="#step-2-install-a-container">#</a></h2>
+<p>Open the <strong>Containers</strong> tab and tap <strong>+</strong>. You get two choices.</p>
+<h3 id="from-the-repository">From the repository <a class="header-anchor" href="#from-the-repository">#</a></h3>
+<p><strong>Repository</strong> opens a list of distributions built for Droidspaces, filtered to your device's architecture. Ubuntu, Debian, Fedora, Arch, Alpine, OpenWrt and others are there, and some come with a desktop environment already wired up.</p>
 <ol>
-<li><strong>Open the Containers tab</strong>: tap the middle icon in the bottom navigation bar.</li>
-<li><strong>Open the repository</strong>: tap the <strong>cloud icon</strong> (above the &quot;+&quot; button). This opens the Rootfs Repository sheet, which fetches every distro built for Android from our <a href="https://github.com/Droidspaces/Droidspaces-rootfs-builder" rel="noopener noreferrer">official repository</a>.</li>
-<li><strong>Pick a distro</strong>: browse or search the list. Each card shows the distro name, size, architecture and build date.</li>
-<li><strong>Download</strong>: tap <strong>Download</strong> on the distro you want. A progress bar appears on the card. The file is saved to your Downloads folder.</li>
-<li><strong>Install</strong>: when the download finishes, the button changes to <strong>Install</strong>. Tap it to start the container setup wizard.</li>
-<li><strong>Configuration wizard</strong>:
-<ul>
-<li><strong>Name</strong>: a name for the container.</li>
-<li><strong>Features</strong>: toggle Hardware Access, IPv6, Network Isolation, Android storage integration and the rest as you need them.</li>
-<li><strong>Container type</strong>: we recommend <strong>Sparse Image</strong>. It performs better and is more stable on Android's f2fs storage, and it avoids odd SELinux and keyring issues.</li>
-</ul>
-</li>
-<li><strong>Done</strong>: the app extracts the tarball and applies the <strong>post-extraction fixes</strong> (DNS, masking useless or dangerous services, and Safe Udev).</li>
+<li>Pick a distribution and tap <strong>Download</strong>. The file goes to your Downloads folder, and a notification tells you when it is done.</li>
+<li>Tap <strong>Install</strong> on the same card.</li>
 </ol>
-<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p>The official repository contains distros preconfigured for Android. For a wider selection, add the LXC images mirror as a custom repository. See the <a href="usage-android-app.html#rootfs-repository">Rootfs Repository</a> section of the usage guide.</p></div>
-<h3 id="option-b-install-from-a-local-tarball">Option B: Install from a local tarball <a class="header-anchor" href="#option-b-install-from-a-local-tarball">#</a></h3>
-<p>If you already have a <code>.tar.xz</code> or <code>.tar.gz</code> rootfs file on the device:</p>
+<p>For more distributions, tap <strong>Manage Repositories</strong> in the same sheet and subscribe to the Linux Containers mirror:</p>
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>https://raw.githubusercontent.com/Droidspaces/linuxcontainers-mirror/refs/heads/main/rootfs.json
+</code></pre></div>
+<p>Those images are stock upstream builds. The installer applies the same Android fixes to them, but they come without the extras of the official builds, such as a preconfigured desktop.</p>
+<h3 id="from-a-file">From a file <a class="header-anchor" href="#from-a-file">#</a></h3>
+<p><strong>Install from file</strong> takes a rootfs archive you already have on the phone. It must be a <code>.tar.xz</code> or <code>.tar.gz</code>. A container exported from another phone with <strong>Export container as tarball</strong> works here too, and its settings are filled in for you.</p>
+<h3 id="the-setup-wizard">The setup wizard <a class="header-anchor" href="#the-setup-wizard">#</a></h3>
+<p>Both paths end in the same wizard.</p>
 <ol>
-<li><strong>Open the Containers tab</strong> and tap the <strong>&quot;+&quot;</strong> button.</li>
-<li><strong>Select your tarball</strong> from storage.</li>
-<li>Follow the same <strong>configuration wizard</strong> steps as above.</li>
+<li><strong>Container Setup</strong>: give the container a name. The hostname defaults to the name.</li>
+<li><strong>Container configuration</strong>: the defaults are right for a first container. NAT networking gives it internet with no setup. Every toggle on this page is explained in <a href="features.html">container settings</a>, and you can change any of them later from the container's menu.</li>
+<li><strong>Storage</strong>: leave <strong>Use Sparse Image</strong> on. The rootfs then lives in a single ext4 image file, which is more reliable on Android's storage than a directory. The size you pick is the maximum; the file only grows as the container uses space. <strong>Choose a folder</strong> puts the image on an SD card or USB drive instead of internal storage.</li>
+<li><strong>Installation Summary</strong>: check it and tap install.</li>
 </ol>
-<p>An archive can include a regular <code>container.config</code> file at its root, alongside <code>bin/</code>,
-<code>etc/</code> and <code>usr/</code>. The app reads its usual <code>key=value</code> settings and prefills the wizard.
-The file may contain the complete config from an installed container or only the settings
-you want to recommend. Missing settings use the wizard defaults. Every setting in the
-file is applied, hardware access and privileged mode included, so the wizard shows a
-warning page before the configuration page. Review it there and change anything you do
-not want before installing. Recommendations use the existing config parser without
-additional field filtering. Rootfs validation still runs before extraction.</p>
-<p>Exporting a container includes its current host-side <code>container.config</code> as the first
-archive member, replacing any old copy in the rootfs. This lets the app read exported
-recommendations without decompressing the rest of the archive. If the first member is
-not <code>container.config</code> or <code>./container.config</code>, the app skips recommendations and opens
-the default configuration wizard. It does not search later entries.
-The new container name and storage location come from the wizard. Bind mounts use the
-existing <code>bind_mounts=source:destination[:ro],...</code> format and can be reviewed in the wizard.</p>
-<p>Environment variables are left out of an export by default, because they often hold
-passwords and tokens. When the container has any, the export asks first, and turning on
-&quot;Include environment variables&quot; adds them as a <code>container.env</code> member right after
-<code>container.config</code>. Importing that archive fills the wizard's environment variables too.
-Neither member is ever extracted into the new rootfs. The rootfs
-itself is not modified during export.</p>
-<div class="callout callout-note"><strong class="callout-title">Note</strong><p>Both methods end in the same wizard. The only difference is where the tarball comes from.</p></div>
-<h2 id="verification--settings">Verification &amp; settings <a class="header-anchor" href="#verification--settings">#</a></h2>
-<p>You can check the system status at any time:</p>
+<p>The app validates the archive, extracts it and applies a set of fixes that every container needs on Android, such as the network groups Android requires for socket access and a journald configuration that does not fill the phone with kernel logs. Installing takes one to a few minutes depending on the distribution.</p>
+<h2 id="step-3-start-it-and-get-a-shell">Step 3: Start it and get a shell <a class="header-anchor" href="#step-3-start-it-and-get-a-shell">#</a></h2>
 <ol>
-<li>Go to <strong>Settings</strong> (gear icon) -&gt; <strong>Requirements</strong>.</li>
-<li>Tap <strong>Check Requirements</strong>. This runs the full <code>droidspaces check</code> suite internally.</li>
-<li><strong>Kernel config</strong>: for kernel developers, the same screen has a copyable <code>droidspaces.config</code> defconfig fragment, like the one on <a href="kernel-configuration.html#step-1-mandatory-configuration">this page</a>, to check that your kernel is compatible with Droidspaces.</li>
+<li>On the <strong>Containers</strong> tab, tap <strong>Start</strong> on the new container. A log window opens and shows the boot as it happens. Close it once the boot is done, and the card shows &quot;RUNNING&quot; and the container's PID.</li>
+<li>Open the <strong>Panel</strong> tab. Running containers appear here with their uptime, IP address, CPU and RAM.</li>
+<li>Tap <strong>Terminal</strong> on the card, pick a user, and you are in.</li>
 </ol>
-<h2 id="next-steps">Next steps <a class="header-anchor" href="#next-steps">#</a></h2>
-<ul>
-<li><a href="usage-android-app.html">Android App Usage Guide</a> for managing containers.</li>
-<li><a href="graphics-and-audio.html">Display, Audio &amp; Desktop Guide</a> to enable GPU acceleration, sound, and desktop environment auto-boot.</li>
-<li><a href="linux-cli.html">Linux CLI Guide</a> for command-line access.</li>
-</ul>
+<p>The terminal keeps running in the background when you leave the screen, so you can come back to the same session later.</p>
+<p>If you prefer Termux or another terminal app, tap the container's card on the <strong>Panel</strong> tab to open its details, pick a user under <strong>Available Users</strong> and tap <strong>Copy login</strong>. Paste the command into a root shell.</p>
+<h2 id="checking-requirements-later">Checking requirements later <a class="header-anchor" href="#checking-requirements-later">#</a></h2>
+<p><strong>Settings</strong> has a <strong>Requirements</strong> page. <strong>Check Requirements</strong> runs every probe the backend has and tells you which kernel options are missing, which is the first thing to look at when a feature is greyed out in a container's settings.</p>
+<hr />
+<p>Next: <a href="installation-linux.html">Linux installation</a></p>
+<p>On Android you can skip ahead. Read these next: <a href="usage-android-app.html">Android app guide</a>, <a href="features.html">Container settings</a> and <a href="graphics-and-audio.html">Display, audio and desktop</a>.</p>
 
     </article>
     <p class="doc-edit"><a href="https://github.com/ravindu644/Droidspaces-OSS/edit/main/Documentation/Installation-Android.md" rel="noopener noreferrer"><span class="icon" aria-hidden="true">edit</span>Edit this page on GitHub</a></p>
 <nav class="doc-nav" aria-label="Pages"><a href="installation-linux.html" class="doc-nav-next"><small>Next</small>Linux installation</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#prerequisites">Prerequisites</a></li><li class="toc-h2"><a href="#step-1-install-the-app">Step 1: Install the app</a></li><li class="toc-h2"><a href="#step-2-automatic-backend-setup">Step 2: Automatic backend setup</a></li><li class="toc-h2"><a href="#step-3-setting-up-your-first-container">Step 3: Setting up your first container</a></li><li class="toc-h3"><a href="#option-a-install-from-the-rootfs-repository-recommended">Option A: Install from the Rootfs Repository (recommended)</a></li><li class="toc-h3"><a href="#option-b-install-from-a-local-tarball">Option B: Install from a local tarball</a></li><li class="toc-h2"><a href="#verification--settings">Verification &amp; settings</a></li><li class="toc-h2"><a href="#next-steps">Next steps</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#before-you-start">Before you start</a></li><li class="toc-h2"><a href="#step-1-install-the-app">Step 1: Install the app</a></li><li class="toc-h2"><a href="#step-2-install-a-container">Step 2: Install a container</a></li><li class="toc-h3"><a href="#from-the-repository">From the repository</a></li><li class="toc-h3"><a href="#from-a-file">From a file</a></li><li class="toc-h3"><a href="#the-setup-wizard">The setup wizard</a></li><li class="toc-h2"><a href="#step-3-start-it-and-get-a-shell">Step 3: Start it and get a shell</a></li><li class="toc-h2"><a href="#checking-requirements-later">Checking requirements later</a></li></ul></nav>
   </aside>
 <footer class="footer">
   <div class="footer-inner">

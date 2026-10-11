@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Two recipes: a mobile server behind Tailscale, UFW and Fail2Ban, and Docker running nested inside a Droidspaces container.">
-  <title>Cool things you can do - Droidspaces Docs</title>
-  <meta property="og:title" content="Cool things you can do - Droidspaces Docs">
-  <meta property="og:description" content="Two recipes: a mobile server behind Tailscale, UFW and Fail2Ban, and Docker running nested inside a Droidspaces container.">
+  <meta name="description" content="Things to build with Droidspaces on a phone: a home server reachable through Tailscale and locked down with UFW and Fail2Ban, Docker inside a container, and a watchdog that keeps Wi-Fi awake.">
+  <title>Recipes - Droidspaces Docs</title>
+  <meta property="og:title" content="Recipes - Droidspaces Docs">
+  <meta property="og:description" content="Things to build with Droidspaces on a phone: a home server reachable through Tailscale and locked down with UFW and Fail2Ban, Docker inside a container, and a watchdog that keeps Wi-Fi awake.">
   <meta property="og:url" content="https://www.droidspaces.org/docs/cool-things-you-can-do.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Droidspaces">
@@ -15,15 +15,15 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="The Droidspaces wordmark, the words Linux containers on Android, and a terminal starting an Ubuntu container">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Cool things you can do - Droidspaces Docs">
-  <meta name="twitter:description" content="Two recipes: a mobile server behind Tailscale, UFW and Fail2Ban, and Docker running nested inside a Droidspaces container.">
+  <meta name="twitter:title" content="Recipes - Droidspaces Docs">
+  <meta name="twitter:description" content="Things to build with Droidspaces on a phone: a home server reachable through Tailscale and locked down with UFW and Fail2Ban, Docker inside a container, and a watchdog that keeps Wi-Fi awake.">
   <meta name="twitter:image" content="https://www.droidspaces.org/assets/images/og-image.png">
   <link rel="canonical" href="https://www.droidspaces.org/docs/cool-things-you-can-do.html">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Cool things you can do", "description": "Two recipes: a mobile server behind Tailscale, UFW and Fail2Ban, and Docker running nested inside a Droidspaces container.", "url": "https://www.droidspaces.org/docs/cool-things-you-can-do.html", "inLanguage": "en", "dateModified": "2026-10-03", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Cool things you can do", "item": "https://www.droidspaces.org/docs/cool-things-you-can-do.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Recipes", "description": "Things to build with Droidspaces on a phone: a home server reachable through Tailscale and locked down with UFW and Fail2Ban, Docker inside a container, and a watchdog that keeps Wi-Fi awake.", "url": "https://www.droidspaces.org/docs/cool-things-you-can-do.html", "inLanguage": "en", "dateModified": "2026-10-12", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Recipes", "item": "https://www.droidspaces.org/docs/cool-things-you-can-do.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -47,7 +47,7 @@
 </nav>
 
 <div class="docs-layout">
-  <button class="doc-breadcrumb" popovertarget="sidebar"><span class="icon" aria-hidden="true">menu</span><span>Docs</span><span class="bc-sep">/</span><span class="bc-section">Recipes</span><span class="bc-sep">/</span><span class="bc-label">Cool things you can do</span></button>
+  <button class="doc-breadcrumb" popovertarget="sidebar"><span class="icon" aria-hidden="true">menu</span><span>Docs</span><span class="bc-sep">/</span><span class="bc-label">Recipes</span></button>
   <aside class="sidebar" id="sidebar" popover>
     <button class="icon-button sidebar-close" popovertarget="sidebar" popovertargetaction="hide" aria-label="Close navigation"><span class="icon" aria-hidden="true">close</span></button>
     <button class="search-open" type="button" hidden><span class="icon" aria-hidden="true">search</span>Search the docs<kbd>Ctrl K</kbd></button>
@@ -56,15 +56,15 @@
 <a href="installation-linux.html" class="sidebar-link">Linux installation</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Guides</summary>
-<a href="features.html" class="sidebar-link">Feature deep dives</a>
-<a href="graphics-and-audio.html" class="sidebar-link">Display, audio & desktop</a>
-<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
-<a href="usage-android-app.html" class="sidebar-link">Android app usage</a>
+<a href="usage-android-app.html" class="sidebar-link">Android app guide</a>
+<a href="features.html" class="sidebar-link">Container settings</a>
 <a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
+<a href="graphics-and-audio.html" class="sidebar-link">Display, audio and desktop</a>
+<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
 <a href="networking-from-zero.html" class="sidebar-link">Networking from zero</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Recipes</summary>
-<a href="cool-things-you-can-do.html" class="sidebar-link" aria-current="page">Cool things you can do</a>
+<a href="cool-things-you-can-do.html" class="sidebar-link" aria-current="page">Recipes</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Reference</summary>
 <a href="troubleshooting.html" class="sidebar-link">Troubleshooting</a>
@@ -75,242 +75,131 @@
   </aside>
   <main id="main" class="docs-content">
     <article>
-<h1 id="cool-things-you-can-do-with-droidspaces">Cool things you can do with Droidspaces <a class="header-anchor" href="#cool-things-you-can-do-with-droidspaces">#</a></h1>
-<div class="callout callout-important"><strong class="callout-title">Important</strong><p>This guide is for <strong>Android devices</strong>. Droidspaces also runs on desktop Linux, but these instructions deal with the networking, storage and kernel requirements specific to Android.</p></div>
-<h3 id="quick-navigation">Quick navigation <a class="header-anchor" href="#quick-navigation">#</a></h3>
-<ul>
-<li><a href="#1-setting-up-a-secure-mobile-server-tailscale--ufw--fail2ban">1. Setting up a secure &quot;mobile server&quot; (Tailscale + UFW + Fail2Ban)</a>
-<ul>
-<li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#step-1-install-networking-tools--compatibility-layer">Step 1: Install networking tools &amp; compatibility layer</a></li>
-<li><a href="#step-2-personal-user-setup--ssh-hardening">Step 2: Personal user setup &amp; SSH hardening</a></li>
-<li><a href="#step-3-set-up-tailscale">Step 3: Set up Tailscale</a></li>
-<li><a href="#step-4-secure-the-container-with-ufw-firewall">Step 4: Secure the container with UFW (firewall)</a></li>
-<li><a href="#step-5-add-brute-force-protection-with-fail2ban">Step 5: Add brute-force protection with Fail2Ban</a></li>
-</ul>
-</li>
-<li><a href="#2-running-docker-containers-nested-containerization">2. Running Docker containers (nested containerization)</a>
-<ul>
-<li><a href="#prerequisites-1">Prerequisites</a></li>
-<li><a href="#step-1-ensure-nat-networking">Step 1: Ensure NAT networking</a></li>
-<li><a href="#step-2-compatibility-layer-iptables-legacy">Step 2: Compatibility Layer (iptables-legacy)</a></li>
-<li><a href="#step-3-install-docker">Step 3: Install Docker</a></li>
-<li><a href="#step-4-non-root-user-setup">Step 4: Non-root user setup</a></li>
-<li><a href="#step-5-verify-installation">Step 5: Verify installation</a></li>
-<li><a href="#last-resort-for-host-mode-or-legacy-kernels-old-kernels-only">&quot;Last resort&quot; for host mode or legacy kernels (old kernels only)</a></li>
-</ul>
-</li>
-</ul>
-<hr />
-<h2 id="1-setting-up-a-secure-mobile-server-tailscale--ufw--fail2ban">1. Setting up a secure &quot;mobile server&quot; (Tailscale + UFW + Fail2Ban) <a class="header-anchor" href="#1-setting-up-a-secure-mobile-server-tailscale--ufw--fail2ban">#</a></h2>
-<p>Droidspaces, Tailscale and the standard Linux security tools together turn an Android device into a Linux server you can reach from anywhere, with nothing exposed to the open internet.</p>
-<h3 id="prerequisites">Prerequisites <a class="header-anchor" href="#prerequisites">#</a></h3>
-<ul>
-<li><strong>Kernel support</strong>: this setup needs several Netfilter and IPSet modules. See <a href="kernel-configuration.html#step-2-firewall-support-ufwfail2ban---optional">Additional Kernel Configuration for UFW/Fail2ban</a> for the full list of required options.</li>
-<li><strong>LTS distribution</strong>: use a long-term support (LTS) distribution such as <strong>Ubuntu 24.04 LTS</strong> or <strong>Debian 12</strong> for stability and package support.</li>
-<li><strong>Root user</strong>: run every step in this guide as the <strong>root</strong> user inside the container.</li>
-<li><strong>Package manager</strong>: the commands below use <code>apt</code>, which is only available on Debian and Ubuntu-based distributions.</li>
-<li><strong>NAT mode</strong>: <strong>mandatory.</strong> Run the container in NAT mode (<code>--net=nat</code>). With host networking, a firewall like UFW either interferes with the Android host's connectivity or does not work at all.</li>
-</ul>
-<hr />
-<h3 id="step-1-install-networking-tools--compatibility-layer">Step 1: Install networking tools &amp; compatibility layer <a class="header-anchor" href="#step-1-install-networking-tools--compatibility-layer">#</a></h3>
-<p>Install the networking tools needed for firewall rules and debugging, then make iptables work with the Android kernel.</p>
-<ol>
-<li>
-<p><strong>Install the tools</strong>:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>net-tools<span class="w"> </span>iptables
+<h1 id="recipes">Recipes <a class="header-anchor" href="#recipes">#</a></h1>
+<p>Three things people build with Droidspaces on a phone. Each one assumes a container that already starts and has internet, which the <a href="installation-android.html">installation guide</a> gets you to. The commands are for Debian and Ubuntu; other distributions have the same packages under other names.</p>
+<h2 id="a-phone-as-a-home-server-reachable-from-anywhere">A phone as a home server, reachable from anywhere <a class="header-anchor" href="#a-phone-as-a-home-server-reachable-from-anywhere">#</a></h2>
+<p>A container with SSH, reachable from your laptop wherever you are through Tailscale, with nothing open to the internet. Tailscale gives every device on your account a private address and an encrypted tunnel between them, so you never forward a port on your router.</p>
+<p><strong>Before you start.</strong> The container must be in NAT mode, the default, or gateway mode. In host mode a firewall inside the container fights the phone's own networking. UFW and Fail2Ban need a few extra netfilter options in the kernel; the <a href="kernel-configuration.html#step-2-firewall-support-optional">kernel guide</a> lists them. Run everything below as root inside the container.</p>
+<p><strong>1. A user of your own.</strong> Distributions ship with a default user on UID 1000. Replace it with yours, give it <code>sudo</code>, and set a password:</p>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="nv">DEFAULT_USER</span><span class="o">=</span><span class="k">$(</span>getent<span class="w"> </span>passwd<span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d:<span class="w"> </span>-f1<span class="k">)</span>
+<span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DEFAULT_USER</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>userdel<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DEFAULT_USER</span><span class="s2">&quot;</span>
+useradd<span class="w"> </span>-m<span class="w"> </span>-u<span class="w"> </span><span class="m">1000</span><span class="w"> </span>-s<span class="w"> </span>/bin/bash<span class="w"> </span>alice
+usermod<span class="w"> </span>-aG<span class="w"> </span>sudo<span class="w"> </span>alice
+passwd<span class="w"> </span>alice
 </code></pre></div>
-</li>
-<li>
-<p><strong>Switch to legacy iptables</strong>:
-Current Ubuntu and Debian releases default to the <code>nftables</code> backend, which often fails in Droidspaces containers on Android kernels. You <strong>must</strong> switch to the legacy <code>iptables</code> backend for the firewall to work:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>update-alternatives<span class="w"> </span>--set<span class="w"> </span>iptables<span class="w"> </span>/usr/sbin/iptables-legacy
-update-alternatives<span class="w"> </span>--set<span class="w"> </span>ip6tables<span class="w"> </span>/usr/sbin/ip6tables-legacy
-</code></pre></div>
-</li>
-</ol>
-<hr />
-<h3 id="step-2-personal-user-setup--ssh-hardening">Step 2: Personal user setup &amp; SSH hardening <a class="header-anchor" href="#step-2-personal-user-setup--ssh-hardening">#</a></h3>
-<p>Create a dedicated user with <code>sudo</code> privileges and turn off direct root login over SSH.</p>
-<ol>
-<li>
-<p><strong>Reclaim UID 1000</strong>: distributions usually give UID <code>1000</code> to the first non-root user (such as <code>ubuntu</code>). To use this ID for your own user, first find and remove whichever user already has UID 1000:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Identify and delete the default user associated with UID 1000</span>
-<span class="nv">DEFAULT_USER</span><span class="o">=</span><span class="k">$(</span>getent<span class="w"> </span>passwd<span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d:<span class="w"> </span>-f<span class="w"> </span><span class="m">1</span><span class="k">)</span>
-userdel<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DEFAULT_USER</span><span class="s2">&quot;</span>
-groupdel<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DEFAULT_USER</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
-</code></pre></div>
-</li>
-<li>
-<p><strong>Create your user as UID 1000</strong> (replace <code>YOUR_USER</code> with the username you want):</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>useradd<span class="w"> </span>-m<span class="w"> </span>-u<span class="w"> </span><span class="m">1000</span><span class="w"> </span>-s<span class="w"> </span>/bin/bash<span class="w"> </span>YOUR_USER
-usermod<span class="w"> </span>-aG<span class="w"> </span>sudo<span class="w"> </span>YOUR_USER
-passwd<span class="w"> </span>YOUR_USER
-</code></pre></div>
-</li>
-<li>
-<p><strong>Install the OpenSSH server</strong>:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>openssh-server
-</code></pre></div>
-</li>
-<li>
-<p><strong>Disable root login</strong>:
-Edit <code>/etc/ssh/sshd_config</code> to refuse direct root logins:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/#PermitRootLogin prohibit-password/PermitRootLogin no/&#39;</span><span class="w"> </span>/etc/ssh/sshd_config
-sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/PermitRootLogin yes/PermitRootLogin no/&#39;</span><span class="w"> </span>/etc/ssh/sshd_config
+<p><strong>2. SSH, with root login off:</strong></p>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>openssh-server
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/^#\?PermitRootLogin.*/PermitRootLogin no/&#39;</span><span class="w"> </span>/etc/ssh/sshd_config
 systemctl<span class="w"> </span>restart<span class="w"> </span>ssh
 </code></pre></div>
-</li>
-</ol>
-<hr />
-<h3 id="step-3-set-up-tailscale">Step 3: Set up Tailscale <a class="header-anchor" href="#step-3-set-up-tailscale">#</a></h3>
-<p>Tailscale gives you an encrypted P2P tunnel to the container, so any device in your Tailnet can reach it without opening ports on your router.</p>
-<ol>
-<li>
-<p><strong>Install Tailscale</strong>:</p>
+<p><strong>3. Tailscale.</strong> Install it and sign in; the command prints a link to open on any device:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://tailscale.com/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+tailscale<span class="w"> </span>up
 </code></pre></div>
-</li>
-<li>
-<p><strong>Authenticate</strong>:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>tailscale<span class="w"> </span>up
-</code></pre></div>
-</li>
-</ol>
-<hr />
-<h3 id="step-4-secure-the-container-with-ufw-firewall">Step 4: Secure the container with UFW (firewall) <a class="header-anchor" href="#step-4-secure-the-container-with-ufw-firewall">#</a></h3>
-<p>NAT mode is dual-stack, so UFW can manage IPv6 as well. Skip the first step unless the container runs with <code>--disable-ipv6</code>, in which case UFW fails to initialise its IPv6 rules.</p>
-<ol>
-<li>
-<p><strong>Disable IPv6 in UFW</strong> (only with <code>--disable-ipv6</code>):</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/IPV6=yes/IPV6=no/&#39;</span><span class="w"> </span>/etc/default/ufw
-</code></pre></div>
-</li>
-<li>
-<p><strong>Set the default policies</strong>:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>ufw<span class="w"> </span>default<span class="w"> </span>deny<span class="w"> </span>incoming
+<p>From then on <code>ssh alice@&lt;container name&gt;</code> works from any other device on your Tailscale account, by the name shown in the Tailscale admin console.</p>
+<p><strong>4. UFW.</strong> Refuse everything that does not arrive through Tailscale:</p>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>ufw
+ufw<span class="w"> </span>default<span class="w"> </span>deny<span class="w"> </span>incoming
 ufw<span class="w"> </span>default<span class="w"> </span>allow<span class="w"> </span>outgoing
+ufw<span class="w"> </span>allow<span class="w"> </span><span class="k">in</span><span class="w"> </span>on<span class="w"> </span>tailscale0
+ufw<span class="w"> </span>--force<span class="w"> </span><span class="nb">enable</span>
 </code></pre></div>
-</li>
-<li>
-<p><strong>Allow the Tailscale interface</strong>:
-Rather than listing IP addresses, tell UFW to trust anything that arrives through your private Tailscale tunnel:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>ufw<span class="w"> </span>allow<span class="w"> </span><span class="k">in</span><span class="w"> </span>on<span class="w"> </span>tailscale0
-</code></pre></div>
-</li>
-<li>
-<p><strong>Enable the firewall</strong>:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>ufw<span class="w"> </span>--force<span class="w"> </span><span class="nb">enable</span>
-</code></pre></div>
-</li>
-</ol>
-<hr />
-<h3 id="step-5-add-brute-force-protection-with-fail2ban">Step 5: Add brute-force protection with Fail2Ban <a class="header-anchor" href="#step-5-add-brute-force-protection-with-fail2ban">#</a></h3>
-<p>Fail2Ban reads the system logs and blocks IP addresses that behave maliciously, such as repeated failed logins.</p>
-<ol>
-<li>
-<p><strong>Install Fail2Ban</strong>:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fail2ban
-</code></pre></div>
-</li>
-<li>
-<p><strong>Create a local configuration</strong>:
-Create <code>/etc/fail2ban/jail.local</code> to protect SSH and ban through UFW:</p>
+<p>If the container runs with IPv6 disabled, set <code>IPV6=no</code> in <code>/etc/default/ufw</code> first, or UFW fails to start.</p>
+<p><strong>5. Fail2Ban</strong>, which bans an address after repeated failed logins. Put this in <code>/etc/fail2ban/jail.local</code>, with your Tailscale address and LAN subnet filled in so you cannot lock yourself out:</p>
 <div class="code-block"><span class="code-lang">ini</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="k">[DEFAULT]</span>
-<span class="c1"># Ban for 1 hour after 5 failed attempts within 10 minutes</span>
 <span class="na">bantime</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s">1h</span>
 <span class="na">findtime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10m</span>
 <span class="na">maxretry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">5</span>
-
-<span class="c1"># Use UFW as the banning action</span>
 <span class="na">banaction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ufw</span>
-
-<span class="c1"># Whitelist to prevent accidental lockouts:</span>
-<span class="c1"># 1. YOUR_TAILSCALE_IP: Your private tunnel address (e.g. 100.74.132.81)</span>
-<span class="c1"># 2. 172.28.0.0/16: The internal Droidspaces NAT bridge (covers all containers)</span>
-<span class="c1"># 3. YOUR_LAN_SUBNET: Your local Wi-Fi range if using port forwarding (e.g. if your LAN IP is 192.168.1.15, use 192.168.1.0/24)</span>
-<span class="na">ignoreip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">YOUR_TAILSCALE_IP 172.28.0.0/16 YOUR_LAN_SUBNET</span>
+<span class="na">ignoreip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">100.x.y.z 172.28.0.0/16 192.168.1.0/24</span>
 
 <span class="k">[sshd]</span>
 <span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span>
 <span class="na">port</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="s">ssh</span>
 <span class="na">backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">systemd</span>
 </code></pre></div>
-</li>
-<li>
-<p><strong>Start and verify</strong>:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>systemctl<span class="w"> </span>restart<span class="w"> </span>fail2ban
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>fail2ban
+systemctl<span class="w"> </span>restart<span class="w"> </span>fail2ban
 fail2ban-client<span class="w"> </span>status<span class="w"> </span>sshd
 </code></pre></div>
-</li>
-</ol>
-<p>The server now refuses incoming connections from the open internet, and you keep full access through your private Tailscale network.</p>
-<hr />
-<h2 id="2-running-docker-containers-nested-containerization">2. Running Docker containers (nested containerization) <a class="header-anchor" href="#2-running-docker-containers-nested-containerization">#</a></h2>
-<p>Docker runs natively inside Droidspaces containers on every supported kernel version, so you can run containerized services such as Portainer or Home Assistant on the phone itself.</p>
-<h3 id="prerequisites-1">Prerequisites <a class="header-anchor" href="#prerequisites-1">#</a></h3>
-<ul>
-<li><strong>LTS distribution</strong>: if your kernel is older than <strong>5.x.x</strong>, use an LTS distribution such as <strong>Ubuntu 24.04 LTS</strong> for the best compatibility.</li>
-<li><strong>Kernel configuration</strong>: your kernel needs the required Droidspaces options enabled. See <a href="kernel-configuration.html#step-1-mandatory-configuration">Required Kernel Configuration</a>.</li>
-<li><strong>Storage mode</strong>: you <strong>must</strong> use either <strong>ext4 /data</strong> or <strong>rootfs.img mode</strong> (recommended).
-<ul>
-<li><em>Why?</em> Android's default <code>f2fs</code> filesystem does not support the overlay features that Docker's <code>overlay2</code> storage driver needs. A <code>rootfs.img</code> puts the container on a native ext4 filesystem.</li>
-</ul>
-</li>
-<li><strong>NAT mode</strong>: <strong>mandatory.</strong> Docker needs NAT networking to create its internal <code>docker0</code> bridge and give nested containers internet access.</li>
-</ul>
-<hr />
-<h3 id="step-1-ensure-nat-networking">Step 1: Ensure NAT networking <a class="header-anchor" href="#step-1-ensure-nat-networking">#</a></h3>
-<p>In host networking mode, Docker fails when it tries to create the <code>docker0</code> interface. Use NAT mode for this container.</p>
-<p>To switch to NAT mode, edit the container configuration in the Android app.</p>
-<h3 id="step-2-compatibility-layer-iptables-legacy">Step 2: Compatibility layer (iptables-legacy) <a class="header-anchor" href="#step-2-compatibility-layer-iptables-legacy">#</a></h3>
-<p>Docker's networking is built on <code>iptables</code>. Current distributions often default to the <code>nftables</code> backend, which can cause &quot;chain not found&quot; errors in containers. Switch to the legacy backend before installing Docker:</p>
+<p>Turn on <strong>Run at Boot</strong> in the container's settings, and the server comes up with the phone.</p>
+<h2 id="docker-inside-a-container">Docker inside a container <a class="header-anchor" href="#docker-inside-a-container">#</a></h2>
+<p>Docker runs inside a Droidspaces container on every supported kernel, so Portainer, Home Assistant, Pi-hole or anything else packaged for Docker runs on the phone.</p>
+<p>The Base and desktop images in the repository, the ones named Base, XFCE or bspwm, ship with Docker installed and configured. Install one, start it, and this works straight away:</p>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hello-world
+</code></pre></div>
+<p>The Minimal images and OpenWrt do not include it. The rest of this recipe is for those, and for a rootfs you prepared yourself.</p>
+<p><strong>Before you start.</strong> The container needs its own network stack, so NAT mode, the default, or gateway mode; in host mode Docker cannot create its bridge. It needs an ext4 filesystem for Docker's <code>overlay2</code> storage, which a sparse image rootfs gives you. On Debian and Ubuntu the app's installer has already switched <code>iptables</code> to the legacy backend, which the Android kernel requires; on a rootfs you prepared yourself, do it by hand:</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>update-alternatives<span class="w"> </span>--set<span class="w"> </span>iptables<span class="w"> </span>/usr/sbin/iptables-legacy
 update-alternatives<span class="w"> </span>--set<span class="w"> </span>ip6tables<span class="w"> </span>/usr/sbin/ip6tables-legacy
 </code></pre></div>
-<h3 id="step-3-install-docker">Step 3: Install Docker <a class="header-anchor" href="#step-3-install-docker">#</a></h3>
-<p>Use the official Docker install script or the distribution's package manager:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Using the official convenience script</span>
-curl<span class="w"> </span>-fsSL<span class="w"> </span>https://get.docker.com<span class="w"> </span>-o<span class="w"> </span>get-docker.sh
-sh<span class="w"> </span>get-docker.sh
+<p><strong>1. Install Docker</strong> with its own script, then let your user run it without <code>sudo</code>:</p>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://get.docker.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span>alice
 </code></pre></div>
-<h3 id="step-4-non-root-user-setup">Step 4: Non-root user setup <a class="header-anchor" href="#step-4-non-root-user-setup">#</a></h3>
-<p>To run Docker commands without <code>sudo</code>, add your user to the <code>docker</code> group:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Replace YOUR_USER with your username</span>
-usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span>YOUR_USER
-
-<span class="c1"># Apply the group change without logging out</span>
-newgrp<span class="w"> </span>docker
-</code></pre></div>
-<h3 id="step-5-verify-installation">Step 5: Verify installation <a class="header-anchor" href="#step-5-verify-installation">#</a></h3>
-<p>Check that Docker can pull and run a nested container:</p>
+<p><strong>2. Check it:</strong></p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>hello-world
 </code></pre></div>
-<p>If you see &quot;Hello from Docker!&quot;, nested containers are working on Android.</p>
-<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p><strong>Troubleshooting Docker</strong>: if the Docker daemon does not start on its own or <code>docker run</code> fails, run <code>sudo dockerd</code> by hand in your terminal. It prints logs as it goes, which show missing kernel modules, filesystem conflicts or network bridge problems.</p></div>
-<h3 id="last-resort-for-host-mode-or-legacy-kernels-old-kernels-only">&quot;Last resort&quot; for host mode or legacy kernels (old kernels only) <a class="header-anchor" href="#last-resort-for-host-mode-or-legacy-kernels-old-kernels-only">#</a></h3>
-<p>If you have to run Docker in <strong>host networking mode</strong>, or your kernel is too old for <code>iptables-legacy</code> and NAT networking, you can turn off Docker's own network management as a last resort.</p>
-<p>Configure the daemon:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/docker
-cat<span class="w"> </span><span class="s">&lt;&lt;EOF &gt; /etc/docker/daemon.json</span>
-<span class="s">{</span>
-<span class="s">  &quot;iptables&quot;: false,</span>
-<span class="s">  &quot;ip6tables&quot;: false,</span>
-<span class="s">  &quot;bridge&quot;: &quot;none&quot;</span>
-<span class="s">}</span>
-<span class="s">EOF</span>
-systemctl<span class="w"> </span>restart<span class="w"> </span>docker
+<p><strong>3. Optional: user namespace remapping.</strong> With <strong>Allow Sandboxing</strong> on in the container's settings, Docker can run its containers under a remapped user range so that root inside a Docker container is not root inside the Droidspaces container. Put this in <code>/etc/docker/daemon.json</code> and restart Docker:</p>
+<div class="code-block"><span class="code-lang">json</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="p">{</span><span class="w"> </span><span class="nt">&quot;userns-remap&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
-<div class="callout callout-warning"><strong class="callout-title">Warning</strong><p>This <code>daemon.json</code> turns off Docker's internal bridge (<code>docker0</code>) and all automatic port forwarding. Docker containers then only get internet access when started with <code>--network host</code>.</p>
-<p>For example: <code>docker run -it --network host ubuntu</code></p></div>
+<p>This is the setup on the maintainer's phone: Ubuntu 24.04 in a sparse image, gateway mode, Docker 29 with <code>overlay2</code> and <code>userns-remap</code>, on a 5.15 kernel.</p>
+<p>If the Docker daemon will not start, run <code>dockerd</code> by hand in a terminal. Its output names the missing kernel option or the network step that failed.</p>
+<p><strong>On kernels older than 5.x</strong> two things can still bite. Docker's device management uses BPF attach types those kernels lack, which shows up as <code>Invalid argument</code>; put <code>&quot;exec-opts&quot;: [&quot;native.cgroupdriver=cgroupfs&quot;]</code> and <code>&quot;storage-driver&quot;: &quot;vfs&quot;</code> in <code>daemon.json</code>. And if NAT mode is impossible and the container must run in host mode, turn Docker's own networking off as a last resort. Docker containers then need <code>--network host</code> to reach the internet:</p>
+<div class="code-block"><span class="code-lang">json</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="p">{</span><span class="w"> </span><span class="nt">&quot;iptables&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;ip6tables&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;bridge&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;none&quot;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<h2 id="keeping-wi-fi-awake">Keeping Wi-Fi awake <a class="header-anchor" href="#keeping-wi-fi-awake">#</a></h2>
+<p>Android puts the Wi-Fi radio into power saving when the screen is off, and a server in a container becomes sluggish or drops connections. There is no setting for it, so a small container turns it off every minute.</p>
+<p>The container must be in host mode: the phone's <code>wlan0</code> is not visible from any other mode. Use a minimal Alpine container for nothing but this.</p>
+<p><strong>1. Install <code>iw</code></strong> inside it: <code>apk add iw</code> on Alpine, <code>apt install iw</code> on Debian and Ubuntu.</p>
+<p><strong>2. The watchdog</strong>, at <code>/usr/local/bin/wifi-watchdog.sh</code>, made executable with <code>chmod +x</code>:</p>
+<div class="code-block"><span class="code-lang">sh</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="ch">#!/bin/sh</span>
+<span class="k">while</span><span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>iw<span class="w"> </span>dev<span class="w"> </span>wlan0<span class="w"> </span>get<span class="w"> </span>power_save<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span>on<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>iw<span class="w"> </span>dev<span class="w"> </span>wlan0<span class="w"> </span><span class="nb">set</span><span class="w"> </span>power_save<span class="w"> </span>off
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span>sleep<span class="w"> </span><span class="m">60</span>
+<span class="k">done</span>
+</code></pre></div>
+<p><strong>3. A service to keep it running.</strong> On Alpine, <code>/etc/init.d/wifi-watchdog</code>:</p>
+<div class="code-block"><span class="code-lang">sh</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="ch">#!/sbin/openrc-run</span>
+<span class="nv">name</span><span class="o">=</span><span class="s2">&quot;Wi-Fi power save watchdog&quot;</span>
+<span class="nv">command</span><span class="o">=</span><span class="s2">&quot;/usr/local/bin/wifi-watchdog.sh&quot;</span>
+<span class="nv">command_background</span><span class="o">=</span><span class="nb">true</span>
+<span class="nv">pidfile</span><span class="o">=</span><span class="s2">&quot;/run/</span><span class="si">${</span><span class="nv">RC_SVCNAME</span><span class="si">}</span><span class="s2">.pid&quot;</span>
+depend<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>need<span class="w"> </span>networking
+<span class="o">}</span>
+</code></pre></div>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>chmod<span class="w"> </span>+x<span class="w"> </span>/etc/init.d/wifi-watchdog
+rc-update<span class="w"> </span>add<span class="w"> </span>wifi-watchdog<span class="w"> </span>default
+rc-service<span class="w"> </span>wifi-watchdog<span class="w"> </span>start
+</code></pre></div>
+<p>On a systemd distribution, <code>/etc/systemd/system/wifi-watchdog.service</code>:</p>
+<div class="code-block"><span class="code-lang">ini</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Wi-Fi power save watchdog</span>
+<span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
+
+<span class="k">[Service]</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/wifi-watchdog.sh</span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+<span class="na">RestartSec</span><span class="o">=</span><span class="s">10</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</code></pre></div>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>wifi-watchdog
+</code></pre></div>
+<p>Turn on <strong>Run at Boot</strong> for this container too.</p>
 <hr />
+<p>Previous: <a href="kernel-configuration.html">Kernel configuration</a> | Next: <a href="troubleshooting.html">Troubleshooting</a></p>
 
     </article>
     <p class="doc-edit"><a href="https://github.com/ravindu644/Droidspaces-OSS/edit/main/Documentation/Cool-things-you-can-do.md" rel="noopener noreferrer"><span class="icon" aria-hidden="true">edit</span>Edit this page on GitHub</a></p>
 <nav class="doc-nav" aria-label="Pages"><a href="networking-from-zero.html" class="doc-nav-prev"><small>Previous</small>Networking from zero</a><a href="troubleshooting.html" class="doc-nav-next"><small>Next</small>Troubleshooting</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h3"><a href="#quick-navigation">Quick navigation</a></li><li class="toc-h2"><a href="#1-setting-up-a-secure-mobile-server-tailscale--ufw--fail2ban">1. Setting up a secure &quot;mobile server&quot; (Tailscale + UFW + Fail2Ban)</a></li><li class="toc-h3"><a href="#prerequisites">Prerequisites</a></li><li class="toc-h3"><a href="#step-1-install-networking-tools--compatibility-layer">Step 1: Install networking tools &amp; compatibility layer</a></li><li class="toc-h3"><a href="#step-2-personal-user-setup--ssh-hardening">Step 2: Personal user setup &amp; SSH hardening</a></li><li class="toc-h3"><a href="#step-3-set-up-tailscale">Step 3: Set up Tailscale</a></li><li class="toc-h3"><a href="#step-4-secure-the-container-with-ufw-firewall">Step 4: Secure the container with UFW (firewall)</a></li><li class="toc-h3"><a href="#step-5-add-brute-force-protection-with-fail2ban">Step 5: Add brute-force protection with Fail2Ban</a></li><li class="toc-h2"><a href="#2-running-docker-containers-nested-containerization">2. Running Docker containers (nested containerization)</a></li><li class="toc-h3"><a href="#prerequisites-1">Prerequisites</a></li><li class="toc-h3"><a href="#step-1-ensure-nat-networking">Step 1: Ensure NAT networking</a></li><li class="toc-h3"><a href="#step-2-compatibility-layer-iptables-legacy">Step 2: Compatibility layer (iptables-legacy)</a></li><li class="toc-h3"><a href="#step-3-install-docker">Step 3: Install Docker</a></li><li class="toc-h3"><a href="#step-4-non-root-user-setup">Step 4: Non-root user setup</a></li><li class="toc-h3"><a href="#step-5-verify-installation">Step 5: Verify installation</a></li><li class="toc-h3"><a href="#last-resort-for-host-mode-or-legacy-kernels-old-kernels-only">&quot;Last resort&quot; for host mode or legacy kernels (old kernels only)</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#a-phone-as-a-home-server-reachable-from-anywhere">A phone as a home server, reachable from anywhere</a></li><li class="toc-h2"><a href="#docker-inside-a-container">Docker inside a container</a></li><li class="toc-h2"><a href="#keeping-wi-fi-awake">Keeping Wi-Fi awake</a></li></ul></nav>
   </aside>
 <footer class="footer">
   <div class="footer-inner">

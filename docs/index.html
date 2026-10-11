@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "CollectionPage", "headline": "Documentation", "description": "Every Droidspaces guide: install on Android or Linux, build the kernel, use the app and the CLI, networking, graphics and audio, recipes, troubleshooting and supported devices.", "url": "https://www.droidspaces.org/docs/", "inLanguage": "en", "dateModified": "2026-10-10", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "CollectionPage", "headline": "Documentation", "description": "Every Droidspaces guide: install on Android or Linux, build the kernel, use the app and the CLI, networking, graphics and audio, recipes, troubleshooting and supported devices.", "url": "https://www.droidspaces.org/docs/", "inLanguage": "en", "dateModified": "2026-10-12", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -56,15 +56,15 @@
 <a href="installation-linux.html" class="sidebar-link">Linux installation</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Guides</summary>
-<a href="features.html" class="sidebar-link">Feature deep dives</a>
-<a href="graphics-and-audio.html" class="sidebar-link">Display, audio & desktop</a>
-<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
-<a href="usage-android-app.html" class="sidebar-link">Android app usage</a>
+<a href="usage-android-app.html" class="sidebar-link">Android app guide</a>
+<a href="features.html" class="sidebar-link">Container settings</a>
 <a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
+<a href="graphics-and-audio.html" class="sidebar-link">Display, audio and desktop</a>
+<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
 <a href="networking-from-zero.html" class="sidebar-link">Networking from zero</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Recipes</summary>
-<a href="cool-things-you-can-do.html" class="sidebar-link">Cool things you can do</a>
+<a href="cool-things-you-can-do.html" class="sidebar-link">Recipes</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Reference</summary>
 <a href="troubleshooting.html" class="sidebar-link">Troubleshooting</a>
@@ -79,24 +79,24 @@
 <p>Every guide for Droidspaces, the Linux container runtime for Android and Linux.</p>
 <h2 id="basics">Basics</h2><ul>
 <li><a href="installation-android.html">Android installation</a>: Install Droidspaces on a rooted Android device: install the APK, let the app set up the backend, and create a Linux container without typing a terminal command.</li>
-<li><a href="installation-linux.html">Linux installation</a>: Install Droidspaces on a Linux desktop or server: download the tarball, install the binary, build a rootfs image and boot the first container.</li>
+<li><a href="installation-linux.html">Linux installation</a>: Install Droidspaces on a Linux desktop or server: install the binary, get a rootfs, put it in an ext4 image, and boot the first container.</li>
 </ul>
 <h2 id="guides">Guides</h2><ul>
-<li><a href="features.html">Feature deep dives</a>: How each Droidspaces feature works: namespace isolation, init system support, OverlayFS volatile mode, GPU acceleration, cgroup isolation, seccomp shields, and Android-specific tuning.</li>
-<li><a href="graphics-and-audio.html">Display, audio &amp; desktop</a>: GPU acceleration, PulseAudio sound and desktop environment auto-boot for Droidspaces containers on Android and Linux.</li>
-<li><a href="kernel-configuration.html">Kernel configuration</a>: How to compile an Android kernel with Droidspaces support: the config options and patches for non-GKI and GKI kernels.</li>
-<li><a href="usage-android-app.html">Android app usage</a>: Using the Droidspaces Android app: managing containers, networking, stats, the terminal and kernel settings.</li>
-<li><a href="linux-cli.html">Linux CLI</a>: Reference for the droidspaces command line: every command, flag and config file key.</li>
+<li><a href="usage-android-app.html">Android app guide</a>: Every screen in the Droidspaces Android app: the Home, Containers and Panel tabs, the container menu, the rootfs repository, the terminal, service management and Settings.</li>
+<li><a href="features.html">Container settings</a>: Every container setting in Droidspaces, in the order the app shows them: what each toggle or flag does, when to turn it on, and what it needs from the kernel.</li>
+<li><a href="linux-cli.html">Linux CLI</a>: Reference for the droidspaces command line: every command, every flag, and the config file keys.</li>
+<li><a href="graphics-and-audio.html">Display, audio and desktop</a>: GPU acceleration, PulseAudio sound and a desktop environment that starts on its own, for Droidspaces containers on Android and Linux.</li>
+<li><a href="kernel-configuration.html">Kernel configuration</a>: How to build an Android kernel with Droidspaces support: the config options and patches for non-GKI and GKI kernels, and how to check the result.</li>
 <li><a href="networking-from-zero.html">Networking from zero</a>: Every networking concept behind Droidspaces gateway mode, from the start: IP addresses, LAN, WAN, DHCP, DNS, NAT, bridges, veth pairs, network namespaces and OpenWRT.</li>
 </ul>
 <h2 id="recipes">Recipes</h2><ul>
-<li><a href="cool-things-you-can-do.html">Cool things you can do</a>: Two recipes: a mobile server behind Tailscale, UFW and Fail2Ban, and Docker running nested inside a Droidspaces container.</li>
+<li><a href="cool-things-you-can-do.html">Recipes</a>: Things to build with Droidspaces on a phone: a home server reachable through Tailscale and locked down with UFW and Fail2Ban, Docker inside a container, and a watchdog that keeps Wi-Fi awake.</li>
 </ul>
 <h2 id="reference">Reference</h2><ul>
-<li><a href="troubleshooting.html">Troubleshooting</a>: Fixes for common Droidspaces container problems: systemd hangs, paranoid networking, SELinux corruption, OverlayFS on f2fs, sparse image reclaim, Wi-Fi power save.</li>
+<li><a href="troubleshooting.html">Troubleshooting</a>: Fixes for common Droidspaces problems: a modern distribution that will not boot on an old kernel, no network inside the container, DNS failures, SELinux damage, sparse images that do not shrink, and resource limits that do not apply.</li>
 <li><a href="community-supported-devices.html">Community-supported devices</a>: Android devices that community members have run Droidspaces on, with kernel sources and downloads.</li>
-<li><a href="nix-nixos.html">Nix/NixOS</a>: Run NixOS in Droidspaces containers: build a tarball, import the compatibility module, and try the experimental Finix system.</li>
-<li><a href="uninstallation.html">Uninstallation</a>: Remove Droidspaces from Android and Linux: containers, backend data, the APK and system files.</li>
+<li><a href="nix-nixos.html">Nix/NixOS</a>: Run NixOS in a Droidspaces container: build a tarball, import the compatibility module, and try the experimental Finix system.</li>
+<li><a href="uninstallation.html">Uninstallation</a>: Remove Droidspaces from Android or Linux: containers, the backend and its data, the boot module, and the app.</li>
 </ul>
     </article>
     <p class="doc-edit"><a href="https://github.com/ravindu644/Droidspaces-OSS/tree/main/Documentation" rel="noopener noreferrer"><span class="icon" aria-hidden="true">edit</span>Edit this page on GitHub</a></p>

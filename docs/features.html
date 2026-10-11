@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="How each Droidspaces feature works: namespace isolation, init system support, OverlayFS volatile mode, GPU acceleration, cgroup isolation, seccomp shields, and Android-specific tuning.">
-  <title>Feature deep dives - Droidspaces Docs</title>
-  <meta property="og:title" content="Feature deep dives - Droidspaces Docs">
-  <meta property="og:description" content="How each Droidspaces feature works: namespace isolation, init system support, OverlayFS volatile mode, GPU acceleration, cgroup isolation, seccomp shields, and Android-specific tuning.">
+  <meta name="description" content="Every container setting in Droidspaces, in the order the app shows them: what each toggle or flag does, when to turn it on, and what it needs from the kernel.">
+  <title>Container settings - Droidspaces Docs</title>
+  <meta property="og:title" content="Container settings - Droidspaces Docs">
+  <meta property="og:description" content="Every container setting in Droidspaces, in the order the app shows them: what each toggle or flag does, when to turn it on, and what it needs from the kernel.">
   <meta property="og:url" content="https://www.droidspaces.org/docs/features.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Droidspaces">
@@ -15,15 +15,15 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="The Droidspaces wordmark, the words Linux containers on Android, and a terminal starting an Ubuntu container">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Feature deep dives - Droidspaces Docs">
-  <meta name="twitter:description" content="How each Droidspaces feature works: namespace isolation, init system support, OverlayFS volatile mode, GPU acceleration, cgroup isolation, seccomp shields, and Android-specific tuning.">
+  <meta name="twitter:title" content="Container settings - Droidspaces Docs">
+  <meta name="twitter:description" content="Every container setting in Droidspaces, in the order the app shows them: what each toggle or flag does, when to turn it on, and what it needs from the kernel.">
   <meta name="twitter:image" content="https://www.droidspaces.org/assets/images/og-image.png">
   <link rel="canonical" href="https://www.droidspaces.org/docs/features.html">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Feature deep dives", "description": "How each Droidspaces feature works: namespace isolation, init system support, OverlayFS volatile mode, GPU acceleration, cgroup isolation, seccomp shields, and Android-specific tuning.", "url": "https://www.droidspaces.org/docs/features.html", "inLanguage": "en", "dateModified": "2026-10-10", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Feature deep dives", "item": "https://www.droidspaces.org/docs/features.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Container settings", "description": "Every container setting in Droidspaces, in the order the app shows them: what each toggle or flag does, when to turn it on, and what it needs from the kernel.", "url": "https://www.droidspaces.org/docs/features.html", "inLanguage": "en", "dateModified": "2026-10-12", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Container settings", "item": "https://www.droidspaces.org/docs/features.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -47,7 +47,7 @@
 </nav>
 
 <div class="docs-layout">
-  <button class="doc-breadcrumb" popovertarget="sidebar"><span class="icon" aria-hidden="true">menu</span><span>Docs</span><span class="bc-sep">/</span><span class="bc-section">Guides</span><span class="bc-sep">/</span><span class="bc-label">Feature deep dives</span></button>
+  <button class="doc-breadcrumb" popovertarget="sidebar"><span class="icon" aria-hidden="true">menu</span><span>Docs</span><span class="bc-sep">/</span><span class="bc-section">Guides</span><span class="bc-sep">/</span><span class="bc-label">Container settings</span></button>
   <aside class="sidebar" id="sidebar" popover>
     <button class="icon-button sidebar-close" popovertarget="sidebar" popovertargetaction="hide" aria-label="Close navigation"><span class="icon" aria-hidden="true">close</span></button>
     <button class="search-open" type="button" hidden><span class="icon" aria-hidden="true">search</span>Search the docs<kbd>Ctrl K</kbd></button>
@@ -56,15 +56,15 @@
 <a href="installation-linux.html" class="sidebar-link">Linux installation</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Guides</summary>
-<a href="features.html" class="sidebar-link" aria-current="page">Feature deep dives</a>
-<a href="graphics-and-audio.html" class="sidebar-link">Display, audio & desktop</a>
-<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
-<a href="usage-android-app.html" class="sidebar-link">Android app usage</a>
+<a href="usage-android-app.html" class="sidebar-link">Android app guide</a>
+<a href="features.html" class="sidebar-link" aria-current="page">Container settings</a>
 <a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
+<a href="graphics-and-audio.html" class="sidebar-link">Display, audio and desktop</a>
+<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
 <a href="networking-from-zero.html" class="sidebar-link">Networking from zero</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Recipes</summary>
-<a href="cool-things-you-can-do.html" class="sidebar-link">Cool things you can do</a>
+<a href="cool-things-you-can-do.html" class="sidebar-link">Recipes</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Reference</summary>
 <a href="troubleshooting.html" class="sidebar-link">Troubleshooting</a>
@@ -75,548 +75,140 @@
   </aside>
   <main id="main" class="docs-content">
     <article>
-<h1 id="feature-deep-dives">Feature deep dives <a class="header-anchor" href="#feature-deep-dives">#</a></h1>
-<p>What each major Droidspaces feature does and how it works underneath.</p>
-<hr />
-<h2 id="namespace-isolation">Namespace isolation <a class="header-anchor" href="#namespace-isolation">#</a></h2>
-<h3 id="what-are-namespaces">What are namespaces? <a class="header-anchor" href="#what-are-namespaces">#</a></h3>
-<p>Linux namespaces are a kernel feature that partitions system resources, so each group of processes sees its own isolated set of them. Droidspaces uses five namespaces for every container, and a sixth, the network namespace, depending on the networking mode:</p>
+<h1 id="container-settings">Container settings <a class="header-anchor" href="#container-settings">#</a></h1>
+<p>Each setting below is one toggle in the app's container configuration, and one flag on the command line. They are listed in the order the app shows them. The CLI flag and the key it writes to the container's config file are given with each one, so this page serves both the app and the CLI.</p>
+<h2 id="how-settings-are-stored">How settings are stored <a class="header-anchor" href="#how-settings-are-stored">#</a></h2>
+<p>Every container has a <code>container.config</code> file of <code>key=value</code> lines. The app writes it from the configuration form. On the CLI, the flags you pass to the first <code>start</code> are saved into it, so later starts only need <code>--name</code>. Flags passed to a later <code>start</code> or <code>restart</code> update the file; <code>--reset</code> returns it to defaults while keeping the name and rootfs.</p>
+<p>A change takes effect the next time the container starts. In the app, the container's menu has <strong>Edit Container Configuration</strong>.</p>
+<h2 id="networking">Networking <a class="header-anchor" href="#networking">#</a></h2>
+<h3 id="network-mode">Network Mode <a class="header-anchor" href="#network-mode">#</a></h3>
+<p><code>--net=MODE</code>, key <code>net_mode</code>. The default is <code>nat</code>.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
-<th>Namespace</th>
-<th>Flag</th>
-<th>What It Isolates</th>
+<th>Mode</th>
+<th>What the container gets</th>
+<th>Use it when</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>PID</strong></td>
-<td><code>CLONE_NEWPID</code></td>
-<td>Process IDs. The container gets its own PID tree where init is PID 1.</td>
+<td><strong>NAT</strong></td>
+<td>Its own network stack and a private address, with internet through the host. Nothing to set up. The host's active connection is followed as it changes between Wi-Fi, mobile data and Ethernet.</td>
+<td>You want a container that just has internet. This is the right choice for almost everything.</td>
 </tr>
 <tr>
-<td><strong>MNT</strong></td>
-<td><code>CLONE_NEWNS</code></td>
-<td>Mount points. The container has its own filesystem view via <code>pivot_root</code>.</td>
+<td><strong>Gateway</strong></td>
+<td>Its own network stack, on a LAN owned by another running container, usually OpenWrt, which does DHCP, DNS, firewalling, routing and VPN for it.</td>
+<td>You want a VPN kill switch, DNS filtering, or several containers on one isolated LAN behind one router.</td>
 </tr>
 <tr>
-<td><strong>UTS</strong></td>
-<td><code>CLONE_NEWUTS</code></td>
-<td>Hostname and domain name. Each container can have its own hostname.</td>
+<td><strong>Macvlan</strong></td>
+<td>Its own MAC address on a wired network the phone is plugged into, and an address from that network's router. No NAT.</td>
+<td>The container should be a first-class device on your home LAN, reachable without port forwarding. Needs a USB Ethernet adapter on a phone.</td>
 </tr>
 <tr>
-<td><strong>IPC</strong></td>
-<td><code>CLONE_NEWIPC</code></td>
-<td>System V IPC and POSIX message queues. Prevents cross-container IPC leaks.</td>
+<td><strong>Host</strong></td>
+<td>The host's own network stack, shared.</td>
+<td>A program needs an interface only the host has. Services bind host ports directly, and a network manager inside the container can break the phone's connectivity.</td>
 </tr>
 <tr>
-<td><strong>Cgroup</strong></td>
-<td><code>CLONE_NEWCGROUP</code></td>
-<td>Cgroup root directory. Each container sees its own cgroup hierarchy.</td>
-</tr>
-<tr>
-<td><strong>Network</strong></td>
-<td><code>CLONE_NEWNET</code></td>
-<td>Network stack. Isolated interfaces, routing, and firewall (NAT/None modes).</td>
+<td><strong>None</strong></td>
+<td>A network stack with only loopback.</td>
+<td>The container must be offline.</td>
 </tr>
 </tbody>
 </table></div>
-<h3 id="network-namespace-isolation---net">Network namespace isolation (<code>--net</code>) <a class="header-anchor" href="#network-namespace-isolation---net">#</a></h3>
-<p>Droidspaces has four networking modes, and the mode decides whether a network namespace (<code>CLONE_NEWNET</code>) is used:</p>
-<ol>
-<li>
-<p><strong>Host mode (<code>--net=host</code>), the default</strong>: Droidspaces deliberately does <strong>not</strong> unshare the network namespace. The container shares the host's network stack, so it has internet access immediately, with no virtual bridge, NAT or firewall rules to set up. On Android, where networking is already complicated (cellular, Wi-Fi, VPN), this avoids a whole category of connectivity problems.</p>
-</li>
-<li>
-<p><strong>NAT mode (<code>--net=nat</code>)</strong>: The container gets a private network namespace, connected to the host through a virtual bridge or veth pair. It is fully isolated from the host's network, and still reaches the internet through the host's active uplink, which is detected automatically (or pinned manually with <code>--upstream</code>, see below). Works on the vast majority of Android devices.</p>
-</li>
-<li>
-<p><strong>None mode (<code>--net=none</code>)</strong>: The container gets a private, air-gapped network namespace with only the loopback interface up.</p>
-</li>
-<li>
-<p><strong>Gateway mode (<code>--net=gateway</code>)</strong>: The container's LAN is handed to <em>another</em> running container (typically OpenWRT). Droidspaces does only the L2 plumbing (bridge and veth pairs), and the gateway container owns all policy: DHCP, DNS, firewall, routing, VPN. Use it for VPN killswitches, segmented LANs and traffic analysis. The <a href="networking-from-zero.html">Networking From Zero</a> guide covers it in full.</p>
-</li>
-<li>
-<p><strong>Macvlan mode (<code>--net=macvlan</code>)</strong>: The container sits directly on a wired LAN through a host NIC (usually a USB Ethernet adapter), with its own MAC address and an address from that LAN's DHCP server. No NAT and nothing on the host to maintain. See <a href="#5-macvlan-mode---netmacvlan">Macvlan mode</a> below.</p>
-</li>
-</ol>
-<h3 id="how-it-compares-to-chroot">How it compares to chroot <a class="header-anchor" href="#how-it-compares-to-chroot">#</a></h3>
-<p>A <code>chroot</code> only changes the apparent root directory of a process. It gives no process, mount, hostname or IPC isolation. A process inside a chroot shares the host's PID space, can see and signal other processes, and cannot run an init system like systemd.</p>
-<p>Droidspaces uses <code>pivot_root</code> instead of <code>chroot</code>, which isolates more. With private mount propagation (<code>MS_PRIVATE</code>) on top, the container's mount events are invisible to the host.</p>
+<p><a href="networking-from-zero.html">Networking from zero</a> explains all five in depth, including how to set up an OpenWrt gateway.</p>
+<h3 id="static-ip-address">Static IP Address <a class="header-anchor" href="#static-ip-address">#</a></h3>
+<p><code>--nat-ip=IP</code>, key <code>static_nat_ip</code>. NAT mode only. Fixes the container's address in the <code>172.28.0.0/16</code> range. Without it the address is derived from the container's PID and can change between starts, which matters when another device or a port forward on your router has it written down.</p>
+<h3 id="upstream-interface">Upstream Interface <a class="header-anchor" href="#upstream-interface">#</a></h3>
+<p><code>--upstream=IFACE[,IFACE...]</code>, key <code>upstream_interfaces</code>. NAT mode only. Leave it empty and the container follows whatever connection the host is using. Set it and the container's internet goes out through the listed interfaces only, first one that is up and has internet wins. Wildcards work, and <code>rmnet*</code> is the way to name mobile data, whose interface number changes between reconnects.</p>
+<ul>
+<li><code>tun0</code>: the container can only reach the internet through a VPN app running on the phone. When the VPN is down, the container is offline.</li>
+<li><code>rmnet*</code>: the container stays on mobile data while the phone uses Wi-Fi. Turn on &quot;Mobile data always active&quot; in Developer Options for this.</li>
+<li><code>wlan0,rmnet*</code>: Wi-Fi when available, mobile data otherwise.</li>
+</ul>
+<h3 id="port-forwarding">Port Forwarding <a class="header-anchor" href="#port-forwarding">#</a></h3>
+<p><code>--port=[HOST:]CONTAINER[/tcp|udp]</code>, key <code>port_forwards</code>. NAT mode only. Makes a service inside the container reachable on a port of the host, from the host itself and from any network it is on. <code>--port=22</code> maps the same port on both sides, <code>--port=8080:80</code> maps host 8080 to container 80, and <code>--port=1000-2000:1000-2000</code> maps a range of the same size. Without a protocol, both TCP and UDP are forwarded. Repeat the flag or separate entries with commas.</p>
+<h3 id="disable-ipv6">Disable IPv6 <a class="header-anchor" href="#disable-ipv6">#</a></h3>
+<p><code>--disable-ipv6</code>, key <code>disable_ipv6</code>. Turns IPv6 off inside the container. In NAT mode the container normally gets IPv6 as well as IPv4, provided the kernel has IPv6 NAT; without it the app holds this toggle on. In host mode the setting reaches the host's own stack, which can break VPN apps on the phone.</p>
+<h3 id="dns-servers">DNS Servers <a class="header-anchor" href="#dns-servers">#</a></h3>
+<p><code>--dns=SERVER[,SERVER...]</code>, key <code>dns_servers</code>. Without it, NAT, host and none mode containers use Cloudflare and Google's public resolvers. Gateway and macvlan containers use whatever DNS their LAN's DHCP server hands out, which is what you want when the gateway filters ads or resolves local names, so set this only to override that on purpose.</p>
+<h2 id="integration-and-hardware">Integration and hardware <a class="header-anchor" href="#integration-and-hardware">#</a></h2>
+<h3 id="android-storage">Android Storage <a class="header-anchor" href="#android-storage">#</a></h3>
+<p><code>--enable-android-storage</code>, key <code>enable_android_storage</code>. Android only. Mounts the phone's shared storage at <code>/storage/emulated/0</code> inside the container, so your photos, downloads and documents are reachable from Linux.</p>
+<h3 id="hardware-access">Hardware Access <a class="header-anchor" href="#hardware-access">#</a></h3>
+<p><code>--hw-access</code>, key <code>enable_hw_access</code>. Gives the container the host's real <code>/dev</code>: GPU, USB devices, sensors, input devices, and every block device, partitions and SD card included. The container behaves like a Linux machine with that hardware. Turn it on for USB peripherals, for a desktop with GPU acceleration on Linux, or for anything that needs a device node the GPU toggle does not cover.</p>
+<div class="callout callout-caution"><strong class="callout-title">Caution</strong><p>Raw block devices are in there. A wrong <code>dd</code> or <code>mkfs</code> inside the container destroys the phone's partitions. Use this only with a container you trust, and do not report bugs seen with it on. The app makes you type a confirmation for that reason.</p></div>
+<p>The six host virtual terminals, <code>tty1</code> to <code>tty6</code>, stay hidden even with hardware access on, because a systemd container would otherwise put its login prompt on the host console. <code>--allow-vts</code> reveals them. The app has no toggle for it.</p>
+<h3 id="gpu-access">GPU Access <a class="header-anchor" href="#gpu-access">#</a></h3>
+<p><code>--gpu</code>, key <code>enable_gpu_mode</code>. The middle ground. The container keeps its private <code>/dev</code> and only the GPU render nodes are mirrored into it, so programs can use the GPU and nothing else on the host is exposed. Mirrored nodes are owned by a <code>droidspaces-gpu</code> group that root belongs to; add other users to that group with <code>usermod</code>. Hardware Access turns this on as well.</p>
+<p>Known GPU families: Mesa DRI render nodes on Intel, AMD and most ARM SoCs, Qualcomm Adreno (<code>kgsl</code>), ARM Mali, NVIDIA, PowerVR and the DMA heaps these drivers need.</p>
+<h3 id="configure-termuxx11">Configure Termux:X11 <a class="header-anchor" href="#configure-termuxx11">#</a></h3>
+<p><code>--x11</code>, key <code>enable_x11</code>. Android: starts the Termux:X11 server when the container starts, mounts its socket into the container, and sets <code>DISPLAY</code> for every login shell. Needs the Termux and Termux:X11 apps and the one-time setup in the <a href="graphics-and-audio.html">display guide</a>. Linux: mounts the host's X11 socket so GUI programs in the container open on your desktop.</p>
+<h3 id="configure-virgl-3d-acceleration">Configure VirGL 3D Acceleration <a class="header-anchor" href="#configure-virgl-3d-acceleration">#</a></h3>
+<p><code>--virgl</code>, key <code>enable_virgl</code>. Android only. Starts the VirGL server in Termux alongside Termux:X11 and sets <code>GALLIUM_DRIVER=virpipe</code> in the container, so OpenGL programs render on the phone's GPU instead of in software. The right choice on Mali and PowerVR GPUs. On Qualcomm, Turnip inside the container with GPU Access is faster; the <a href="graphics-and-audio.html">display guide</a> compares them.</p>
+<h3 id="configure-pulseaudio">Configure PulseAudio <a class="header-anchor" href="#configure-pulseaudio">#</a></h3>
+<p><code>--pulse-audio</code>, key <code>enable_pulseaudio</code>. Android only. Starts a PulseAudio server in Termux, mounts its socket into the container and sets <code>PULSE_SERVER</code>, so anything that plays sound in the container comes out of the phone's speaker.</p>
+<h2 id="resource-limits">Resource limits <a class="header-anchor" href="#resource-limits">#</a></h2>
+<p><code>--memory=SIZE</code>, <code>--cpus=COUNT</code> and <code>--pids-limit=N</code>, keys <code>memory_limit</code>, <code>cpu_quota</code> with <code>cpu_period</code>, and <code>pids_limit</code>. Off by default; a container shares everything the device has.</p>
+<ul>
+<li><strong>Limit memory</strong>: <code>--memory=512M</code> or <code>--memory=2G</code>. The container is pushed into swap before anything is killed. Everything inside the container, <code>free</code> and fastfetch included, reports usage against this limit.</li>
+<li><strong>Limit CPU</strong>: <code>--cpus=1.5</code> gives the container one and a half cores' worth of time, spread over all cores.</li>
+<li><strong>Limit processes</strong>: the most processes and threads the container may have at once, minimum 16. A systemd distribution needs a few hundred.</li>
+</ul>
+<p>Each limit needs its cgroup controller in the kernel: <code>CONFIG_MEMCG</code>, <code>CONFIG_CFS_BANDWIDTH</code> and <code>CONFIG_CGROUP_PIDS</code>. The app greys out a limit the kernel cannot enforce and names the missing option; the CLI skips it at start with a warning. Stock Android kernels often lack the CPU and process ones. <code>droidspaces info</code> prints the limits in force and current usage.</p>
+<p>One gap: a program that asks the kernel directly through <code>sysinfo()</code> rather than reading <code>/proc</code> still sees the host's memory and load. OpenWrt's LuCI does this. The limit is enforced all the same.</p>
+<h2 id="security-and-boot">Security and boot <a class="header-anchor" href="#security-and-boot">#</a></h2>
+<h3 id="selinux-permissive">SELinux Permissive <a class="header-anchor" href="#selinux-permissive">#</a></h3>
+<p><code>--selinux-permissive</code>, key <code>selinux_permissive</code>. Android and supported Linux distros only. Switches the host's SELinux to permissive while the container runs, and back to enforcing when the last container that asked for it stops.</p>
+<h3 id="allow-sandboxing">Allow Sandboxing <a class="header-anchor" href="#allow-sandboxing">#</a></h3>
+<p><code>--allow-sandboxing</code>, key <code>allow_sandboxing</code>. Off by default. Turn it on when something inside the container builds its own sandbox: rootless Docker or Podman, Flatpak, bwrap, Firefox, Chromium. They all create a user namespace and mount their own <code>/proc</code> inside it, and a stock container blocks both. With the toggle on, user namespaces are allowed and the container gets the pristine <code>/proc</code> and read-only <code>/sys</code> instances the kernel requires for that, under <code>/run/droidspaces/</code>.</p>
+<p>The cost is that root in the container can reach the host's live sysctl tree through that pristine <code>/proc</code>, so this is a statement of trust in the container's root user. Needs <code>CONFIG_USER_NS</code>, reported by <code>droidspaces check</code> as user namespace support. For Docker inside the container, put <code>{&quot;userns-remap&quot;: &quot;default&quot;}</code> in <code>/etc/docker/daemon.json</code> and restart it.</p>
+<h3 id="volatile-mode">Volatile Mode <a class="header-anchor" href="#volatile-mode">#</a></h3>
+<p><code>--volatile</code>, key <code>volatile_mode</code>. Every write goes to RAM and is thrown away when the container stops; the rootfs is never changed. Good for trying a package, for a clean environment on every boot, or for breaking things on purpose. Needs OverlayFS in the kernel. On Android it needs a sparse image rootfs, because OverlayFS on most Android kernels refuses an f2fs directory as its base.</p>
+<h3 id="force-cgroup-v1">Force Cgroup V1 <a class="header-anchor" href="#force-cgroup-v1">#</a></h3>
+<p><code>--force-cgroupv1</code>, key <code>force_cgroupv1</code>. Makes the container use the legacy cgroup v1 hierarchy even when the host offers v2. For old Android kernels, 4.9 and earlier, whose cgroup v2 is missing the controllers systemd expects, which makes systemd misread the environment and fail to boot. Leave it off unless a systemd container will not boot on such a kernel.</p>
+<h3 id="privileged-mode">Privileged Mode <a class="header-anchor" href="#privileged-mode">#</a></h3>
+<p><code>--privileged=TAG[,TAG...]</code>, key <code>privileged</code>. Removes security barriers one at a time:</p>
+<ul>
+<li><code>nomask</code>: <code>/proc</code> and <code>/sys</code> are not masked. <code>/sys</code> stays read-only unless Hardware Access is on.</li>
+<li><code>nocaps</code>: no capabilities are dropped; root in the container is full root.</li>
+<li><code>noseccomp</code>: no system call filtering.</li>
+<li><code>shared</code>: mounts made in the container propagate to the host.</li>
+<li><code>full</code>: all of the above.</li>
+</ul>
+<p>Each one is a hole in the container's isolation. Nothing in ordinary use needs them; Allow Sandboxing covers Flatpak, bwrap and rootless Docker on its own. Bugs seen with privileged mode on are not accepted, and the app asks you to confirm that.</p>
+<h3 id="run-at-boot">Run at Boot <a class="header-anchor" href="#run-at-boot">#</a></h3>
+<p>Key <code>run_at_boot</code>, with <code>run_at_boot_priority</code>. App only. Starts the container when the phone boots, before the lock screen, through the boot module the app installed. Containers start in the order set under <strong>Settings</strong>, <strong>Auto Boot Priority</strong>; put a gateway container before the containers that route through it.</p>
+<h2 id="advanced-options">Advanced options <a class="header-anchor" href="#advanced-options">#</a></h2>
+<h3 id="environment-variables">Environment Variables <a class="header-anchor" href="#environment-variables">#</a></h3>
+<p><code>--env=PATH</code>, key <code>env_file</code>. A file of <code>KEY=value</code> lines, one per line, <code>#</code> for comments. The variables are set for the container's init and for every <code>enter</code> and <code>run</code> session. The app edits the file for you.</p>
+<h3 id="bind-mounts">Bind Mounts <a class="header-anchor" href="#bind-mounts">#</a></h3>
+<p><code>--bind=SRC:DEST[:ro]</code>, key <code>bind_mounts</code>. Makes a host directory visible inside the container at <code>DEST</code>, read-only with <code>:ro</code>. Repeat the flag or separate entries with commas. The destination must be an absolute path inside the container and cannot be <code>/</code>. A source that is missing at start is skipped with a warning rather than failing the boot.</p>
+<h3 id="custom-init-binary">Custom Init Binary <a class="header-anchor" href="#custom-init-binary">#</a></h3>
+<p><code>--init=PATH</code>, key <code>custom_init</code>. The program to run as PID 1 instead of <code>/sbin/init</code>. For a distribution that keeps its init elsewhere, or to start a shell as PID 1 when debugging a rootfs that will not boot.</p>
+<h3 id="termuxx11-extra-flags-and-virgl-extra-flags">Termux:X11 Extra Flags and VirGL Extra Flags <a class="header-anchor" href="#termuxx11-extra-flags-and-virgl-extra-flags">#</a></h3>
+<p><code>--tx11-flags=&quot;...&quot;</code>, key <code>tx11_extra_flags</code>, and <code>--virgl-flags=&quot;...&quot;</code>, key <code>virgl_extra_flags</code>. Extra arguments for the Termux:X11 and VirGL servers Droidspaces starts. Shown in the app only when the matching toggle is on.</p>
+<h2 id="storage">Storage <a class="header-anchor" href="#storage">#</a></h2>
+<p>Chosen once, when the container is installed.</p>
+<p><strong>Sparse image</strong>: the rootfs lives in one ext4 image file that Droidspaces loop-mounts at start. The CLI equivalent is <code>--rootfs-img=PATH</code>, which also accepts a block device. The image behaves the same whatever filesystem the host uses, which matters on Android's f2fs, and it is one file to copy when you move the container. Images are checked with <code>e2fsck</code> when their superblock says they need it. The size you pick is a ceiling; the file grows as the container uses space. The app can <strong>Resize the sparse image</strong> later, and <strong>Migrate to a sparse image</strong> converts a directory container.</p>
+<p><strong>Directory</strong>: the rootfs is a plain directory, <code>--rootfs=PATH</code> on the CLI. Simpler to look into from the host. On Android, use it only if the image path is not possible.</p>
+<p><strong>Storage location</strong>: internal storage by default, or any folder you pick, including an SD card or USB drive. A location that cannot hold a directory rootfs forces the sparse image.</p>
+<h2 id="things-with-no-toggle">Things with no toggle <a class="header-anchor" href="#things-with-no-toggle">#</a></h2>
+<p><strong>Init systems.</strong> Any init that can run as PID 1 works: systemd, OpenRC, runit, s6, SysVinit, OpenWrt's procd. The container's <code>/sbin/init</code> must exist, or you name another with Custom Init Binary. The app's container details recognise systemd, OpenRC and procd and let you manage their services.</p>
+<p><strong>Hostname.</strong> <code>--hostname=NAME</code>, key <code>hostname</code>. Defaults to the container name.</p>
+<p><strong>Foreground mode.</strong> <code>--foreground</code> on the CLI attaches your terminal to the container's console for the whole boot, which is the best way to see why a container does not come up.</p>
 <hr />
-<h2 id="init-system-support">Init system support <a class="header-anchor" href="#init-system-support">#</a></h2>
-<h3 id="why-init-systems-matter">Why init systems matter <a class="header-anchor" href="#why-init-systems-matter">#</a></h3>
-<p>Without an init system you are running individual processes in a chroot. There is no service management, no <code>systemctl</code>, no journald for logging and no proper session management. It is a shell with extra steps.</p>
-<p>Droidspaces boots a real init system. When systemd starts as PID 1 inside the container:</p>
-<ul>
-<li>Services are managed via <code>systemctl start/stop/enable</code></li>
-<li>Logs are available via <code>journalctl</code></li>
-<li>User sessions work properly with <code>login</code>, <code>su</code>, and <code>sudo</code></li>
-<li>Targets and dependencies are resolved correctly</li>
-<li>Timer units, socket activation, and all other systemd features work</li>
-</ul>
-<h3 id="how-droidspaces-enables-it">How Droidspaces enables it <a class="header-anchor" href="#how-droidspaces-enables-it">#</a></h3>
-<p>systemd needs three things to work inside a container:</p>
-<ol>
-<li>
-<p><strong>PID 1:</strong> The init process must be PID 1. Droidspaces creates a PID namespace (<code>CLONE_NEWPID</code>) and then forks, which makes the container's init the first process in its namespace.</p>
-</li>
-<li>
-<p><strong>Container detection:</strong> systemd needs to know it is running in a container. Droidspaces writes <code>droidspaces</code> to <code>/run/systemd/container</code> and sets the <code>container=droidspaces</code> environment variable.</p>
-</li>
-<li>
-<p><strong>Cgroup access:</strong> systemd needs write access to its cgroup hierarchy to create scopes and slices. Droidspaces gives each container its own cgroup tree (see <a href="#cgroup-isolation">Cgroup Isolation</a>).</p>
-</li>
-</ol>
-<h3 id="supported-init-systems">Supported init systems <a class="header-anchor" href="#supported-init-systems">#</a></h3>
-<p>In theory Droidspaces works with <strong>any init system</strong> that can run as PID 1, including:</p>
-<ul>
-<li><strong>systemd</strong> (most Linux distributions)</li>
-<li><strong>OpenRC</strong> (Alpine Linux, Gentoo)</li>
-<li><strong>runit</strong> (Void Linux, Devuan)</li>
-<li><strong>s6-init</strong> (Alpine, various containers)</li>
-<li><strong>SysVinit</strong> (Debian, Devuan)</li>
-</ul>
-<p>The init binary must be at <code>/sbin/init</code>. If it is missing or not executable, Droidspaces refuses to boot the container, so that services and session management always have a working init.</p>
-<hr />
-<h2 id="volatile-mode">Volatile mode <a class="header-anchor" href="#volatile-mode">#</a></h2>
-<h3 id="what-is-volatile-mode">What is volatile mode? <a class="header-anchor" href="#what-is-volatile-mode">#</a></h3>
-<p>Volatile mode (<code>--volatile</code> or <code>-V</code>) runs an ephemeral container: every change is kept in RAM and thrown away when the container stops. The original rootfs is never modified.</p>
-<h3 id="how-it-works">How it works <a class="header-anchor" href="#how-it-works">#</a></h3>
-<p>Droidspaces uses <strong>OverlayFS</strong>, the union filesystem built into the Linux kernel:</p>
-<ul>
-<li><strong>Lower layer:</strong> The original rootfs (mounted read-only if using the rootfs.img mode)</li>
-<li><strong>Upper layer:</strong> A tmpfs-backed directory that captures all writes</li>
-<li><strong>Merged view:</strong> The container sees a unified filesystem where reads come from the lower layer and writes go to the upper layer</li>
-</ul>
-<p>When the container stops, the upper layer in RAM is discarded and the original rootfs is left as it was.</p>
-<h3 id="use-cases">Use cases <a class="header-anchor" href="#use-cases">#</a></h3>
-<ul>
-<li><strong>Testing:</strong> Install packages, modify configurations, and verify changes without committing anything</li>
-<li><strong>Development:</strong> Spin up a clean environment for each build</li>
-<li><strong>Security:</strong> Guaranteed clean state on every boot</li>
-<li><strong>Experimentation:</strong> Break things without consequences</li>
-</ul>
-<h3 id="usage">Usage <a class="header-anchor" href="#usage">#</a></h3>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Volatile container from a directory</span>
-droidspaces<span class="w"> </span>--name<span class="o">=</span><span class="nb">test</span><span class="w"> </span>--rootfs<span class="o">=</span>/path/to/rootfs<span class="w"> </span>--volatile<span class="w"> </span>start
-
-<span class="c1"># Volatile container from an image</span>
-droidspaces<span class="w"> </span>--name<span class="o">=</span><span class="nb">test</span><span class="w"> </span>--rootfs-img<span class="o">=</span>/path/to/rootfs.img<span class="w"> </span>--volatile<span class="w"> </span>start
-</code></pre></div>
-<h3 id="known-limitation-f2fs-on-android">Known limitation: f2fs on Android <a class="header-anchor" href="#known-limitation-f2fs-on-android">#</a></h3>
-<p>Most Android devices use f2fs for the <code>/data</code> partition, and OverlayFS on many Android kernels does not accept f2fs as a lower directory. So <strong>volatile mode with a directory rootfs on f2fs will fail</strong>.</p>
-<p><strong>Workaround:</strong> Use a rootfs image (<code>--rootfs-img</code>) instead. The ext4 loop mount gives OverlayFS a lower directory it accepts.</p>
-<p>Droidspaces detects this incompatibility at runtime and prints a diagnostic message saying so.</p>
-<hr />
-<h2 id="hardware-access-mode">Hardware access mode <a class="header-anchor" href="#hardware-access-mode">#</a></h2>
-<div class="callout callout-caution"><strong class="callout-title">Caution</strong><p>Enabling Hardware Access Mode (<code>--hw-access</code>) exposes all host devices, including raw block devices, directly to the container. If a malicious process or accidental command targets these devices, it could permanently destroy your partition table, wipe your SD card, or brick your device. The developer(s) of Droidspaces is not responsible for any data loss or hardware damage that occurs as a result of using this feature. <strong>Use at your own risk.</strong></p></div>
-<h3 id="what-it-does">What it does <a class="header-anchor" href="#what-it-does">#</a></h3>
-<p>The <code>--hw-access</code> flag exposes the host's hardware devices to the container by mounting <code>devtmpfs</code> at <code>/dev</code> instead of a private <code>tmpfs</code>.</p>
-<p>The container then has access to:</p>
-<ul>
-<li><strong>GPU</strong> (for hardware-accelerated graphics via Turnip + Zink, Panfrost/Native GPU Acceleration in desktop for Intel and AMD)</li>
-<li><strong>Cameras</strong></li>
-<li><strong>Sensors</strong></li>
-<li><strong>USB devices</strong></li>
-<li><strong>Block Devices</strong> (Partitions and physical disks)</li>
-</ul>
-<h3 id="security-implications">Security implications <a class="header-anchor" href="#security-implications">#</a></h3>
-<p>Hardware access mode lets the container see <strong>all</strong> host devices, and talk to the GPU, USB controllers and other hardware directly. Use it only when you trust what is in the container and need the hardware.</p>
-<p>The container's <code>/dev</code> is the kernel's devtmpfs, the same instance the host uses on Linux. Droidspaces never writes into it: the nodes it needs (<code>null</code>, <code>console</code>, <code>ptmx</code>, GPU nodes and so on) are created in a private tmpfs and bind-mounted over the devtmpfs paths inside the container's mount namespace. The one exception is <code>/dev/tty1</code> to <code>tty6</code>, which are masked with <code>/dev/null</code> by default because a systemd container starts <code>getty</code> on them and would put its login prompt on the host console. Pass <code>--allow-vts</code> to leave the host's virtual terminals visible.</p>
-<h3 id="the-systemd-258-fix">The systemd 258+ fix <a class="header-anchor" href="#the-systemd-258-fix">#</a></h3>
-<p>systemd 258 hardened its container detection. It now checks whether <code>/sys</code> is mounted read-only to decide between a container and a physical machine. If <code>/sys</code> is read-write, systemd assumes it owns the hardware and tries to attach services such as <code>getty</code> to the physical TTYs (<code>tty1</code>-<code>tty6</code>). Those do not exist in the isolated container, so the services fail and the console has no login prompt.</p>
-<div class="callout callout-note"><strong class="callout-title">Note</strong><p>This information is based on current developer understanding of systemd's behavior in Droidspaces and may require further verification.</p></div>
-<p>Droidspaces handles this by &quot;dynamic hole-punching&quot;:</p>
-<ol>
-<li><strong>Pinning subsystems</strong>: Every <code>/sys</code> subdirectory is bind-mounted onto itself, which keeps each hardware subsystem read-write.</li>
-<li><strong>Read-only remount</strong>: The top-level <code>/sys</code> is remounted read-only.</li>
-<li><strong>Container identification</strong>: systemd sees the read-only <code>/sys</code>, identifies the container environment correctly, and falls back to container-native console management.</li>
-<li><strong>Hardware access</strong>: Each hardware subsystem stays fully accessible through the pinned sub-mounts from step 1.</li>
-</ol>
-<h3 id="usage-1">Usage <a class="header-anchor" href="#usage-1">#</a></h3>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>droidspaces<span class="w"> </span>--name<span class="o">=</span>gpu-test<span class="w"> </span>--rootfs<span class="o">=</span>/path/to/rootfs<span class="w"> </span>--hw-access<span class="w"> </span>start
-</code></pre></div>
-<h3 id="automatic-gpu-group-setup">Automatic GPU group setup <a class="header-anchor" href="#automatic-gpu-group-setup">#</a></h3>
-<p>With <code>--hw-access</code> enabled, Droidspaces automatically:</p>
-<ol>
-<li><strong>Scans host GPU devices</strong>: Before <code>pivot_root</code>, it probes ~40 known GPU device paths (<code>/dev/dri/*</code>, <code>/dev/mali*</code>, <code>/dev/kgsl-3d0</code>, <code>/dev/nvidia*</code>, etc.) and collects their group IDs via <code>stat()</code>.</li>
-<li><strong>Creates matching groups</strong>: After <code>pivot_root</code>, it appends entries like <code>gpu_&lt;GID&gt;:x:&lt;GID&gt;:root</code> to the container's <code>/etc/group</code>. The container's root user is added to each group.</li>
-<li><strong>Handles restarts idempotently</strong>: On a container restart, existing groups are detected and skipped, so there are no duplicate entries.</li>
-</ol>
-<p>No manual <code>groupadd</code>/<code>usermod</code> inside the container is needed.</p>
-<h3 id="x11-socket-mounting">X11 socket mounting <a class="header-anchor" href="#x11-socket-mounting">#</a></h3>
-<p>For GUI applications, Droidspaces bind-mounts the host X11 socket when <code>--x11</code> is set:</p>
-<ul>
-<li><strong>Android (Termux X11):</strong> Detects and mounts <code>/data/data/com.termux/files/usr/tmp/.X11-unix</code></li>
-<li><strong>Desktop Linux:</strong> Mounts the host <code>/tmp/.X11-unix/X0</code> into the container</li>
-</ul>
-<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p>X11 support is enabled with the <code>--x11</code> (<code>-X</code>) flag and does not need <code>--hw-access</code>. This is the recommended way to run GUI applications if you do not need full GPU/hardware access, because the container stays more isolated.</p></div>
-<p>Droidspaces injects <code>DISPLAY=:5</code> and (if VirGL is enabled) <code>GALLIUM_DRIVER=virpipe</code> into the container environment through <code>/run/droidspaces.env</code>, which is symlinked from <code>/etc/profile.d/droidspaces_env.sh</code>. Shells like <code>bash</code> and <code>sh</code> source it automatically. If you use <code>zsh</code>, <code>fish</code>, or another non-login shell, source it yourself: <code>source /run/droidspaces.env</code>.</p>
-<h3 id="supported-gpu-families">Supported GPU families <a class="header-anchor" href="#supported-gpu-families">#</a></h3>
-<div class="table-wrap"><table>
-<thead>
-<tr>
-<th>Family</th>
-<th>Device Paths</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>DRI</strong> (Intel, AMD, Mesa)</td>
-<td><code>/dev/dri/renderD128-130</code>, <code>/dev/dri/card0-2</code></td>
-</tr>
-<tr>
-<td><strong>NVIDIA</strong> (Proprietary)</td>
-<td><code>/dev/nvidia*</code>, <code>/dev/nvidia-uvm*</code>, <code>/dev/nvidia-caps/*</code></td>
-</tr>
-<tr>
-<td><strong>ARM Mali</strong></td>
-<td><code>/dev/mali</code>, <code>/dev/mali0</code>, <code>/dev/mali1</code></td>
-</tr>
-<tr>
-<td><strong>Qualcomm Adreno</strong></td>
-<td><code>/dev/kgsl-3d0</code>, <code>/dev/kgsl</code>, <code>/dev/genlock</code></td>
-</tr>
-<tr>
-<td><strong>AMD Compute</strong></td>
-<td><code>/dev/kfd</code></td>
-</tr>
-<tr>
-<td><strong>PowerVR</strong></td>
-<td><code>/dev/pvr_sync</code></td>
-</tr>
-<tr>
-<td><strong>NVIDIA Tegra</strong></td>
-<td><code>/dev/nvhost-ctrl</code>, <code>/dev/nvhost-gpu</code>, <code>/dev/nvmap</code></td>
-</tr>
-<tr>
-<td><strong>DMA Heaps</strong></td>
-<td><code>/dev/dma_heap/system</code>, <code>/dev/dma_heap/linux,cma</code>, <code>/dev/dma_heap/reserved</code>, <code>/dev/dma_heap/qcom,system</code></td>
-</tr>
-<tr>
-<td><strong>Sync</strong></td>
-<td><code>/dev/sw_sync</code></td>
-</tr>
-</tbody>
-</table></div>
-<hr />
-<h2 id="custom-bind-mounts">Custom bind mounts <a class="header-anchor" href="#custom-bind-mounts">#</a></h2>
-<h3 id="what-are-bind-mounts">What are bind mounts? <a class="header-anchor" href="#what-are-bind-mounts">#</a></h3>
-<p>A bind mount maps a directory from the host filesystem to a location inside the container. The host directory is then visible and writable inside the container.</p>
-<h3 id="syntax">Syntax <a class="header-anchor" href="#syntax">#</a></h3>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Single mount</span>
---bind-mount<span class="o">=</span>/host/path:/container/path
--B<span class="w"> </span>/host/path:/container/path
-
-<span class="c1"># Multiple mounts (comma-separated)</span>
--B<span class="w"> </span>/src1:/dst1,/src2:/dst2,/src3:/dst3
-
-<span class="c1"># Multiple mounts (chained)</span>
--B<span class="w"> </span>/src1:/dst1<span class="w"> </span>-B<span class="w"> </span>/src2:/dst2
-
-<span class="c1"># Mix and match</span>
--B<span class="w"> </span>/src1:/dst1,/src2:/dst2<span class="w"> </span>-B<span class="w"> </span>/src3:/dst3
-</code></pre></div>
-<h3 id="limits">Limits <a class="header-anchor" href="#limits">#</a></h3>
-<ul>
-<li>Destination must be an <strong>absolute path</strong></li>
-<li>Path traversal (<code>..</code>) in destinations is <strong>rejected</strong> for security</li>
-</ul>
-<h3 id="automatic-directory-creation">Automatic directory creation <a class="header-anchor" href="#automatic-directory-creation">#</a></h3>
-<p>If the destination directory does not exist inside the rootfs, Droidspaces creates it with <code>mkdir -p</code>.</p>
-<h3 id="soft-fail-model">Soft-fail model <a class="header-anchor" href="#soft-fail-model">#</a></h3>
-<p>If a host source path does not exist or a mount fails, Droidspaces prints a warning and skips that entry instead of failing the whole boot. A container still starts when an optional bind source is temporarily missing.</p>
-<h3 id="security">Security <a class="header-anchor" href="#security">#</a></h3>
-<p>Droidspaces checks bind mount targets twice:</p>
-<ol>
-<li><strong>Pre-mount:</strong> Uses <code>lstat()</code> to ensure the target inside the rootfs is not a symlink</li>
-<li><strong>Post-mount:</strong> Uses <code>realpath()</code> via the <code>is_subpath()</code> helper to verify the mounted path cannot escape the container root</li>
-</ol>
-<hr />
-<h2 id="network-isolation-4-modes">Network isolation (4 modes) <a class="header-anchor" href="#network-isolation-4-modes">#</a></h2>
-<p>Droidspaces has four networking modes, from shared-with-the-host to fully isolated.</p>
-<h3 id="1-host-mode---nethost---default">1. Host mode (<code>--net=host</code>) - default <a class="header-anchor" href="#1-host-mode---nethost---default">#</a></h3>
-<p>The container shares the host's network namespace.</p>
-<ul>
-<li><strong>Pros</strong>: No configuration, internet access immediately, works with all Android VPNs/hotspots.</li>
-<li><strong>Cons</strong>: No port isolation; services inside the container bind to host ports directly.</li>
-</ul>
-<h3 id="2-nat-mode---netnat">2. NAT mode (<code>--net=nat</code>) <a class="header-anchor" href="#2-nat-mode---netnat">#</a></h3>
-<p>The container gets a private network namespace (<code>CLONE_NEWNET</code>) and is connected to the host through a virtual bridge (<code>ds-br0</code>) or a direct veth pair.</p>
-<ul>
-<li><strong>Deterministic IP</strong>: Each container is assigned a unique IP in the <code>172.28.0.0/16</code> range, derived from its PID.</li>
-<li><strong>Embedded DHCP</strong>: Droidspaces includes a minimal, built-in DHCP server to automatically configure the container's <code>eth0</code>.</li>
-<li><strong>Full isolation</strong>: The container cannot see or interact with the host's network interfaces directly.</li>
-<li><strong>Automatic uplink detection</strong>: No configuration needed. Droidspaces asks the kernel which interface provides internet access: on Android, the policy-routing rule netd installs for the active default network; on standard Linux, the main routing table's default route. CLAT (464xlat) interfaces on IPv6-only mobile networks are handled automatically.</li>
-</ul>
-<div class="callout callout-important"><strong class="callout-title">Important</strong><p>NAT mode is <strong>dual-stack</strong>. Containers get an IPv4 address over DHCP and an IPv6 address over router advertisements, and IPv6 leaves through NAT66 the same way IPv4 leaves through NAT. Gateway mode inherits this, because the gateway container's WAN is a NAT interface.</p>
-<p>IPv6 needs <code>CONFIG_IP6_NF_NAT</code> and <code>CONFIG_IP6_NF_TARGET_MASQUERADE</code> in the kernel. Without them the container stays IPv4 only, and <code>droidspaces check</code> shows IPv6 NAT support as missing. Port forwarding (<code>--port</code>) is IPv4 only. Pass <code>--disable-ipv6</code> to turn IPv6 off for a container.</p></div>
-<h3 id="3-none-mode---netnone">3. None mode (<code>--net=none</code>) <a class="header-anchor" href="#3-none-mode---netnone">#</a></h3>
-<p>The container gets a private network namespace with only the loopback (<code>lo</code>) interface up.</p>
-<ul>
-<li><strong>Use case</strong>: Offline tasks where the container should have no network at all.</li>
-</ul>
-<h3 id="4-gateway-mode---netgateway">4. Gateway mode (<code>--net=gateway</code>) <a class="header-anchor" href="#4-gateway-mode---netgateway">#</a></h3>
-<p>The container sits on an isolated L2 bridge whose <strong>policy is owned by another running container</strong> (typically OpenWRT) instead of by Droidspaces. Droidspaces does only the plumbing: it creates the bridge and the veth pairs and moves them into place. The gateway container provides DHCP, DNS, firewall, routing and VPN.</p>
-<ul>
-<li><strong>Required flag</strong>: <code>--gateway=NAME</code> names the running container that acts as the router.</li>
-<li><strong>Segments</strong>: <code>--gateway-net=NAME</code> (default <code>lan</code>) selects which bridge/segment the client lands on. Clients sharing a <code>--gateway-net</code> share a LAN; different <code>--gateway-net</code> values are isolated segments through the same gateway.</li>
-<li><strong>Interface naming</strong>: <code>--gateway-iface=IFACE</code> (default <code>eth1</code>) sets what the LAN interface is called <em>inside</em> the gateway container, so it matches the gateway's own config.</li>
-<li><strong>Self-healing</strong>: Wiring is driven entirely from the host side, so clients are (re)wired automatically when the gateway container starts or reboots. No client restart is needed.</li>
-<li><strong>Use cases</strong>: VPN killswitch for selected containers, VLAN-style segmented LANs, single-chokepoint traffic analysis, gateway-wide DNS filtering. See <a href="networking-from-zero.html">Networking From Zero</a> for the complete walkthrough.</li>
-</ul>
-<h3 id="5-macvlan-mode---netmacvlan">5. Macvlan mode (<code>--net=macvlan</code>) <a class="header-anchor" href="#5-macvlan-mode---netmacvlan">#</a></h3>
-<p>The container's <code>eth0</code> is a macvlan on a host NIC: it gets its own MAC address on that NIC's LAN, and its address, route and DNS come from that LAN's DHCP server, usually your router. Other devices on the LAN reach the container directly, without port forwarding. Droidspaces installs no NAT, firewall or routing rules for it, and Android's network policy never sees its traffic.</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>droidspaces<span class="w"> </span>--name<span class="o">=</span>ubuntu<span class="w"> </span>--rootfs<span class="o">=</span>/data/ubuntu<span class="w"> </span>--net<span class="o">=</span>macvlan<span class="w"> </span>--macvlan-parent<span class="o">=</span>eth0<span class="w"> </span>start
-</code></pre></div>
-<ul>
-<li><strong>Required flag</strong>: <code>--macvlan-parent=IF</code> names the host NIC, for example <code>eth0</code>.</li>
-<li><strong>Mode</strong>: <code>--macvlan-mode</code> is <code>bridge</code> by default, so containers on the same NIC reach each other directly. <code>private</code>, <code>vepa</code> and <code>passthru</code> are the other Linux macvlan modes.</li>
-<li><strong>Stable identity</strong>: the MAC is derived from the container name, so the router hands out the same lease after every restart.</li>
-<li><strong>Replugging</strong>: unplugging the NIC deletes the container's <code>eth0</code>. Droidspaces recreates it within about two seconds of the NIC coming back, and the container's DHCP client takes the same lease again.</li>
-<li><strong>Requirements</strong>: <code>CONFIG_MACVLAN</code> in the kernel (see the <a href="kernel-configuration.html">Kernel configuration guide</a>); <code>droidspaces check</code> reports it as <strong>Macvlan support</strong>.</li>
-</ul>
-<p>What it cannot do:</p>
-<ul>
-<li><strong>Wired NICs only.</strong> A Wi-Fi access point only delivers frames to the MAC that associated with it, so a macvlan on <code>wlan0</code> gets no traffic on almost every network. <code>passthru</code> mode is the exception that does not last: it takes over <code>wlan0</code>'s own MAC, so it works at first, but it also takes the WPA key exchange frames away from Android, and the access point drops the phone at the next rekey or roam (<code>reason=15</code>, 4-way handshake timeout). Mobile data (<code>rmnet*</code>) carries no Ethernet frames at all, and the kernel refuses a macvlan on it.</li>
-<li><strong>The phone cannot reach the container through that NIC.</strong> A macvlan never talks to its own parent. Use the container's LAN address from another device, or <code>droidspaces run</code> / <code>enter</code> from the phone.</li>
-<li><strong>NetworkManager inside the container cannot manage the interface</strong>, because its parent lives in the host's namespace. Rootfs that Droidspaces installed and that rely on NetworkManager run dhcpcd for <code>eth0</code> in macvlan mode instead: Artix always, and a systemd rootfs without systemd-networkd when dhcpcd is installed. Without dhcpcd, give the container a static address. systemd-networkd, dhcpcd and OpenWrt's netifd work as they are.</li>
-<li><strong>One passthru container per interface.</strong> Passthru takes the whole NIC, so it cannot share it with any other macvlan container.</li>
-</ul>
-<p>A start that could never get a network is refused with the reason: no <code>--macvlan-parent</code>, a kernel without <code>CONFIG_MACVLAN</code>, a parent that is not an Ethernet interface, or a parent another running container holds in passthru mode. A parent that is only unplugged is fine; <code>eth0</code> appears when it is plugged in.</p>
-<div class="callout callout-note"><strong class="callout-title">Note</strong><p>A rootfs installed before macvlan mode existed only starts its DHCP client in NAT and gateway mode, so its <code>eth0</code> gets no IPv4 address. Run this once inside the container to allow macvlan too:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/net_mode=(nat|gateway)/net_mode=(nat|gateway|macvlan)/&#39;</span><span class="w"> </span><span class="k">$(</span>grep<span class="w"> </span>-rl<span class="w"> </span><span class="s1">&#39;net_mode=(nat|gateway)&#39;</span><span class="w"> </span>/etc<span class="k">)</span>
-</code></pre></div>
-<p>NetworkManager-based rootfs (Artix) also need the dhcpcd fallback, which only a fresh install brings.</p></div>
-<h3 id="port-forwarding-nat-mode">Port forwarding (NAT mode) <a class="header-anchor" href="#port-forwarding-nat-mode">#</a></h3>
-<p>In NAT mode, the <code>--port</code> flag exposes container services to the host or the local network. Supported formats:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Forward host port 8080 to container port 80</span>
---port<span class="w"> </span><span class="m">8080</span>:80
-
-<span class="c1"># Symmetric shorthand (host 8080 -&gt; container 8080)</span>
---port<span class="w"> </span><span class="m">8080</span>
-
-<span class="c1"># Forward host range to container range (must be same size)</span>
---port<span class="w"> </span><span class="m">1000</span>-2000:1000-2000
-
-<span class="c1"># Mix and match with explicit protocols</span>
---port<span class="w"> </span><span class="m">2222</span>:22/tcp<span class="w"> </span>--port<span class="w"> </span><span class="m">5000</span>-5050:5000-5050/udp
-</code></pre></div>
-<p>Forwarded ports are reachable from any network the host is on, including clients on the phone's own hotspot or USB tethering on Android.</p>
-<h3 id="real-time-uplink-monitoring">Real-time uplink monitoring <a class="header-anchor" href="#real-time-uplink-monitoring">#</a></h3>
-<p>On Android the connection often moves between Wi-Fi and mobile data. Droidspaces runs a <strong>Route Monitor</strong> that subscribes to kernel routing events (FIB rules, routes, links, addresses). As soon as Android switches its default network (you walk out of Wi-Fi range, for example), the monitor updates the kernel's policy routing to keep the container connected, with no configuration and no restart. The same monitor works on desktop Linux (a Wi-Fi to ethernet handoff, for example), where it follows the main routing table's default route.</p>
-<h3 id="manual-uplink-pinning---upstream">Manual uplink pinning (<code>--upstream</code>) <a class="header-anchor" href="#manual-uplink-pinning---upstream">#</a></h3>
-<p>By default the uplink is chosen automatically. To make the container's WAN <strong>ignore the host's active network</strong> and go out through a specific interface, pin it with <code>--upstream</code>. This turns auto-detection off completely: the listed interface(s) become the <em>only</em> WAN candidates.</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Single interface</span>
---upstream<span class="o">=</span>wlan0
-
-<span class="c1"># Priority-ordered list with wildcards (comma-separated)</span>
---upstream<span class="o">=</span>wlan0,rmnet*
-</code></pre></div>
-<ul>
-<li><strong>Authoritative, not a fallback</strong>: Traffic never moves to whatever <code>netd</code> marks active, only to interfaces you listed.</li>
-<li><strong>Priority failover <em>within</em> the list</strong>: The Route Monitor re-resolves on every link/route change and uses the first listed interface that is up and has internet. <code>wlan0,rmnet*</code> prefers Wi-Fi, falls back to mobile data, and returns to Wi-Fi when it comes back.</li>
-<li><strong>Literals and wildcards</strong> (<code>*</code>, <code>?</code>): Use <code>rmnet*</code> for mobile data, whose interface number is not stable across reconnects.</li>
-<li><strong>Interfaces that disappear and reappear</strong> mid-session are handled: there is no WAN until a pinned interface is up, then it is wired automatically.</li>
-<li><strong>Use cases</strong>: Pin <code>tun0</code> to route the container only through a phone-side VPN (a free killswitch), or pin <code>rmnet*</code> (with &quot;Mobile data always active&quot;) to keep the container on cellular while the phone stays on Wi-Fi.</li>
-</ul>
-<blockquote>
-<p><code>--upstream</code> is only valid with <code>--net=nat</code>; it is ignored (with a warning) in other modes.</p>
-</blockquote>
-<hr />
-<h2 id="rootfs-image-support">Rootfs image support <a class="header-anchor" href="#rootfs-image-support">#</a></h2>
-<h3 id="why-use-images">Why use images? <a class="header-anchor" href="#why-use-images">#</a></h3>
-<p>A directory rootfs is simple, but it has limitations:</p>
-<ul>
-<li>File permissions may not be preserved correctly on some filesystems (especially f2fs on Android)</li>
-<li>OverlayFS may not be compatible with the underlying filesystem</li>
-</ul>
-<p>Ext4 images solve both. The image file holds a complete ext4 filesystem that is loop-mounted at runtime, so it behaves the same whatever the host filesystem is. Images also give you:</p>
-<ul>
-<li><strong>Built-in integrity checking</strong>: Images can be verified with <code>e2fsck</code> at runtime.</li>
-<li><strong>Portability</strong>: The whole container is one <code>.img</code> file, which makes it easy to back up, share, or carry to another device. Copy the file to any device with Droidspaces and it boots.</li>
-</ul>
-<h3 id="how-it-works-1">How it works <a class="header-anchor" href="#how-it-works-1">#</a></h3>
-<p>When you use <code>--rootfs-img</code>:</p>
-<ol>
-<li><strong>Filesystem check:</strong> Droidspaces reads the image's superblock and runs <code>e2fsck -y</code> only when it says the filesystem needs it: not cleanly unmounted, errors flagged, a journal to replay, or the mount-count or check-interval limit reached. A clean image skips the check</li>
-<li><strong>SELinux context:</strong> On Android, applies the <code>vold_data_file</code> SELinux context to prevent silent I/O denials</li>
-<li><strong>Loop mount:</strong> The image is mounted at <code>/mnt/Droidspaces/&lt;name&gt;</code></li>
-<li><strong>Retry logic:</strong> On kernel 4.14, mounts may fail due to stale loop device state. Droidspaces retries up to 3 times with <code>sync()</code> and settle delays.</li>
-</ol>
-<h3 id="usage-2">Usage <a class="header-anchor" href="#usage-2">#</a></h3>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Image-based container (--name is mandatory)</span>
-droidspaces<span class="w"> </span>--name<span class="o">=</span>ubuntu<span class="w"> </span>--rootfs-img<span class="o">=</span>/path/to/rootfs.img<span class="w"> </span>start
-
-<span class="c1"># Volatile mode with image (image mounted read-only)</span>
-droidspaces<span class="w"> </span>--name<span class="o">=</span>ubuntu<span class="w"> </span>--rootfs-img<span class="o">=</span>/path/to/rootfs.img<span class="w"> </span>--volatile<span class="w"> </span>start
-</code></pre></div>
-<hr />
-<h2 id="cgroup-isolation">Cgroup isolation <a class="header-anchor" href="#cgroup-isolation">#</a></h2>
-<h3 id="what-it-does-1">What it does <a class="header-anchor" href="#what-it-does-1">#</a></h3>
-<p>Droidspaces creates a cgroup tree per container at <code>/sys/fs/cgroup/droidspaces/&lt;name&gt;</code> on the host. Together with the cgroup namespace, each container sees its own clean cgroup hierarchy.</p>
-<p>In <code>--force-cgroupv1</code> mode the same is done in every v1 hierarchy: the container gets <code>droidspaces/&lt;name&gt;</code> in each one, wherever the host mounts it (<code>/dev/memcg</code>, <code>/dev/cpuctl</code> and so on for Android).</p>
-<h3 id="why-it-matters">Why it matters <a class="header-anchor" href="#why-it-matters">#</a></h3>
-<p>systemd relies on cgroups for:</p>
-<ul>
-<li>Creating service scopes and slices</li>
-<li>Resource accounting (CPU, memory per service)</li>
-<li>Process tracking (knowing which processes belong to which service)</li>
-<li>Clean shutdown (killing all processes in a service's cgroup)</li>
-</ul>
-<p>Without cgroup isolation systemd cannot work: containers would collide in the cgroup hierarchy and service management would fail.</p>
-<h3 id="the-jail-trick">The &quot;jail&quot; trick <a class="header-anchor" href="#the-jail-trick">#</a></h3>
-<p>A cgroup namespace is rooted wherever the process sits when it is created. So for every boot, the short-lived process that forks the container's init first joins the container's own cgroup and only then calls <code>unshare(CLONE_NEWCGROUP)</code>, and the root of the new namespace maps to the container's subtree.</p>
-<p>The supervising monitor never enters that cgroup. The cgroup is created fresh for each boot, including a restart and a reboot from inside the container, and removed when the container stops, so limits always match the current configuration.</p>
-<h3 id="cgroup-v1-and-v2-support">Cgroup v1 and v2 support <a class="header-anchor" href="#cgroup-v1-and-v2-support">#</a></h3>
-<p>Droidspaces supports both cgroup versions:</p>
-<ul>
-<li><strong>Cgroup v2 (unified):</strong> Used by modern distributions. Mounted as a single hierarchy.</li>
-<li><strong>Cgroup v1 (legacy):</strong> Used by older distributions. Droidspaces handles comounted controllers (e.g., <code>cpu,cpuacct</code>) and creates symlinks for secondary names in older kernels or <code>--force-cgroupv1</code> mode.</li>
-</ul>
-<h3 id="forcing-legacy-cgroup-v1---force-cgroupv1">Forcing legacy cgroup v1 (<code>--force-cgroupv1</code>) <a class="header-anchor" href="#forcing-legacy-cgroup-v1---force-cgroupv1">#</a></h3>
-<p>On legacy Android kernels (3.18, 4.4, or 4.9), the host may have no cgroup v2 support at all, or a partial one without the controllers (CPU, memory, etc.) that modern <code>systemd</code> needs. That often makes <code>systemd</code> misidentify the environment and fail to boot.</p>
-<p>The <code>--force-cgroupv1</code> flag is an escape hatch for experts. It makes Droidspaces use only the legacy v1 hierarchy, even if v2 appears to be available on the host. Distributions with modern <code>systemd</code> versions then run reliably on older kernels.</p>
-<h3 id="resource-limits">Resource limits <a class="header-anchor" href="#resource-limits">#</a></h3>
-<p><code>--memory</code>, <code>--cpus</code> and <code>--pids-limit</code> cap a container's RAM, CPU time and process count.</p>
-<p>A cgroup controller belongs to one hierarchy at a time. Android binds <code>memory</code> and <code>cpu</code> to v1 hierarchies (<code>/dev/memcg</code>, <code>/dev/cpuctl</code>), which removes them from cgroup v2, and that cannot be undone while Android is running. So Droidspaces applies each limit on whichever hierarchy owns the controller, v2 or v1, and the container itself can stay on cgroup v2.</p>
-<p>What each limit needs from the kernel, on either cgroup version:</p>
-<div class="table-wrap"><table>
-<thead>
-<tr>
-<th>Limit</th>
-<th>Kernel option</th>
-<th>Typical Android kernel</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>--memory</code></td>
-<td><code>CONFIG_MEMCG</code></td>
-<td>Present</td>
-</tr>
-<tr>
-<td><code>--cpus</code></td>
-<td><code>CONFIG_CFS_BANDWIDTH</code></td>
-<td>Missing before the android16-6.12 GKI</td>
-</tr>
-<tr>
-<td><code>--pids-limit</code></td>
-<td><code>CONFIG_CGROUP_PIDS</code></td>
-<td>Missing in GKI</td>
-</tr>
-</tbody>
-</table></div>
-<p>If an option is missing, the limit is skipped at start with a warning that names it. See <a href="kernel-configuration.html">Kernel Configuration</a> to add them.</p>
-<p><code>--pids-limit</code> has a floor of 16. The limit counts every task in the container's cgroup, including the two the runtime keeps there and the three each <code>enter</code> or <code>run</code> session starts with. A systemd distribution needs far more, typically a few hundred.</p>
-<p><code>--memory</code> limits RAM only. A container that goes over it is pushed into swap (zram on Android) before anything is killed.</p>
-<h4 id="where-a-limit-is-applied">Where a limit is applied <a class="header-anchor" href="#where-a-limit-is-applied">#</a></h4>
-<p>For each limit Droidspaces looks for the controller in the container's cgroup v2 directory first. If it is not there, it finds the v1 hierarchy that owns the controller, wherever the host mounted it, and puts the container in <code>droidspaces/&lt;name&gt;</code> inside it. On a typical Android phone that means memory at <code>/dev/memcg/droidspaces/&lt;name&gt;</code>, while the container's own view, the one systemd manages, stays cgroup v2. <code>enter</code> and <code>run</code> sessions join the same cgroups, so they are held to the same limits.</p>
-<h4 id="reading-limits-and-usage">Reading limits and usage <a class="header-anchor" href="#reading-limits-and-usage">#</a></h4>
-<p><code>droidspaces info</code> prints the limits that are actually in force, read back from the cgroup, so a limit the kernel could not apply is not listed:</p>
-<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>Resources:
-  Memory : 94.14 MB / 512.00 MB
-  CPU    : 2.00 cores (Avg usage: 3.1%)
-  PIDs   : 1024 (current: 12)
-</code></pre></div>
-<p>The same block, without the usage figures, is printed after <code>start</code> and <code>restart</code>.</p>
-<p><code>info --format</code> adds <code>memory_limit</code> (bytes), <code>cpu_quota</code>, <code>cpu_period</code> (microseconds) and <code>pids_limit</code>. <code>show --format</code> and <code>info --format</code> add <code>ram_limit_kb</code> and <code>cpu_limit_permill</code> per container, on the same scale as <code>ram_used_kb</code> and <code>cpu_permill</code>. All are 0 when unlimited.</p>
-<p>Memory use means one thing everywhere for a container with a memory cgroup: what the cgroup is charged, minus its file cache, which the kernel reclaims on its own. <code>info</code>, <code>show --format</code> and <code>free</code> or fastfetch inside the container all report that figure. The limit itself still counts the cache, so a container can be pushed to reclaim before &quot;used&quot; reaches the limit.</p>
-<p>One gap: a program that asks the kernel through the <code>sysinfo()</code> system call, and not through <code>/proc</code>, still sees the host's memory, load and uptime. OpenWRT's LuCI is the common case. The limit is enforced regardless, see <a href="troubleshooting.html#sysinfo-host-values">Troubleshooting</a>.</p>
-<h4 id="in-the-android-app">In the Android app <a class="header-anchor" href="#in-the-android-app">#</a></h4>
-<p>The container settings have a <strong>Resource Limits</strong> section with a switch per limit. Memory and CPU open a slider bounded by the device's real RAM and core count, the process limit a number field. A limit the kernel cannot enforce is greyed out with the missing option named. The limits also show on the container's card and in the installation summary, and the Panel tab shows usage against the limit, for example <code>94/512 MB (18%)</code>.</p>
-<h3 id="the-su-fix">The <code>su</code> fix <a class="header-anchor" href="#the-su-fix">#</a></h3>
-<p>When you enter a container with <code>enter</code> or <code>run</code>, the process has to be in the container's host-side cgroup before it joins the namespaces. Otherwise <code>systemd-logind</code> and <code>sd-pam</code> inside the container cannot map the process to a valid session, and <code>su</code> and <code>sudo</code> hang. Droidspaces attaches to the container's cgroup before any <code>setns()</code> call, so this is handled for you.</p>
-<hr />
-<h2 id="adaptive-security">Adaptive security <a class="header-anchor" href="#adaptive-security">#</a></h2>
-<p>Droidspaces uses BPF seccomp filters to work around Android kernel conflicts:</p>
-<h3 id="1-fbe-keyring-conflict-automatic">1. FBE keyring conflict (automatic) <a class="header-anchor" href="#1-fbe-keyring-conflict-automatic">#</a></h3>
-<p>Android's File-Based Encryption keeps filesystem keys in the kernel's session keyring. When systemd creates new session keyrings, the process loses access to the host's encryption keys and gets <code>ENOKEY</code> errors.</p>
-<p><strong>Solution:</strong> On legacy kernels (&lt; 5.0), Droidspaces <em>automatically</em> intercepts the keyring syscalls (<code>keyctl</code>, <code>add_key</code>, <code>request_key</code>) and returns <code>ENOSYS</code>, which makes systemd use the existing keyring.</p>
-<div class="callout callout-tip"><strong class="callout-title">Tip</strong><p><strong>Legacy Kernel Networking:</strong> When running Docker/Podman inside Droidspaces on legacy kernels, modern <code>nftables</code> may fail to route traffic. We recommend using Droidspaces' NAT mode and switching your container's networking stack to <code>iptables-legacy</code> and <code>ip6tables-legacy</code>.</p></div>
-<p><a id="sandboxing"></a></p>
-<h2 id="sandboxing---allow-sandboxing">Sandboxing (<code>--allow-sandboxing</code>) <a class="header-anchor" href="#sandboxing---allow-sandboxing">#</a></h2>
-<p>Off by default. Turn it on when something inside the container needs to build its own sandbox: unprivileged Docker or Podman (<code>userns-remap</code>, rootless), Flatpak, bwrap, Firefox and Chromium. All of them create a user namespace and then mount their own <code>proc</code> and <code>sysfs</code> inside it, and a stock Droidspaces container blocks both steps.</p>
-<h3 id="what-it-changes">What it changes <a class="header-anchor" href="#what-it-changes">#</a></h3>
-<ol>
-<li><strong>User namespaces are allowed.</strong> The seccomp filter stops returning <code>EPERM</code> for <code>unshare(CLONE_NEWUSER)</code> and <code>clone(CLONE_NEWUSER)</code>, and <code>clone3</code> is no longer hidden.</li>
-<li><strong>A pristine <code>proc</code> and a read-only <code>sysfs</code> are mounted under <code>/run/droidspaces/</code>.</strong> The kernel lets a child user namespace mount <code>proc</code> or <code>sysfs</code> only if some instance of that filesystem in the mount namespace is &quot;fully visible&quot;: the root of the filesystem, nothing bind-mounted over a real file inside it, and not read-only when the new mount is read-write. The container's own <code>/proc</code> and <code>/sys</code> never qualify, because the jail masks and the virtualized <code>uptime</code>, <code>loadavg</code>, <code>meminfo</code> and friends are exactly such bind mounts. Any instance anywhere satisfies the rule, so Droidspaces adds one out of the way. LXC does the same in <code>nesting.conf</code> with <code>/dev/.lxc/proc</code> and <code>/dev/.lxc/sys</code>. The masks and the virtualized files stay where they were.</li>
-<li><strong><code>/proc/sys/user</code> is writable.</strong> bwrap with <code>--disable-userns</code>, which is how Flatpak launches apps, writes <code>user.max_user_namespaces</code> through the container's own <code>/proc</code> before it unshares its second user namespace. So that subtree joins <code>net</code>, <code>hostname</code> and <code>domainname</code> as a read-write hole in the otherwise read-only <code>/proc/sys</code>.</li>
-<li><strong><code>CAP_SYS_PTRACE</code> stays in the bounding set.</strong> runc opens <code>/proc/&lt;pid&gt;/ns/net</code> and <code>/proc/&lt;pid&gt;/ns/mnt</code> of a container init that has already switched to the remapped uid, and root only gets that read on another uid's process through this capability.</li>
-</ol>
-<h3 id="what-it-costs">What it costs <a class="header-anchor" href="#what-it-costs">#</a></h3>
-<p>The pristine <code>proc</code> has to be writable and unmasked, or the kernel would not count it. So <code>/run/droidspaces/proc/sys/</code> is the live host sysctl tree and <code>/run/droidspaces/proc/sysrq-trigger</code> is real. Nothing writes there by accident, <code>/proc/sys</code> at its normal path is still read-only, but root in the container can reach it on purpose. The one exception is <code>/proc/sys/user</code>. Those sysctls belong to the user namespace of the writer, and the container shares the host's, so a <code>user.max_user_namespaces = 0</code> line in the container's <code>sysctl.d</code> lands on the host at boot and switches user namespaces off for every other sandboxing container until the device reboots. Treat the toggle as trusting the container's root user. The <code>sysfs</code> copy is read-only and exposes nothing new.</p>
-<h3 id="usage-3">Usage <a class="header-anchor" href="#usage-3">#</a></h3>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>droidspaces<span class="w"> </span>--name<span class="o">=</span>mycontainer<span class="w"> </span>--rootfs<span class="o">=</span>/path/to/rootfs<span class="w"> </span>--allow-sandboxing<span class="w"> </span>start
-</code></pre></div>
-<p>In the app it is the <strong>Allow Sandboxing</strong> toggle under Security. It is greyed out when the kernel was built without <code>CONFIG_USER_NS</code>, which <code>droidspaces check</code> reports as &quot;Sandboxing (user namespaces)&quot;. <code>--allow-userns</code> and the <code>allow_userns=</code> config key are the old names and still work.</p>
-<p>Quick check from inside a running container:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>grep<span class="w"> </span>CapBnd<span class="w"> </span>/proc/1/status<span class="w">          </span><span class="c1"># bit 19 set</span>
-bwrap<span class="w"> </span>--unshare-user<span class="w"> </span>--proc<span class="w"> </span>/proc<span class="w"> </span>--dev<span class="w"> </span>/dev<span class="w"> </span>--ro-bind<span class="w"> </span>/<span class="w"> </span>/<span class="w"> </span><span class="nb">true</span>
-</code></pre></div>
-<p>For Docker, add <code>{&quot;userns-remap&quot;: &quot;default&quot;}</code> to <code>/etc/docker/daemon.json</code>, restart the daemon, and <code>docker run --rm alpine cat /proc/self/uid_map</code> should print <code>0 100000 65536</code>.</p>
-<hr />
-<h2 id="android-specific-tuning">Android-specific tuning <a class="header-anchor" href="#android-specific-tuning">#</a></h2>
-<p>The Android kernel is opinionated. For containers to be stable, reach the network and use hardware on it, the container's rootfs needs several adjustments.</p>
-<div class="callout callout-note"><strong class="callout-title">Note</strong><p>The Droidspaces backend itself does not alter the rootfs. These changes are applied automatically when the user installs a new rootfs tarball using the Android App's built-in installer, or are pre-baked when using our official rootfs tarball from the <a href="https://github.com/Droidspaces/Droidspaces-rootfs-builder" rel="noopener noreferrer">Droidspaces rootfs-builder</a>.</p></div>
-<h3 id="1-android-network--hardware-groups">1. Android network &amp; hardware groups <a class="header-anchor" href="#1-android-network--hardware-groups">#</a></h3>
-<p>Older Android kernels allow network socket creation and direct hardware access only to specific, hardcoded group IDs (GIDs). Droidspaces maps and configures these groups inside the container's rootfs:</p>
-<ul>
-<li><strong>GID mapping</strong>: Appends Android-specific groups to <code>/etc/group</code>:
-<ul>
-<li><code>aid_inet</code> (3003): Allows internet access.</li>
-<li><code>aid_net_raw</code> (3004): Allows raw socket creation (e.g., for <code>ping</code>).</li>
-<li><code>aid_net_admin</code> (3005): Allows network administration.</li>
-</ul>
-</li>
-<li><strong>Permissions assignment</strong>: Adds the container's <code>root</code> user to the <code>aid_inet</code>, <code>aid_net_raw</code>, <code>input</code>, <code>video</code>, and <code>tty</code> groups.</li>
-<li><strong>Package manager fix</strong>: Sets <code>aid_inet</code> as the primary group of the Debian/Ubuntu <code>_apt</code> user, so packages install and update without permission errors.</li>
-<li><strong>New users</strong>: Modifies <code>/etc/adduser.conf</code> so any newly created user gets these groups automatically.</li>
-</ul>
-<h3 id="2-udev-trigger--service-overrides">2. Udev trigger &amp; service overrides <a class="header-anchor" href="#2-udev-trigger--service-overrides">#</a></h3>
-<p>Standard Linux distributions run <code>udevadm trigger</code> during boot to coldplug hardware devices. Triggering every subsystem at once on an Android device can panic the kernel.</p>
-<ul>
-<li><strong>Hardware access guards</strong>: udev services are only useful when hardware access is enabled, so Droidspaces injects a drop-in <code>ExecCondition</code> override that stops <code>systemd-udevd.service</code>, <code>systemd-udev-trigger.service</code>, and <code>systemd-udev-settle.service</code> from starting unless the container is configured with hardware access (<code>enable_hw_access=1</code>):<div class="code-block"><span class="code-lang">ini</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="k">[Service]</span>
-<span class="na">ExecCondition</span><span class="o">=</span>
-<span class="na">ExecCondition</span><span class="o">=</span><span class="s">/bin/sh -c &quot;grep -q &#39;enable_hw_access=1&#39; /run/droidspaces/container.config&quot;</span>
-</code></pre></div>
-</li>
-<li><strong>Safe udev trigger</strong>: Instead of scanning everything, Droidspaces overrides the default <code>systemd-udev-trigger.service</code> with a drop-in. With hardware access enabled, the trigger is limited to a fixed, safe subset of subsystems:<div class="code-block"><span class="code-lang">ini</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="k">[Service]</span>
-<span class="na">ExecStart</span><span class="o">=</span>
-<span class="na">ExecStart</span><span class="o">=</span><span class="s">-/usr/bin/udevadm trigger --subsystem-match=usb --subsystem-match=block --subsystem-match=input --subsystem-match=tty --subsystem-match=net</span>
-</code></pre></div>
-The container still detects new USB drives, keyboards and network interfaces, without the risk of crashing the host.</li>
-<li><strong>Read-only path fix</strong>: Overrides <code>ConditionPathIsReadWrite</code> for all udev units, so they do not fail where key system directories are mounted read-only.</li>
-</ul>
-<h3 id="3-optimizing-systemd--logging">3. Optimizing systemd &amp; logging <a class="header-anchor" href="#3-optimizing-systemd--logging">#</a></h3>
-<p>The Android kernel logs a lot. Without tuning, a standard <code>journald</code> setup reads the host's kernel messages and writes gigabytes of logs, which fills the device's internal storage quickly:</p>
-<ul>
-<li><strong>Journald adjustments</strong>: Turns off reading kernel messages and system auditing (<code>ReadKMsg=no</code>, <code>Audit=no</code>) in <code>journald.conf</code>, so the container does not collect system-wide kernel logs.</li>
-<li><strong>Volatile storage</strong>: Keeps systemd journal logs in memory only (<code>Storage=volatile</code>) with a hard size limit (200MB), so constant writes do not wear out and fill the device's internal flash.</li>
-<li><strong>Service masking</strong>: Masks <code>systemd-networkd-wait-online.service</code> to prevent boot delays, and <code>systemd-journald-audit.socket</code> to prevent systemd deadlocks in old kernels like 4.9.</li>
-<li><strong>Power key handling</strong>: Tells <code>systemd-logind</code> to ignore host power and suspend key events, so the container does not try to handle host power state changes.</li>
-</ul>
-<h3 id="4-nat-mode-network-guards">4. NAT mode network guards <a class="header-anchor" href="#4-nat-mode-network-guards">#</a></h3>
-<p>In host networking mode, network managers like <code>NetworkManager</code> or <code>systemd-networkd</code> running inside the container can fight with the Android host's routing tables and break cellular/Wi-Fi connectivity.</p>
-<p>Droidspaces injects a drop-in <code>ExecCondition</code> override for the standard network services (such as <code>NetworkManager.service</code>, <code>systemd-networkd.service</code>, <code>dhcpcd.service</code>, and <code>systemd-resolved.service</code>), so they run only when the container is configured in NAT mode:</p>
-<div class="code-block"><span class="code-lang">ini</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="k">[Service]</span>
-<span class="na">ExecCondition</span><span class="o">=</span>
-<span class="na">ExecCondition</span><span class="o">=</span><span class="s">/bin/sh -c &quot;grep -q &#39;net_mode=nat&#39; /run/droidspaces/container.config&quot;</span>
-</code></pre></div>
-<h3 id="5-storage-and-dhcp-configuration">5. Storage and DHCP configuration <a class="header-anchor" href="#5-storage-and-dhcp-configuration">#</a></h3>
-<ul>
-<li><strong>systemd-networkd config</strong>: Configures <code>10-eth-dhcp.network</code> to enable DHCP and IPv6 route acceptance for any <code>eth*</code> interfaces.</li>
-<li><strong>Logrotate limit</strong>: Sets a <code>maxsize 50M</code> limit in <code>/etc/logrotate.conf</code> so logs do not take up too much disk space over time.</li>
-</ul>
+<p>Previous: <a href="usage-android-app.html">Android app guide</a> | Next: <a href="linux-cli.html">Linux CLI</a></p>
 
     </article>
     <p class="doc-edit"><a href="https://github.com/ravindu644/Droidspaces-OSS/edit/main/Documentation/Features.md" rel="noopener noreferrer"><span class="icon" aria-hidden="true">edit</span>Edit this page on GitHub</a></p>
-<nav class="doc-nav" aria-label="Pages"><a href="installation-linux.html" class="doc-nav-prev"><small>Previous</small>Linux installation</a><a href="graphics-and-audio.html" class="doc-nav-next"><small>Next</small>Display, audio & desktop</a></nav>
+<nav class="doc-nav" aria-label="Pages"><a href="usage-android-app.html" class="doc-nav-prev"><small>Previous</small>Android app guide</a><a href="linux-cli.html" class="doc-nav-next"><small>Next</small>Linux CLI</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#namespace-isolation">Namespace isolation</a></li><li class="toc-h3"><a href="#what-are-namespaces">What are namespaces?</a></li><li class="toc-h3"><a href="#network-namespace-isolation---net">Network namespace isolation ( --net )</a></li><li class="toc-h3"><a href="#how-it-compares-to-chroot">How it compares to chroot</a></li><li class="toc-h2"><a href="#init-system-support">Init system support</a></li><li class="toc-h3"><a href="#why-init-systems-matter">Why init systems matter</a></li><li class="toc-h3"><a href="#how-droidspaces-enables-it">How Droidspaces enables it</a></li><li class="toc-h3"><a href="#supported-init-systems">Supported init systems</a></li><li class="toc-h2"><a href="#volatile-mode">Volatile mode</a></li><li class="toc-h3"><a href="#what-is-volatile-mode">What is volatile mode?</a></li><li class="toc-h3"><a href="#how-it-works">How it works</a></li><li class="toc-h3"><a href="#use-cases">Use cases</a></li><li class="toc-h3"><a href="#usage">Usage</a></li><li class="toc-h3"><a href="#known-limitation-f2fs-on-android">Known limitation: f2fs on Android</a></li><li class="toc-h2"><a href="#hardware-access-mode">Hardware access mode</a></li><li class="toc-h3"><a href="#what-it-does">What it does</a></li><li class="toc-h3"><a href="#security-implications">Security implications</a></li><li class="toc-h3"><a href="#the-systemd-258-fix">The systemd 258+ fix</a></li><li class="toc-h3"><a href="#usage-1">Usage</a></li><li class="toc-h3"><a href="#automatic-gpu-group-setup">Automatic GPU group setup</a></li><li class="toc-h3"><a href="#x11-socket-mounting">X11 socket mounting</a></li><li class="toc-h3"><a href="#supported-gpu-families">Supported GPU families</a></li><li class="toc-h2"><a href="#custom-bind-mounts">Custom bind mounts</a></li><li class="toc-h3"><a href="#what-are-bind-mounts">What are bind mounts?</a></li><li class="toc-h3"><a href="#syntax">Syntax</a></li><li class="toc-h3"><a href="#limits">Limits</a></li><li class="toc-h3"><a href="#automatic-directory-creation">Automatic directory creation</a></li><li class="toc-h3"><a href="#soft-fail-model">Soft-fail model</a></li><li class="toc-h3"><a href="#security">Security</a></li><li class="toc-h2"><a href="#network-isolation-4-modes">Network isolation (4 modes)</a></li><li class="toc-h3"><a href="#1-host-mode---nethost---default">1. Host mode ( --net=host ) - default</a></li><li class="toc-h3"><a href="#2-nat-mode---netnat">2. NAT mode ( --net=nat )</a></li><li class="toc-h3"><a href="#3-none-mode---netnone">3. None mode ( --net=none )</a></li><li class="toc-h3"><a href="#4-gateway-mode---netgateway">4. Gateway mode ( --net=gateway )</a></li><li class="toc-h3"><a href="#5-macvlan-mode---netmacvlan">5. Macvlan mode ( --net=macvlan )</a></li><li class="toc-h3"><a href="#port-forwarding-nat-mode">Port forwarding (NAT mode)</a></li><li class="toc-h3"><a href="#real-time-uplink-monitoring">Real-time uplink monitoring</a></li><li class="toc-h3"><a href="#manual-uplink-pinning---upstream">Manual uplink pinning ( --upstream )</a></li><li class="toc-h2"><a href="#rootfs-image-support">Rootfs image support</a></li><li class="toc-h3"><a href="#why-use-images">Why use images?</a></li><li class="toc-h3"><a href="#how-it-works-1">How it works</a></li><li class="toc-h3"><a href="#usage-2">Usage</a></li><li class="toc-h2"><a href="#cgroup-isolation">Cgroup isolation</a></li><li class="toc-h3"><a href="#what-it-does-1">What it does</a></li><li class="toc-h3"><a href="#why-it-matters">Why it matters</a></li><li class="toc-h3"><a href="#the-jail-trick">The &quot;jail&quot; trick</a></li><li class="toc-h3"><a href="#cgroup-v1-and-v2-support">Cgroup v1 and v2 support</a></li><li class="toc-h3"><a href="#forcing-legacy-cgroup-v1---force-cgroupv1">Forcing legacy cgroup v1 ( --force-cgroupv1 )</a></li><li class="toc-h3"><a href="#resource-limits">Resource limits</a></li><li class="toc-h3"><a href="#the-su-fix">The su fix</a></li><li class="toc-h2"><a href="#adaptive-security">Adaptive security</a></li><li class="toc-h3"><a href="#1-fbe-keyring-conflict-automatic">1. FBE keyring conflict (automatic)</a></li><li class="toc-h2"><a href="#sandboxing---allow-sandboxing">Sandboxing ( --allow-sandboxing )</a></li><li class="toc-h3"><a href="#what-it-changes">What it changes</a></li><li class="toc-h3"><a href="#what-it-costs">What it costs</a></li><li class="toc-h3"><a href="#usage-3">Usage</a></li><li class="toc-h2"><a href="#android-specific-tuning">Android-specific tuning</a></li><li class="toc-h3"><a href="#1-android-network--hardware-groups">1. Android network &amp; hardware groups</a></li><li class="toc-h3"><a href="#2-udev-trigger--service-overrides">2. Udev trigger &amp; service overrides</a></li><li class="toc-h3"><a href="#3-optimizing-systemd--logging">3. Optimizing systemd &amp; logging</a></li><li class="toc-h3"><a href="#4-nat-mode-network-guards">4. NAT mode network guards</a></li><li class="toc-h3"><a href="#5-storage-and-dhcp-configuration">5. Storage and DHCP configuration</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#how-settings-are-stored">How settings are stored</a></li><li class="toc-h2"><a href="#networking">Networking</a></li><li class="toc-h3"><a href="#network-mode">Network Mode</a></li><li class="toc-h3"><a href="#static-ip-address">Static IP Address</a></li><li class="toc-h3"><a href="#upstream-interface">Upstream Interface</a></li><li class="toc-h3"><a href="#port-forwarding">Port Forwarding</a></li><li class="toc-h3"><a href="#disable-ipv6">Disable IPv6</a></li><li class="toc-h3"><a href="#dns-servers">DNS Servers</a></li><li class="toc-h2"><a href="#integration-and-hardware">Integration and hardware</a></li><li class="toc-h3"><a href="#android-storage">Android Storage</a></li><li class="toc-h3"><a href="#hardware-access">Hardware Access</a></li><li class="toc-h3"><a href="#gpu-access">GPU Access</a></li><li class="toc-h3"><a href="#configure-termuxx11">Configure Termux:X11</a></li><li class="toc-h3"><a href="#configure-virgl-3d-acceleration">Configure VirGL 3D Acceleration</a></li><li class="toc-h3"><a href="#configure-pulseaudio">Configure PulseAudio</a></li><li class="toc-h2"><a href="#resource-limits">Resource limits</a></li><li class="toc-h2"><a href="#security-and-boot">Security and boot</a></li><li class="toc-h3"><a href="#selinux-permissive">SELinux Permissive</a></li><li class="toc-h3"><a href="#allow-sandboxing">Allow Sandboxing</a></li><li class="toc-h3"><a href="#volatile-mode">Volatile Mode</a></li><li class="toc-h3"><a href="#force-cgroup-v1">Force Cgroup V1</a></li><li class="toc-h3"><a href="#privileged-mode">Privileged Mode</a></li><li class="toc-h3"><a href="#run-at-boot">Run at Boot</a></li><li class="toc-h2"><a href="#advanced-options">Advanced options</a></li><li class="toc-h3"><a href="#environment-variables">Environment Variables</a></li><li class="toc-h3"><a href="#bind-mounts">Bind Mounts</a></li><li class="toc-h3"><a href="#custom-init-binary">Custom Init Binary</a></li><li class="toc-h3"><a href="#termuxx11-extra-flags-and-virgl-extra-flags">Termux:X11 Extra Flags and VirGL Extra Flags</a></li><li class="toc-h2"><a href="#storage">Storage</a></li><li class="toc-h2"><a href="#things-with-no-toggle">Things with no toggle</a></li></ul></nav>
   </aside>
 <footer class="footer">
   <div class="footer-inner">

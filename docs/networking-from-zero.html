@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=ccd72260b9">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Networking from zero", "description": "Every networking concept behind Droidspaces gateway mode, from the start: IP addresses, LAN, WAN, DHCP, DNS, NAT, bridges, veth pairs, network namespaces and OpenWRT.", "url": "https://www.droidspaces.org/docs/networking-from-zero.html", "inLanguage": "en", "dateModified": "2026-10-10", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Networking from zero", "item": "https://www.droidspaces.org/docs/networking-from-zero.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Networking from zero", "description": "Every networking concept behind Droidspaces gateway mode, from the start: IP addresses, LAN, WAN, DHCP, DNS, NAT, bridges, veth pairs, network namespaces and OpenWRT.", "url": "https://www.droidspaces.org/docs/networking-from-zero.html", "inLanguage": "en", "dateModified": "2026-10-12", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Networking from zero", "item": "https://www.droidspaces.org/docs/networking-from-zero.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -56,15 +56,15 @@
 <a href="installation-linux.html" class="sidebar-link">Linux installation</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Guides</summary>
-<a href="features.html" class="sidebar-link">Feature deep dives</a>
-<a href="graphics-and-audio.html" class="sidebar-link">Display, audio & desktop</a>
-<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
-<a href="usage-android-app.html" class="sidebar-link">Android app usage</a>
+<a href="usage-android-app.html" class="sidebar-link">Android app guide</a>
+<a href="features.html" class="sidebar-link">Container settings</a>
 <a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
+<a href="graphics-and-audio.html" class="sidebar-link">Display, audio and desktop</a>
+<a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
 <a href="networking-from-zero.html" class="sidebar-link" aria-current="page">Networking from zero</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Recipes</summary>
-<a href="cool-things-you-can-do.html" class="sidebar-link">Cool things you can do</a>
+<a href="cool-things-you-can-do.html" class="sidebar-link">Recipes</a>
 </details>
 <details class="sidebar-group" open><summary class="sidebar-heading">Reference</summary>
 <a href="troubleshooting.html" class="sidebar-link">Troubleshooting</a>
@@ -75,70 +75,7 @@
   </aside>
   <main id="main" class="docs-content">
     <article>
-<h1 id="networking-from-zero-understanding-droidspaces-gateway-mode">Networking from zero: understanding Droidspaces gateway mode <a class="header-anchor" href="#networking-from-zero-understanding-droidspaces-gateway-mode">#</a></h1>
-<h3 id="quick-navigation">Quick navigation <a class="header-anchor" href="#quick-navigation">#</a></h3>
-<ul>
-<li><a href="#part-1-the-absolute-basics">Part 1: The absolute basics</a>
-<ul>
-<li><a href="#what-is-an-ip-address">What is an IP address?</a></li>
-<li><a href="#what-is-a-network">What is a network?</a></li>
-<li><a href="#lan---local-area-network">LAN - Local Area Network</a></li>
-<li><a href="#wan---wide-area-network">WAN - Wide Area Network</a></li>
-<li><a href="#gateway">Gateway</a></li>
-</ul>
-</li>
-<li><a href="#part-2-how-data-actually-gets-delivered">Part 2: How data actually gets delivered</a>
-<ul>
-<li><a href="#mac-address-vs-ip-address">MAC address vs IP address</a></li>
-<li><a href="#what-is-a-packet">What is a packet?</a></li>
-</ul>
-</li>
-<li><a href="#part-3-dhcp-how-you-get-an-ip-address">Part 3: DHCP (how you get an IP address)</a></li>
-<li><a href="#part-4-dns-how-names-become-addresses">Part 4: DNS (how names become addresses)</a></li>
-<li><a href="#part-5-nat-the-magic-your-router-does">Part 5: NAT (the magic your router does)</a>
-<ul>
-<li><a href="#nat-in-droidspaces">NAT in Droidspaces</a></li>
-<li><a href="#how-nat-mode-picks-the-wan-uplink-automatic">How NAT mode picks the WAN uplink (automatic)</a></li>
-<li><a href="#pinning-the-uplink-manually-with---upstream">Pinning the uplink manually with --upstream</a></li>
-<li><a href="#use-cases-for---upstream">Use cases for --upstream</a></li>
-</ul>
-</li>
-<li><a href="#part-6-bridges-and-virtual-cables-linux-plumbing">Part 6: Bridges and virtual cables (Linux plumbing)</a>
-<ul>
-<li><a href="#what-is-a-network-bridge">What is a network bridge?</a></li>
-<li><a href="#what-is-a-veth-pair">What is a veth pair?</a></li>
-<li><a href="#how-nat-mode-uses-bridges-and-veths">How NAT mode uses bridges and veths</a></li>
-</ul>
-</li>
-<li><a href="#part-7-network-namespaces-how-containers-are-isolated">Part 7: Network namespaces (how containers are isolated)</a></li>
-<li><a href="#part-8-openwrt-and-what-it-is">Part 8: OpenWRT and what it is</a></li>
-<li><a href="#part-9-the-new-gateway-mode---putting-it-all-together">Part 9: The new gateway mode - putting it all together</a>
-<ul>
-<li><a href="#why-does-gateway-mode-exist">Why does gateway mode exist?</a></li>
-<li><a href="#the-architecture">The architecture</a></li>
-<li><a href="#step-by-step---what-happens-when-you-start-a-gateway-mode-container">Step by step - what happens when you start a gateway-mode container</a></li>
-<li><a href="#what-lazy-attachment-means">What &quot;lazy attachment&quot; means</a></li>
-<li><a href="#why-resolvconf-is-left-alone-in-gateway-mode">Why resolv.conf is left alone in gateway mode</a></li>
-<li><a href="#why-bridge-nf-call-iptables-is-set-to-0">Why bridge-nf-call-iptables is set to 0</a></li>
-<li><a href="#start-order-and-automatic-self-healing">Start order and automatic self-healing</a></li>
-<li><a href="#what-happens-when-containers-stop">What happens when containers stop</a></li>
-</ul>
-</li>
-<li><a href="#part-10-gateway-mode-flags-and-configuration">Part 10: Gateway mode flags and configuration</a>
-<ul>
-<li><a href="#required-vs-optional-flags">Required vs optional flags</a></li>
-<li><a href="#what---gateway-net-does">What --gateway-net does</a></li>
-<li><a href="#what---gateway-iface-does">What --gateway-iface does</a></li>
-<li><a href="#the-flag-conflict-you-must-avoid">The flag conflict you must avoid</a></li>
-<li><a href="#ipv6-through-the-gateway">IPv6 through the gateway</a></li>
-<li><a href="#validation-rules-and-kernel-requirements">Validation rules and kernel requirements</a></li>
-</ul>
-</li>
-<li><a href="#part-11-comparing-all-networking-modes">Part 11: Comparing all networking modes</a></li>
-<li><a href="#part-12-real-world-use-cases-for-gateway-mode">Part 12: Real-world use cases for gateway mode</a></li>
-<li><a href="#quick-reference---terms">Quick reference - terms</a></li>
-</ul>
-<hr />
+<h1 id="networking-from-zero">Networking from zero <a class="header-anchor" href="#networking-from-zero">#</a></h1>
 <h2 id="part-1-the-absolute-basics">Part 1: The absolute basics <a class="header-anchor" href="#part-1-the-absolute-basics">#</a></h2>
 <h3 id="what-is-an-ip-address">What is an IP address? <a class="header-anchor" href="#what-is-an-ip-address">#</a></h3>
 <p>Every device on a network needs an address, so other devices know where to send data. That address is its <strong>IP address</strong>.</p>
@@ -175,7 +112,6 @@
 <p>A <strong>gateway</strong> is the device that connects two networks.</p>
 <p>At home, the router <em>is</em> the gateway. Your phone's IP is <code>192.168.1.5</code> (LAN). When it wants to reach Google at <code>142.250.80.46</code> (WAN, the internet), it has no direct path. It sends the data to the gateway (the router), and the router forwards it to the internet.</p>
 <p><strong>Rule:</strong> every device on a LAN is configured with a &quot;default gateway&quot;, the address it sends all traffic to when it has no more specific route.</p>
-<hr />
 <h2 id="part-2-how-data-actually-gets-delivered">Part 2: How data actually gets delivered <a class="header-anchor" href="#part-2-how-data-actually-gets-delivered">#</a></h2>
 <h3 id="mac-address-vs-ip-address">MAC address vs IP address <a class="header-anchor" href="#mac-address-vs-ip-address">#</a></h3>
 <p>Networking uses <em>two</em> kinds of address:</p>
@@ -214,7 +150,6 @@
 <li>A small piece of the actual data</li>
 </ul>
 <p>The destination reassembles the packets.</p>
-<hr />
 <h2 id="part-3-dhcp-how-you-get-an-ip-address">Part 3: DHCP (how you get an IP address) <a class="header-anchor" href="#part-3-dhcp-how-you-get-an-ip-address">#</a></h2>
 <h3 id="the-problem">The problem <a class="header-anchor" href="#the-problem">#</a></h3>
 <p>Every device needs an IP address to join a network, and no two devices can have the same one. That would be two houses with the same postal address: mail gets lost.</p>
@@ -236,7 +171,6 @@ New Device:   &quot;Got it, thanks!&quot;
 </ul>
 <p>At home, the <strong>router runs the DHCP server</strong> and hands out IPs to every device that connects.</p>
 <p>In <strong>Droidspaces NAT mode</strong>, Droidspaces runs its own small DHCP server that gives the container its IP (in the <code>172.28.x.x</code> range). The IP is deterministic: it is derived from the container's name, saved to its config file and offered again on every boot, so a container keeps the same address across restarts.</p>
-<hr />
 <h2 id="part-4-dns-how-names-become-addresses">Part 4: DNS (how names become addresses) <a class="header-anchor" href="#part-4-dns-how-names-become-addresses">#</a></h2>
 <h3 id="the-problem-1">The problem <a class="header-anchor" href="#the-problem-1">#</a></h3>
 <p>IP addresses are hard to remember. Nobody types <code>142.250.80.46</code> to visit Google. They type <code>google.com</code>.</p>
@@ -251,7 +185,6 @@ Your Browser:   &quot;Thanks.&quot; [now connects to 142.250.80.46]
 </code></pre></div>
 <p>Every device is configured with a DNS server address. On most home networks the router <em>is</em> the DNS server: it forwards your queries to your ISP's DNS or to a public one like <code>1.1.1.1</code>.</p>
 <p>In <strong>Droidspaces NAT mode</strong>, Droidspaces writes a <code>resolv.conf</code> inside the container that points at a DNS server (<code>1.1.1.1</code> and <code>8.8.8.8</code> by default, or whatever you pass with <code>--dns</code>). The same DNS servers are also advertised in the DHCP lease.</p>
-<hr />
 <h2 id="part-5-nat-the-magic-your-router-does">Part 5: NAT (the magic your router does) <a class="header-anchor" href="#part-5-nat-the-magic-your-router-does">#</a></h2>
 <h3 id="the-problem-2">The problem <a class="header-anchor" href="#the-problem-2">#</a></h3>
 <p>Your ISP gives you <em>one</em> public IP address, but you have 10 devices at home. How do all 10 use the internet at once?</p>
@@ -322,7 +255,6 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span>box<span class=
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>droidspaces<span class="w"> </span>--name<span class="o">=</span>box<span class="w"> </span>--rootfs<span class="o">=</span>/data/box<span class="w"> </span>--net<span class="o">=</span>nat<span class="w"> </span>--upstream<span class="o">=</span>rmnet*<span class="w"> </span>start
 </code></pre></div>
 <p>The container's traffic goes out over mobile data while the rest of the phone stays on Wi-Fi. Useful for testing from a different IP or network, moving a container's bandwidth onto cellular, or running something on a separate connection from everything else on the phone.</p>
-<hr />
 <h2 id="part-6-bridges-and-virtual-cables-linux-plumbing">Part 6: Bridges and virtual cables (Linux plumbing) <a class="header-anchor" href="#part-6-bridges-and-virtual-cables-linux-plumbing">#</a></h2>
 <p>One level deeper: how Linux connects containers to each other.</p>
 <h3 id="what-is-a-network-bridge">What is a network bridge? <a class="header-anchor" href="#what-is-a-network-bridge">#</a></h3>
@@ -361,7 +293,6 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span>box<span class=
 </code></pre></div>
 <p>The bridge <code>ds-br0</code> holds the gateway IP <code>172.28.0.1</code>, which every NAT container uses as its default gateway. Its MAC is pinned from its name on every start, because an unpinned bridge borrows the lowest MAC among its ports and would change it whenever that container stops, leaving every other container with a stale ARP entry for the gateway. The veth pair is named after the container's init process ID: the host side is <code>ds-v&lt;PID&gt;</code>, and the container side starts as <code>ds-p&lt;PID&gt;</code> and is renamed to <code>eth0</code> inside the container.</p>
 <p>Droidspaces runs a small per-container DHCP server on the container's host-side veth. The whole <code>172.28.0.0/16</code> subnet belongs to Droidspaces. The <code>172.28.0.x</code> row is reserved for the gateway itself, so containers always get an address from <code>172.28.1.x</code> to <code>172.28.254.x</code>, and all of it is NATed out through Android's real interface.</p>
-<hr />
 <h2 id="part-7-network-namespaces-how-containers-are-isolated">Part 7: Network namespaces (how containers are isolated) <a class="header-anchor" href="#part-7-network-namespaces-how-containers-are-isolated">#</a></h2>
 <h3 id="what-is-a-namespace">What is a namespace? <a class="header-anchor" href="#what-is-a-namespace">#</a></h3>
 <p>Linux <strong>namespaces</strong> give a process its own isolated view of a system resource.</p>
@@ -378,7 +309,6 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span>box<span class=
 <li>One end sits in the container's network namespace (as <code>eth0</code>).</li>
 <li>The other end stays in the host's network namespace, where Droidspaces connects it to a bridge.</li>
 </ul>
-<hr />
 <h2 id="part-8-openwrt-and-what-it-is">Part 8: OpenWRT and what it is <a class="header-anchor" href="#part-8-openwrt-and-what-it-is">#</a></h2>
 <h3 id="what-is-openwrt">What is OpenWRT? <a class="header-anchor" href="#what-is-openwrt">#</a></h3>
 <p><strong>OpenWRT</strong> is a Linux distribution built for routers. It usually runs on router hardware, but it can also run on an ordinary Linux system or inside a container.</p>
@@ -391,8 +321,7 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span>box<span class=
 <li>Everything else a real router does, in software</li>
 </ul>
 <p>So you can run OpenWRT in a Droidspaces container and it behaves like a real router: it manages networks, hands out DHCP leases, serves DNS, applies firewall rules, routes VPN traffic, and so on.</p>
-<hr />
-<h2 id="part-9-the-new-gateway-mode---putting-it-all-together">Part 9: The new gateway mode - putting it all together <a class="header-anchor" href="#part-9-the-new-gateway-mode---putting-it-all-together">#</a></h2>
+<h2 id="part-9-gateway-mode-putting-it-all-together">Part 9: Gateway mode, putting it all together <a class="header-anchor" href="#part-9-gateway-mode-putting-it-all-together">#</a></h2>
 <h3 id="why-does-gateway-mode-exist">Why does gateway mode exist? <a class="header-anchor" href="#why-does-gateway-mode-exist">#</a></h3>
 <p>In NAT mode, Droidspaces is the router and does everything. For most uses that is fine.</p>
 <p>But you may want <strong>OpenWRT to be the router</strong> for other containers: OpenWRT's firewall rules, OpenWRT's DHCP, OpenWRT's VPN routing, with other containers (a Kali Linux container, say) sitting on OpenWRT's LAN and getting everything from it.</p>
@@ -499,7 +428,6 @@ OpenWRT's <code>dnsmasq</code> starts answering DHCP requests on <code>eth1</cod
 <li><strong>The last client stops while the gateway is still running:</strong> the bridge is <strong>kept</strong>, not reaped. Tearing it down would flap the carrier on the gateway's live <code>eth1</code> and sometimes make netifd report &quot;device initialization failed&quot;. An idle bridge with no IP does no harm, and the next client reuses it.</li>
 <li><strong>The gateway stops:</strong> Droidspaces deletes the gateway-side veth itself. It cannot be left to the kernel: the host end of a veth holds a reference to its peer's namespace, so the dead gateway's namespace would never be freed. Once no clients remain <em>and</em> the gateway is gone, the idle bridge is reaped.</li>
 </ul>
-<hr />
 <h2 id="part-10-gateway-mode-flags-and-configuration">Part 10: Gateway mode flags and configuration <a class="header-anchor" href="#part-10-gateway-mode-flags-and-configuration">#</a></h2>
 <h3 id="required-vs-optional-flags">Required vs optional flags <a class="header-anchor" href="#required-vs-optional-flags">#</a></h3>
 <p>With <code>--net=gateway</code>, <strong>only one flag is required</strong>:</p>
@@ -662,7 +590,6 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <li><code>--port</code> only makes sense in NAT mode. In gateway mode it is ignored with a warning, because port forwarding and uplink selection are the gateway container's job.</li>
 <li>When the host bridge name is derived from <code>--gateway-net</code>, the name is sanitised (only letters, digits, <code>_</code> and <code>-</code> are kept) and truncated to 9 characters, giving <code>ds-</code> plus at most 9 characters. If you need an exact bridge name, set it with <code>--gateway-bridge</code>.</li>
 </ul>
-<hr />
 <h2 id="part-11-comparing-all-networking-modes">Part 11: Comparing all networking modes <a class="header-anchor" href="#part-11-comparing-all-networking-modes">#</a></h2>
 <div class="table-wrap"><table>
 <thead>
@@ -750,7 +677,6 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 </tr>
 </tbody>
 </table></div>
-<hr />
 <h2 id="part-12-real-world-use-cases-for-gateway-mode">Part 12: Real-world use cases for gateway mode <a class="header-anchor" href="#part-12-real-world-use-cases-for-gateway-mode">#</a></h2>
 <h3 id="1-vpn-killswitch-for-specific-containers">1. VPN killswitch for specific containers <a class="header-anchor" href="#1-vpn-killswitch-for-specific-containers">#</a></h3>
 <p>Run OpenWRT with a WireGuard or OpenVPN client, and configure its firewall to drop all traffic that does not go through the VPN tunnel. No gateway-mode container can then leak traffic outside the VPN. OpenWRT enforces it at the bridge, not inside each container.</p>
@@ -762,7 +688,6 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <p>Run OpenWRT with a <code>dnsmasq</code> blocklist (or with Adblock installed via opkg). Every container on the gateway LAN gets filtered DNS without configuring each container.</p>
 <h3 id="5-bandwidth-shaping">5. Bandwidth shaping <a class="header-anchor" href="#5-bandwidth-shaping">#</a></h3>
 <p>OpenWRT's <code>tc</code> (traffic control) and <code>sqm-scripts</code> can shape bandwidth per container, because OpenWRT sees each container as a separate MAC address on its LAN interface.</p>
-<hr />
 <h2 id="quick-reference---terms">Quick reference - terms <a class="header-anchor" href="#quick-reference---terms">#</a></h2>
 <div class="table-wrap"><table>
 <thead>
@@ -861,10 +786,10 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 
     </article>
     <p class="doc-edit"><a href="https://github.com/ravindu644/Droidspaces-OSS/edit/main/Documentation/Networking-From-Zero.md" rel="noopener noreferrer"><span class="icon" aria-hidden="true">edit</span>Edit this page on GitHub</a></p>
-<nav class="doc-nav" aria-label="Pages"><a href="linux-cli.html" class="doc-nav-prev"><small>Previous</small>Linux CLI</a><a href="cool-things-you-can-do.html" class="doc-nav-next"><small>Next</small>Cool things you can do</a></nav>
+<nav class="doc-nav" aria-label="Pages"><a href="kernel-configuration.html" class="doc-nav-prev"><small>Previous</small>Kernel configuration</a><a href="cool-things-you-can-do.html" class="doc-nav-next"><small>Next</small>Recipes</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h3"><a href="#quick-navigation">Quick navigation</a></li><li class="toc-h2"><a href="#part-1-the-absolute-basics">Part 1: The absolute basics</a></li><li class="toc-h3"><a href="#what-is-an-ip-address">What is an IP address?</a></li><li class="toc-h3"><a href="#what-is-a-network">What is a network?</a></li><li class="toc-h3"><a href="#lan---local-area-network">LAN - Local Area Network</a></li><li class="toc-h3"><a href="#wan---wide-area-network">WAN - Wide Area Network</a></li><li class="toc-h3"><a href="#gateway">Gateway</a></li><li class="toc-h2"><a href="#part-2-how-data-actually-gets-delivered">Part 2: How data actually gets delivered</a></li><li class="toc-h3"><a href="#mac-address-vs-ip-address">MAC address vs IP address</a></li><li class="toc-h3"><a href="#what-is-a-packet">What is a packet?</a></li><li class="toc-h2"><a href="#part-3-dhcp-how-you-get-an-ip-address">Part 3: DHCP (how you get an IP address)</a></li><li class="toc-h3"><a href="#the-problem">The problem</a></li><li class="toc-h3"><a href="#the-solution-dhcp">The solution: DHCP</a></li><li class="toc-h2"><a href="#part-4-dns-how-names-become-addresses">Part 4: DNS (how names become addresses)</a></li><li class="toc-h3"><a href="#the-problem-1">The problem</a></li><li class="toc-h3"><a href="#the-solution-dns">The solution: DNS</a></li><li class="toc-h2"><a href="#part-5-nat-the-magic-your-router-does">Part 5: NAT (the magic your router does)</a></li><li class="toc-h3"><a href="#the-problem-2">The problem</a></li><li class="toc-h3"><a href="#the-solution-nat">The solution: NAT</a></li><li class="toc-h3"><a href="#nat-in-droidspaces">NAT in Droidspaces</a></li><li class="toc-h3"><a href="#how-nat-mode-picks-the-wan-uplink-automatic">How NAT mode picks the WAN uplink (automatic)</a></li><li class="toc-h3"><a href="#pinning-the-uplink-manually-with---upstream">Pinning the uplink manually with --upstream</a></li><li class="toc-h3"><a href="#use-cases-for---upstream">Use cases for --upstream</a></li><li class="toc-h2"><a href="#part-6-bridges-and-virtual-cables-linux-plumbing">Part 6: Bridges and virtual cables (Linux plumbing)</a></li><li class="toc-h3"><a href="#what-is-a-network-bridge">What is a network bridge?</a></li><li class="toc-h3"><a href="#what-is-a-veth-pair">What is a veth pair?</a></li><li class="toc-h3"><a href="#how-nat-mode-uses-bridges-and-veths">How NAT mode uses bridges and veths</a></li><li class="toc-h2"><a href="#part-7-network-namespaces-how-containers-are-isolated">Part 7: Network namespaces (how containers are isolated)</a></li><li class="toc-h3"><a href="#what-is-a-namespace">What is a namespace?</a></li><li class="toc-h2"><a href="#part-8-openwrt-and-what-it-is">Part 8: OpenWRT and what it is</a></li><li class="toc-h3"><a href="#what-is-openwrt">What is OpenWRT?</a></li><li class="toc-h2"><a href="#part-9-the-new-gateway-mode---putting-it-all-together">Part 9: The new gateway mode - putting it all together</a></li><li class="toc-h3"><a href="#why-does-gateway-mode-exist">Why does gateway mode exist?</a></li><li class="toc-h3"><a href="#the-architecture">The architecture</a></li><li class="toc-h3"><a href="#step-by-step---what-happens-when-you-start-a-gateway-mode-container">Step by step - what happens when you start a gateway-mode container</a></li><li class="toc-h3"><a href="#what-lazy-attachment-means">What &quot;lazy attachment&quot; means</a></li><li class="toc-h3"><a href="#why-resolvconf-is-left-alone-in-gateway-mode">Why resolv.conf is left alone in gateway mode</a></li><li class="toc-h3"><a href="#why-bridge-nf-call-iptables-is-set-to-0">Why bridge-nf-call-iptables is set to 0</a></li><li class="toc-h3"><a href="#start-order-and-automatic-self-healing">Start order and automatic self-healing</a></li><li class="toc-h3"><a href="#what-happens-when-containers-stop">What happens when containers stop</a></li><li class="toc-h2"><a href="#part-10-gateway-mode-flags-and-configuration">Part 10: Gateway mode flags and configuration</a></li><li class="toc-h3"><a href="#required-vs-optional-flags">Required vs optional flags</a></li><li class="toc-h3"><a href="#what---gateway-net-does">What --gateway-net does</a></li><li class="toc-h3"><a href="#what---gateway-iface-does">What --gateway-iface does</a></li><li class="toc-h3"><a href="#the-flag-conflict-you-must-avoid">The flag conflict you must avoid</a></li><li class="toc-h3"><a href="#ipv6-through-the-gateway">IPv6 through the gateway</a></li><li class="toc-h3"><a href="#validation-rules-and-kernel-requirements">Validation rules and kernel requirements</a></li><li class="toc-h2"><a href="#part-11-comparing-all-networking-modes">Part 11: Comparing all networking modes</a></li><li class="toc-h2"><a href="#part-12-real-world-use-cases-for-gateway-mode">Part 12: Real-world use cases for gateway mode</a></li><li class="toc-h3"><a href="#1-vpn-killswitch-for-specific-containers">1. VPN killswitch for specific containers</a></li><li class="toc-h3"><a href="#2-multiple-isolated-lan-segments">2. Multiple isolated LAN segments</a></li><li class="toc-h3"><a href="#3-traffic-analysis">3. Traffic analysis</a></li><li class="toc-h3"><a href="#4-custom-dns-filtering">4. Custom DNS filtering</a></li><li class="toc-h3"><a href="#5-bandwidth-shaping">5. Bandwidth shaping</a></li><li class="toc-h2"><a href="#quick-reference---terms">Quick reference - terms</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#part-1-the-absolute-basics">Part 1: The absolute basics</a></li><li class="toc-h3"><a href="#what-is-an-ip-address">What is an IP address?</a></li><li class="toc-h3"><a href="#what-is-a-network">What is a network?</a></li><li class="toc-h3"><a href="#lan---local-area-network">LAN - Local Area Network</a></li><li class="toc-h3"><a href="#wan---wide-area-network">WAN - Wide Area Network</a></li><li class="toc-h3"><a href="#gateway">Gateway</a></li><li class="toc-h2"><a href="#part-2-how-data-actually-gets-delivered">Part 2: How data actually gets delivered</a></li><li class="toc-h3"><a href="#mac-address-vs-ip-address">MAC address vs IP address</a></li><li class="toc-h3"><a href="#what-is-a-packet">What is a packet?</a></li><li class="toc-h2"><a href="#part-3-dhcp-how-you-get-an-ip-address">Part 3: DHCP (how you get an IP address)</a></li><li class="toc-h3"><a href="#the-problem">The problem</a></li><li class="toc-h3"><a href="#the-solution-dhcp">The solution: DHCP</a></li><li class="toc-h2"><a href="#part-4-dns-how-names-become-addresses">Part 4: DNS (how names become addresses)</a></li><li class="toc-h3"><a href="#the-problem-1">The problem</a></li><li class="toc-h3"><a href="#the-solution-dns">The solution: DNS</a></li><li class="toc-h2"><a href="#part-5-nat-the-magic-your-router-does">Part 5: NAT (the magic your router does)</a></li><li class="toc-h3"><a href="#the-problem-2">The problem</a></li><li class="toc-h3"><a href="#the-solution-nat">The solution: NAT</a></li><li class="toc-h3"><a href="#nat-in-droidspaces">NAT in Droidspaces</a></li><li class="toc-h3"><a href="#how-nat-mode-picks-the-wan-uplink-automatic">How NAT mode picks the WAN uplink (automatic)</a></li><li class="toc-h3"><a href="#pinning-the-uplink-manually-with---upstream">Pinning the uplink manually with --upstream</a></li><li class="toc-h3"><a href="#use-cases-for---upstream">Use cases for --upstream</a></li><li class="toc-h2"><a href="#part-6-bridges-and-virtual-cables-linux-plumbing">Part 6: Bridges and virtual cables (Linux plumbing)</a></li><li class="toc-h3"><a href="#what-is-a-network-bridge">What is a network bridge?</a></li><li class="toc-h3"><a href="#what-is-a-veth-pair">What is a veth pair?</a></li><li class="toc-h3"><a href="#how-nat-mode-uses-bridges-and-veths">How NAT mode uses bridges and veths</a></li><li class="toc-h2"><a href="#part-7-network-namespaces-how-containers-are-isolated">Part 7: Network namespaces (how containers are isolated)</a></li><li class="toc-h3"><a href="#what-is-a-namespace">What is a namespace?</a></li><li class="toc-h2"><a href="#part-8-openwrt-and-what-it-is">Part 8: OpenWRT and what it is</a></li><li class="toc-h3"><a href="#what-is-openwrt">What is OpenWRT?</a></li><li class="toc-h2"><a href="#part-9-gateway-mode-putting-it-all-together">Part 9: Gateway mode, putting it all together</a></li><li class="toc-h3"><a href="#why-does-gateway-mode-exist">Why does gateway mode exist?</a></li><li class="toc-h3"><a href="#the-architecture">The architecture</a></li><li class="toc-h3"><a href="#step-by-step---what-happens-when-you-start-a-gateway-mode-container">Step by step - what happens when you start a gateway-mode container</a></li><li class="toc-h3"><a href="#what-lazy-attachment-means">What &quot;lazy attachment&quot; means</a></li><li class="toc-h3"><a href="#why-resolvconf-is-left-alone-in-gateway-mode">Why resolv.conf is left alone in gateway mode</a></li><li class="toc-h3"><a href="#why-bridge-nf-call-iptables-is-set-to-0">Why bridge-nf-call-iptables is set to 0</a></li><li class="toc-h3"><a href="#start-order-and-automatic-self-healing">Start order and automatic self-healing</a></li><li class="toc-h3"><a href="#what-happens-when-containers-stop">What happens when containers stop</a></li><li class="toc-h2"><a href="#part-10-gateway-mode-flags-and-configuration">Part 10: Gateway mode flags and configuration</a></li><li class="toc-h3"><a href="#required-vs-optional-flags">Required vs optional flags</a></li><li class="toc-h3"><a href="#what---gateway-net-does">What --gateway-net does</a></li><li class="toc-h3"><a href="#what---gateway-iface-does">What --gateway-iface does</a></li><li class="toc-h3"><a href="#the-flag-conflict-you-must-avoid">The flag conflict you must avoid</a></li><li class="toc-h3"><a href="#ipv6-through-the-gateway">IPv6 through the gateway</a></li><li class="toc-h3"><a href="#validation-rules-and-kernel-requirements">Validation rules and kernel requirements</a></li><li class="toc-h2"><a href="#part-11-comparing-all-networking-modes">Part 11: Comparing all networking modes</a></li><li class="toc-h2"><a href="#part-12-real-world-use-cases-for-gateway-mode">Part 12: Real-world use cases for gateway mode</a></li><li class="toc-h3"><a href="#1-vpn-killswitch-for-specific-containers">1. VPN killswitch for specific containers</a></li><li class="toc-h3"><a href="#2-multiple-isolated-lan-segments">2. Multiple isolated LAN segments</a></li><li class="toc-h3"><a href="#3-traffic-analysis">3. Traffic analysis</a></li><li class="toc-h3"><a href="#4-custom-dns-filtering">4. Custom DNS filtering</a></li><li class="toc-h3"><a href="#5-bandwidth-shaping">5. Bandwidth shaping</a></li><li class="toc-h2"><a href="#quick-reference---terms">Quick reference - terms</a></li></ul></nav>
   </aside>
 <footer class="footer">
   <div class="footer-inner">
