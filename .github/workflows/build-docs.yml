@@ -34,6 +34,11 @@ jobs:
           rm -rf docs/content/
           mkdir -p docs/content
           cp -r /tmp/source/Documentation/. docs/content/
+          # the pages reference screenshots as resources/gallery/<name>.png, relative to
+          # /docs/, so the folder has to live next to the pages
+          rm -rf docs/resources
+          cp -r /tmp/source/Documentation/resources docs/resources
+          rm -rf docs/resources/kernel-patches
 
       - name: Install the build's Markdown renderer and highlighter
         run: pip install markdown-it-py mdit-py-plugins pygments

@@ -182,6 +182,8 @@ html { scroll-padding-top: 80px; } /* an anchor lands below the 64px sticky nav,
 .docs-content li { margin-bottom: 4px; }
 .docs-content li > p { margin-bottom: 8px; }
 .docs-content img { display: block; max-width: 100%; height: auto; margin: 16px 0; border: 1px solid var(--md-sys-color-outline-variant); border-radius: var(--md-sys-shape-corner-lg); }
+/* a row of phone screenshots: the pages mark it up as <p align="center"> with 30% wide images */
+.docs-content p[align="center"] img { display: inline-block; width: 30%; margin: 8px 1%; vertical-align: top; }
 .docs-content hr { margin: 32px 0; border: 0; border-top: 1px solid var(--md-sys-color-outline-variant); }
 .docs-content hr + h2 { padding-top: 0; border-top: 0; } /* the page already drew its own rule */
 .docs-content :not(pre) > code { overflow-wrap: anywhere; } /* a long path wraps instead of widening a phone screen */
