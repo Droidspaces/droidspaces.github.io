@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="A Wayland desktop on Android through Anland: install a patched compositor in the container, install the Anland app, and turn on Anland Display.">
-  <title>Anland - Droidspaces Docs</title>
-  <meta property="og:title" content="Anland - Droidspaces Docs">
-  <meta property="og:description" content="A Wayland desktop on Android through Anland: install a patched compositor in the container, install the Anland app, and turn on Anland Display.">
+  <meta name="description" content="Set up Anland Wayland display in a Droidspaces Android container, from installing a patched compositor to configuring the container.">
+  <title>Anland (Wayland) - Droidspaces Docs</title>
+  <meta property="og:title" content="Anland (Wayland) - Droidspaces Docs">
+  <meta property="og:description" content="Set up Anland Wayland display in a Droidspaces Android container, from installing a patched compositor to configuring the container.">
   <meta property="og:url" content="https://www.droidspaces.org/docs/anland.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Droidspaces">
@@ -15,15 +15,15 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="The Droidspaces wordmark, the words Linux containers on Android, and a terminal starting an Ubuntu container">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Anland - Droidspaces Docs">
-  <meta name="twitter:description" content="A Wayland desktop on Android through Anland: install a patched compositor in the container, install the Anland app, and turn on Anland Display.">
+  <meta name="twitter:title" content="Anland (Wayland) - Droidspaces Docs">
+  <meta name="twitter:description" content="Set up Anland Wayland display in a Droidspaces Android container, from installing a patched compositor to configuring the container.">
   <meta name="twitter:image" content="https://www.droidspaces.org/assets/images/og-image.png">
   <link rel="canonical" href="https://www.droidspaces.org/docs/anland.html">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=13356a4605">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Anland", "description": "A Wayland desktop on Android through Anland: install a patched compositor in the container, install the Anland app, and turn on Anland Display.", "url": "https://www.droidspaces.org/docs/anland.html", "inLanguage": "en", "dateModified": "2026-10-12", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Anland", "item": "https://www.droidspaces.org/docs/anland.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Anland (Wayland)", "description": "Set up Anland Wayland display in a Droidspaces Android container, from installing a patched compositor to configuring the container.", "url": "https://www.droidspaces.org/docs/anland.html", "inLanguage": "en", "dateModified": "2026-10-12", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Anland (Wayland)", "item": "https://www.droidspaces.org/docs/anland.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -47,7 +47,7 @@
 </nav>
 
 <div class="docs-layout">
-  <button class="doc-breadcrumb" popovertarget="sidebar"><span class="icon" aria-hidden="true">menu</span><span>Docs</span><span class="bc-sep">/</span><span class="bc-section">Guides</span><span class="bc-sep">/</span><span class="bc-label">Anland</span></button>
+  <button class="doc-breadcrumb" popovertarget="sidebar"><span class="icon" aria-hidden="true">menu</span><span>Docs</span><span class="bc-sep">/</span><span class="bc-section">Guides</span><span class="bc-sep">/</span><span class="bc-label">Anland (Wayland)</span></button>
   <aside class="sidebar" id="sidebar" popover>
     <button class="icon-button sidebar-close" popovertarget="sidebar" popovertargetaction="hide" aria-label="Close navigation"><span class="icon" aria-hidden="true">close</span></button>
     <button class="search-open" type="button" hidden><span class="icon" aria-hidden="true">search</span>Search the docs<kbd>Ctrl K</kbd></button>
@@ -60,7 +60,7 @@
 <a href="features.html" class="sidebar-link">Container settings</a>
 <a href="linux-cli.html" class="sidebar-link">Linux CLI</a>
 <a href="graphics-and-audio.html" class="sidebar-link">Display, audio and desktop</a>
-<a href="anland.html" class="sidebar-link" aria-current="page">Anland</a>
+<a href="anland.html" class="sidebar-link" aria-current="page">Anland (Wayland)</a>
 <a href="kernel-configuration.html" class="sidebar-link">Kernel configuration</a>
 <a href="networking-from-zero.html" class="sidebar-link">Networking from zero</a>
 </details>
@@ -76,65 +76,121 @@
   </aside>
   <main id="main" class="docs-content">
     <article>
-<h1 id="anland">Anland <a class="header-anchor" href="#anland">#</a></h1>
-<p>Anland is a second way to get a desktop on the phone, next to Termux:X11. It is for Wayland. A Linux compositor patched for Anland, KWin for KDE Plasma or Weston, renders straight into GPU buffers, and the Anland app on Android shows those buffers on screen. Droidspaces runs the small daemon that connects the two over a socket and gives you a button to open the desktop.</p>
-<p>Anland only handles the display. The container, its rootfs, GPU access and startup are still Droidspaces' job. Anland works best on Qualcomm Snapdragon devices with Adreno GPUs, because it leans on the device's GPU buffer sharing, and that is where it has been tested most.</p>
-<h2 id="what-you-need">What you need <a class="header-anchor" href="#what-you-need">#</a></h2>
+<h1 id="anland-wayland">Anland (Wayland) <a class="header-anchor" href="#anland-wayland">#</a></h1>
+<p>Anland is an optional Wayland display path for Droidspaces. A Linux compositor patched for Anland, such as KWin or Weston, renders the desktop into GPU buffers. The Anland app displays those buffers on Android, while a small Droidspaces broker connects the container and the app over a Unix domain socket.</p>
+<p>Unlike Termux:X11, Anland is designed for Wayland compositors such as KDE Plasma Wayland. Anland handles the display path; Droidspaces still manages the container, rootfs, permissions, GPU access and startup.</p>
+<p>Qualcomm Snapdragon devices with Adreno GPUs are recommended. Anland relies on device-side GPU buffer sharing, and Qualcomm devices tend to be more compatible.</p>
+<h2 id="more-anland-guides">More Anland guides <a class="header-anchor" href="#more-anland-guides">#</a></h2>
 <ul>
-<li>A container that already runs on your phone.</li>
-<li>A compositor patched for Anland inside that container. KWin is the main one; the <a href="https://github.com/superturtlee/anland/tree/main/producers" rel="noopener noreferrer">Anland producers directory</a> lists the backends that exist.</li>
-<li>The Anland app on Android.</li>
+<li><a href="https://github.com/SuperTurtleDev/anland/blob/legacy/doc/UserManual/anland_guide.md" rel="noopener noreferrer">Anland user guide</a>: Install Anland and connect to an Anland-capable Wayland desktop through chroot or Droidspaces.</li>
+<li><a href="https://github.com/SuperTurtleDev/anland/blob/legacy/doc/UserManual/anland_settings_guide.md" rel="noopener noreferrer">Anland settings guide</a>: Configure input, display, connection, audio and window behavior in the Android app.</li>
 </ul>
-<h2 id="step-1-put-an-anland-backend-in-the-container">Step 1: Put an Anland backend in the container <a class="header-anchor" href="#step-1-put-an-anland-backend-in-the-container">#</a></h2>
-<p>Either build the backend yourself or use a rootfs that already has it.</p>
-<h3 id="build-it-inside-the-container">Build it inside the container <a class="header-anchor" href="#build-it-inside-the-container">#</a></h3>
-<p>For a distribution or desktop of your choice, or when you want to see what the backend does.</p>
+<h2 id="quick-navigation">Quick navigation <a class="header-anchor" href="#quick-navigation">#</a></h2>
+<ul>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#backend">Step 1: Install an Anland backend</a>
+<ul>
+<li><a href="#manual-build">Build it in the container</a></li>
+<li><a href="#rootfs-builder">Build a rootfs automatically</a></li>
+</ul>
+</li>
+<li><a href="#app">Step 2: Install the Anland app</a></li>
+<li><a href="#container-config">Step 3: Configure the container</a></li>
+</ul>
+<p><a id="requirements"></a></p>
+<h2 id="requirements">Requirements <a class="header-anchor" href="#requirements">#</a></h2>
+<p>Before setting up Anland, make sure you have:</p>
+<ol>
+<li><strong>An Android device supported by Droidspaces.</strong> Anland works with Droidspaces when <strong>Anland Display</strong> is enabled in the container configuration.</li>
+<li><strong>A compositor backend patched for Anland.</strong> KWin is the main supported backend. See the <a href="https://github.com/SuperTurtleDev/anland/tree/legacy/producers" rel="noopener noreferrer">Anland producers directory</a> for available builds.</li>
+<li><strong>A compatible GPU.</strong> Qualcomm Snapdragon devices with Adreno GPUs are recommended for better compatibility.</li>
+</ol>
+<p><a id="backend"></a></p>
+<h2 id="step-1-install-an-anland-backend">Step 1: Install an Anland backend <a class="header-anchor" href="#step-1-install-an-anland-backend">#</a></h2>
+<p>The desktop in the container must use a compositor backend patched for Anland. An unpatched Wayland compositor cannot send its display to the Anland app.</p>
+<p><a id="manual-build"></a></p>
+<h3 id="build-it-in-the-container">Build it in the container <a class="header-anchor" href="#build-it-in-the-container">#</a></h3>
+<p>Build the backend yourself if you want to choose a distribution or desktop environment, or need to debug the setup.</p>
 <ol>
 <li>
-<p>Open a shell in the container and clone the Anland source:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/superturtlee/anland.git
+<p>Open a shell in the Droidspaces container.</p>
+</li>
+<li>
+<p>Clone the Anland source:</p>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>legacy<span class="w"> </span>https://github.com/SuperTurtleDev/anland.git
 </code></pre></div>
 </li>
 <li>
-<p>Under <code>producers</code>, pick the directory for your desktop and distribution. For KDE it looks like this:</p>
-<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>producers/kde
-├── anland_backend_debian13_v5
-├── anland_backend_v5
-├── Debian13_v5
-├── Fedora43_v5
-└── ubuntu2604_v5
+<p>Under <code>producers</code>, choose the directory for your desktop and distribution. KDE backend directories include:</p>
+<div class="code-block"><span class="code-lang">text</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>producers/kde/
+├── anland_backend/
+├── Debian13_v5/
+├── Fedora43_v5/
+└── ubuntu2604_v5/
 </code></pre></div>
 </li>
 <li>
-<p>Run that directory's <code>build.sh</code> as root. It installs the dependencies and the patched backend.</p>
+<p>As root, run <code>build.sh</code> in the matching directory. The script installs the required dependencies and Anland backend.</p>
 </li>
 <li>
-<p>Start the desktop with the project's <code>startup.sh</code>.</p>
+<p>Start the desktop with the project's <code>startup.sh</code> script.</p>
 </li>
 </ol>
-<h3 id="use-a-prebuilt-kde-plasma-rootfs">Use a prebuilt KDE Plasma rootfs <a class="header-anchor" href="#use-a-prebuilt-kde-plasma-rootfs">#</a></h3>
-<p><a href="https://github.com/Goldzxcbug/Droidspaces-rootfs-KDE-builder" rel="noopener noreferrer">Droidspaces-rootfs-KDE-builder</a> builds a KDE Plasma rootfs with the Anland backend already in it. It is the simpler route if KDE is what you want; it builds nothing else.</p>
+<p><a id="rootfs-builder"></a></p>
+<h3 id="build-a-rootfs-automatically">Build a rootfs automatically <a class="header-anchor" href="#build-a-rootfs-automatically">#</a></h3>
+<p>For a ready-to-import rootfs, use <a href="https://github.com/Goldzxcbug/Droidspaces-rootfs-Desktop-builder" rel="noopener noreferrer">Droidspaces-rootfs-Desktop-builder</a>.</p>
+<div class="callout callout-important"><strong class="callout-title">Important</strong><p>The builder currently supports KDE Plasma, GNOME and niri desktops.</p></div>
 <ol>
-<li>Fork the project and open its <strong>Actions</strong> page.</li>
-<li>Run the &quot;编译并发布Droidspaces Rootfs&quot; workflow by hand with the &quot;Wayland 支持&quot; option turned on. The build takes about fifteen minutes.</li>
-<li>Download the rootfs from the project's <strong>Releases</strong> page and install it with <strong>Install from file</strong> in the app.</li>
-<li>If the desktop does not start on its own, enter the container as a normal user and run <code>startplasma-wayland</code>.</li>
+<li>
+<p>Fork the project.</p>
+</li>
+<li>
+<p>Open its GitHub <strong>Actions</strong> page and find the <code>编译并发布Droidspaces Rootfs</code> workflow.</p>
+</li>
+<li>
+<p>Run the workflow manually and select <code>anland-wayland</code> for the display backend.</p>
+</li>
+<li>
+<p>Wait for the build to finish. It usually takes about 15 minutes.</p>
+</li>
+<li>
+<p>Open the project's <strong>Releases</strong> page, download the generated rootfs package and import it into Droidspaces.</p>
+</li>
+<li>
+<p>If the KDE desktop is not configured to start automatically, enter the container as a regular user and run the command for your desktop:</p>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>startplasma-wayland<span class="w">       </span><span class="c1"># KDE Plasma</span>
+startplasmamobile<span class="w">         </span><span class="c1"># KDE Plasma Mobile</span>
+gnome-session<span class="w"> </span>--session<span class="o">=</span>gnome
+niri-anland
+</code></pre></div>
+</li>
 </ol>
+<p><a id="app"></a></p>
 <h2 id="step-2-install-the-anland-app">Step 2: Install the Anland app <a class="header-anchor" href="#step-2-install-the-anland-app">#</a></h2>
-<p>Install <code>anland-v5.apk</code> from the newest 5.x release on the <a href="https://github.com/superturtlee/anland/releases" rel="noopener noreferrer">Anland releases page</a>, open it once, and grant it root. Droidspaces supports only Anland 5.x. The 6.x releases, marked &quot;Latest&quot; there, are a different app and do not work with it.</p>
-<h2 id="step-3-configure-the-container">Step 3: Configure the container <a class="header-anchor" href="#step-3-configure-the-container">#</a></h2>
-<p>In the container's configuration:</p>
 <ol>
-<li>Turn on <strong>GPU Access</strong>. The Anland switch stays greyed out until it is on, or Hardware Access is.</li>
-<li>Turn on <strong>Anland Display</strong>. On the CLI that is <code>--anland</code>, key <code>enable_anland</code>. Turning it on turns <strong>Configure Termux:X11</strong> off: the two display paths set conflicting variables and services, so a container uses one or the other.</li>
+<li>Download <code>anland-v5.apk</code> from the newest 5.x release on the <a href="https://github.com/superturtlee/anland/releases" rel="noopener noreferrer">Anland releases page</a>. Droidspaces supports only Anland 5.x. The 6.x releases, marked &quot;Latest&quot; there, are a different app and do not work with it.</li>
+<li>Install the APK on your Android device.</li>
+<li>Grant it root access. With KernelSU or APatch, allow it in the manager app. With Magisk, open Anland once and accept the root prompt.</li>
 </ol>
-<p>Three more settings are worth knowing:</p>
+<p><a id="container-config"></a></p>
+<h2 id="step-3-configure-the-container">Step 3: Configure the container <a class="header-anchor" href="#step-3-configure-the-container">#</a></h2>
+<p>Edit the target container's configuration in Droidspaces.</p>
+<h3 id="required-settings">Required settings <a class="header-anchor" href="#required-settings">#</a></h3>
+<ol>
+<li>Turn on <strong>GPU Access</strong>. <strong>Hardware Access</strong> also satisfies this requirement, but GPU Access is sufficient.</li>
+<li>Turn on <strong>Anland Display</strong>.</li>
+<li>Turn off <strong>Configure Termux:X11</strong>.</li>
+</ol>
+<p>Anland and Termux:X11 use separate display paths with conflicting environment variables and services. Enabling <strong>Anland Display</strong> turns off <strong>Configure Termux:X11</strong> for that container.
+On the CLI, enable Anland with <code>--anland</code> or the <code>enable_anland</code> config key.</p>
+<div class="callout callout-important"><strong class="callout-title">Important</strong><p>Use one display path per container. Keep the Termux:X11 configuration off while using Anland.</p></div>
+<h3 id="recommended-settings">Recommended settings <a class="header-anchor" href="#recommended-settings">#</a></h3>
 <ul>
-<li><strong>Configure PulseAudio</strong> can stay off. Anland carries audio itself. If it was on before, remove any <code>PULSE_SERVER</code> variable left in the container so programs stop looking for the old server.</li>
-<li><strong>Allow Sandboxing</strong> should be on for a full desktop such as KDE Plasma. Without it Plasma on Wayland can get slow or stop responding. Privileged mode is not needed, and neither is any of its tags.</li>
-<li><strong>SELinux Permissive</strong> should stay off. Try enforcing first; turn permissive on only if Anland fails to start or draw on your device, and treat that as a workaround while you report it.</li>
+<li><strong>Configure PulseAudio:</strong> Leave this off because Anland has its own audio path. If PulseAudio was previously enabled, remove any existing <code>PULSE_SERVER</code> environment variable from the container so applications do not connect to the old server.</li>
+<li><strong>SELinux Permissive:</strong> Leave this off and try Anland with SELinux enforcing first. If Anland cannot start or display anything on your device, you can temporarily enable this option to check for a compatibility issue.</li>
+<li><strong>Allow Sandboxing:</strong> Enable this for KDE Plasma and similar desktop environments. It allows user namespaces, which can improve Plasma Wayland responsiveness. This weakens container isolation, so enable it only for containers you trust. Anland does not require privileged mode, <code>noseccomp</code>, <code>nomask</code> or other privileged options.</li>
 </ul>
-<p>Start the container, then open its details page by tapping its card on the <strong>Panel</strong> tab. Below the Terminal card there is an <strong>Anland</strong> card with a <strong>Launch</strong> button, which opens the desktop in the Anland app. The button becomes active as soon as the broker's socket is recorded, which happens as the container starts. The desktop itself appears once the compositor inside the container has started.</p>
+<p>Start the container, then tap its card on the <strong>Panel</strong> tab to open the container details. The <strong>Anland</strong> card below <strong>Terminal</strong> has a <strong>Launch</strong> button that opens the desktop in the Anland app. The button becomes active when the container starts and Droidspaces records the broker socket. The desktop appears after the compositor inside the container starts.</p>
 <hr />
 <p>Previous: <a href="graphics-and-audio.html">Display, audio and desktop</a> | Next: <a href="kernel-configuration.html">Kernel configuration</a></p>
 
@@ -143,7 +199,7 @@
 <nav class="doc-nav" aria-label="Pages"><a href="graphics-and-audio.html" class="doc-nav-prev"><small>Previous</small>Display, audio and desktop</a><a href="kernel-configuration.html" class="doc-nav-next"><small>Next</small>Kernel configuration</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#what-you-need">What you need</a></li><li class="toc-h2"><a href="#step-1-put-an-anland-backend-in-the-container">Step 1: Put an Anland backend in the container</a></li><li class="toc-h3"><a href="#build-it-inside-the-container">Build it inside the container</a></li><li class="toc-h3"><a href="#use-a-prebuilt-kde-plasma-rootfs">Use a prebuilt KDE Plasma rootfs</a></li><li class="toc-h2"><a href="#step-2-install-the-anland-app">Step 2: Install the Anland app</a></li><li class="toc-h2"><a href="#step-3-configure-the-container">Step 3: Configure the container</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#more-anland-guides">More Anland guides</a></li><li class="toc-h2"><a href="#quick-navigation">Quick navigation</a></li><li class="toc-h2"><a href="#requirements">Requirements</a></li><li class="toc-h2"><a href="#step-1-install-an-anland-backend">Step 1: Install an Anland backend</a></li><li class="toc-h3"><a href="#build-it-in-the-container">Build it in the container</a></li><li class="toc-h3"><a href="#build-a-rootfs-automatically">Build a rootfs automatically</a></li><li class="toc-h2"><a href="#step-2-install-the-anland-app">Step 2: Install the Anland app</a></li><li class="toc-h2"><a href="#step-3-configure-the-container">Step 3: Configure the container</a></li><li class="toc-h3"><a href="#required-settings">Required settings</a></li><li class="toc-h3"><a href="#recommended-settings">Recommended settings</a></li></ul></nav>
   </aside>
 <footer class="footer">
   <div class="footer-inner">
