@@ -125,9 +125,8 @@
 <h2 id="step-3-configure-the-container">Step 3: Configure the container <a class="header-anchor" href="#step-3-configure-the-container">#</a></h2>
 <p>In the container's configuration:</p>
 <ol>
-<li>Turn on <strong>GPU Access</strong>.</li>
-<li>Turn on <strong>Anland Display</strong>. On the CLI that is <code>--anland</code>, key <code>enable_anland</code>.</li>
-<li>Turn off <strong>Configure Termux:X11</strong>. The two display paths set conflicting variables and services, so a container uses one or the other.</li>
+<li>Turn on <strong>GPU Access</strong>. The Anland switch stays greyed out until it is on, or Hardware Access is.</li>
+<li>Turn on <strong>Anland Display</strong>. On the CLI that is <code>--anland</code>, key <code>enable_anland</code>. Turning it on turns <strong>Configure Termux:X11</strong> off: the two display paths set conflicting variables and services, so a container uses one or the other.</li>
 </ol>
 <p>Three more settings are worth knowing:</p>
 <ul>
@@ -135,7 +134,7 @@
 <li><strong>Allow Sandboxing</strong> should be on for a full desktop such as KDE Plasma. Without it Plasma on Wayland can get slow or stop responding. Privileged mode is not needed, and neither is any of its tags.</li>
 <li><strong>SELinux Permissive</strong> should stay off. Try enforcing first; turn permissive on only if Anland fails to start or draw on your device, and treat that as a workaround while you report it.</li>
 </ul>
-<p>Start the container. When the backend is up, the container's card on the <strong>Panel</strong> tab shows a <strong>Launch Anland</strong> button, which opens the desktop in the Anland app.</p>
+<p>Start the container, then open its details page by tapping its card on the <strong>Panel</strong> tab. Below the Terminal card there is an <strong>Anland</strong> card with a <strong>Launch</strong> button, which opens the desktop in the Anland app. The button becomes active as soon as the broker's socket is recorded, which happens as the container starts. The desktop itself appears once the compositor inside the container has started.</p>
 <hr />
 <p>Previous: <a href="graphics-and-audio.html">Display, audio and desktop</a> | Next: <a href="kernel-configuration.html">Kernel configuration</a></p>
 
