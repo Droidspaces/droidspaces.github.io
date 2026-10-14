@@ -267,6 +267,21 @@
 <td><a href="https://github.com/tingao" rel="noopener noreferrer">@tingao</a></td>
 <td>MediaTek MT6833 (Dimensity 700). Replaces the BOOT partition only, flash with <code>fastboot flash boot</code>. The container runs on <strong>cgroup v2</strong>, so every process in it lands in its own host-side subtree and a memory cap can actually bind; needs <code>--privileged=noseccomp</code> and a systemd drop-in replacing <code>dockerd -H fd://</code> with a plain unix socket, and on v2 <code>cgroup-parent</code> has to come out of <code>daemon.json</code> or dockerd refuses to start. The handset's 17 prebuilt vendor modules were built from a source branch one patch level newer than the only one Motorola published, so the kernel warns on a symbol-CRC mismatch instead of rejecting every module. GPU acceleration untested.</td>
 </tr>
+<tr>
+<td><strong>Galaxy S10+ (Snapdragon, CHN/HK)</strong></td>
+<td>SM-G9750</td>
+<td>One UI 4.1 (stock) - Android 12</td>
+<td><code>SP1A.210812.016.G9750ZHU8HZE1</code></td>
+<td><code>4.14.190</code></td>
+<td>KernelSU-Next v3.1.0</td>
+<td><a href="https://github.com/tingao/s10plus-snapdragon-droidspaces-kernel" rel="noopener noreferrer">Source</a></td>
+<td><a href="https://github.com/tingao/s10plus-snapdragon-droidspaces-kernel/releases/download/v1.0.0/AP-boot-beyond2qlte-droidspaces.tar.md5" rel="noopener noreferrer">Download</a></td>
+<td>Both</td>
+<td>Untested</td>
+<td>Working</td>
+<td><a href="https://github.com/tingao" rel="noopener noreferrer">@tingao</a></td>
+<td>Snapdragon 855 / SM8150 (<code>beyond2q</code>), not the Exynos <code>beyond2lte</code> and not the US <code>beyond2qltesq</code>. Odin AP holding <code>boot.img</code> and <code>vbmeta.img</code>, every other partition left stock. The stock boot image has <code>RAMDISK_SZ 0</code>, so Magisk cannot patch it and KernelSU is the only root route here; there is no ramdisk variant. Carries the namespace, cgroup, overlayfs, veth and devtmpfs options Droidspaces needs, plus its non-GKI cgroup file-prefix patch. Tested with a Debian 13 container running systemd, Docker and overlay2 inside. GPU acceleration untested.</td>
+</tr>
 </tbody>
 </table></div>
 <h2 id="gki-devices-kernel-54-and-up">GKI devices (kernel 5.4 and up) <a class="header-anchor" href="#gki-devices-kernel-54-and-up">#</a></h2>
