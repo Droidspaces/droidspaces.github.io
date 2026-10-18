@@ -114,6 +114,9 @@
 <span class="c"># accounting that reports CPU usage on kernels before 4.15.</span>
 <span class="c"># Optional: a limit whose option is missing is skipped with a warning</span>
 <span class="nv">CONFIG_MEMCG</span><span class="o">=</span>y
+<span class="c"># Keeps a memory-limited container out of swap. Before 6.1 only; before 5.8</span>
+<span class="c"># also boot with swapaccount=1 unless CONFIG_MEMCG_SWAP_ENABLED=y</span>
+<span class="nv">CONFIG_MEMCG_SWAP</span><span class="o">=</span>y
 <span class="nv">CONFIG_CFS_BANDWIDTH</span><span class="o">=</span>y
 <span class="nv">CONFIG_CGROUP_PIDS</span><span class="o">=</span>y
 <span class="nv">CONFIG_CGROUP_CPUACCT</span><span class="o">=</span>y
@@ -291,7 +294,7 @@
 <h3 id="cpu-and-process-limits-on-gki">CPU and process limits on GKI <a class="header-anchor" href="#cpu-and-process-limits-on-gki">#</a></h3>
 <p><code>CONFIG_CFS_BANDWIDTH</code>, which <code>--cpus</code> needs, and <code>CONFIG_CGROUP_PIDS</code>, which <code>--pids-limit</code> needs, change the size of scheduler and cgroup structures that almost every exported kernel function refers to. On a 5.15 GKI tree they changed the checksum of about four thousand exported symbols, and no padding trick covers that. Stock vendor modules then refuse to load and the device bootloops.</p>
 <p>Turn them on only if you can rebuild every kernel module on the device from the same source tree and configuration, and flash them in <code>vendor_boot</code>, <code>vendor_dlkm</code> and <code>system_dlkm</code> together with the new <code>boot.img</code>, all at once. If any module is a prebuilt with no source, you cannot. Do not disable <code>CONFIG_MODVERSIONS</code> or force-load modules to get past the check; the structures really did change.</p>
-<p>Without these two options everything else works. <code>--cpus</code> and <code>--pids-limit</code> are skipped with a warning and the app greys out the two toggles. Memory limits need only <code>CONFIG_MEMCG</code>, which GKI already has. Keeping a limited container out of swap also needs <code>CONFIG_MEMCG_SWAP</code>, plus <code>swapaccount=1</code> on the kernel command line before 5.8 unless <code>CONFIG_MEMCG_SWAP_ENABLED</code> is set; without it the container can still spill into swap past its limit, and the start log says so.</p>
+<p>Without these two options everything else works. <code>--cpus</code> and <code>--pids-limit</code> are skipped with a warning and the app greys out the two toggles. Memory limits need only <code>CONFIG_MEMCG</code>, which GKI already has. Keeping a limited container out of swap also needs <code>CONFIG_MEMCG_SWAP</code>, plus <code>swapaccount=1</code> on the kernel command line before 5.8 unless <code>CONFIG_MEMCG_SWAP_ENABLED</code> is set; without it the container can still spill into swap past its limit, the start log says so, and the app greys out <strong>Allow swap</strong>.</p>
 <h2 id="what-the-check-looks-for">What the check looks for <a class="header-anchor" href="#what-the-check-looks-for">#</a></h2>
 <p><code>droidspaces check</code>, and the app's Requirements screen, probe the running kernel rather than its config. What each probe needs, and what you lose without it:</p>
 <div class="table-wrap"><table>
@@ -372,6 +375,11 @@
 <td>Memory, CPU and process limits</td>
 <td><code>CONFIG_MEMCG</code>, <code>CONFIG_CFS_BANDWIDTH</code>, <code>CONFIG_CGROUP_PIDS</code>, and no <code>cgroup_disable=</code> for them on the kernel command line</td>
 <td>That limit is skipped.</td>
+</tr>
+<tr>
+<td>Swap limit</td>
+<td><code>CONFIG_MEMCG_SWAP</code> with swap accounting on, <code>swapaccount=1</code> before 5.8</td>
+<td>A memory-limited container can still use swap.</td>
 </tr>
 <tr>
 <td>CPU usage accounting</td>

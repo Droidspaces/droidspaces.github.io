@@ -157,7 +157,8 @@
 <h2 id="resource-limits">Resource limits <a class="header-anchor" href="#resource-limits">#</a></h2>
 <p><code>--memory=SIZE</code>, <code>--cpus=COUNT</code> and <code>--pids-limit=N</code>, keys <code>memory_limit</code>, <code>cpu_quota</code> with <code>cpu_period</code>, and <code>pids_limit</code>. Off by default; a container shares everything the device has.</p>
 <ul>
-<li><strong>Limit memory</strong>: <code>--memory=512M</code> or <code>--memory=2G</code>. The container cannot grow past it into the device's swap, so at the limit its own OOM killer ends a process inside it instead of the phone slowing down as zram fills. Everything inside the container, <code>free</code> and fastfetch included, reports usage against this limit.</li>
+<li><strong>Limit memory</strong>: <code>--memory=512M</code> or <code>--memory=2G</code>. The container cannot grow past it into the device's swap, so at the limit its own OOM killer ends a process inside it instead of the phone slowing down as zram fills. Everything inside the container, <code>free</code> and fastfetch included, reports usage against this limit and no swap.</li>
+<li><strong>Allow swap</strong>: <code>--allow-swap</code>, key <code>allow_swap</code>. Lets a memory-limited container use the device's swap past its limit, as it could before the cap, and shows it the device's swap. <code>droidspaces info</code> and <code>show --format</code> say whether a running container may swap.</li>
 <li><strong>Limit CPU</strong>: <code>--cpus=1.5</code> gives the container one and a half cores' worth of time, spread over all cores.</li>
 <li><strong>Limit processes</strong>: the most processes and threads the container may have at once, minimum 16. A systemd distribution needs a few hundred.</li>
 </ul>
