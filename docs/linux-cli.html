@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=13356a4605">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Linux CLI", "description": "Reference for the droidspaces command line: every command, every flag, and the config file keys.", "url": "https://www.droidspaces.org/docs/linux-cli.html", "inLanguage": "en", "dateModified": "2026-10-18", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Linux CLI", "item": "https://www.droidspaces.org/docs/linux-cli.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Linux CLI", "description": "Reference for the droidspaces command line: every command, every flag, and the config file keys.", "url": "https://www.droidspaces.org/docs/linux-cli.html", "inLanguage": "en", "dateModified": "2026-10-19", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Linux CLI", "item": "https://www.droidspaces.org/docs/linux-cli.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -110,11 +110,11 @@
 </tr>
 <tr>
 <td><code>show</code></td>
-<td>Lists running containers. With <code>--format</code>, JSON with distribution, hostname, IP, uptime, CPU and RAM for each.</td>
+<td>Lists running containers. With <code>--json</code>, JSON with distribution, hostname, IP, uptime, CPU and RAM for each.</td>
 </tr>
 <tr>
 <td><code>info</code></td>
-<td>Shows a container's settings and state. With <code>--format</code>, JSON.</td>
+<td>Shows a container's settings and state. With <code>--json</code>, JSON.</td>
 </tr>
 <tr>
 <td><code>pid</code></td>
@@ -126,7 +126,7 @@
 </tr>
 <tr>
 <td><code>check</code></td>
-<td>Probes the kernel for everything Droidspaces uses. With <code>--format</code>, JSON with one <code>0</code> or <code>1</code> per probe and <code>requirements_met</code>.</td>
+<td>Probes the kernel for everything Droidspaces uses. With <code>--json</code>, JSON with one <code>0</code> or <code>1</code> per probe and <code>requirements_met</code>.</td>
 </tr>
 <tr>
 <td><code>daemon</code></td>
@@ -416,7 +416,7 @@
 <td>Forward your input to the <code>run</code> command. Without it the command gets nothing.</td>
 </tr>
 <tr>
-<td><code>--format</code></td>
+<td><code>--json</code></td>
 <td>JSON output from <code>show</code>, <code>info</code> and <code>check</code>.</td>
 </tr>
 </tbody>
@@ -463,7 +463,7 @@ sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class
 sudo<span class="w"> </span>droidspaces<span class="w"> </span>--name<span class="o">=</span>scratch<span class="w"> </span>--rootfs<span class="o">=</span>/srv/ubuntu<span class="w"> </span>--volatile<span class="w"> </span>start
 
 <span class="c1"># What is running, as JSON</span>
-sudo<span class="w"> </span>droidspaces<span class="w"> </span>--format<span class="w"> </span>show
+sudo<span class="w"> </span>droidspaces<span class="w"> </span>--json<span class="w"> </span>show
 </code></pre></div>
 <h2 id="where-things-are">Where things are <a class="header-anchor" href="#where-things-are">#</a></h2>
 <div class="table-wrap"><table>
