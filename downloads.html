@@ -49,259 +49,102 @@
 <main id="main" class="compact">
   <section class="section">
     <h1>Downloads.</h1>
-    <p class="title-lg">Version v7.0.0, released 2026-10-14. The APK carries the runtime and the app. Linux gets a static tarball with no dependencies.</p>
+    <p class="title-lg">Version v7.1.0, released 2026-10-27. The APK carries the runtime and the app. Linux gets a static tarball with no dependencies.</p>
     <div class="columns download-cards">
       <div class="card">
         <h3><span class="icon" aria-hidden="true">android</span>Android</h3>
         <p class="body-md">For rooted devices through KernelSU, Magisk or APatch, on a kernel built with the documented configuration.</p>
-        <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v7.0.0/Droidspaces-universal-v7.0.0-37e8b45.apk" class="button button-filled"><span class="icon" aria-hidden="true">download</span>Download the APK</a>
+        <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v7.1.0/Droidspaces-universal-v7.1.0-4344dc5.apk" class="button button-filled"><span class="icon" aria-hidden="true">download</span>Download the APK</a>
       </div>
       <div class="card">
         <h3><span class="icon" aria-hidden="true">terminal</span>Linux</h3>
         <p class="body-md">A static binary for any distribution on kernel 3.10 or newer. Root, or a running droidspaces daemon.</p>
-        <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v7.0.0/droidspaces-v7.0.0-37e8b45.tar.gz" class="button button-tonal"><span class="icon" aria-hidden="true">download</span>Download the tarball</a>
+        <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v7.1.0/droidspaces-v7.1.0-4344dc5.tar.gz" class="button button-tonal"><span class="icon" aria-hidden="true">download</span>Download the tarball</a>
       </div>
     </div>
     <p class="body-md">Every release, with checksums, is on <a href="https://github.com/ravindu644/Droidspaces-OSS/releases" rel="noopener noreferrer">GitHub</a>.</p>
   </section>
 
   <section class="section">
-    <h2>What changed in v7.0.0.</h2>
+    <h2>What changed in v7.1.0.</h2>
     <details class="changelog">
       <summary>Show the changelog</summary>
 <h2 id="whats-changed">What's Changed <a class="header-anchor" href="#whats-changed">#</a></h2>
 <ul>
-<li>docs: refresh the Home screenshot for v7.0.0 (37e8b45)</li>
-<li>droidspaces: bump v7.0.0 (64f7411)</li>
-<li>app: add a SteamOS distro icon (53524ba)</li>
-<li>app: make Broccoli the default theme palette (a93e618)</li>
-<li>Translated using Weblate (#351) (66043ca)</li>
-<li>docs: add Galaxy S10+ (Snapdragon, SM-G9750) to the non-GKI supported devices (#352) (38d6eac)</li>
-<li>docs: Add OnePlus 9 (lemonade, lemonadep) to the GKI supported devices (#353) (e81c973)</li>
-<li>app: fix: keep the terminal's user fetch alive across effect restarts (e2dc374)</li>
-<li>fix: keep the config's name when -n uses its folder spelling (73822e8)</li>
-<li>app: fix: let hwservicemanager hand HIDL services to containers (50e483a)</li>
-<li>fix: bind binderfs nodes in GPU mode instead of mknod copies (a91e5a4)</li>
-<li>Translated using Weblate (#348) (51f16c2)</li>
-<li>fix: leave the Pids directory empty after a stop (c2d27d2)</li>
-<li>docs: say that NAT, not host, is the default network mode (e50c4ec)</li>
-<li>fix: make stop wait for the monitor's route monitor before pulling shared rules (b5cfd06)</li>
-<li>fix: log each container of a multi-stop under its own name (6ad78df)</li>
-<li>net: log interface removals only when a link was actually deleted (f42ff66)</li>
-<li>app: probe the init system and users in one container entry (3df5f3e)</li>
-<li>docs: add a security policy (8f10124)</li>
-<li>fix: Update the Anland (Wayland) usage guide, correct translations and links (#350) (0dfea9e)</li>
-<li>app: fix: say that Anland Display needs the 5.x app (1bcdc3e)</li>
-<li>net: accept the all-uid default-network rule of Android 15+ netd (0b3d800)</li>
-<li>fix: stop the helper daemons a restarted container no longer wants (9fa5315)</li>
-<li>app: fix: gate the Anland launch on the booted socket, not the saved config (5bf12dd)</li>
-<li>app: fix: make the Anland and Termux:X11 switches exclude each other both ways (a0dde2c)</li>
-<li>app: bring the Anland pill back to the Panel card (9ed375a)</li>
-<li>fix: take USER_HZ from the auxv, musl hardcodes 100 (14a259b)</li>
-<li>fix: record the Anland daemon under .apid and .asock (b48a01d)</li>
-<li>fix: drop an Anland client that stalls the broker (46900e9)</li>
-<li>fix(security): authenticate the Anland broker's two roles (47c445c)</li>
-<li>refactor: bring the vendored Anland broker under the tree's rules (dc3431a)</li>
-<li>refactor: spawn the Anland daemon through ds_spawn_daemon (262c94c)</li>
-<li>fix(security): keep the Anland socket in the root-owned workspace (e22bc02)</li>
-<li>app: move the Anland launch to a card on the container details page (f683437)</li>
-<li>fix: give --anland its own option value (bee50dd)</li>
-<li>docs: fit the Anland guide into the rewritten documentation (746a9e1)</li>
-<li>Add Anland Guide (#230) (783fb49)</li>
-<li>feat: integrate Anland Wayland display support (c57056b)</li>
-<li>docs: give the documentation one reading order (db4558e)</li>
-<li>docs: mark every zh-CN page as lagging the English version (174f04e)</li>
-<li>docs: drop the navigation block and rules from Networking From Zero (e1f4f48)</li>
-<li>docs: restructure the kernel configuration guide (db57cf6)</li>
-<li>docs: rewrite the recipes, uninstallation and NixOS pages (e02b184)</li>
-<li>docs: rewrite troubleshooting as symptom, cause, fix (672cb79)</li>
-<li>docs: tighten the display, audio and desktop guide (cb0165c)</li>
-<li>docs: rewrite the app guide and the CLI reference from the real surface (f47e3b4)</li>
-<li>docs: turn Features.md into a container settings reference (f9c9de4)</li>
-<li>docs: rewrite the installation guides from the real first-launch flow (a5ecf5d)</li>
-<li>docs: rewrite the README around what a new user needs (b3ebffb)</li>
-<li>app: fix: forget all app-side data when a container is uninstalled (1a78bbe)</li>
-<li>app: preselect the last opened user in the terminal picker (84c8e8e)</li>
-<li>app: fix: put the terminal keyboard away before the user picker opens (bb54344)</li>
-<li>app: refresh terminal users on each pick and open root directly when alone (5aba875)</li>
-<li>Translated using Weblate (#347) (a172ad8)</li>
-<li>app: add the Fedora accent palette (0d3d29d)</li>
-<li>app: add the One UI accent palette (9cd5d50)</li>
-<li>app: add the Broccoli accent palette (e0a94c7)</li>
-<li>app: add the Sand accent palette (b666fb0)</li>
-<li>app: fix: spin the refresh button in the network interface sheets (24a5a99)</li>
-<li>app: fix: keep tab screen snackbars and the FAB above the tab bar (fdc1c99)</li>
-<li>app: fix: stop dialogs bouncing when the keyboard opens (feb9e5c)</li>
-<li>app: refactor: drop two unused strings (4389e45)</li>
-<li>app: fix: grey out the Termux-backed toggles when the apps are missing (72bba8e)</li>
-<li>post_extract_fixes: say which modes the OpenRC dhcpcd guard skips (c891c81)</li>
-<li>app: fix: give View logs its own icon (55f7967)</li>
-<li>app: fix: clear text field focus on a tap outside it on every screen (cb427c7)</li>
-<li>app: use the Droidspaces mark for the containers icon (cf859c1)</li>
-<li>app: rebuild the container config screen as grouped settings with sub-pages (8898978)</li>
-<li>app: fix: keep dialog buttons above the keyboard (d200452)</li>
-<li>app: fix: clear text field focus on a tap inside a dialog (56c1b51)</li>
-<li>app: fix: hold the dropdown's check still while the menu closes (c02aa60)</li>
-<li>app: fix: open menus with the standard motion (67309f8)</li>
-<li>app: fix: keep a dropdown unfocused after tapping it shut (48b0d62)</li>
-<li>docs: document macvlan mode (6c9bd10)</li>
-<li>post_extract_fixes: run the rootfs DHCP client in every mode with its own network (f0be431)</li>
-<li>app: add macvlan network mode (3e8bb2d)</li>
-<li>app: fix: give the network settings one header and helper text style (19569ef)</li>
-<li>app: refactor: share the list entry cards and the interface picker (96a8968)</li>
-<li>net: add a macvlan network mode (d4e4812)</li>
-<li>docs: bring the gateway sections of Networking-From-Zero up to date (d1d7478)</li>
-<li>net: wake the route monitor on IPv6 route and rule changes (13d9bd4)</li>
-<li>net: de-dupe gateway teardown on cable and bridge together (aa76fbb)</li>
-<li>net: count a gateway client as wired only when its eth0 is there (50b97d8)</li>
-<li>net: tear down a gateway's LAN cables in any isolated mode (0d270fa)</li>
-<li>net: advertise only IPv4 --dns servers in the DHCP lease (ca9d308)</li>
-<li>net: let bridgeless NAT containers reach each other (d4bbdc2)</li>
-<li>net: correct comments that no longer describe the code (327fbac)</li>
-<li>refactor: delete ds_nl_flush_stale_veths, which nothing calls (eb819ee)</li>
-<li>app: offer to carry environment variables in an export (bcab71d)</li>
-<li>app: animate container cards in and out, drop ghost Panel cards (f9a9457)</li>
-<li>app: apply a rootfs config whole and warn before the config page (2e7f5cc)</li>
-<li>app: install and export tarballs in place instead of through cacheDir (be5c0e4)</li>
-<li>app: fix: read rootfs recommendations from a prefix, not a full copy (0ec2106)</li>
-<li>app: preserve container configuration in rootfs exports and imports (#346) (ff892de)</li>
-<li>app: fix: tint on-accent colours in the built-in palettes (f458ff4)</li>
-<li>app: redesign the setup flow with Material 3 Expressive (303b55e)</li>
-<li>app: fix: opaque primaryContainer in the AMOLED palette schemes (f705023)</li>
-<li>app: land the installer result in an Expressive shape container (2dda3fc)</li>
-<li>app: ignore the Kotlin compiler cache (f093d8e)</li>
-<li>app: refactor: use material3's own LoadingIndicator (56e2562)</li>
-<li>app: generate the locale list and locales_config.xml under build/ (9ffcaeb)</li>
-<li>app: derive versionCode from the git commit count (7308fd5)</li>
-<li>app: fix: dismiss the download notification when installing from the sheet (5267066)</li>
-<li>app: fold the Containers FABs into a Material 3 Expressive FAB menu (626d537)</li>
-<li>app: show rootfs download progress on the Expressive wavy indicator (34184ba)</li>
-<li>app: move to Kotlin 2.2, AGP 8.11 and the Compose 1.11 line (06f8ca1)</li>
-<li>mount: attach rootfs images with direct I/O (b765b97)</li>
-<li>net: pin the NAT and gateway bridges' MAC so a stopping container cannot change it (9cd0970)</li>
-<li>net: create the gateway's LAN cable with its end born inside the gateway (965179f)</li>
-<li>net: never treat the host's own network namespace as a container's (95640c4)</li>
-<li>socketd: require the network namespace for gateway mode too (812e9f1)</li>
-<li>check: answer the network namespace probe from the ns file, not by creating one (ea12f2d)</li>
-<li>net: insert and remove the MSS clamp through the raw socket (30ea194)</li>
-<li>pid: drop the UUID collision scan, which could never find a collision (0fb62f0)</li>
-<li>monitor: drop the first-boot stale container check (b8713a1)</li>
-<li>monitor: refresh the virtual /proc files once per heartbeat, quietly at shutdown (6de3644)</li>
-<li>docs: describe when an image start runs e2fsck, and the probe's per-boot stamp (f30f744)</li>
-<li>net: skip the iptables-save sweep for a container booted without forwards (2544c7a)</li>
-<li>mount: settle and force an unmount only when MNT_DETACH left it mounted (7885a4c)</li>
-<li>fix: poll for init's exit every 20 ms during a graceful stop (628b14b)</li>
-<li>net: create the NAT veth peer inside the container's netns (a94a583)</li>
-<li>net: remember the capability probe's full pass for the boot (0a2b3cd)</li>
-<li>mount: run e2fsck only when the superblock says it has something to do (b70242a)</li>
-<li>net: ask the table blob whether the MSS clamp is in, not iptables -C (16eec9b)</li>
-<li>net: load the netfilter modules only when a table is missing (c85968f)</li>
-<li>mount: drop the sync() and 200 ms settle sleep before mounting an image (7d166ae)</li>
-<li>fix: initialise the start sync pipe before any early exit can reach cleanup (89eb4a9)</li>
-<li>fix: reap the Android tweaks helper on the start error path too (501c301)</li>
-<li>fix: apply the Android tweaks while the container boots, not before the fork (a8b7dc7)</li>
-<li>app: show container RAM usage with a unit per side, fastfetch style (15ba5f5)</li>
-<li>fix: ask the cgroup2 root before /proc/cgroups when probing a controller (899085a)</li>
-<li>fix: keep a container's services inside its cgroup without a cgroup namespace (b370d20)</li>
-<li>docs: document on-device testing and DS_NO_PROXY for agents (d9da1d2)</li>
-<li>net: give NAT containers internet on an IPv6-only uplink (2ac9f5a)</li>
-<li>app: fall back to a root read of the boot id when the app read is denied (6a48049)</li>
-<li>Translated using Weblate (Arabic) (#344) (423b87c)</li>
-<li>app: redesign the backend installer around the M3 Expressive loader (71369aa)</li>
-<li>app: tell the user when the kernel cannot run Droidspaces (206a566)</li>
-<li>app: gate the config form on check --format capabilities (cd9ea9d)</li>
-<li>feat: add check --format for machine-readable capability probes (bcc2314)</li>
-<li>docs: document --x11 and the enable_x11 key (e446c17)</li>
-<li>app: write enable_x11 and read the old key as a fallback (a884275)</li>
-<li>refactor: rename --termux-x11 to --x11 and gate desktop X11 behind it (7b12749)</li>
-<li>daemon: forward client stdin to run with --stdin (1ab94e8)</li>
-<li>fix: let run survive ^C and report 130 like lxc-attach (a91e686)</li>
-<li>fix: size the enter pty before the shell starts (420b830)</li>
-<li>fix: return the command's real exit status from run and enter (1b2e4b9)</li>
-<li>refactor: trim dead code around enter and run (d8fa53d)</li>
-<li>fix: accept -- before the command in run (fb8a25d)</li>
-<li>net: stop leaking duplicate policy rules on kernels before 4.12 (33b93c4)</li>
-<li>post_extract_fixes: stop OpenWrt from locking apps out of the host's debugfs (92cee27)</li>
-<li>Add nomount based mount system recommendation to strings.xml (#343) (3a7b5e0)</li>
-<li>fix: report IPv6 NAT support truthfully and fail closed without MASQUERADE (33369d8)</li>
-<li>Translated using Weblate (Indonesian) (#342) (a2319c2)</li>
-<li>docs: CPU and process limits on GKI need every module rebuilt (ac38c11)</li>
-<li>app: warn that CPU and process limit options break the GKI kABI (b21ec4e)</li>
-<li>docs: explain a limit that is missing despite its kernel option (1339f38)</li>
-<li>fix: name cgroup_disable= when a resource limit is unavailable (321087d)</li>
-<li>app: fix: do not offer a limit whose controller is disabled at boot (7bb0fdf)</li>
-<li>refactor: group the optional checks by what they are for (6ba80ca)</li>
-<li>app: show the hostname on the container card without its label (4c32194)</li>
-<li>app: list CONFIG_CGROUP_CPUACCT in the kernel requirements (36a45b4)</li>
-<li>docs: list CONFIG_CGROUP_CPUACCT with the resource limit options (defbd4b)</li>
-<li>feat: check for CPU usage accounting, drop the plain IPv6 line (95be742)</li>
-<li>feat: give each container its own load average (96d7566)</li>
-<li>fix: give enter and run sessions the container's CPU set (093d6bc)</li>
-<li>fix: show the container's own CPU use in /proc/stat under a CPU limit (88ccf16)</li>
-<li>fix: report CPU use under a limit on kernels before 4.15 (8c57121)</li>
-<li>app: move Resource Limits after Integration &amp; Hardware (b842178)</li>
-<li>app: fix: keep a limit's value on screen while its card closes (9bac37d)</li>
-<li>app: fix: stop the card below sliding under an expanding container card (9f08924)</li>
-<li>fix: name a gateway client's cable after the container, not its PID (916b94a)</li>
-<li>fix: wire a gateway client that boots at the same time as its gateway (e6f6724)</li>
-<li>fix: do not replace a working gateway client cable on gateway restart (1bdf98d)</li>
-<li>fix: let a forced-v1 container use a controller that cgroup v2 holds (bda64bd)</li>
-<li>docs: note that sysinfo() callers see host memory and load (13d7613)</li>
-<li>fix: refuse a PID limit the runtime cannot boot under (3a509bf)</li>
-<li>app: fix: use the memory icon for the memory limit (35e5163)</li>
-<li>fix: keep the monitor out of the container's cgroup and recreate it every boot (a9c3ce5)</li>
-<li>docs: document resource limits (aa57c8e)</li>
-<li>app: add resource limits to containers (551d569)</li>
-<li>feat: make resource limits work on Android and on cgroup v1 (6b06342)</li>
-<li>fix: attach enter/run beside init.scope, not inside it (eaf1fa6)</li>
-<li>fix: report a container as started only once init has exec'd (bd990de)</li>
-<li>net: keep the host off the gateway LAN over IPv6 (ef9a940)</li>
-<li>feat: report the container's IPv6 address in status output (efa274b)</li>
-<li>docs: update kernel version support range in README (b77842d)</li>
-<li>locales: add arabic config (2da0d77)</li>
-<li>fix: tear a container down with the config it booted with (dc1ad52)</li>
-<li>net: delete the previous boot cycle's veth on an internal reboot (f1c191c)</li>
-<li>net: treat an existing probe interface as proof of NAT support (f5ecb98)</li>
-<li>refactor: serialize container lifecycle with a per-container flock (b7634e7)</li>
-<li>fix: keep SIGCHLD away from the monitor's helper threads (c75e7b6)</li>
-<li>docs: NAT and Gateway modes are dual-stack (4fd6151)</li>
-<li>app: remove the forced Disable IPv6 toggle (c87d98c)</li>
-<li>net: add IPv6 to NAT mode with NAT66 and router advertisements (dcf13f0)</li>
-<li>Translated using Weblate (Chinese (Traditional Han script)) (#334) (434d795)</li>
-<li>Update Simplify Chinese translation of document (#335) (8a03135)</li>
-<li>mount: punch /proc/sys/user through the jail as an rw hole (ea9b68d)</li>
-<li>mount: expose proc user sysctls with sandboxing (#333) (2330246)</li>
-<li>app: fix: replace system DownloadManager with an in-app rootfs downloader (ff39a37)</li>
-<li>README: nuked redundant website URL (c83ee66)</li>
-<li>README: link the website and its documentation (#330) (36f4d55)</li>
-<li>docs: community-supported-devices: plain sentences, sentence-case headings, lists that render (4974ea8)</li>
-<li>docs: Usage-Android-App: plain sentences, sentence-case headings, lists that render (6e08c2e)</li>
-<li>docs: Uninstallation: plain sentences, sentence-case headings, lists that render (6df5940)</li>
-<li>docs: Troubleshooting: plain sentences, sentence-case headings, lists that render (ba490c5)</li>
-<li>docs: Nix-NixOS: plain sentences, sentence-case headings, lists that render (f3bd732)</li>
-<li>docs: Networking-From-Zero: plain sentences, sentence-case headings, lists that render (6e37d68)</li>
-<li>docs: Linux-CLI: plain sentences, sentence-case headings, lists that render (9c4ebce)</li>
-<li>docs: Kernel-Configuration: plain sentences, sentence-case headings, lists that render (f4f204b)</li>
-<li>docs: Installation-Linux: plain sentences, sentence-case headings, lists that render (ffdf10b)</li>
-<li>docs: Installation-Android: plain sentences, sentence-case headings, lists that render (e68106f)</li>
-<li>docs: Graphics-and-Audio: plain sentences, sentence-case headings, lists that render (b1045c9)</li>
-<li>docs: Features: plain sentences, sentence-case headings, lists that render (6d6cb16)</li>
-<li>docs: Cool-things-you-can-do: plain sentences, sentence-case headings, lists that render (c8bfc98)</li>
-<li>Translated using Weblate (Chinese (Traditional Han script)) (#325) (b24eec0)</li>
-<li>docs: add moto g(50) 5G (saipan / XT2149-1, MT6833) to the non-GKI supported devices (#327) (2f665d4)</li>
+<li>droidspaces: bump v7.1.0 (4344dc5)</li>
+<li>build: refresh output/droidspaces on every arch target (bf8b91e)</li>
+<li>fix: keep nl_addattr out of line and fail the link on LTO warnings (c2b1efa)</li>
+<li>docs: describe the incremental build and the tag release flow (294f511)</li>
+<li>ci: cache toolchains, release on a v* tag, checksum the artifacts (9f3068a)</li>
+<li>app: build the backend from gradle and ship it as a generated asset (553bdbb)</li>
+<li>build: track header deps, link per arch, skip unchanged work (28f5fc0)</li>
+<li>Translated using Weblate (Chinese (Simplified Han script)) (#376) (b14e091)</li>
+<li>app: add a Termux:X11 launch button (d0b3a2e)</li>
+<li>fix: apply changed X11 and VirGL extra flags on restart (925cf0c)</li>
+<li>Translated using Weblate (Czech) (#373) (64d53d1)</li>
+<li>Update: Kernel for RM6785 (#372) (21be5ba)</li>
+<li>docs: sync zh-CN translation with English (#371) (9cc9565)</li>
+<li>app: fix: let chkrunit.sh own every runit directory lookup (847ecdd)</li>
+<li>app: add runit service management (#368) (656eaee)</li>
+<li>Translated using Weblate (Chinese (Traditional Han script)) (#367) (4e12682)</li>
+<li>Update: Fixed RM6785 kernel link &amp; added source (#366) (75034e4)</li>
+<li>fix(security): allocate the boot console from the container's devpts (3b6759c)</li>
+<li>refactor: rename --format to --json (700c356)</li>
+<li>fix(net): run the route monitor on Linux too (7b5c892)</li>
+<li>Translated using Weblate (Czech) (#365) (a4cf72e)</li>
+<li>Update Simplify Chinese translation of document (#363) (17fddc1)</li>
+<li>app: fix: Write container files and binaries durably (8b625e1)</li>
+<li>fix: fsync container.config before renaming it into place (10ff17b)</li>
+<li>app: feat: Allow swap toggle under the memory limit (79bfbb6)</li>
+<li>feat: --allow-swap lets a memory-limited container use host swap (6e39a5b)</li>
+<li>fix: hide the host's swap devices from memory-limited containers (2407912)</li>
+<li>fix: drop the runtime's OOM protection for container processes (316fe90)</li>
+<li>fix: keep memory-limited containers out of the host's swap (be1dc41)</li>
+<li>fix: report why a custom bind mount failed, log it before the binds run (81b5296)</li>
+<li>Translated using Weblate (Chinese (Simplified Han script)) (#356) (9cf1311)</li>
+<li>update RM6785 (#357) (616f4bf)</li>
+<li>Update Simplity Chinese translation of document (#360) (788f64a)</li>
+<li>fix: drop Android's PER_LINUX32 personality for 64-bit containers (0aa20da)</li>
+<li>fix: give enter/run sessions init's real CPU mask (06045b2)</li>
+<li>fix: read a direct I/O loop back before trusting it (a718620)</li>
+<li>app: fix: let resize2fs decide the sparse image minimum (a23578e)</li>
+<li>community-supported-devices: add REDMAGIC 8S Pro+ (NX729J) (#355) (33815f7)</li>
+<li>app: fix: put the terminal keyboard away when leaving the terminal (3c53363)</li>
+<li>ci: rebuild droidspaces.org when a release is published (52cb39b)</li>
+<li>docs: say v7 in the file headers now that v7.0.0 is out (035bafc)</li>
 </ul>
-<hr />
-<p><strong>Automated Release by Droidspaces CI</strong></p>
+<h2 id="whats-changed-1">What's Changed <a class="header-anchor" href="#whats-changed-1">#</a></h2>
+<ul>
+<li>community-supported-devices: add REDMAGIC 8S Pro+ (NX729J) by @fkun1754 in https://github.com/ravindu644/Droidspaces-OSS/pull/355</li>
+<li>Update Simplity Chinese translation of document by @404-GCross in https://github.com/ravindu644/Droidspaces-OSS/pull/360</li>
+<li>update RM6785 by @avelith07 in https://github.com/ravindu644/Droidspaces-OSS/pull/357</li>
+<li>Translations update from Hosted Weblate by @weblate in https://github.com/ravindu644/Droidspaces-OSS/pull/356</li>
+<li>Update Simplify Chinese translation of document by @404-GCross in https://github.com/ravindu644/Droidspaces-OSS/pull/363</li>
+<li>Translations update from Hosted Weblate by @weblate in https://github.com/ravindu644/Droidspaces-OSS/pull/365</li>
+<li>Update: Fixed RM6785 kernel link &amp; added source by @avelith07 in https://github.com/ravindu644/Droidspaces-OSS/pull/366</li>
+<li>Translations update from Hosted Weblate by @weblate in https://github.com/ravindu644/Droidspaces-OSS/pull/367</li>
+<li>Add runit integration in the Android app by @GlitchedCode922 in https://github.com/ravindu644/Droidspaces-OSS/pull/368</li>
+<li>docs: sync zh-CN translation with English by @ravindu644 in https://github.com/ravindu644/Droidspaces-OSS/pull/371</li>
+<li>Update: Kernel for RM6785 by @avelith07 in https://github.com/ravindu644/Droidspaces-OSS/pull/372</li>
+<li>Translations update from Hosted Weblate by @weblate in https://github.com/ravindu644/Droidspaces-OSS/pull/373</li>
+<li>Translations update from Hosted Weblate by @weblate in https://github.com/ravindu644/Droidspaces-OSS/pull/376</li>
+</ul>
+<h2 id="new-contributors">New Contributors <a class="header-anchor" href="#new-contributors">#</a></h2>
+<ul>
+<li>@fkun1754 made their first contribution in https://github.com/ravindu644/Droidspaces-OSS/pull/355</li>
+<li>@GlitchedCode922 made their first contribution in https://github.com/ravindu644/Droidspaces-OSS/pull/368</li>
+</ul>
+<p><strong>Full Changelog</strong>: https://github.com/ravindu644/Droidspaces-OSS/compare/v7.0.0...v7.1.0</p>
 
     </details>
   </section>
 
   <section class="section">
     <h2>Previous releases.</h2>
-<div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody><tr><td>Droidspaces v6.6.0</td><td>2026-09-21</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.6.0" rel="noopener noreferrer">Release page</a></td></tr>
+<div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody><tr><td>Droidspaces v7.0.0</td><td>2026-10-14</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v7.0.0" rel="noopener noreferrer">Release page</a></td></tr>
+<tr><td>Droidspaces v6.6.0</td><td>2026-09-21</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.6.0" rel="noopener noreferrer">Release page</a></td></tr>
 <tr><td>Droidspaces v6.5.5</td><td>2026-09-08</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.5.5" rel="noopener noreferrer">Release page</a></td></tr>
-<tr><td>Droidspaces v6.5.0</td><td>2026-08-09</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.5.0" rel="noopener noreferrer">Release page</a></td></tr>
-<tr><td>Droidspaces v6.4.5</td><td>2026-07-17</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.4.5" rel="noopener noreferrer">Release page</a></td></tr></tbody></table></div>
+<tr><td>Droidspaces v6.5.0</td><td>2026-08-09</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.5.0" rel="noopener noreferrer">Release page</a></td></tr></tbody></table></div>
   </section>
 </main>
 <footer class="footer">
