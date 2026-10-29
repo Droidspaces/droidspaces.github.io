@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Every networking concept behind Droidspaces gateway mode, from the start: IP addresses, LAN, WAN, DHCP, DNS, NAT, bridges, veth pairs, network namespaces and OpenWRT.">
+  <meta name="description" content="Every networking concept behind Droidspaces gateway mode, from the start: IP addresses, LAN, WAN, DHCP, DNS, NAT, bridges, veth pairs, network namespaces and OpenWrt.">
   <title>Networking from zero - Droidspaces Docs</title>
   <meta property="og:title" content="Networking from zero - Droidspaces Docs">
-  <meta property="og:description" content="Every networking concept behind Droidspaces gateway mode, from the start: IP addresses, LAN, WAN, DHCP, DNS, NAT, bridges, veth pairs, network namespaces and OpenWRT.">
+  <meta property="og:description" content="Every networking concept behind Droidspaces gateway mode, from the start: IP addresses, LAN, WAN, DHCP, DNS, NAT, bridges, veth pairs, network namespaces and OpenWrt.">
   <meta property="og:url" content="https://www.droidspaces.org/docs/networking-from-zero.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Droidspaces">
@@ -16,14 +16,14 @@
   <meta property="og:image:alt" content="The Droidspaces wordmark, the words Linux containers on Android, and a terminal starting an Ubuntu container">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Networking from zero - Droidspaces Docs">
-  <meta name="twitter:description" content="Every networking concept behind Droidspaces gateway mode, from the start: IP addresses, LAN, WAN, DHCP, DNS, NAT, bridges, veth pairs, network namespaces and OpenWRT.">
+  <meta name="twitter:description" content="Every networking concept behind Droidspaces gateway mode, from the start: IP addresses, LAN, WAN, DHCP, DNS, NAT, bridges, veth pairs, network namespaces and OpenWrt.">
   <meta name="twitter:image" content="https://www.droidspaces.org/assets/images/og-image.png">
   <link rel="canonical" href="https://www.droidspaces.org/docs/networking-from-zero.html">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=13356a4605">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Networking from zero", "description": "Every networking concept behind Droidspaces gateway mode, from the start: IP addresses, LAN, WAN, DHCP, DNS, NAT, bridges, veth pairs, network namespaces and OpenWRT.", "url": "https://www.droidspaces.org/docs/networking-from-zero.html", "inLanguage": "en", "dateModified": "2026-10-19", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Networking from zero", "item": "https://www.droidspaces.org/docs/networking-from-zero.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Networking from zero", "description": "Every networking concept behind Droidspaces gateway mode, from the start: IP addresses, LAN, WAN, DHCP, DNS, NAT, bridges, veth pairs, network namespaces and OpenWrt.", "url": "https://www.droidspaces.org/docs/networking-from-zero.html", "inLanguage": "en", "dateModified": "2026-10-29", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Networking from zero", "item": "https://www.droidspaces.org/docs/networking-from-zero.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -310,10 +310,10 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span>box<span class=
 <li>One end sits in the container's network namespace (as <code>eth0</code>).</li>
 <li>The other end stays in the host's network namespace, where Droidspaces connects it to a bridge.</li>
 </ul>
-<h2 id="part-8-openwrt-and-what-it-is">Part 8: OpenWRT and what it is <a class="header-anchor" href="#part-8-openwrt-and-what-it-is">#</a></h2>
-<h3 id="what-is-openwrt">What is OpenWRT? <a class="header-anchor" href="#what-is-openwrt">#</a></h3>
-<p><strong>OpenWRT</strong> is a Linux distribution built for routers. It usually runs on router hardware, but it can also run on an ordinary Linux system or inside a container.</p>
-<p>A running OpenWRT provides:</p>
+<h2 id="part-8-openwrt-and-what-it-is">Part 8: OpenWrt and what it is <a class="header-anchor" href="#part-8-openwrt-and-what-it-is">#</a></h2>
+<h3 id="what-is-openwrt">What is OpenWrt? <a class="header-anchor" href="#what-is-openwrt">#</a></h3>
+<p><strong>OpenWrt</strong> is a Linux distribution built for routers. It usually runs on router hardware, but it can also run on an ordinary Linux system or inside a container.</p>
+<p>A running OpenWrt provides:</p>
 <ul>
 <li><strong>netifd</strong>, the network interface daemon (manages network interfaces, DHCP client/server, etc.)</li>
 <li><strong>dnsmasq</strong>, a DNS and DHCP server</li>
@@ -321,97 +321,97 @@ droidspaces<span class="w"> </span>--name<span class="o">=</span>box<span class=
 <li><strong>LuCI</strong>, a web UI for configuration</li>
 <li>Everything else a real router does, in software</li>
 </ul>
-<p>So you can run OpenWRT in a Droidspaces container and it behaves like a real router: it manages networks, hands out DHCP leases, serves DNS, applies firewall rules, routes VPN traffic, and so on.</p>
+<p>So you can run OpenWrt in a Droidspaces container and it behaves like a real router: it manages networks, hands out DHCP leases, serves DNS, applies firewall rules, routes VPN traffic, and so on.</p>
 <h2 id="part-9-gateway-mode-putting-it-all-together">Part 9: Gateway mode, putting it all together <a class="header-anchor" href="#part-9-gateway-mode-putting-it-all-together">#</a></h2>
 <h3 id="why-does-gateway-mode-exist">Why does gateway mode exist? <a class="header-anchor" href="#why-does-gateway-mode-exist">#</a></h3>
 <p>In NAT mode, Droidspaces is the router and does everything. For most uses that is fine.</p>
-<p>But you may want <strong>OpenWRT to be the router</strong> for other containers: OpenWRT's firewall rules, OpenWRT's DHCP, OpenWRT's VPN routing, with other containers (a Kali Linux container, say) sitting on OpenWRT's LAN and getting everything from it.</p>
-<p>If Droidspaces also sets up NAT, DHCP and DNS for those containers, it <em>conflicts</em> with OpenWRT: two DHCP servers competing to hand out the address, two firewalls applying contradictory rules.</p>
-<p><strong>Gateway mode avoids this.</strong> Droidspaces steps back. It does only the L2 plumbing (the virtual cables and the switch) and leaves all the policy to OpenWRT: DHCP, DNS, firewall and routing.</p>
+<p>But you may want <strong>OpenWrt to be the router</strong> for other containers: OpenWrt's firewall rules, OpenWrt's DHCP, OpenWrt's VPN routing, with other containers (a Kali Linux container, say) sitting on OpenWrt's LAN and getting everything from it.</p>
+<p>If Droidspaces also sets up NAT, DHCP and DNS for those containers, it <em>conflicts</em> with OpenWrt: two DHCP servers competing to hand out the address, two firewalls applying contradictory rules.</p>
+<p><strong>Gateway mode avoids this.</strong> Droidspaces steps back. It does only the L2 plumbing (the virtual cables and the switch) and leaves all the policy to OpenWrt: DHCP, DNS, firewall and routing.</p>
 <h3 id="the-architecture">The architecture <a class="header-anchor" href="#the-architecture">#</a></h3>
 <div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>Android host kernel
 |
 +-- wlan0 (Android&#x27;s real Wi-Fi - WAN)
 |
-+-- [OpenWRT container - net=nat mode]
++-- [OpenWrt container - net=nat mode]
 |    netns: owns eth0 (WAN, gets NAT from Droidspaces)
 |           eth1 (LAN side - plugged into ds-lan bridge by gateway mode)
 |    Runs: dnsmasq, netifd, firewall, VPN
 |
 +-- ds-lan (host bridge - NO IP address, just a switch)
 |    |
-|    +-- ds-g[hash] (veth host-side, connected to OpenWRT&#x27;s netns as eth1)
+|    +-- ds-g[hash] (veth host-side, connected to OpenWrt&#x27;s netns as eth1)
 |    +-- ds-c[pid]  (veth host-side, connected to Kali&#x27;s netns as eth0)
 |
 +-- [Kali container - net=gateway mode]
      netns: owns eth0 (LAN side - plugged into ds-lan bridge)
-     Gets DHCP from OpenWRT&#x27;s dnsmasq
-     Routing decisions made by OpenWRT
-     Firewall rules applied by OpenWRT
+     Gets DHCP from OpenWrt&#x27;s dnsmasq
+     Routing decisions made by OpenWrt
+     Firewall rules applied by OpenWrt
 </code></pre></div>
 <h3 id="step-by-step---what-happens-when-you-start-a-gateway-mode-container">Step by step - what happens when you start a gateway-mode container <a class="header-anchor" href="#step-by-step---what-happens-when-you-start-a-gateway-mode-container">#</a></h3>
-<p><strong>Step 1: start OpenWRT first (in NAT mode)</strong></p>
+<p><strong>Step 1: start OpenWrt first (in NAT mode)</strong></p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>droidspaces<span class="w"> </span>--name<span class="o">=</span>openwrt<span class="w"> </span>--rootfs<span class="o">=</span>/data/openwrt<span class="w"> </span>--net<span class="o">=</span>nat<span class="w"> </span>start
 </code></pre></div>
-<p>OpenWRT boots with:</p>
+<p>OpenWrt boots with:</p>
 <ul>
 <li><code>eth0</code> on the WAN side (Droidspaces handles NAT for it)</li>
-<li>No LAN side yet. OpenWRT is waiting for one.</li>
+<li>No LAN side yet. OpenWrt is waiting for one.</li>
 </ul>
 <p><strong>Step 2: start Kali (in gateway mode)</strong></p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>droidspaces<span class="w"> </span>--name<span class="o">=</span>kali<span class="w"> </span>--rootfs<span class="o">=</span>/data/kali<span class="w"> </span>--net<span class="o">=</span>gateway<span class="w"> </span>--gateway<span class="o">=</span>openwrt<span class="w"> </span>start
 </code></pre></div>
 <p>Droidspaces does the following, all plumbing and no policy:</p>
 <ol>
-<li>Finds OpenWRT's running process ID, so it can reach its network namespace.</li>
+<li>Finds OpenWrt's running process ID, so it can reach its network namespace.</li>
 <li>Creates a bridge called <code>ds-lan</code> on the host, with no IP address on it.</li>
-<li>Disables <code>bridge-nf-call-iptables</code>, so Android's host firewall does NOT intercept traffic on this bridge and OpenWRT's firewall stays the only authority.</li>
-<li>Creates a veth pair for OpenWRT's LAN side. One end goes into OpenWRT's netns (as <code>eth1</code>), the other plugs into the <code>ds-lan</code> bridge.</li>
+<li>Disables <code>bridge-nf-call-iptables</code>, so Android's host firewall does NOT intercept traffic on this bridge and OpenWrt's firewall stays the only authority.</li>
+<li>Creates a veth pair for OpenWrt's LAN side. One end goes into OpenWrt's netns (as <code>eth1</code>), the other plugs into the <code>ds-lan</code> bridge.</li>
 <li>Creates a veth pair for Kali. One end goes into Kali's netns (as <code>eth0</code>), the other plugs into the <code>ds-lan</code> bridge.</li>
 <li>Does NOT install NAT, DHCP, DNS or any firewall rules.</li>
 </ol>
-<p><strong>Step 3: OpenWRT takes over</strong></p>
-<p>OpenWRT's <code>netifd</code> sees <code>eth1</code> appear and configures it as the LAN interface.
-OpenWRT's <code>dnsmasq</code> starts answering DHCP requests on <code>eth1</code>.</p>
-<p>Kali's <code>eth0</code> sends a DHCP request, and OpenWRT's <code>dnsmasq</code> replies with:</p>
+<p><strong>Step 3: OpenWrt takes over</strong></p>
+<p>OpenWrt's <code>netifd</code> sees <code>eth1</code> appear and configures it as the LAN interface.
+OpenWrt's <code>dnsmasq</code> starts answering DHCP requests on <code>eth1</code>.</p>
+<p>Kali's <code>eth0</code> sends a DHCP request, and OpenWrt's <code>dnsmasq</code> replies with:</p>
 <ul>
-<li>IP address: <code>192.168.1.100</code> (or whatever OpenWRT's DHCP range is)</li>
-<li>Gateway: <code>192.168.1.1</code> (OpenWRT itself)</li>
-<li>DNS: <code>192.168.1.1</code> (OpenWRT's dnsmasq)</li>
+<li>IP address: <code>192.168.1.100</code> (or whatever OpenWrt's DHCP range is)</li>
+<li>Gateway: <code>192.168.1.1</code> (OpenWrt itself)</li>
+<li>DNS: <code>192.168.1.1</code> (OpenWrt's dnsmasq)</li>
 </ul>
-<p>Kali is now configured, with OpenWRT as its router.</p>
-<p><strong>Step 4: traffic flows through OpenWRT</strong></p>
+<p>Kali is now configured, with OpenWrt as its router.</p>
+<p><strong>Step 4: traffic flows through OpenWrt</strong></p>
 <p>When Kali reaches for the internet:</p>
-<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>Kali eth0 --&gt; ds-lan bridge --&gt; OpenWRT eth1
+<div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>Kali eth0 --&gt; ds-lan bridge --&gt; OpenWrt eth1
                                       |
-                              OpenWRT firewall rules applied here
+                              OpenWrt firewall rules applied here
                                       |
-                              OpenWRT routes to eth0 (WAN)
+                              OpenWrt routes to eth0 (WAN)
                                       |
                               Droidspaces NAT (eth0 -&gt; wlan0)
                                       |
                                   Android wlan0 --&gt; Internet
 </code></pre></div>
-<p>OpenWRT's firewall sees all of Kali's traffic and can apply any rule a real router could: block sites, redirect through a VPN, shape bandwidth, log connections.</p>
+<p>OpenWrt's firewall sees all of Kali's traffic and can apply any rule a real router could: block sites, redirect through a VPN, shape bandwidth, log connections.</p>
 <h3 id="what-lazy-attachment-means">What &quot;lazy attachment&quot; means <a class="header-anchor" href="#what-lazy-attachment-means">#</a></h3>
 <p>The gateway veth is &quot;lazily attached&quot;:</p>
 <ul>
-<li>Starting OpenWRT does NOT give it an <code>eth1</code> straight away.</li>
-<li><code>eth1</code> appears inside OpenWRT only <strong>when the first gateway-mode container starts</strong>.</li>
-<li>This is on purpose. OpenWRT boots with only its WAN side (<code>eth0</code>), and its LAN cable (<code>eth1</code>) is plugged in later, on demand.</li>
+<li>Starting OpenWrt does NOT give it an <code>eth1</code> straight away.</li>
+<li><code>eth1</code> appears inside OpenWrt only <strong>when the first gateway-mode container starts</strong>.</li>
+<li>This is on purpose. OpenWrt boots with only its WAN side (<code>eth0</code>), and its LAN cable (<code>eth1</code>) is plugged in later, on demand.</li>
 </ul>
 <p>It is the same as plugging a cable into a router's LAN port after the router is already running.</p>
 <h3 id="why-resolvconf-is-left-alone-in-gateway-mode">Why resolv.conf is left alone in gateway mode <a class="header-anchor" href="#why-resolvconf-is-left-alone-in-gateway-mode">#</a></h3>
 <p>In NAT mode, Droidspaces writes <code>/etc/resolv.conf</code> inside the container, pointing at <code>1.1.1.1</code> or <code>8.8.8.8</code>.</p>
-<p>In gateway mode, Droidspaces does NOT write a static <code>resolv.conf</code> unless you pass <code>--dns</code>. OpenWRT's <code>dnsmasq</code> gives the container its DNS server in the DHCP lease. If Droidspaces also wrote a <code>resolv.conf</code>, it would conflict with that: the container would use the wrong DNS and skip OpenWRT's DNS filtering and caching entirely.</p>
+<p>In gateway mode, Droidspaces does NOT write a static <code>resolv.conf</code> unless you pass <code>--dns</code>. OpenWrt's <code>dnsmasq</code> gives the container its DNS server in the DHCP lease. If Droidspaces also wrote a <code>resolv.conf</code>, it would conflict with that: the container would use the wrong DNS and skip OpenWrt's DNS filtering and caching entirely.</p>
 <p>How this is wired depends on the client's init system:</p>
 <ul>
 <li><strong>systemd containers:</strong> <code>/etc/resolv.conf</code> is a symlink to <code>/run/systemd/resolve/resolv.conf</code>, which systemd-resolved fills from the DHCP lease.</li>
 <li><strong>non-systemd containers:</strong> Droidspaces leaves <code>/etc/resolv.conf</code> alone, so the container's own DHCP client (udhcpc/dhclient) writes the nameserver from the gateway's lease. Earlier builds wrote a hardcoded <code>1.1.1.1</code>/<code>8.8.8.8</code> here, which silently bypassed the gateway's DNS. That is fixed. If a minimal rootfs ships no DHCP resolv.conf hook, pass <code>--dns</code> to set one explicitly.</li>
 </ul>
 <h3 id="why-bridge-nf-call-iptables-is-set-to-0">Why bridge-nf-call-iptables is set to 0 <a class="header-anchor" href="#why-bridge-nf-call-iptables-is-set-to-0">#</a></h3>
-<p>The bridge <code>ds-lan</code> carries traffic between OpenWRT and Kali. By default, Linux can pass bridged traffic through the host's iptables. Android's iptables rules, which may drop or NAT packets unexpectedly, would then interfere with traffic OpenWRT is supposed to manage.</p>
-<p>Setting it to <code>0</code> tells Linux not to run iptables on bridged traffic. OpenWRT's firewall is then the <em>only</em> firewall that sees this traffic, which is what we want.</p>
+<p>The bridge <code>ds-lan</code> carries traffic between OpenWrt and Kali. By default, Linux can pass bridged traffic through the host's iptables. Android's iptables rules, which may drop or NAT packets unexpectedly, would then interfere with traffic OpenWrt is supposed to manage.</p>
+<p>Setting it to <code>0</code> tells Linux not to run iptables on bridged traffic. OpenWrt's firewall is then the <em>only</em> firewall that sees this traffic, which is what we want.</p>
 <h3 id="start-order-and-automatic-self-healing">Start order and automatic self-healing <a class="header-anchor" href="#start-order-and-automatic-self-healing">#</a></h3>
 <p>All wiring for a gateway-mode client is done <strong>from the host side</strong> by one function, <code>gateway_wire_client()</code>. It makes sure the bridge and the gateway-side cable exist, then creates the client's app veth with its peer born inside the client's namespace as <code>eth0</code> (with a pinned MAC, brought up). The client's own boot code only brings up <code>lo</code>. Because the host owns every step, the same function wires a client whether it is starting or already running.</p>
 <p>That leads to one simple rule, keyed on <strong>whether the gateway is running</strong>:</p>
@@ -484,57 +484,57 @@ OpenWRT's <code>dnsmasq</code> starts answering DHCP requests on <code>eth1</cod
 --gateway-net=iot   -&gt;  host bridge: ds-iot
 </code></pre></div>
 <p><strong>2. It identifies the segment, that is, which bridge clients land on.</strong></p>
-<p>The veth names for the gateway's LAN side come from a hash of the string <code>{gateway_container}:{gateway_net}</code>. Same hash, same veth, same bridge segment. So client containers that share the same <code>--gateway</code> and <code>--gateway-net</code> all end up on the same bridge and all get DHCP from the same OpenWRT interface.</p>
+<p>The veth names for the gateway's LAN side come from a hash of the string <code>{gateway_container}:{gateway_net}</code>. Same hash, same veth, same bridge segment. So client containers that share the same <code>--gateway</code> and <code>--gateway-net</code> all end up on the same bridge and all get DHCP from the same OpenWrt interface.</p>
 <p>This is what <code>--gateway-net</code> is for: running several isolated LAN segments through one gateway container.</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># These two land on ds-lan - they see each other, OpenWRT routes them as one LAN</span>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># These two land on ds-lan - they see each other, OpenWrt routes them as one LAN</span>
 droidspaces<span class="w"> </span>--name<span class="o">=</span>kali<span class="w">   </span>--net<span class="o">=</span>gateway<span class="w"> </span>--gateway<span class="o">=</span>openwrt<span class="w"> </span>--gateway-net<span class="o">=</span>lan<span class="w"> </span>start
 droidspaces<span class="w"> </span>--name<span class="o">=</span>ubuntu<span class="w"> </span>--net<span class="o">=</span>gateway<span class="w"> </span>--gateway<span class="o">=</span>openwrt<span class="w"> </span>--gateway-net<span class="o">=</span>lan<span class="w"> </span>start
 
 <span class="c1"># This one lands on ds-vpn - a completely separate bridge</span>
-<span class="c1"># OpenWRT can apply different firewall/VPN rules to this segment</span>
+<span class="c1"># OpenWrt can apply different firewall/VPN rules to this segment</span>
 droidspaces<span class="w"> </span>--name<span class="o">=</span>torbox<span class="w"> </span>--net<span class="o">=</span>gateway<span class="w"> </span>--gateway<span class="o">=</span>openwrt<span class="w"> </span>--gateway-net<span class="o">=</span>vpn<span class="w"> </span>start
 </code></pre></div>
-<p>Inside OpenWRT, the <code>lan</code> clients arrive on <code>eth1</code> and the <code>vpn</code> clients on <code>eth2</code>. Each segment gets its own veth, because <code>openwrt:lan</code> and <code>openwrt:vpn</code> hash differently.</p>
+<p>Inside OpenWrt, the <code>lan</code> clients arrive on <code>eth1</code> and the <code>vpn</code> clients on <code>eth2</code>. Each segment gets its own veth, because <code>openwrt:lan</code> and <code>openwrt:vpn</code> hash differently.</p>
 <h3 id="what---gateway-iface-does">What --gateway-iface does <a class="header-anchor" href="#what---gateway-iface-does">#</a></h3>
 <p>This sets <strong>the name of the LAN interface inside the gateway container's network namespace</strong>.</p>
-<p>When Droidspaces creates the gateway veth for a segment, the gateway's end is born directly inside OpenWRT's netns under the name you pass here (default <code>eth1</code>); only the host end carries a hash name (<code>ds-gXXXXXXXX</code>).</p>
-<p><strong>Why it matters:</strong> OpenWRT's configuration is keyed on interface names. If your OpenWRT <code>/etc/config/network</code> says:</p>
+<p>When Droidspaces creates the gateway veth for a segment, the gateway's end is born directly inside OpenWrt's netns under the name you pass here (default <code>eth1</code>); only the host end carries a hash name (<code>ds-gXXXXXXXX</code>).</p>
+<p><strong>Why it matters:</strong> OpenWrt's configuration is keyed on interface names. If your OpenWrt <code>/etc/config/network</code> says:</p>
 <div class="code-block"><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>config interface &#x27;lan&#x27;
     option device &#x27;eth1&#x27;
 </code></pre></div>
-<p>then the interface that appears inside OpenWRT <strong>must</strong> be named <code>eth1</code>, or OpenWRT will not treat it as its LAN and will not serve DHCP on it. <code>--gateway-iface=eth1</code> takes care of that.</p>
-<p>For a second segment, pass <code>--gateway-iface=eth2</code> so OpenWRT sees a separate interface and you can add a second UCI network block for it.</p>
+<p>then the interface that appears inside OpenWrt <strong>must</strong> be named <code>eth1</code>, or OpenWrt will not treat it as its LAN and will not serve DHCP on it. <code>--gateway-iface=eth1</code> takes care of that.</p>
+<p>For a second segment, pass <code>--gateway-iface=eth2</code> so OpenWrt sees a separate interface and you can add a second UCI network block for it.</p>
 <p><strong>Important detail:</strong> <code>--gateway-iface</code> only takes effect when the gateway veth for a segment is first created, which is when the first client container on that segment starts. The gateway veth is shared by every client on the same <code>--gateway-net</code>: it is created once and reused. Every later client skips creating the gateway veth and only wires its own app veth into the existing bridge.</p>
-<p>So if you start two containers on <code>--gateway-net=lan</code> and both pass <code>--gateway-iface=eth1</code>, that works: the first creates the veth with its peer named <code>eth1</code> inside OpenWRT, and the second finds the veth already there and ignores <code>--gateway-iface</code>.</p>
+<p>So if you start two containers on <code>--gateway-net=lan</code> and both pass <code>--gateway-iface=eth1</code>, that works: the first creates the veth with its peer named <code>eth1</code> inside OpenWrt, and the second finds the veth already there and ignores <code>--gateway-iface</code>.</p>
 <h3 id="the-flag-conflict-you-must-avoid">The flag conflict you must avoid <a class="header-anchor" href="#the-flag-conflict-you-must-avoid">#</a></h3>
 <p>The problem only appears when you use <strong>two different <code>--gateway-net</code> segments with the same <code>--gateway-iface</code></strong>:</p>
-<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># segment 1 - creates eth1 inside OpenWRT</span>
+<div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># segment 1 - creates eth1 inside OpenWrt</span>
 droidspaces<span class="w"> </span>--name<span class="o">=</span>kali<span class="w">   </span>--net<span class="o">=</span>gateway<span class="w"> </span>--gateway<span class="o">=</span>openwrt<span class="w"> </span>--gateway-net<span class="o">=</span>lan<span class="w"> </span>--gateway-iface<span class="o">=</span>eth1<span class="w"> </span>start
 
-<span class="c1"># segment 2 - WRONG: also tries to create eth1 inside OpenWRT</span>
+<span class="c1"># segment 2 - WRONG: also tries to create eth1 inside OpenWrt</span>
 droidspaces<span class="w"> </span>--name<span class="o">=</span>torbox<span class="w"> </span>--net<span class="o">=</span>gateway<span class="w"> </span>--gateway<span class="o">=</span>openwrt<span class="w"> </span>--gateway-net<span class="o">=</span>vpn<span class="w"> </span>--gateway-iface<span class="o">=</span>eth1<span class="w"> </span>start
 </code></pre></div>
-<p>When the second command runs, Droidspaces sees that OpenWRT already has an <code>eth1</code>, belonging to the first segment, and refuses to wire the <code>vpn</code> segment. The log says <code>'openwrt' already has an interface named eth1 that is not this segment's cable</code>. The <code>vpn</code> segment gets no gateway-side interface: no DHCP, no routing, and its containers are effectively isolated.</p>
+<p>When the second command runs, Droidspaces sees that OpenWrt already has an <code>eth1</code>, belonging to the first segment, and refuses to wire the <code>vpn</code> segment. The log says <code>'openwrt' already has an interface named eth1 that is not this segment's cable</code>. The <code>vpn</code> segment gets no gateway-side interface: no DHCP, no routing, and its containers are effectively isolated.</p>
 <p><strong>The rule:</strong> every <code>--gateway-net</code> segment needs its own <code>--gateway-iface</code> name.</p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code><span class="c1"># Correct: two segments, two interface names</span>
---gateway-net<span class="o">=</span>lan<span class="w">  </span>--gateway-iface<span class="o">=</span>eth1<span class="w">   </span>-&gt;<span class="w">  </span>eth1<span class="w"> </span>inside<span class="w"> </span>OpenWRT<span class="w"> </span><span class="o">(</span>LAN<span class="w"> </span>segment<span class="o">)</span>
---gateway-net<span class="o">=</span>vpn<span class="w">  </span>--gateway-iface<span class="o">=</span>eth2<span class="w">   </span>-&gt;<span class="w">  </span>eth2<span class="w"> </span>inside<span class="w"> </span>OpenWRT<span class="w"> </span><span class="o">(</span>VPN<span class="w"> </span>segment<span class="o">)</span>
+--gateway-net<span class="o">=</span>lan<span class="w">  </span>--gateway-iface<span class="o">=</span>eth1<span class="w">   </span>-&gt;<span class="w">  </span>eth1<span class="w"> </span>inside<span class="w"> </span>OpenWrt<span class="w"> </span><span class="o">(</span>LAN<span class="w"> </span>segment<span class="o">)</span>
+--gateway-net<span class="o">=</span>vpn<span class="w">  </span>--gateway-iface<span class="o">=</span>eth2<span class="w">   </span>-&gt;<span class="w">  </span>eth2<span class="w"> </span>inside<span class="w"> </span>OpenWrt<span class="w"> </span><span class="o">(</span>VPN<span class="w"> </span>segment<span class="o">)</span>
 </code></pre></div>
 <h3 id="ipv6-through-the-gateway">IPv6 through the gateway <a class="header-anchor" href="#ipv6-through-the-gateway">#</a></h3>
-<p>NAT mode gives a container IPv6 as well as IPv4: Droidspaces announces a private IPv6 prefix (<code>fd64:7370::/64</code>) with router advertisements and translates it on the way out, the same idea as IPv4 NAT. The gateway container's WAN is a NAT interface, so OpenWRT can have IPv6 too. It does not pick it up by itself, and there are two things to understand before the steps:</p>
+<p>NAT mode gives a container IPv6 as well as IPv4: Droidspaces announces a private IPv6 prefix (<code>fd64:7370::/64</code>) with router advertisements and translates it on the way out, the same idea as IPv4 NAT. The gateway container's WAN is a NAT interface, so OpenWrt can have IPv6 too. It does not pick it up by itself, and there are two things to understand before the steps:</p>
 <ul>
-<li><strong>Droidspaces hands OpenWRT one address, not a block of addresses to pass on.</strong> OpenWRT therefore numbers its own LAN from a private prefix of its own (a ULA) and does IPv6 NAT a second time on its WAN. Client traffic is translated twice, once by OpenWRT and once by Droidspaces. It works, it is just not how IPv6 is used on a real ISP line.</li>
-<li><strong>The host kernel does the work for both.</strong> A container shares the host's kernel, so both Droidspaces and OpenWRT need <code>CONFIG_IP6_NF_NAT</code> and <code>CONFIG_IP6_NF_TARGET_MASQUERADE</code> in it. <code>droidspaces check</code> reports this as &quot;IPv6 NAT support&quot;.</li>
+<li><strong>Droidspaces hands OpenWrt one address, not a block of addresses to pass on.</strong> OpenWrt therefore numbers its own LAN from a private prefix of its own (a ULA) and does IPv6 NAT a second time on its WAN. Client traffic is translated twice, once by OpenWrt and once by Droidspaces. It works, it is just not how IPv6 is used on a real ISP line.</li>
+<li><strong>The host kernel does the work for both.</strong> A container shares the host's kernel, so both Droidspaces and OpenWrt need <code>CONFIG_IP6_NF_NAT</code> and <code>CONFIG_IP6_NF_TARGET_MASQUERADE</code> in it. <code>droidspaces check</code> reports this as &quot;IPv6 NAT support&quot;.</li>
 </ul>
-<p>The OpenWRT image from the Droidspaces rootfs repository already ships steps 1, 2 and 4. With it you only need step 3 for each LAN. On any other OpenWRT image, do all of them, inside the gateway container.</p>
+<p>The OpenWrt image from the Droidspaces rootfs repository already ships steps 1, 2 and 4. With it you only need step 3 for each LAN. On any other OpenWrt image, do all of them, inside the gateway container.</p>
 <p><strong>1. Add an IPv6 WAN on <code>eth0</code></strong></p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>uci<span class="w"> </span><span class="nb">set</span><span class="w"> </span>network.wan6<span class="o">=</span>interface
 uci<span class="w"> </span><span class="nb">set</span><span class="w"> </span>network.wan6.device<span class="o">=</span><span class="s1">&#39;eth0&#39;</span>
 uci<span class="w"> </span><span class="nb">set</span><span class="w"> </span>network.wan6.proto<span class="o">=</span><span class="s1">&#39;dhcpv6&#39;</span>
 uci<span class="w"> </span><span class="nb">set</span><span class="w"> </span>network.wan6.sourcefilter<span class="o">=</span><span class="s1">&#39;0&#39;</span>
 </code></pre></div>
-<p><code>sourcefilter '0'</code> matters. By default OpenWRT installs its IPv6 default route as &quot;only for packets from my WAN prefix&quot;. Two things break with that: Android kernels are built without <code>CONFIG_IPV6_SUBTREES</code>, so the route silently fails to install, and LAN clients carry a different source address anyway, so the route would not apply to them.</p>
-<p><strong>2. Make sure OpenWRT has a private prefix of its own</strong></p>
+<p><code>sourcefilter '0'</code> matters. By default OpenWrt installs its IPv6 default route as &quot;only for packets from my WAN prefix&quot;. Two things break with that: Android kernels are built without <code>CONFIG_IPV6_SUBTREES</code>, so the route silently fails to install, and LAN clients carry a different source address anyway, so the route would not apply to them.</p>
+<p><strong>2. Make sure OpenWrt has a private prefix of its own</strong></p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>uci<span class="w"> </span>get<span class="w"> </span>network.globals.ula_prefix
 </code></pre></div>
 <p>If that prints a prefix starting with <code>fd</code>, you are done. If it says &quot;Entry not found&quot;, set one. Any <code>fd</code> prefix with 10 random hex digits is fine:</p>
@@ -548,7 +548,7 @@ uci<span class="w"> </span><span class="nb">set</span><span class="w"> </span>dh
 uci<span class="w"> </span><span class="nb">set</span><span class="w"> </span>dhcp.lan.dhcpv6<span class="o">=</span><span class="s1">&#39;server&#39;</span>
 uci<span class="w"> </span><span class="nb">set</span><span class="w"> </span>dhcp.lan.ra_default<span class="o">=</span><span class="s1">&#39;1&#39;</span>
 </code></pre></div>
-<p><code>ip6assign</code> gives the interface a <code>/64</code> out of the private prefix. <code>ra</code> and <code>dhcpv6</code> make OpenWRT announce it to clients. <code>ra_default '1'</code> tells clients to use OpenWRT as their IPv6 gateway even though the prefix is a private one, which OpenWRT would otherwise refuse to do.</p>
+<p><code>ip6assign</code> gives the interface a <code>/64</code> out of the private prefix. <code>ra</code> and <code>dhcpv6</code> make OpenWrt announce it to clients. <code>ra_default '1'</code> tells clients to use OpenWrt as their IPv6 gateway even though the prefix is a private one, which OpenWrt would otherwise refuse to do.</p>
 <p><strong>4. Firewall: let IPv6 in, and translate it on the way out</strong></p>
 <p>Put <code>wan6</code> in the same zone as <code>wan</code>, so the same forwarding rules cover it. If your zones reject input, also allow ICMPv6 and DHCPv6, because IPv6 cannot find its neighbours or its router without them.</p>
 <p>On an image with the iptables firewall (fw3, which is what Android needs), IPv6 NAT goes in through a small script:</p>
@@ -560,7 +560,7 @@ uci<span class="w"> </span><span class="nb">set</span><span class="w"> </span>fi
 uci<span class="w"> </span><span class="nb">set</span><span class="w"> </span>firewall.nat6.path<span class="o">=</span><span class="s1">&#39;/etc/firewall.nat6&#39;</span>
 uci<span class="w"> </span><span class="nb">set</span><span class="w"> </span>firewall.nat6.reload<span class="o">=</span><span class="s1">&#39;1&#39;</span>
 </code></pre></div>
-<p>On an image with the nftables firewall (fw4, the OpenWRT default on a Linux host), it is one option on the <code>wan</code> zone instead: <code>option masq6 '1'</code>.</p>
+<p>On an image with the nftables firewall (fw4, the OpenWrt default on a Linux host), it is one option on the <code>wan</code> zone instead: <code>option masq6 '1'</code>.</p>
 <p><strong>5. Apply and check</strong></p>
 <div class="code-block"><span class="code-lang">bash</span><button class="icon-button copy-btn" onclick="copyCode(this)" aria-label="Copy"><span class="icon" aria-hidden="true">content_copy</span></button><pre><code>uci<span class="w"> </span>commit
 /etc/init.d/network<span class="w"> </span>reload
@@ -572,7 +572,7 @@ uci<span class="w"> </span><span class="nb">set</span><span class="w"> </span>fi
 ip<span class="w"> </span>-6<span class="w"> </span>route<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>default<span class="w">  </span><span class="c1"># default via fe80::1 dev eth0</span>
 ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 </code></pre></div>
-<p>A client container on the LAN then gets an address from OpenWRT's private prefix and can <code>ping6</code> the internet.</p>
+<p>A client container on the LAN then gets an address from OpenWrt's private prefix and can <code>ping6</code> the internet.</p>
 <p>Three things to expect:</p>
 <ul>
 <li><strong>Clients still prefer IPv4</strong> for sites that have both. Operating systems rank a private IPv6 source below IPv4, so IPv6 is used for destinations that are IPv6 only.</li>
@@ -609,7 +609,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>Droidspaces DHCP</td>
 <td>Android (shared)</td>
 <td>Nobody (loopback only)</td>
-<td>OpenWRT dnsmasq</td>
+<td>OpenWrt dnsmasq</td>
 <td>The LAN's DHCP server (your router)</td>
 </tr>
 <tr>
@@ -617,7 +617,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>Droidspaces iptables</td>
 <td>Android</td>
 <td>N/A</td>
-<td>OpenWRT (via Droidspaces NAT on OpenWRT's WAN)</td>
+<td>OpenWrt (via Droidspaces NAT on OpenWrt's WAN)</td>
 <td>Your router, as for any LAN device</td>
 </tr>
 <tr>
@@ -625,7 +625,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>Droidspaces</td>
 <td>Android</td>
 <td>N/A</td>
-<td>OpenWRT</td>
+<td>OpenWrt</td>
 <td>The container itself</td>
 </tr>
 <tr>
@@ -633,7 +633,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>Droidspaces</td>
 <td>Android</td>
 <td>Nobody</td>
-<td>OpenWRT dnsmasq</td>
+<td>OpenWrt dnsmasq</td>
 <td>The LAN's DHCP server</td>
 </tr>
 <tr>
@@ -657,7 +657,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>Yes, with NAT66 (needs kernel support)</td>
 <td>Whatever Android has</td>
 <td>Loopback only</td>
-<td>Yes, once OpenWRT is set up for it (see Part 10)</td>
+<td>Yes, once OpenWrt is set up for it (see Part 10)</td>
 <td>Whatever the LAN advertises</td>
 </tr>
 <tr>
@@ -674,21 +674,21 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>Maximum performance, no veth or bridge in the path</td>
 <td>Offline / sandboxed workloads</td>
 <td>Router appliance, VPN gateway, segmented LANs</td>
-<td>A real LAN address, OpenWRT on a physical LAN</td>
+<td>A real LAN address, OpenWrt on a physical LAN</td>
 </tr>
 </tbody>
 </table></div>
 <h2 id="part-12-real-world-use-cases-for-gateway-mode">Part 12: Real-world use cases for gateway mode <a class="header-anchor" href="#part-12-real-world-use-cases-for-gateway-mode">#</a></h2>
 <h3 id="1-vpn-killswitch-for-specific-containers">1. VPN killswitch for specific containers <a class="header-anchor" href="#1-vpn-killswitch-for-specific-containers">#</a></h3>
-<p>Run OpenWRT with a WireGuard or OpenVPN client, and configure its firewall to drop all traffic that does not go through the VPN tunnel. No gateway-mode container can then leak traffic outside the VPN. OpenWRT enforces it at the bridge, not inside each container.</p>
+<p>Run OpenWrt with a WireGuard or OpenVPN client, and configure its firewall to drop all traffic that does not go through the VPN tunnel. No gateway-mode container can then leak traffic outside the VPN. OpenWrt enforces it at the bridge, not inside each container.</p>
 <h3 id="2-multiple-isolated-lan-segments">2. Multiple isolated LAN segments <a class="header-anchor" href="#2-multiple-isolated-lan-segments">#</a></h3>
-<p>Use <code>--gateway-net</code> to create separate segments on the same OpenWRT. Containers on <code>--gateway-net=lan</code> cannot reach containers on <code>--gateway-net=vpn</code> unless OpenWRT routes between them. You get VLAN-style isolation from a single gateway container.</p>
+<p>Use <code>--gateway-net</code> to create separate segments on the same OpenWrt. Containers on <code>--gateway-net=lan</code> cannot reach containers on <code>--gateway-net=vpn</code> unless OpenWrt routes between them. You get VLAN-style isolation from a single gateway container.</p>
 <h3 id="3-traffic-analysis">3. Traffic analysis <a class="header-anchor" href="#3-traffic-analysis">#</a></h3>
-<p>Run OpenWRT with <code>tcpdump</code> or <code>nftables</code> logging enabled. Every packet from every gateway-mode container passes through OpenWRT, so you have one chokepoint from which to watch the network activity of many containers at once.</p>
+<p>Run OpenWrt with <code>tcpdump</code> or <code>nftables</code> logging enabled. Every packet from every gateway-mode container passes through OpenWrt, so you have one chokepoint from which to watch the network activity of many containers at once.</p>
 <h3 id="4-custom-dns-filtering">4. Custom DNS filtering <a class="header-anchor" href="#4-custom-dns-filtering">#</a></h3>
-<p>Run OpenWRT with a <code>dnsmasq</code> blocklist (or with Adblock installed via opkg). Every container on the gateway LAN gets filtered DNS without configuring each container.</p>
+<p>Run OpenWrt with a <code>dnsmasq</code> blocklist (or with Adblock installed via opkg). Every container on the gateway LAN gets filtered DNS without configuring each container.</p>
 <h3 id="5-bandwidth-shaping">5. Bandwidth shaping <a class="header-anchor" href="#5-bandwidth-shaping">#</a></h3>
-<p>OpenWRT's <code>tc</code> (traffic control) and <code>sqm-scripts</code> can shape bandwidth per container, because OpenWRT sees each container as a separate MAC address on its LAN interface.</p>
+<p>OpenWrt's <code>tc</code> (traffic control) and <code>sqm-scripts</code> can shape bandwidth per container, because OpenWrt sees each container as a separate MAC address on its LAN interface.</p>
 <h2 id="quick-reference---terms">Quick reference - terms <a class="header-anchor" href="#quick-reference---terms">#</a></h2>
 <div class="table-wrap"><table>
 <thead>
@@ -743,16 +743,16 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <td>An isolated copy of the Linux networking stack - containers live in their own namespace</td>
 </tr>
 <tr>
-<td><strong>OpenWRT</strong></td>
+<td><strong>OpenWrt</strong></td>
 <td>A Linux distro designed to run as a router/gateway - runs dnsmasq, netifd, firewall</td>
 </tr>
 <tr>
 <td><strong>netifd</strong></td>
-<td>OpenWRT's network interface daemon - manages interfaces and DHCP</td>
+<td>OpenWrt's network interface daemon - manages interfaces and DHCP</td>
 </tr>
 <tr>
 <td><strong>dnsmasq</strong></td>
-<td>Lightweight DHCP and DNS server used by OpenWRT</td>
+<td>Lightweight DHCP and DNS server used by OpenWrt</td>
 </tr>
 <tr>
 <td><strong>MASQUERADE</strong></td>
@@ -790,7 +790,7 @@ ping6<span class="w"> </span>-c3<span class="w"> </span>google.com
 <nav class="doc-nav" aria-label="Pages"><a href="kernel-configuration.html" class="doc-nav-prev"><small>Previous</small>Kernel configuration</a><a href="cool-things-you-can-do.html" class="doc-nav-next"><small>Next</small>Recipes</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#part-1-the-absolute-basics">Part 1: The absolute basics</a></li><li class="toc-h3"><a href="#what-is-an-ip-address">What is an IP address?</a></li><li class="toc-h3"><a href="#what-is-a-network">What is a network?</a></li><li class="toc-h3"><a href="#lan---local-area-network">LAN - Local Area Network</a></li><li class="toc-h3"><a href="#wan---wide-area-network">WAN - Wide Area Network</a></li><li class="toc-h3"><a href="#gateway">Gateway</a></li><li class="toc-h2"><a href="#part-2-how-data-actually-gets-delivered">Part 2: How data actually gets delivered</a></li><li class="toc-h3"><a href="#mac-address-vs-ip-address">MAC address vs IP address</a></li><li class="toc-h3"><a href="#what-is-a-packet">What is a packet?</a></li><li class="toc-h2"><a href="#part-3-dhcp-how-you-get-an-ip-address">Part 3: DHCP (how you get an IP address)</a></li><li class="toc-h3"><a href="#the-problem">The problem</a></li><li class="toc-h3"><a href="#the-solution-dhcp">The solution: DHCP</a></li><li class="toc-h2"><a href="#part-4-dns-how-names-become-addresses">Part 4: DNS (how names become addresses)</a></li><li class="toc-h3"><a href="#the-problem-1">The problem</a></li><li class="toc-h3"><a href="#the-solution-dns">The solution: DNS</a></li><li class="toc-h2"><a href="#part-5-nat-the-magic-your-router-does">Part 5: NAT (the magic your router does)</a></li><li class="toc-h3"><a href="#the-problem-2">The problem</a></li><li class="toc-h3"><a href="#the-solution-nat">The solution: NAT</a></li><li class="toc-h3"><a href="#nat-in-droidspaces">NAT in Droidspaces</a></li><li class="toc-h3"><a href="#how-nat-mode-picks-the-wan-uplink-automatic">How NAT mode picks the WAN uplink (automatic)</a></li><li class="toc-h3"><a href="#pinning-the-uplink-manually-with---upstream">Pinning the uplink manually with --upstream</a></li><li class="toc-h3"><a href="#use-cases-for---upstream">Use cases for --upstream</a></li><li class="toc-h2"><a href="#part-6-bridges-and-virtual-cables-linux-plumbing">Part 6: Bridges and virtual cables (Linux plumbing)</a></li><li class="toc-h3"><a href="#what-is-a-network-bridge">What is a network bridge?</a></li><li class="toc-h3"><a href="#what-is-a-veth-pair">What is a veth pair?</a></li><li class="toc-h3"><a href="#how-nat-mode-uses-bridges-and-veths">How NAT mode uses bridges and veths</a></li><li class="toc-h2"><a href="#part-7-network-namespaces-how-containers-are-isolated">Part 7: Network namespaces (how containers are isolated)</a></li><li class="toc-h3"><a href="#what-is-a-namespace">What is a namespace?</a></li><li class="toc-h2"><a href="#part-8-openwrt-and-what-it-is">Part 8: OpenWRT and what it is</a></li><li class="toc-h3"><a href="#what-is-openwrt">What is OpenWRT?</a></li><li class="toc-h2"><a href="#part-9-gateway-mode-putting-it-all-together">Part 9: Gateway mode, putting it all together</a></li><li class="toc-h3"><a href="#why-does-gateway-mode-exist">Why does gateway mode exist?</a></li><li class="toc-h3"><a href="#the-architecture">The architecture</a></li><li class="toc-h3"><a href="#step-by-step---what-happens-when-you-start-a-gateway-mode-container">Step by step - what happens when you start a gateway-mode container</a></li><li class="toc-h3"><a href="#what-lazy-attachment-means">What &quot;lazy attachment&quot; means</a></li><li class="toc-h3"><a href="#why-resolvconf-is-left-alone-in-gateway-mode">Why resolv.conf is left alone in gateway mode</a></li><li class="toc-h3"><a href="#why-bridge-nf-call-iptables-is-set-to-0">Why bridge-nf-call-iptables is set to 0</a></li><li class="toc-h3"><a href="#start-order-and-automatic-self-healing">Start order and automatic self-healing</a></li><li class="toc-h3"><a href="#what-happens-when-containers-stop">What happens when containers stop</a></li><li class="toc-h2"><a href="#part-10-gateway-mode-flags-and-configuration">Part 10: Gateway mode flags and configuration</a></li><li class="toc-h3"><a href="#required-vs-optional-flags">Required vs optional flags</a></li><li class="toc-h3"><a href="#what---gateway-net-does">What --gateway-net does</a></li><li class="toc-h3"><a href="#what---gateway-iface-does">What --gateway-iface does</a></li><li class="toc-h3"><a href="#the-flag-conflict-you-must-avoid">The flag conflict you must avoid</a></li><li class="toc-h3"><a href="#ipv6-through-the-gateway">IPv6 through the gateway</a></li><li class="toc-h3"><a href="#validation-rules-and-kernel-requirements">Validation rules and kernel requirements</a></li><li class="toc-h2"><a href="#part-11-comparing-all-networking-modes">Part 11: Comparing all networking modes</a></li><li class="toc-h2"><a href="#part-12-real-world-use-cases-for-gateway-mode">Part 12: Real-world use cases for gateway mode</a></li><li class="toc-h3"><a href="#1-vpn-killswitch-for-specific-containers">1. VPN killswitch for specific containers</a></li><li class="toc-h3"><a href="#2-multiple-isolated-lan-segments">2. Multiple isolated LAN segments</a></li><li class="toc-h3"><a href="#3-traffic-analysis">3. Traffic analysis</a></li><li class="toc-h3"><a href="#4-custom-dns-filtering">4. Custom DNS filtering</a></li><li class="toc-h3"><a href="#5-bandwidth-shaping">5. Bandwidth shaping</a></li><li class="toc-h2"><a href="#quick-reference---terms">Quick reference - terms</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#part-1-the-absolute-basics">Part 1: The absolute basics</a></li><li class="toc-h3"><a href="#what-is-an-ip-address">What is an IP address?</a></li><li class="toc-h3"><a href="#what-is-a-network">What is a network?</a></li><li class="toc-h3"><a href="#lan---local-area-network">LAN - Local Area Network</a></li><li class="toc-h3"><a href="#wan---wide-area-network">WAN - Wide Area Network</a></li><li class="toc-h3"><a href="#gateway">Gateway</a></li><li class="toc-h2"><a href="#part-2-how-data-actually-gets-delivered">Part 2: How data actually gets delivered</a></li><li class="toc-h3"><a href="#mac-address-vs-ip-address">MAC address vs IP address</a></li><li class="toc-h3"><a href="#what-is-a-packet">What is a packet?</a></li><li class="toc-h2"><a href="#part-3-dhcp-how-you-get-an-ip-address">Part 3: DHCP (how you get an IP address)</a></li><li class="toc-h3"><a href="#the-problem">The problem</a></li><li class="toc-h3"><a href="#the-solution-dhcp">The solution: DHCP</a></li><li class="toc-h2"><a href="#part-4-dns-how-names-become-addresses">Part 4: DNS (how names become addresses)</a></li><li class="toc-h3"><a href="#the-problem-1">The problem</a></li><li class="toc-h3"><a href="#the-solution-dns">The solution: DNS</a></li><li class="toc-h2"><a href="#part-5-nat-the-magic-your-router-does">Part 5: NAT (the magic your router does)</a></li><li class="toc-h3"><a href="#the-problem-2">The problem</a></li><li class="toc-h3"><a href="#the-solution-nat">The solution: NAT</a></li><li class="toc-h3"><a href="#nat-in-droidspaces">NAT in Droidspaces</a></li><li class="toc-h3"><a href="#how-nat-mode-picks-the-wan-uplink-automatic">How NAT mode picks the WAN uplink (automatic)</a></li><li class="toc-h3"><a href="#pinning-the-uplink-manually-with---upstream">Pinning the uplink manually with --upstream</a></li><li class="toc-h3"><a href="#use-cases-for---upstream">Use cases for --upstream</a></li><li class="toc-h2"><a href="#part-6-bridges-and-virtual-cables-linux-plumbing">Part 6: Bridges and virtual cables (Linux plumbing)</a></li><li class="toc-h3"><a href="#what-is-a-network-bridge">What is a network bridge?</a></li><li class="toc-h3"><a href="#what-is-a-veth-pair">What is a veth pair?</a></li><li class="toc-h3"><a href="#how-nat-mode-uses-bridges-and-veths">How NAT mode uses bridges and veths</a></li><li class="toc-h2"><a href="#part-7-network-namespaces-how-containers-are-isolated">Part 7: Network namespaces (how containers are isolated)</a></li><li class="toc-h3"><a href="#what-is-a-namespace">What is a namespace?</a></li><li class="toc-h2"><a href="#part-8-openwrt-and-what-it-is">Part 8: OpenWrt and what it is</a></li><li class="toc-h3"><a href="#what-is-openwrt">What is OpenWrt?</a></li><li class="toc-h2"><a href="#part-9-gateway-mode-putting-it-all-together">Part 9: Gateway mode, putting it all together</a></li><li class="toc-h3"><a href="#why-does-gateway-mode-exist">Why does gateway mode exist?</a></li><li class="toc-h3"><a href="#the-architecture">The architecture</a></li><li class="toc-h3"><a href="#step-by-step---what-happens-when-you-start-a-gateway-mode-container">Step by step - what happens when you start a gateway-mode container</a></li><li class="toc-h3"><a href="#what-lazy-attachment-means">What &quot;lazy attachment&quot; means</a></li><li class="toc-h3"><a href="#why-resolvconf-is-left-alone-in-gateway-mode">Why resolv.conf is left alone in gateway mode</a></li><li class="toc-h3"><a href="#why-bridge-nf-call-iptables-is-set-to-0">Why bridge-nf-call-iptables is set to 0</a></li><li class="toc-h3"><a href="#start-order-and-automatic-self-healing">Start order and automatic self-healing</a></li><li class="toc-h3"><a href="#what-happens-when-containers-stop">What happens when containers stop</a></li><li class="toc-h2"><a href="#part-10-gateway-mode-flags-and-configuration">Part 10: Gateway mode flags and configuration</a></li><li class="toc-h3"><a href="#required-vs-optional-flags">Required vs optional flags</a></li><li class="toc-h3"><a href="#what---gateway-net-does">What --gateway-net does</a></li><li class="toc-h3"><a href="#what---gateway-iface-does">What --gateway-iface does</a></li><li class="toc-h3"><a href="#the-flag-conflict-you-must-avoid">The flag conflict you must avoid</a></li><li class="toc-h3"><a href="#ipv6-through-the-gateway">IPv6 through the gateway</a></li><li class="toc-h3"><a href="#validation-rules-and-kernel-requirements">Validation rules and kernel requirements</a></li><li class="toc-h2"><a href="#part-11-comparing-all-networking-modes">Part 11: Comparing all networking modes</a></li><li class="toc-h2"><a href="#part-12-real-world-use-cases-for-gateway-mode">Part 12: Real-world use cases for gateway mode</a></li><li class="toc-h3"><a href="#1-vpn-killswitch-for-specific-containers">1. VPN killswitch for specific containers</a></li><li class="toc-h3"><a href="#2-multiple-isolated-lan-segments">2. Multiple isolated LAN segments</a></li><li class="toc-h3"><a href="#3-traffic-analysis">3. Traffic analysis</a></li><li class="toc-h3"><a href="#4-custom-dns-filtering">4. Custom DNS filtering</a></li><li class="toc-h3"><a href="#5-bandwidth-shaping">5. Bandwidth shaping</a></li><li class="toc-h2"><a href="#quick-reference---terms">Quick reference - terms</a></li></ul></nav>
   </aside>
 <footer class="footer">
   <div class="footer-inner">
