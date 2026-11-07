@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=13356a4605">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Kernel configuration", "description": "How to build an Android kernel with Droidspaces support: the config options and patches for non-GKI and GKI kernels, and how to check the result.", "url": "https://www.droidspaces.org/docs/kernel-configuration.html", "inLanguage": "en", "dateModified": "2026-10-28", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Kernel configuration", "item": "https://www.droidspaces.org/docs/kernel-configuration.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Kernel configuration", "description": "How to build an Android kernel with Droidspaces support: the config options and patches for non-GKI and GKI kernels, and how to check the result.", "url": "https://www.droidspaces.org/docs/kernel-configuration.html", "inLanguage": "en", "dateModified": "2026-11-07", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Kernel configuration", "item": "https://www.droidspaces.org/docs/kernel-configuration.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -194,8 +194,8 @@
 <span class="nv">CONFIG_NETFILTER_XT_MATCH_CONNTRACK</span><span class="o">=</span>y
 <span class="nv">CONFIG_NETFILTER_XT_MATCH_MULTIPORT</span><span class="o">=</span>y
 <span class="nv">CONFIG_NETFILTER_XT_MATCH_HL</span><span class="o">=</span>y
-<span class="nv">CONFIG_NETFILTER_XT_TARGET_REJECT</span><span class="o">=</span>y
 <span class="nv">CONFIG_IP_NF_TARGET_REJECT</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP6_NF_TARGET_REJECT</span><span class="o">=</span>y
 <span class="nv">CONFIG_NETFILTER_XT_TARGET_LOG</span><span class="o">=</span>y
 <span class="nv">CONFIG_IP_NF_TARGET_ULOG</span><span class="o">=</span>y
 <span class="nv">CONFIG_NETFILTER_XT_MATCH_RECENT</span><span class="o">=</span>y
@@ -264,7 +264,8 @@
 <span class="nv">CONFIG_MACVLAN</span><span class="o">=</span>y
 
 <span class="c"># UFW support</span>
-<span class="nv">CONFIG_NETFILTER_XT_TARGET_REJECT</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP_NF_TARGET_REJECT</span><span class="o">=</span>y
+<span class="nv">CONFIG_IP6_NF_TARGET_REJECT</span><span class="o">=</span>y
 <span class="nv">CONFIG_NETFILTER_XT_TARGET_LOG</span><span class="o">=</span>y
 <span class="nv">CONFIG_NETFILTER_XT_MATCH_RECENT</span><span class="o">=</span>y
 
