@@ -49,69 +49,116 @@
 <main id="main" class="compact">
   <section class="section">
     <h1>Downloads.</h1>
-    <p class="title-lg">Version v7.1.0, released 2026-10-27. The APK carries the runtime and the app. Linux gets a static tarball with no dependencies.</p>
+    <p class="title-lg">Version v7.2.0, released 2026-11-07. The APK carries the runtime and the app. Linux gets a static tarball with no dependencies.</p>
     <div class="columns download-cards">
       <div class="card">
         <h3><span class="icon" aria-hidden="true">android</span>Android</h3>
         <p class="body-md">For rooted devices through KernelSU, Magisk or APatch, on a kernel built with the documented configuration.</p>
-        <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v7.1.0/Droidspaces-universal-v7.1.0-4344dc5.apk" class="button button-filled"><span class="icon" aria-hidden="true">download</span>Download the APK</a>
+        <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v7.2.0/Droidspaces-universal-v7.2.0-cdadb9eb.apk" class="button button-filled"><span class="icon" aria-hidden="true">download</span>Download the APK</a>
       </div>
       <div class="card">
         <h3><span class="icon" aria-hidden="true">terminal</span>Linux</h3>
         <p class="body-md">A static binary for any distribution on kernel 3.10 or newer. Root, or a running droidspaces daemon.</p>
-        <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v7.1.0/droidspaces-v7.1.0-4344dc5.tar.gz" class="button button-tonal"><span class="icon" aria-hidden="true">download</span>Download the tarball</a>
+        <a href="https://github.com/ravindu644/Droidspaces-OSS/releases/download/v7.2.0/droidspaces-v7.2.0-cdadb9eb.tar.gz" class="button button-tonal"><span class="icon" aria-hidden="true">download</span>Download the tarball</a>
       </div>
     </div>
     <p class="body-md">Every release, with checksums, is on <a href="https://github.com/ravindu644/Droidspaces-OSS/releases" rel="noopener noreferrer">GitHub</a>.</p>
   </section>
 
   <section class="section">
-    <h2>What changed in v7.1.0.</h2>
+    <h2>What changed in v7.2.0.</h2>
     <details class="changelog">
       <summary>Show the changelog</summary>
-<h2 id="full-changelog">Full Changelog <a class="header-anchor" href="#full-changelog">#</a></h2>
+<h2 id="whats-changed">What's Changed <a class="header-anchor" href="#whats-changed">#</a></h2>
 <ul>
-<li>droidspaces: bump v7.1.0 (4344dc5)</li>
-<li>build: refresh output/droidspaces on every arch target (bf8b91e)</li>
-<li>fix: keep nl_addattr out of line and fail the link on LTO warnings (c2b1efa)</li>
-<li>docs: describe the incremental build and the tag release flow (294f511)</li>
-<li>ci: cache toolchains, release on a v* tag, checksum the artifacts (9f3068a)</li>
-<li>app: build the backend from gradle and ship it as a generated asset (553bdbb)</li>
-<li>build: track header deps, link per arch, skip unchanged work (28f5fc0)</li>
-<li>Translated using Weblate (Chinese (Simplified Han script)) (#376) (b14e091)</li>
-<li>app: add a Termux:X11 launch button (d0b3a2e)</li>
-<li>fix: apply changed X11 and VirGL extra flags on restart (925cf0c)</li>
-<li>Translated using Weblate (Czech) (#373) (64d53d1)</li>
-<li>Update: Kernel for RM6785 (#372) (21be5ba)</li>
-<li>docs: sync zh-CN translation with English (#371) (9cc9565)</li>
-<li>app: fix: let chkrunit.sh own every runit directory lookup (847ecdd)</li>
-<li>app: add runit service management (#368) (656eaee)</li>
-<li>Translated using Weblate (Chinese (Traditional Han script)) (#367) (4e12682)</li>
-<li>Update: Fixed RM6785 kernel link &amp; added source (#366) (75034e4)</li>
-<li>fix(security): allocate the boot console from the container's devpts (3b6759c)</li>
-<li>refactor: rename --format to --json (700c356)</li>
-<li>fix(net): run the route monitor on Linux too (7b5c892)</li>
-<li>Translated using Weblate (Czech) (#365) (a4cf72e)</li>
-<li>Update Simplify Chinese translation of document (#363) (17fddc1)</li>
-<li>app: fix: Write container files and binaries durably (8b625e1)</li>
-<li>fix: fsync container.config before renaming it into place (10ff17b)</li>
-<li>app: feat: Allow swap toggle under the memory limit (79bfbb6)</li>
-<li>feat: --allow-swap lets a memory-limited container use host swap (6e39a5b)</li>
-<li>fix: hide the host's swap devices from memory-limited containers (2407912)</li>
-<li>fix: drop the runtime's OOM protection for container processes (316fe90)</li>
-<li>fix: keep memory-limited containers out of the host's swap (be1dc41)</li>
-<li>fix: report why a custom bind mount failed, log it before the binds run (81b5296)</li>
-<li>Translated using Weblate (Chinese (Simplified Han script)) (#356) (9cf1311)</li>
-<li>update RM6785 (#357) (616f4bf)</li>
-<li>Update Simplity Chinese translation of document (#360) (788f64a)</li>
-<li>fix: drop Android's PER_LINUX32 personality for 64-bit containers (0aa20da)</li>
-<li>fix: give enter/run sessions init's real CPU mask (06045b2)</li>
-<li>fix: read a direct I/O loop back before trusting it (a718620)</li>
-<li>app: fix: let resize2fs decide the sparse image minimum (a23578e)</li>
-<li>community-supported-devices: add REDMAGIC 8S Pro+ (NX729J) (#355) (33815f7)</li>
-<li>app: fix: put the terminal keyboard away when leaving the terminal (3c53363)</li>
-<li>ci: rebuild droidspaces.org when a release is published (52cb39b)</li>
-<li>docs: say v7 in the file headers now that v7.0.0 is out (035bafc)</li>
+<li>droidspaces: bump v7.2.0 (cdadb9eb)</li>
+<li>fix: stop the contributors script hitting the search rate limit (bffc0b52)</li>
+<li>docs: use the real REJECT target symbols in the kernel config lists (d7c2e9be)</li>
+<li>fix: autoboot no longer waits for the network (cea978d5)</li>
+<li>app: fix: remove the language dialog before recreating the activity (6659b5b5)</li>
+<li>fix(security): stop the daemon handing out umask 0 (01240953)</li>
+<li>fix: drop the pad space from the help menu build date (b01a8119)</li>
+<li>docs: name ds_net_prepare_host_veth in the networking inventory (01c729b7)</li>
+<li>fix: the no-limits cgroup test no longer depends on test order (ad628a25)</li>
+<li>refactor: move anland under android/ (8635a114)</li>
+<li>refactor: private headers next to their sources, android/internal.h (e37010e6)</li>
+<li>refactor: one public header per folder (a98fa3b7)</li>
+<li>refactor: one helper for the KSU-then-seccomp order (2a3eb371)</li>
+<li>refactor: one env-file load instead of three copies (f16a097e)</li>
+<li>refactor: delete dead code (a79cecc3)</li>
+<li>refactor: make three single-file helpers static (821b93bf)</li>
+<li>refactor: move types and one-layer constants out of droidspaces.h (b28db35c)</li>
+<li>refactor: give x11, virgl, pulseaudio and anland their headers (023ea03f)</li>
+<li>refactor: move is_android to core/platform.c (aa753f1a)</li>
+<li>refactor: split main.c into cli/options.c, cli/usage.c and core/log.c (b11acacc)</li>
+<li>refactor: move check.c to cli/check.c (a64272b3)</li>
+<li>refactor: move documentation.c to cli/docs.c (81e686e9)</li>
+<li>refactor: move the anland headers to include/anland/ (cd1029f2)</li>
+<li>refactor: split daemon.c into daemon/ (603adb31)</li>
+<li>refactor: split monitor.c into monitor/console.c and monitor/monitor.c (47180100)</li>
+<li>refactor: move boot.c to boot/init.c (f77cb475)</li>
+<li>fix(security): never read what a guest writes; ask its monitor, like LXC (ee07018b)</li>
+<li>refactor: split container.c into container/, android/helpers.c and env/ (a6e6e98b)</li>
+<li>app: point the uplink and bridge mirror comments at the split net/ files (15434dc6)</li>
+<li>docs: point AGENTS.md and CONTRIBUTING.md at the split source tree (a6258343)</li>
+<li>net: fix the pointers the net split left stale, and keep the RA builder folder-private (29941fb8)</li>
+<li>net: split network.c into net/{naming,netns,dns,static_ip,guest,macvlan,cleanup}, nat/, route/ and gateway/ (faabe4aa)</li>
+<li>net: split dhcp.c into net/dhcp/{proto,server} and move ra.c beside them (430d08ab)</li>
+<li>net: split iptables.c into net/ipt/{core,match,insert,remove,rules,portfwd} (8006f452)</li>
+<li>net: split netlink.c into net/nl/{core,probe,link,addr,linkdump,route_query,rule} (5ac0d30e)</li>
+<li>refactor: rename droidspace.h to droidspaces.h (67ed7d56)</li>
+<li>app: point the backend mirror comments at the moved files (d974046d)</li>
+<li>refactor: fix the comments the split left stale (d8cb089a)</li>
+<li>fix(security): describe ds_peer_in_pidns as the fail-closed check it is (30f7f2e6)</li>
+<li>refactor: split terminal.c and console.c into tty/{pty,proxy,console} (d4fca35c)</li>
+<li>refactor: split hardware.c into hw/gpu and hw/hardware (2672e024)</li>
+<li>refactor: split virtualize.c into virt/{mem,cpu,affinity,vproc} (be5586fe)</li>
+<li>refactor: split cgroup.c into cgroup/{discover,mount,v1,lifecycle,limits,stats} (ee05ef67)</li>
+<li>refactor: split seccomp.c into security/seccomp and security/seccomp_shims (05f98982)</li>
+<li>refactor: move the capability hardening out of boot.c into security/caps.c (8c36e3cc)</li>
+<li>refactor: split mount.c into rootfs/, dev/ and security/jail (bb81fd7f)</li>
+<li>refactor: split status.c into status/collect and core/json (66465d4a)</li>
+<li>refactor: move environment.c to env/environment.c (d30bb761)</li>
+<li>refactor: split config.c into config/{config,parse,load,save} (bafeed6f)</li>
+<li>refactor: split pid.c into core/paths, container/{registry,recovery} and status/show (26befe65)</li>
+<li>refactor: split utils.c into core, security, config, android, container and cli (fe824fe2)</li>
+<li>docs: add Redmi K60 Pro (socrates) to community-supported devices (#382) (58e3f4e2)</li>
+<li>add device entry for galaxy s10+ exynos (#381) (9dc1ea30)</li>
+<li>fix: --gpu on Android mirrors only the video nodes that are hardware codecs (f0234247)</li>
+<li>fix: stop rewriting the command given to run as if it were our options (de4a71e5)</li>
+<li>net: steer each veth flow to one CPU so container traffic leaves in order (fe274ddf)</li>
+<li>fix: runit containers now honour stop (d8e12c08)</li>
+<li>chore: spell OpenWrt the way the project does (c4cd876b)</li>
+<li>app: fix: the Fedora icon drew its upper loop solid on Android 12 and older (24404020)</li>
+<li>seccomp: let systemd 259+ run on kernels without the new mount API (3132cc93)</li>
+<li>fix: a neighbour's broken config no longer warns under another container's start (0a0cbb43)</li>
+<li>fix: autoboot no longer skips a gateway client whose gateway is down (12e5c95a)</li>
+<li>app: fix: the user picker's rows had lost their height (60bcb4a5)</li>
+<li>app: build: let R8 shrink Compose and libsu (cb1d51c9)</li>
+<li>app: build: let AGP generate the locale config (3376f56d)</li>
+<li>app: refactor: one autoboot script for the module and the native init path (34552b83)</li>
+<li>app: build: sign with AGP's debug keystore when there is no release key (b8a20d59)</li>
+<li>nix: build from the tree as it is today (40ef8434)</li>
+<li>refactor: the docs pager's own clear and header, and a GPU group with no members (f0ec3e42)</li>
+<li>app: refactor: the installer, requirements and edit screens' hand-rolled pieces (456038ab)</li>
+<li>app: refactor: the dialogs and list rows through the components they copied (246e0552)</li>
+<li>app: refactor: one card shell on the details screen, and the container rows' copies (42f87139)</li>
+<li>app: refactor: settings rows through the components that already draw them (72b9b125)</li>
+<li>app: refactor: let the platform defaults do what the code restated (eecc00a8)</li>
+<li>app: refactor: the same logic in fewer lines, part two (dbdbe7e6)</li>
+<li>app: refactor: one base for the four init-system managers (78c193ea)</li>
+<li>app: refactor: the same logic in fewer lines, part one (77aa9596)</li>
+<li>fix: follow-ups from the review of the refactor batches (3f03ccc9)</li>
+<li>app: refactor: delete the code no screen calls (e12d1371)</li>
+<li>app: build: drop the gradle configuration AGP already provides (e642f339)</li>
+<li>build: drop the packaging and script code nothing runs (30f53f1d)</li>
+<li>fix: the six CLI and daemon bugs the test suite pinned (b221a48e)</li>
+<li>refactor: the same runtime logic in fewer lines (56a84ece)</li>
+<li>refactor: one parser each for bind, port and config values (c46f1acf)</li>
+<li>refactor: delete the backend's zero-caller code (054e1e51)</li>
+<li>refactor: remove the socketd backend bridge (f32f6ca0)</li>
+<li>feat: black-box test suite that drives the installed binary through the daemon (099d6859)</li>
+<li>ci: drop GitHub's generated release notes (472744f3)</li>
 </ul>
 <hr />
 <p><strong>Automated Release by Droidspaces CI</strong></p>
@@ -121,10 +168,10 @@
 
   <section class="section">
     <h2>Previous releases.</h2>
-<div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody><tr><td>Droidspaces v7.0.0</td><td>2026-10-14</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v7.0.0" rel="noopener noreferrer">Release page</a></td></tr>
+<div class="table-wrap"><table><thead><tr><th>Version</th><th>Date</th><th></th></tr></thead><tbody><tr><td>Droidspaces v7.1.0</td><td>2026-10-27</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v7.1.0" rel="noopener noreferrer">Release page</a></td></tr>
+<tr><td>Droidspaces v7.0.0</td><td>2026-10-14</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v7.0.0" rel="noopener noreferrer">Release page</a></td></tr>
 <tr><td>Droidspaces v6.6.0</td><td>2026-09-21</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.6.0" rel="noopener noreferrer">Release page</a></td></tr>
-<tr><td>Droidspaces v6.5.5</td><td>2026-09-08</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.5.5" rel="noopener noreferrer">Release page</a></td></tr>
-<tr><td>Droidspaces v6.5.0</td><td>2026-08-09</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.5.0" rel="noopener noreferrer">Release page</a></td></tr></tbody></table></div>
+<tr><td>Droidspaces v6.5.5</td><td>2026-09-08</td><td><a href="https://github.com/ravindu644/Droidspaces-OSS/releases/tag/v6.5.5" rel="noopener noreferrer">Release page</a></td></tr></tbody></table></div>
   </section>
 </main>
 <footer class="footer">
