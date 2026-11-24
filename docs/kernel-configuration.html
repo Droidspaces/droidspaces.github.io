@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="stylesheet" href="/assets/css/site.css?v=b310d7c992">
   <link rel="stylesheet" href="/assets/css/main.css?v=13356a4605">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Kernel configuration", "description": "How to build an Android kernel with Droidspaces support: the config options and patches for non-GKI and GKI kernels, and how to check the result.", "url": "https://www.droidspaces.org/docs/kernel-configuration.html", "inLanguage": "en", "dateModified": "2026-11-07", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Kernel configuration", "item": "https://www.droidspaces.org/docs/kernel-configuration.html"}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Kernel configuration", "description": "How to build an Android kernel with Droidspaces support: the config options and patches for non-GKI and GKI kernels, and how to check the result.", "url": "https://www.droidspaces.org/docs/kernel-configuration.html", "inLanguage": "en", "dateModified": "2026-11-24", "author": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "publisher": {"@type": "Organization", "name": "Droidspaces", "url": "https://www.droidspaces.org/", "sameAs": ["https://github.com/ravindu644/Droidspaces-OSS", "https://t.me/Droidspaces"]}, "isPartOf": {"@type": "WebSite", "name": "Droidspaces", "url": "https://www.droidspaces.org/"}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.droidspaces.org/"}, {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://www.droidspaces.org/docs/"}, {"@type": "ListItem", "position": 3, "name": "Kernel configuration", "item": "https://www.droidspaces.org/docs/kernel-configuration.html"}]}]</script>
   <script>(function(){const t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body>
@@ -296,6 +296,37 @@
 <p><code>CONFIG_CFS_BANDWIDTH</code>, which <code>--cpus</code> needs, and <code>CONFIG_CGROUP_PIDS</code>, which <code>--pids-limit</code> needs, change the size of scheduler and cgroup structures that almost every exported kernel function refers to. On a 5.15 GKI tree they changed the checksum of about four thousand exported symbols, and no padding trick covers that. Stock vendor modules then refuse to load and the device bootloops.</p>
 <p>Turn them on only if you can rebuild every kernel module on the device from the same source tree and configuration, and flash them in <code>vendor_boot</code>, <code>vendor_dlkm</code> and <code>system_dlkm</code> together with the new <code>boot.img</code>, all at once. If any module is a prebuilt with no source, you cannot. Do not disable <code>CONFIG_MODVERSIONS</code> or force-load modules to get past the check; the structures really did change.</p>
 <p>Without these two options everything else works. <code>--cpus</code> and <code>--pids-limit</code> are skipped with a warning and the app greys out the two toggles. Memory limits need only <code>CONFIG_MEMCG</code>, which GKI already has. Keeping a limited container out of swap also needs <code>CONFIG_MEMCG_SWAP</code>, plus <code>swapaccount=1</code> on the kernel command line before 5.8 unless <code>CONFIG_MEMCG_SWAP_ENABLED</code> is set; without it the container can still spill into swap past its limit, the start log says so, and the app greys out <strong>Allow swap</strong>.</p>
+<h2 id="if-you-cannot-flash-a-kernel">If you cannot flash a kernel <a class="header-anchor" href="#if-you-cannot-flash-a-kernel">#</a></h2>
+<p>On a locked bootloader, or with only temporary root, flashing a kernel is not an option. These third-party projects load kernel modules that emulate the missing PID and IPC namespaces on a stock GKI kernel instead:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Project</th>
+<th>Made for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/cyanmint/lkm4ctr" rel="noopener noreferrer">lkm4ctr</a></td>
+<td>GKI 5.10 to 6.18</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Dere3046/_patchHarmony" rel="noopener noreferrer">droid_lkm</a></td>
+<td>GKI 5.10 to 6.18</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Shikochin/Droidspaces-LKM" rel="noopener noreferrer">Droidspaces-LKM</a></td>
+<td>PLZ110 on 6.12, with experimental builds for GKI 5.10 to 6.18</td>
+</tr>
+<tr>
+<td><a href="https://github.com/ai-luo2006/droidspaces-6.12-pmb110" rel="noopener noreferrer">droidspaces-6.12-pmb110</a></td>
+<td>OnePlus PMB110 on 6.12</td>
+</tr>
+</tbody>
+</table></div>
+<div class="callout callout-warning"><strong class="callout-title">Warning</strong><p><strong>Droidspaces does not support these modules.</strong> No bug reports are accepted from a device that uses one, and Droidspaces will not be fixed or changed to make one work. That is up to the developers of the module, so report problems to them.</p>
+<p>The Droidspaces team has not reviewed these projects. They change a running kernel: the wrong module can freeze or reboot the phone, and an emulated namespace may not isolate like a real one even when every check passes. Use them at your own risk.</p></div>
+<p>Use a build made for your exact kernel version. Modules do not stay loaded across a reboot, so they have to be loaded again each time.</p>
 <h2 id="what-the-check-looks-for">What the check looks for <a class="header-anchor" href="#what-the-check-looks-for">#</a></h2>
 <p><code>droidspaces check</code>, and the app's Requirements screen, probe the running kernel rather than its config. What each probe needs, and what you lose without it:</p>
 <div class="table-wrap"><table>
@@ -431,7 +462,7 @@
 <nav class="doc-nav" aria-label="Pages"><a href="anland.html" class="doc-nav-prev"><small>Previous</small>Anland (Wayland)</a><a href="networking-from-zero.html" class="doc-nav-next"><small>Next</small>Networking from zero</a></nav>
   </main>
   <aside class="toc-column">
-<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#non-gki-kernels-318-to-419">Non-GKI kernels (3.18 to 4.19)</a></li><li class="toc-h3"><a href="#step-1-the-required-options">Step 1: The required options</a></li><li class="toc-h3"><a href="#step-2-firewall-support-optional">Step 2: Firewall support, optional</a></li><li class="toc-h3"><a href="#step-3-patches">Step 3: Patches</a></li><li class="toc-h3"><a href="#step-4-build-flash-check">Step 4: Build, flash, check</a></li><li class="toc-h2"><a href="#gki-kernels-54-and-newer">GKI kernels (5.4 and newer)</a></li><li class="toc-h3"><a href="#step-1-the-kabi-patches">Step 1: The kABI patches</a></li><li class="toc-h3"><a href="#step-2-edit-the-gki-defconfig">Step 2: Edit the GKI defconfig</a></li><li class="toc-h3"><a href="#step-3-build-flash-check">Step 3: Build, flash, check</a></li><li class="toc-h3"><a href="#cpu-and-process-limits-on-gki">CPU and process limits on GKI</a></li><li class="toc-h2"><a href="#what-the-check-looks-for">What the check looks for</a></li><li class="toc-h2"><a href="#which-kernel-version-to-aim-for">Which kernel version to aim for</a></li><li class="toc-h2"><a href="#where-to-ask">Where to ask</a></li></ul></nav>
+<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul><li class="toc-h2"><a href="#non-gki-kernels-318-to-419">Non-GKI kernels (3.18 to 4.19)</a></li><li class="toc-h3"><a href="#step-1-the-required-options">Step 1: The required options</a></li><li class="toc-h3"><a href="#step-2-firewall-support-optional">Step 2: Firewall support, optional</a></li><li class="toc-h3"><a href="#step-3-patches">Step 3: Patches</a></li><li class="toc-h3"><a href="#step-4-build-flash-check">Step 4: Build, flash, check</a></li><li class="toc-h2"><a href="#gki-kernels-54-and-newer">GKI kernels (5.4 and newer)</a></li><li class="toc-h3"><a href="#step-1-the-kabi-patches">Step 1: The kABI patches</a></li><li class="toc-h3"><a href="#step-2-edit-the-gki-defconfig">Step 2: Edit the GKI defconfig</a></li><li class="toc-h3"><a href="#step-3-build-flash-check">Step 3: Build, flash, check</a></li><li class="toc-h3"><a href="#cpu-and-process-limits-on-gki">CPU and process limits on GKI</a></li><li class="toc-h2"><a href="#if-you-cannot-flash-a-kernel">If you cannot flash a kernel</a></li><li class="toc-h2"><a href="#what-the-check-looks-for">What the check looks for</a></li><li class="toc-h2"><a href="#which-kernel-version-to-aim-for">Which kernel version to aim for</a></li><li class="toc-h2"><a href="#where-to-ask">Where to ask</a></li></ul></nav>
   </aside>
 <footer class="footer">
   <div class="footer-inner">
